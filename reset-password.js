@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-const API_BASE="https://senkustakes-api.onrender.com";
+const API_BASE="https://senkupay-api.onrender.com";
 
 const RESET_ENDPOINT=`${API_BASE}/api/auth/reset-password`;
 

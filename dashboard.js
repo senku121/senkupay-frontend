@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
 const API_BASE_URL =
-"https://senkustakes-api.onrender.com";
+"https://senkupay-api.onrender.com";
 
 const WALLET_ENDPOINT =
 `${API_BASE_URL}/api/wallet`;

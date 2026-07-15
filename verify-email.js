@@ -4,7 +4,7 @@
 ==================================================*/
 
 document.addEventListener("DOMContentLoaded", () => {
-    const API_BASE_URL = "https://senkustakes-api.onrender.com";
+    const API_BASE_URL = "https://senkupay-api.onrender.com";
     const VERIFY_ENDPOINT = `${API_BASE_URL}/api/auth/verify-email`;
     const RESEND_ENDPOINT = `${API_BASE_URL}/api/auth/resend-otp`;
     const OTP_LENGTH = 6;

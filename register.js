@@ -4,7 +4,7 @@
 ==================================================*/
 
 document.addEventListener("DOMContentLoaded", () => {
-    const API_BASE_URL = "https://senkustakes-api.onrender.com";
+    const API_BASE_URL = "https://senkupay-api.onrender.com";
     const REGISTER_ENDPOINT = `${API_BASE_URL}/api/auth/register`;
 
     const form = document.getElementById("registerForm");
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /*
          * The existing backend route is:
-         * POST https://senkustakes-api.onrender.com/api/auth/register
+         * POST https://senkupay-api.onrender.com/api/auth/register
          *
          * Core fields are preserved exactly:
          * firstName, lastName, email, username and password.

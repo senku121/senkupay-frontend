@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-const API_BASE="https://senkustakes-api.onrender.com";
+const API_BASE="https://senkupay-api.onrender.com";
 
 const ENDPOINT=`${API_BASE}/api/auth/forgot-password`;
 

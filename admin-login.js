@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 const API_BASE_URL=
-"https://senkustakes-api.onrender.com";
+"https://senkupay-api.onrender.com";
 
 const ADMIN_LOGIN_ENDPOINT=
 `${API_BASE_URL}/api/admin/auth/login`;

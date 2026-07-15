@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded",async()=>{
 
 const API_BASE_URL=
-"https://senkustakes-api.onrender.com";
+"https://senkupay-api.onrender.com";
 
 const WITHDRAWS_ENDPOINT=
 `${API_BASE_URL}/api/admin/withdraws`;
