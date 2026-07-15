@@ -541,15 +541,20 @@ user.status ||
 
 if(emailStatusElement){
 
-const verified=
+const rawEmailVerified =
+walletData.emailVerified;
 
-user.emailVerified ||
+const verified =
 
-walletData.emailVerified ||
+rawEmailVerified === true ||
 
-false;
+rawEmailVerified === "true" ||
 
-emailStatusElement.textContent=
+rawEmailVerified === 1 ||
+
+rawEmailVerified === "1";
+
+emailStatusElement.textContent =
 
 verified
 
@@ -557,7 +562,7 @@ verified
 
 : "Pending";
 
-emailStatusElement.className=
+emailStatusElement.className =
 
 verified
 
