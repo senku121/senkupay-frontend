@@ -406,13 +406,14 @@ WALLET_ENDPOINT
 
 const storedUser = getStoredUser();
 
+const walletData =
+wallet.wallet || {};
+
 const user =
-
-wallet.user ||
-
-storedUser ||
-
-wallet;
+{
+    ...storedUser,
+    ...walletData
+};
 
 const usernameValue =
 
@@ -482,7 +483,7 @@ balanceElement.textContent=
 
 formatMoney(
 
-wallet.balance
+walletData.balance
 
 );
 
@@ -494,7 +495,7 @@ depositedElement.textContent=
 
 formatMoney(
 
-wallet.deposited
+walletData.deposited
 
 );
 
@@ -506,7 +507,7 @@ withdrawnElement.textContent=
 
 formatMoney(
 
-wallet.withdrawn
+walletData.withdrawn
 
 );
 
@@ -518,9 +519,9 @@ pendingElement.textContent=
 
 formatMoney(
 
-wallet.pendingWithdraw ||
+walletData.pendingWithdraw ||
 
-wallet.pending ||
+walletData.pending ||
 
 0
 
@@ -544,7 +545,7 @@ const verified=
 
 user.emailVerified ||
 
-wallet.emailVerified ||
+walletData.emailVerified ||
 
 false;
 
@@ -574,7 +575,7 @@ formatDate(
 
 user.createdAt ||
 
-wallet.createdAt
+walletData.createdAt
 
 );
 

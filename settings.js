@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
 const API_BASE_URL=
 "https://senkupay-api.onrender.com";
 
-const SETTINGS_ENDPOINT=
-`${API_BASE_URL}/api/settings`;
+const SETTINGS_ENDPOINT =
+`${API_BASE_URL}/api/user/profile`;
 
 const UPDATE_SETTINGS_ENDPOINT=
 `${API_BASE_URL}/api/settings/update`;
@@ -329,14 +329,11 @@ getCurrentUser()||
 
 {};
 
-const user=
-
-data.user||
-
-data.settings||
-
-data||
-
+const user =
+data.profile ||
+data.user ||
+data.settings ||
+data ||
 current;
 
 username.value=
