@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Monitor all Senku Pay deposits and withdrawals.">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>Transactions | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-transactions.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="transaction-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a
+href="admin-transactions.html"
+class="active">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a href="admin-platform-withdraw.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a href="admin-agent-requests.html">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+<a href="#security">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>Security</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="transaction-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton"
+aria-label="Open navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">FINANCIAL ACTIVITY</p>
+
+<h1>Transactions</h1>
+
+<p>
+
+Monitor all deposits, withdrawals and wallet activity.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="refresh-transactions-button"
+id="refreshTransactionsButton">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</header>
+
+<div
+id="adminTransactionsMessage"
+class="admin-transactions-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="transaction-stats">
+
+<div class="transaction-box">
+
+<div class="transaction-icon deposit-icon">
+
+<i class="fa-solid fa-arrow-down"></i>
+
+</div>
+
+<div>
+
+<p>Total Deposits</p>
+
+<h2 id="depositTotal">$0.00</h2>
+
+<span id="depositCount">0 transactions</span>
+
+</div>
+
+</div>
+
+<div class="transaction-box">
+
+<div class="transaction-icon withdrawal-icon">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</div>
+
+<div>
+
+<p>Total Withdrawals</p>
+
+<h2 id="withdrawTotal">$0.00</h2>
+
+<span id="withdrawCount">0 transactions</span>
+
+</div>
+
+</div>
+
+<div class="transaction-box">
+
+<div class="transaction-icon pending-icon">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<div>
+
+<p>Pending Transactions</p>
+
+<h2 id="pendingTotal">0</h2>
+
+<span>Awaiting completion</span>
+
+</div>
+
+</div>
+
+<div class="transaction-box">
+
+<div class="transaction-icon volume-icon">
+
+<i class="fa-solid fa-chart-column"></i>
+
+</div>
+
+<div>
+
+<p>Total Volume</p>
+
+<h2 id="totalVolume">$0.00</h2>
+
+<span>Combined transaction value</span>
+
+</div>
+
+</div>
+
+</section>
+<section class="transaction-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">TRANSACTION RECORDS</p>
+
+<h2>All Transactions</h2>
+
+</div>
+
+<span id="lastTransactionSync">
+
+Not synchronized yet
+
+</span>
+
+</div>
+
+<div class="filter-bar">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="search"
+id="transactionSearch"
+placeholder="Search ID, username, email, amount or status...">
+
+</div>
+
+<select
+id="typeFilter"
+aria-label="Filter by transaction type">
+
+<option value="all">All Types</option>
+
+<option value="deposit">Deposits</option>
+
+<option value="withdrawal">Withdrawals</option>
+
+</select>
+
+<select
+id="statusFilter"
+aria-label="Filter by transaction status">
+
+<option value="all">All Statuses</option>
+
+<option value="pending">Pending</option>
+
+<option value="processing">Processing</option>
+
+<option value="completed">Completed</option>
+
+<option value="approved">Approved</option>
+
+<option value="rejected">Rejected</option>
+
+<option value="failed">Failed</option>
+
+</select>
+
+<select
+id="dateFilter"
+aria-label="Filter by date">
+
+<option value="all">All Dates</option>
+
+<option value="today">Today</option>
+
+<option value="week">Last 7 Days</option>
+
+<option value="month">Last 30 Days</option>
+
+</select>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Transaction ID</th>
+
+<th>User</th>
+
+<th>Type</th>
+
+<th>Method</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="transactionTable">
+
+<tr class="loading-row">
+
+<td colspan="8">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading transactions...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+id="emptyTransactions"
+class="empty-history"
+hidden>
+
+<i class="fa-solid fa-receipt"></i>
+
+<h3>No Transactions Found</h3>
+
+<p>
+
+No deposits or withdrawals match the selected filters.
+
+</p>
+
+</div>
+
+<div class="table-footer">
+
+<p id="transactionResultsText">
+
+Showing 0 transactions
+
+</p>
+
+<div class="pagination-controls">
+
+<button
+type="button"
+class="pagination-button"
+id="previousTransactionPage"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="transactionPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+class="pagination-button"
+id="nextTransactionPage"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="security-card"
+id="security">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">SYSTEM MONITORING</p>
+
+<h2>Transaction Security</h2>
+
+</div>
+
+<span>Protected Records</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h3>Administrator Access</h3>
+
+<p>
+
+Only authenticated administrators can view transaction records.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-server"></i>
+
+</div>
+
+<div>
+
+<h3>Backend Connection</h3>
+
+<p id="transactionsBackendStatus">
+
+Checking backend connection...
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>Live Synchronization</h3>
+
+<p>
+
+Transaction statistics and records update whenever the page is refreshed.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        TRANSACTION DETAILS MODAL
+==========================================-->
+
+<div
+class="transaction-modal"
+id="transactionModal"
+aria-hidden="true">
+
+<div
+class="transaction-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="transactionModalTitle">
+
+<button
+type="button"
+class="close-transaction-modal"
+id="closeTransactionModal"
+aria-label="Close transaction details">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="transaction-modal-header">
+
+<div
+class="transaction-modal-icon"
+id="transactionModalIcon">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">TRANSACTION DETAILS</p>
+
+<h2 id="transactionModalTitle">
+
+Transaction
+
+</h2>
+
+<p id="transactionModalSubtitle">
+
+Review complete transaction information.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="transaction-detail-grid">
+
+<div class="transaction-detail-box">
+
+<span>Transaction ID</span>
+
+<strong id="detailTransactionId">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>User</span>
+
+<strong id="detailTransactionUser">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Email</span>
+
+<strong id="detailTransactionEmail">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Type</span>
+
+<strong id="detailTransactionType">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Payment Method</span>
+
+<strong id="detailTransactionMethod">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Amount</span>
+
+<strong id="detailTransactionAmount">$0.00</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Status</span>
+
+<strong id="detailTransactionStatus">--</strong>
+
+</div>
+
+<div class="transaction-detail-box">
+
+<span>Created At</span>
+
+<strong id="detailTransactionDate">--</strong>
+
+</div>
+
+</div>
+
+<div
+class="transaction-reference"
+id="transactionReferenceBox"
+hidden>
+
+<div>
+
+<span>Reference</span>
+
+<strong id="detailTransactionReference">--</strong>
+
+</div>
+
+</div>
+
+<div
+class="transaction-note"
+id="transactionNoteBox"
+hidden>
+
+<span>Transaction Note</span>
+
+<p id="detailTransactionNote">
+
+No note available.
+
+</p>
+
+</div>
+
+<button
+type="button"
+class="close-details-button"
+id="closeTransactionDetailsButton">
+
+<i class="fa-solid fa-check"></i>
+
+<span>Close Details</span>
+
+</button>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-transactions.js"></script>
+
+</body>
+
+</html>

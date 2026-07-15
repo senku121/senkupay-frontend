@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Sub Agents Management | Senku Stakes Admin</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="popup.css">
+<link rel="stylesheet" href="admin-sub-agents.css">
+<link rel="stylesheet" href="responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+
+
+<div class="sub-agent-layout">
+
+
+
+
+
+<!-- SIDEBAR -->
+
+
+<aside class="admin-sidebar">
+
+
+<div class="admin-brand">
+
+
+<div class="logo-box">
+
+S
+
+</div>
+
+
+<div>
+
+<h2>
+
+Senku Stakes
+
+</h2>
+
+
+<span>
+
+Admin Panel
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<nav>
+
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Dashboard
+
+</a>
+
+
+
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+Users
+
+</a>
+
+
+
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+Transactions
+
+</a>
+
+
+
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+Withdraw
+
+</a>
+
+
+
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+Agents
+
+</a>
+
+
+
+
+<a href="admin-sub-agents.html" class="active">
+
+<i class="fa-solid fa-user-gear"></i>
+
+Sub Agents
+
+</a>
+
+
+</nav>
+
+
+
+
+
+
+
+<button class="admin-logout">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+
+</button>
+
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+<main class="sub-agent-main">
+
+
+
+
+
+
+<header class="page-header">
+
+
+<div>
+
+
+<h1>
+
+Sub Agent Management
+
+</h1>
+
+
+<p>
+
+Control created sub agent accounts
+
+</p>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<section class="agent-stats">
+
+
+
+<div class="stat-box">
+
+
+<i class="fa-solid fa-user-shield"></i>
+
+
+<div>
+
+<p>
+
+Total Sub Agents
+
+</p>
+
+
+<h2>
+
+35
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-box">
+
+
+<i class="fa-solid fa-user-check"></i>
+
+
+<div>
+
+<p>
+
+Active
+
+</p>
+
+
+<h2>
+
+30
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-box">
+
+
+<i class="fa-solid fa-user-slash"></i>
+
+
+<div>
+
+<p>
+
+Blocked
+
+</p>
+
+
+<h2>
+
+5
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="sub-agent-card">
+
+
+
+<div class="search-area">
+
+
+<i class="fa-solid fa-search"></i>
+
+
+<input
+
+type="text"
+
+id="subAgentSearch"
+
+placeholder="Search sub agent"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="table-container">
+
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+ID
+
+</th>
+
+
+<th>
+
+Name
+
+</th>
+
+
+<th>
+
+Balance
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Actions
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+
+<tbody id="subAgentTable">
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+<script src="popup-loader.js"></script>
+<script src="admin-sub-agents.js"></script>
+
+
+</body>
+
+</html>

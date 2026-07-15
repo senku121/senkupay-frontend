@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Review and manage Senku Pay agent requests.">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>Agent Requests | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-agent-requests.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="admin-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a href="admin-platform-withdraw.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a
+href="admin-agent-requests.html"
+class="active">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+<a href="#security">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>Security</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="admin-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton"
+aria-label="Open navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">
+
+AGENT OPERATIONS
+
+</p>
+
+<h1>
+
+Agent Requests
+
+</h1>
+
+<p>
+
+Review, approve and reject requests submitted by agents and sub-agents.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="refresh-page-button"
+id="refreshRequests">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</header>
+
+<div
+id="agentRequestsMessage"
+class="agent-requests-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="stats-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon pending-icon">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+</div>
+
+<div>
+
+<p>Pending Requests</p>
+
+<h2 id="pendingCount">0</h2>
+
+<span>Waiting for administrator review</span>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon approved-icon">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<div>
+
+<p>Approved Requests</p>
+
+<h2 id="approvedCount">0</h2>
+
+<span>Successfully approved requests</span>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon rejected-icon">
+
+<i class="fa-solid fa-circle-xmark"></i>
+
+</div>
+
+<div>
+
+<p>Rejected Requests</p>
+
+<h2 id="rejectedCount">0</h2>
+
+<span>Declined agent submissions</span>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon money-icon">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+</div>
+
+<div>
+
+<p>Total Requested</p>
+
+<h2 id="requestAmount">$0.00</h2>
+
+<span>Combined value of all requests</span>
+
+</div>
+
+</div>
+
+</section>
+<section class="request-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+REQUEST RECORDS
+
+</p>
+
+<h2>
+
+All Agent Requests
+
+</h2>
+
+</div>
+
+<span id="agentRequestsLastSync">
+
+Not synchronized yet
+
+</span>
+
+</div>
+
+<div class="request-toolbar">
+
+<div class="search-box">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+type="search"
+id="requestSearch"
+placeholder="Search request ID, agent, type, amount or status...">
+
+</div>
+
+<div class="toolbar-right">
+
+<select
+id="requestTypeFilter"
+aria-label="Filter requests by type">
+
+<option value="all">
+
+All Types
+
+</option>
+
+<option value="transfer">
+
+Transfer
+
+</option>
+
+<option value="balance">
+
+Balance Request
+
+</option>
+
+<option value="withdrawal">
+
+Withdrawal
+
+</option>
+
+<option value="support">
+
+Support
+
+</option>
+
+<option value="other">
+
+Other
+
+</option>
+
+</select>
+
+<select
+id="statusFilter"
+aria-label="Filter requests by status">
+
+<option value="all">
+
+All Statuses
+
+</option>
+
+<option value="pending">
+
+Pending
+
+</option>
+
+<option value="approved">
+
+Approved
+
+</option>
+
+<option value="rejected">
+
+Rejected
+
+</option>
+
+<option value="processing">
+
+Processing
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Request ID</th>
+
+<th>Agent</th>
+
+<th>Agent ID</th>
+
+<th>Type</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="requestTable">
+
+<tr class="loading-row">
+
+<td colspan="8">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading agent requests...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+id="requestEmptyState"
+class="empty-state"
+hidden>
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<h3>No Agent Requests Found</h3>
+
+<p>
+
+No agent requests match the selected filters.
+
+</p>
+
+</div>
+
+<div class="table-footer">
+
+<p id="requestResultsText">
+
+Showing 0 requests
+
+</p>
+
+<div class="pagination-controls">
+
+<button
+type="button"
+class="pagination-button"
+id="previousRequestPage"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="requestPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+class="pagination-button"
+id="nextRequestPage"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="security-card"
+id="security">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+REQUEST SECURITY
+
+</p>
+
+<h2>
+
+Agent Request Protection
+
+</h2>
+
+</div>
+
+<span>
+
+Administrator Only
+
+</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-user-shield"></i>
+
+</div>
+
+<div>
+
+<h3>Protected Review</h3>
+
+<p>
+
+Only authenticated administrators can approve or reject agent requests.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-database"></i>
+
+</div>
+
+<div>
+
+<h3>Backend Records</h3>
+
+<p id="agentRequestsBackendStatus">
+
+Checking agent-request server...
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>Live Synchronization</h3>
+
+<p>
+
+Request records and statistics update whenever the page is refreshed.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        REQUEST DETAILS MODAL
+==========================================-->
+
+<div
+class="request-modal"
+id="requestModal"
+aria-hidden="true">
+
+<div
+class="request-modal-card"
+role="dialog"
+aria-modal="true"
+aria-labelledby="requestModalTitle">
+
+<button
+type="button"
+class="request-modal-close"
+id="closeModal"
+aria-label="Close request details">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="request-modal-header">
+
+<div class="request-modal-icon">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+REQUEST DETAILS
+
+</p>
+
+<h2 id="requestModalTitle">
+
+Agent Request
+
+</h2>
+
+<p id="requestModalSubtitle">
+
+Review the full request before taking action.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="request-detail-grid">
+
+<div class="request-detail-box">
+
+<span>Request ID</span>
+
+<strong id="detailRequestId">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Agent ID</span>
+
+<strong id="detailAgentId">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Agent Name</span>
+
+<strong id="detailAgentName">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Agent Username</span>
+
+<strong id="detailAgentUsername">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Request Type</span>
+
+<strong id="detailType">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Amount</span>
+
+<strong id="detailAmount">$0.00</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Status</span>
+
+<strong id="detailStatus">--</strong>
+
+</div>
+
+<div class="request-detail-box">
+
+<span>Created At</span>
+
+<strong id="detailDate">--</strong>
+
+</div>
+
+</div>
+
+<div
+class="request-note"
+id="requestNoteBox"
+hidden>
+
+<span>Request Note</span>
+
+<p id="detailRequestNote">
+
+No note available.
+
+</p>
+
+</div>
+
+<div
+class="request-modal-message"
+id="requestModalMessage"
+hidden
+aria-live="polite">
+
+</div>
+
+<div
+class="request-modal-actions"
+id="requestModalActions">
+
+<button
+type="button"
+class="modal-reject-button"
+id="rejectModalBtn">
+
+<i class="fa-solid fa-circle-xmark"></i>
+
+<span>Reject Request</span>
+
+</button>
+
+<button
+type="button"
+class="modal-approve-button"
+id="approveModalBtn">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<span>Approve Request</span>
+
+</button>
+
+</div>
+
+<button
+type="button"
+class="close-details-button"
+id="closeDetailsBtn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>Back to Requests</span>
+
+</button>
+
+</div>
+
+</div>
+
+<!--=========================================
+        ACTION CONFIRMATION MODAL
+==========================================-->
+
+<div
+class="request-modal"
+id="requestActionModal"
+aria-hidden="true">
+
+<div
+class="request-modal-card confirmation-card"
+role="dialog"
+aria-modal="true"
+aria-labelledby="requestActionTitle">
+
+<button
+type="button"
+class="request-modal-close"
+id="closeRequestActionModal"
+aria-label="Close confirmation">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="request-modal-header">
+
+<div
+class="request-modal-icon warning"
+id="requestActionIcon">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+CONFIRM ACTION
+
+</p>
+
+<h2 id="requestActionTitle">
+
+Confirm Request Action
+
+</h2>
+
+<p id="requestActionText">
+
+Review this action before continuing.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="confirmation-summary">
+
+<div>
+
+<span>Request</span>
+
+<strong id="confirmRequestId">--</strong>
+
+</div>
+
+<div>
+
+<span>Agent</span>
+
+<strong id="confirmRequestAgent">--</strong>
+
+</div>
+
+<div>
+
+<span>Amount</span>
+
+<strong id="confirmRequestAmount">$0.00</strong>
+
+</div>
+
+<div>
+
+<span>Action</span>
+
+<strong id="confirmRequestAction">--</strong>
+
+</div>
+
+</div>
+
+<div class="action-note-group">
+
+<label for="requestActionNote">
+
+Administrator Note
+
+</label>
+
+<textarea
+id="requestActionNote"
+placeholder="Optional internal note"
+maxlength="300">
+
+</textarea>
+
+</div>
+
+<div
+class="request-modal-message"
+id="requestActionMessage"
+hidden
+aria-live="polite">
+
+</div>
+
+<div class="confirmation-actions">
+
+<button
+type="button"
+class="secondary-action-button"
+id="cancelRequestAction">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-action-button"
+id="confirmRequestActionButton">
+
+<i class="fa-solid fa-check"></i>
+
+<span>Confirm</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-agent-requests.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage Senku Pay platform treasury withdrawals.">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>Platform Withdraw | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-platform-withdraw.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="platform-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a
+href="admin-platform-withdraw.html"
+class="active">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a href="admin-agent-requests.html">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+<a href="#security">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>Security</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="platform-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton"
+aria-label="Open navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">PLATFORM TREASURY</p>
+
+<h1>Platform Withdraw</h1>
+
+<p>
+
+Withdraw platform funds to approved payout accounts.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="admin-profile">
+
+<div
+class="profile-icon"
+id="platformAdminIcon">
+
+A
+
+</div>
+
+<div>
+
+<h3 id="platformAdminName">Administrator</h3>
+
+<span id="platformAdminRole">Treasury Access</span>
+
+</div>
+
+</div>
+
+</header>
+
+<div
+id="platformWithdrawMessage"
+class="platform-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="platform-balance-card">
+
+<div class="balance-left">
+
+<div class="balance-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<div>
+
+<p>Available Platform Balance</p>
+
+<h2 id="platformBalance">$0.00</h2>
+
+<span id="platformBalanceStatus">
+
+Checking treasury balance...
+
+</span>
+
+</div>
+
+</div>
+
+<div class="balance-right">
+
+<div class="balance-mini">
+
+<span>Today's Withdrawals</span>
+
+<strong id="todayWithdraw">$0.00</strong>
+
+</div>
+
+<div class="balance-mini">
+
+<span>Total Withdrawals</span>
+
+<strong id="totalWithdraw">$0.00</strong>
+
+</div>
+
+<div class="balance-mini">
+
+<span>Total Requests</span>
+
+<strong id="platformWithdrawCount">0</strong>
+
+</div>
+
+</div>
+
+</section>
+<section class="platform-withdraw-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">CREATE WITHDRAWAL</p>
+
+<h2>Platform Payout Details</h2>
+
+</div>
+
+<span>Secure Treasury Action</span>
+
+</div>
+
+<p class="section-desc">
+
+Enter the amount and destination details for the platform withdrawal.
+
+</p>
+
+<div class="withdraw-grid">
+
+<div class="form-group">
+
+<label for="withdrawAmount">
+
+Withdraw Amount
+
+</label>
+
+<div class="amount-input">
+
+<span>$</span>
+
+<input
+type="number"
+id="withdrawAmount"
+placeholder="Enter amount"
+min="0.01"
+step="0.01"
+inputmode="decimal">
+
+</div>
+
+<small
+class="field-error"
+id="withdrawAmountError">
+
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="withdrawMethod">
+
+Payment Method
+
+</label>
+
+<select id="withdrawMethod">
+
+<option value="cashapp">
+
+Cash App
+
+</option>
+
+<option value="paypal">
+
+PayPal
+
+</option>
+
+<option value="chime">
+
+Chime
+
+</option>
+
+<option value="applepay">
+
+Apple Pay
+
+</option>
+
+<option value="googlepay">
+
+Google Pay
+
+</option>
+
+<option value="card">
+
+Debit / Credit Card
+
+</option>
+
+</select>
+
+</div>
+
+<div
+class="form-group full-width"
+id="paymentDetailsBox">
+
+<label for="accountInput" id="accountLabel">
+
+Cash App Username / Cashtag
+
+</label>
+
+<input
+type="text"
+id="accountInput"
+placeholder="$Cashtag"
+autocomplete="off">
+
+<small
+class="field-error"
+id="accountInputError">
+
+</small>
+
+</div>
+
+<div
+class="saved-card-section full-width"
+id="savedCardSection"
+hidden>
+
+<div class="saved-card-header">
+
+<div>
+
+<h3>Card Withdrawal</h3>
+
+<p>
+
+Select or add an approved payout card.
+
+</p>
+
+</div>
+
+<button
+type="button"
+id="addCardBtn"
+class="add-card-button">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<span>Add Card</span>
+
+</button>
+
+</div>
+
+<div
+class="saved-card-list"
+id="savedCardList">
+
+<div class="saved-card-empty">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<p>No payout card selected.</p>
+
+</div>
+
+</div>
+
+<input
+type="hidden"
+id="selectedCardId">
+
+</div>
+
+<div class="form-group">
+
+<label for="holderName">
+
+Account Holder
+
+</label>
+
+<input
+type="text"
+id="holderName"
+placeholder="Full legal name"
+autocomplete="name">
+
+<small
+class="field-error"
+id="holderNameError">
+
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="withdrawNote">
+
+Reference / Note
+
+</label>
+
+<input
+type="text"
+id="withdrawNote"
+placeholder="Optional withdrawal note"
+maxlength="250">
+
+</div>
+
+<div class="withdraw-summary full-width">
+
+<div>
+
+<span>Selected Method</span>
+
+<strong id="selectedMethodSummary">
+
+Cash App
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Withdrawal Amount</span>
+
+<strong id="selectedAmountSummary">
+
+$0.00
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Remaining Balance</span>
+
+<strong id="remainingBalanceSummary">
+
+$0.00
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="full-width">
+
+<button
+type="button"
+id="platformWithdrawBtn">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+<span>Review Withdrawal</span>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+<section class="withdraw-history-card">
+
+<div class="history-header">
+
+<div>
+
+<p class="section-label">WITHDRAWAL HISTORY</p>
+
+<h2>Platform Withdrawal Records</h2>
+
+<p>
+
+Review all completed, pending and failed platform withdrawals.
+
+</p>
+
+</div>
+
+<div class="history-actions">
+
+<div class="history-search">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="search"
+id="historySearch"
+placeholder="Search ID, method, destination or status...">
+
+</div>
+
+<select
+id="historyStatusFilter"
+aria-label="Filter withdrawal history by status">
+
+<option value="all">All Statuses</option>
+
+<option value="pending">Pending</option>
+
+<option value="completed">Completed</option>
+
+<option value="approved">Approved</option>
+
+<option value="failed">Failed</option>
+
+<option value="rejected">Rejected</option>
+
+</select>
+
+<button
+type="button"
+class="refresh-history-button"
+id="refreshPlatformHistoryButton">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</div>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Amount</th>
+
+<th>Method</th>
+
+<th>Destination</th>
+
+<th>Holder</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="withdrawHistory">
+
+<tr class="loading-row">
+
+<td colspan="8">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading withdrawal history...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+class="empty-history"
+id="platformHistoryEmpty"
+hidden>
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>No Withdrawals Found</h3>
+
+<p>
+
+No platform withdrawals match the selected filters.
+
+</p>
+
+</div>
+
+<div class="table-footer">
+
+<p id="platformHistoryResults">
+
+Showing 0 withdrawals
+
+</p>
+
+<div class="pagination-controls">
+
+<button
+type="button"
+class="pagination-button"
+id="platformHistoryPrevious"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="platformHistoryPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+class="pagination-button"
+id="platformHistoryNext"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="treasury-security-card"
+id="security">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">TREASURY SECURITY</p>
+
+<h2>Platform Fund Protection</h2>
+
+</div>
+
+<span>Administrator Only</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-user-shield"></i>
+
+</div>
+
+<div>
+
+<h3>Restricted Access</h3>
+
+<p>
+
+Only authenticated Senku Pay administrators can create platform withdrawals.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<div>
+
+<h3>Balance Validation</h3>
+
+<p>
+
+Every request is checked against the available platform treasury balance.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>Live Synchronization</h3>
+
+<p id="platformWithdrawLastSync">
+
+Platform data has not been synchronized yet.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        ADD CARD MODAL
+==========================================-->
+
+<div
+class="platform-modal"
+id="addCardModal"
+aria-hidden="true">
+
+<div
+class="platform-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="addCardModalTitle">
+
+<button
+type="button"
+class="platform-modal-close"
+id="closeAddCardModal"
+aria-label="Close add card modal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="platform-modal-header">
+
+<div class="platform-modal-icon">
+
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">PAYOUT CARD</p>
+
+<h2 id="addCardModalTitle">Add Withdrawal Card</h2>
+
+<p>
+
+Enter the approved card details used for platform payouts.
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="platform-modal-message"
+id="addCardModalMessage"
+hidden
+aria-live="polite">
+
+</div>
+
+<div class="card-form-grid">
+
+<div class="form-group full-width">
+
+<label for="cardHolderName">
+
+Cardholder Name
+
+</label>
+
+<input
+type="text"
+id="cardHolderName"
+placeholder="Name shown on card"
+autocomplete="cc-name">
+
+</div>
+
+<div class="form-group full-width">
+
+<label for="cardNumber">
+
+Card Number
+
+</label>
+
+<input
+type="text"
+id="cardNumber"
+placeholder="1234 5678 9012 3456"
+inputmode="numeric"
+autocomplete="cc-number"
+maxlength="23">
+
+</div>
+
+<div class="form-group">
+
+<label for="cardExpiry">
+
+Expiry Date
+
+</label>
+
+<input
+type="text"
+id="cardExpiry"
+placeholder="MM/YY"
+inputmode="numeric"
+autocomplete="cc-exp"
+maxlength="5">
+
+</div>
+
+<div class="form-group">
+
+<label for="cardCvv">
+
+CVV
+
+</label>
+
+<input
+type="password"
+id="cardCvv"
+placeholder="123"
+inputmode="numeric"
+autocomplete="cc-csc"
+maxlength="4">
+
+</div>
+
+<div class="form-group full-width">
+
+<label for="cardBillingAddress">
+
+Billing Address
+
+</label>
+
+<input
+type="text"
+id="cardBillingAddress"
+placeholder="Billing address"
+autocomplete="street-address">
+
+</div>
+
+</div>
+
+<div class="platform-modal-actions">
+
+<button
+type="button"
+class="secondary-modal-button"
+id="cancelAddCard">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-modal-button"
+id="saveWithdrawalCard">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+<span>Save Card</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!--=========================================
+        WITHDRAWAL CONFIRMATION MODAL
+==========================================-->
+
+<div
+class="platform-modal"
+id="platformConfirmModal"
+aria-hidden="true">
+
+<div
+class="platform-modal-box confirm-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="platformConfirmTitle">
+
+<button
+type="button"
+class="platform-modal-close"
+id="closePlatformConfirmModal"
+aria-label="Close confirmation modal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="platform-modal-header">
+
+<div class="platform-modal-icon warning">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">CONFIRM TREASURY ACTION</p>
+
+<h2 id="platformConfirmTitle">
+
+Review Platform Withdrawal
+
+</h2>
+
+<p>
+
+Confirm all payout information before submitting this withdrawal.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="confirmation-grid">
+
+<div class="confirmation-box">
+
+<span>Amount</span>
+
+<strong id="confirmWithdrawAmount">$0.00</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Method</span>
+
+<strong id="confirmWithdrawMethod">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Destination</span>
+
+<strong id="confirmWithdrawDestination">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Account Holder</span>
+
+<strong id="confirmWithdrawHolder">--</strong>
+
+</div>
+
+<div class="confirmation-box full-width">
+
+<span>Reference / Note</span>
+
+<strong id="confirmWithdrawNote">No note</strong>
+
+</div>
+
+</div>
+
+<div
+class="platform-modal-message"
+id="platformConfirmMessage"
+hidden
+aria-live="polite">
+
+</div>
+
+<div class="platform-modal-actions">
+
+<button
+type="button"
+class="secondary-modal-button"
+id="cancelPlatformWithdrawal">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-modal-button danger-confirm"
+id="confirmPlatformWithdrawal">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+<span>Confirm Withdrawal</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!--=========================================
+        HISTORY DETAILS MODAL
+==========================================-->
+
+<div
+class="platform-modal"
+id="platformHistoryModal"
+aria-hidden="true">
+
+<div
+class="platform-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="platformHistoryModalTitle">
+
+<button
+type="button"
+class="platform-modal-close"
+id="closePlatformHistoryModal"
+aria-label="Close withdrawal details">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="platform-modal-header">
+
+<div class="platform-modal-icon">
+
+<i class="fa-solid fa-receipt"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">WITHDRAWAL DETAILS</p>
+
+<h2 id="platformHistoryModalTitle">
+
+Platform Withdrawal
+
+</h2>
+
+<p id="platformHistoryModalSubtitle">
+
+Review the complete treasury withdrawal record.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="history-detail-grid">
+
+<div class="confirmation-box">
+
+<span>Withdrawal ID</span>
+
+<strong id="historyDetailId">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Amount</span>
+
+<strong id="historyDetailAmount">$0.00</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Method</span>
+
+<strong id="historyDetailMethod">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Destination</span>
+
+<strong id="historyDetailDestination">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Account Holder</span>
+
+<strong id="historyDetailHolder">--</strong>
+
+</div>
+
+<div class="confirmation-box">
+
+<span>Status</span>
+
+<strong id="historyDetailStatus">--</strong>
+
+</div>
+
+<div class="confirmation-box full-width">
+
+<span>Created At</span>
+
+<strong id="historyDetailDate">--</strong>
+
+</div>
+
+<div
+class="confirmation-box full-width"
+id="historyDetailNoteBox"
+hidden>
+
+<span>Reference / Note</span>
+
+<strong id="historyDetailNote">--</strong>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="primary-modal-button full-modal-button"
+id="closePlatformHistoryDetails">
+
+<i class="fa-solid fa-check"></i>
+
+<span>Close Details</span>
+
+</button>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-platform-withdraw.js"></script>
+
+</body>
+
+</html>

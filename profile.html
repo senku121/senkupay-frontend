@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage your Senku Pay profile, personal information and account security.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>Profile | Senku Pay</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="profile.css">
+
+<link rel="stylesheet" href="popup.css">
+
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="profile-layout">
+
+<header class="profile-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<small>Digital Payments</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="profile-container">
+
+<div
+id="profileMessage"
+class="profile-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="profile-card">
+
+<div
+class="profile-avatar"
+id="profileAvatar">
+
+U
+
+</div>
+
+<h1 id="profileUsername">
+
+Loading...
+
+</h1>
+
+<p id="profileRole">
+
+Senku Pay User
+
+</p>
+
+<div
+class="status"
+id="profileStatus">
+
+<i class="fa-solid fa-circle"></i>
+
+<span>Checking Account</span>
+
+</div>
+
+<div class="profile-meta">
+
+<div>
+
+<span>Email Status</span>
+
+<strong id="profileEmailStatus">
+
+Checking
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Member Since</span>
+
+<strong id="profileMemberSince">
+
+--
+
+</strong>
+
+</div>
+
+<div>
+
+<span>Account Type</span>
+
+<strong id="profileAccountType">
+
+User
+
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PERSONAL INFORMATION
+
+</p>
+
+<h2>
+
+Profile Details
+
+</h2>
+
+</div>
+
+<span>
+
+Editable
+
+</span>
+
+</div>
+
+<div class="form-grid">
+
+<div class="input-box">
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+id="fullName"
+type="text"
+placeholder="Full Name">
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+Username
+
+</label>
+
+<input
+id="username"
+type="text"
+placeholder="Username">
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+Email Address
+
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="Email Address"
+readonly>
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+Phone Number
+
+</label>
+
+<input
+id="phone"
+type="tel"
+placeholder="+1 234 567 890">
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+Country
+
+</label>
+
+<input
+id="country"
+type="text"
+placeholder="Country">
+
+</div>
+
+<div class="input-box">
+
+<label>
+
+Date of Birth
+
+</label>
+
+<input
+id="dob"
+type="date">
+
+</div>
+
+</div>
+
+</section>
+
+<section class="security-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+ACCOUNT SECURITY
+
+</p>
+
+<h2>
+
+Security Center
+
+</h2>
+
+</div>
+
+<span>
+
+Protected
+
+</span>
+
+</div>
+
+<div class="security-item">
+
+<div>
+
+<i class="fa-solid fa-lock"></i>
+
+<div>
+
+<h3>
+
+Password
+
+</h3>
+
+<p>
+
+Change your account password.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+id="changePasswordBtn">
+
+Change
+
+</button>
+
+</div>
+
+<div class="security-item">
+
+<div>
+
+<i class="fa-solid fa-envelope-circle-check"></i>
+
+<div>
+
+<h3>
+
+Email Verification
+
+</h3>
+
+<p id="emailVerificationText">
+
+Checking...
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+id="verifyEmailBtn">
+
+Verify
+
+</button>
+
+</div>
+
+<div class="security-item">
+
+<div>
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>
+
+Two-Factor Authentication
+
+</h3>
+
+<p>
+
+Coming Soon
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+disabled>
+
+Soon
+
+</button>
+
+</div>
+
+</section>
+
+<button
+type="button"
+class="save-btn"
+id="saveProfileBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+<span>
+
+Save Changes
+
+</span>
+
+</button>
+
+<section class="activity-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+ACCOUNT INFORMATION
+
+</p>
+
+<h2>
+
+Account Overview
+
+</h2>
+
+</div>
+
+<span>
+
+Live Data
+
+</span>
+
+</div>
+
+<div class="activity-grid">
+
+<div class="activity-box">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<div>
+
+<span>
+
+Joined
+
+</span>
+
+<strong id="joinedDate">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="activity-box">
+
+<i class="fa-solid fa-clock"></i>
+
+<div>
+
+<span>
+
+Last Login
+
+</span>
+
+<strong id="lastLogin">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="activity-box">
+
+<i class="fa-solid fa-wallet"></i>
+
+<div>
+
+<span>
+
+Wallet Status
+
+</span>
+
+<strong id="walletStatus">
+
+Connected
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="activity-box">
+
+<i class="fa-solid fa-user-check"></i>
+
+<div>
+
+<span>
+
+Account ID
+
+</span>
+
+<strong id="accountId">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="profile-footer">
+
+<div class="footer-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Your Profile Is Secure
+
+</h3>
+
+<p>
+
+Your personal information is encrypted and synchronized securely with the Senku Pay servers. Any changes made here are saved directly to your account.
+
+</p>
+
+</div>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="profile.js"></script>
+
+</body>
+
+</html>

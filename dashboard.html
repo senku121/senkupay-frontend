@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage your Senku Pay wallet, deposits, withdrawals and account activity.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>Dashboard | Senku Pay</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+<link rel="stylesheet" href="popup.css">
+
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+
+<div class="dashboard-layout">
+
+<!--=========================================
+                SIDEBAR
+==========================================-->
+
+<aside class="sidebar" id="dashboardSidebar">
+
+<div class="side-logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<small>Digital Payments</small>
+
+</div>
+
+</div>
+
+<nav aria-label="Dashboard navigation">
+
+<a
+href="dashboard.html"
+class="active">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="wallet.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Wallet</span>
+
+</a>
+
+<a href="deposit.html">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<span>Deposit</span>
+
+</a>
+
+<a href="withdraw.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Withdraw</span>
+
+</a>
+
+<a href="transactions.html">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
+</a>
+
+<a href="settings.html">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>Settings</span>
+
+</a>
+
+</nav>
+
+<div class="logout">
+
+<button
+type="button"
+id="logoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</div>
+
+</aside>
+
+<!--=========================================
+                MAIN AREA
+==========================================-->
+
+<section class="main-area">
+
+<header class="topbar">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="mobileMenuButton"
+aria-label="Open dashboard navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div class="search">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+id="dashboardSearch"
+type="search"
+placeholder="Search dashboard..."
+autocomplete="off">
+
+</div>
+
+<div class="top-actions">
+
+<button
+type="button"
+id="notificationButton"
+class="notification-button"
+aria-label="View notifications">
+
+<i class="fa-solid fa-bell"></i>
+
+<span
+class="notification-dot"
+id="notificationDot"
+hidden>
+
+</span>
+
+</button>
+
+<div class="user">
+
+<div
+class="avatar"
+id="dashboardAvatar">
+
+U
+
+</div>
+
+<div>
+
+<h4 id="dashboardUsername">
+
+Loading...
+
+</h4>
+
+<span id="dashboardRole">
+
+User
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="content">
+
+<div
+id="dashboardMessage"
+class="dashboard-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<!--=========================================
+                WELCOME
+==========================================-->
+
+<section class="welcome">
+
+<div>
+
+<p class="welcome-label">
+
+ACCOUNT OVERVIEW
+
+</p>
+
+<h1 id="dashboardWelcome">
+
+Welcome back 👋
+
+</h1>
+
+<p>
+
+Manage your balance, deposits, withdrawals and recent account activity.
+
+</p>
+
+</div>
+
+<button
+type="button"
+id="addFundsButton">
+
+<i class="fa-solid fa-plus"></i>
+
+<span>Add Funds</span>
+
+</button>
+
+</section>
+<!--=========================================
+                BALANCE CARDS
+==========================================-->
+
+<section class="cards">
+
+<div class="balance-card">
+
+<div>
+
+<p>Available Balance</p>
+
+<h2 id="dashboardBalance">
+
+$0.00
+
+</h2>
+
+</div>
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div class="balance-card">
+
+<div>
+
+<p>Total Deposited</p>
+
+<h2 id="dashboardDeposited">
+
+$0.00
+
+</h2>
+
+</div>
+
+<i class="fa-solid fa-arrow-down"></i>
+
+</div>
+
+<div class="balance-card">
+
+<div>
+
+<p>Total Withdrawn</p>
+
+<h2 id="dashboardWithdrawn">
+
+$0.00
+
+</h2>
+
+</div>
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</div>
+
+<div class="balance-card">
+
+<div>
+
+<p>Pending Withdrawals</p>
+
+<h2 id="dashboardPending">
+
+$0.00
+
+</h2>
+
+</div>
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+</div>
+
+</section>
+
+<!--=========================================
+            QUICK ACTIONS
+==========================================-->
+
+<section class="quick-section">
+
+<div class="section-title">
+
+<h2>
+
+Quick Actions
+
+</h2>
+
+</div>
+
+<div class="quick-grid">
+
+<div
+class="quick-card"
+onclick="location.href='deposit.html'">
+
+<div class="quick-icon">
+
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Deposit
+
+</h3>
+
+<p>
+
+Instant wallet funding
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="quick-card"
+onclick="location.href='withdraw.html'">
+
+<div class="quick-icon">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Withdraw
+
+</h3>
+
+<p>
+
+Submit withdrawal request
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="quick-card"
+onclick="location.href='transactions.html'">
+
+<div class="quick-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Transactions
+
+</h3>
+
+<p>
+
+View payment history
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="quick-card"
+onclick="location.href='profile.html'">
+
+<div class="quick-icon">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Profile
+
+</h3>
+
+<p>
+
+Manage your account
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--=========================================
+            ACCOUNT SUMMARY
+==========================================-->
+
+<section class="stats-section">
+
+<div class="section-title">
+
+<h2>
+
+Account Summary
+
+</h2>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<i class="fa-solid fa-user-check"></i>
+
+<div>
+
+<p>
+
+Account Status
+
+</p>
+
+<h3 id="dashboardStatus">
+
+Verified
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-envelope-circle-check"></i>
+
+<div>
+
+<p>
+
+Email
+
+</p>
+
+<h3 id="dashboardEmailStatus">
+
+Verified
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<div>
+
+<p>
+
+Member Since
+
+</p>
+
+<h3 id="dashboardJoined">
+
+--
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<p>
+
+Security
+
+</p>
+
+<h3>
+
+Protected
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!--=========================================
+        RECENT TRANSACTIONS
+==========================================-->
+
+<section class="transaction-section">
+
+<div class="section-title">
+
+<h2>
+
+Recent Transactions
+
+</h2>
+
+<a href="transactions.html">
+
+View All
+
+</a>
+
+</div>
+
+<div
+class="transaction-card"
+id="dashboardTransactions">
+
+<div class="empty-transactions">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<h3>
+
+No Transactions Yet
+
+</h3>
+
+<p>
+
+Your deposits, withdrawals and transfers will appear here once your account becomes active.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!--=========================================
+        ACCOUNT ACTIVITY
+==========================================-->
+
+<section class="activity-section">
+
+<div class="section-title">
+
+<h2>
+
+Account Activity
+
+</h2>
+
+</div>
+
+<div class="activity-card">
+
+<div class="chart-placeholder">
+
+<div class="chart-line"></div>
+
+<div class="chart-points">
+
+<span></span>
+
+<span></span>
+
+<span></span>
+
+<span></span>
+
+<span></span>
+
+</div>
+
+</div>
+
+<div class="chart-labels">
+
+<span>Mon</span>
+
+<span>Tue</span>
+
+<span>Wed</span>
+
+<span>Thu</span>
+
+<span>Fri</span>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</section>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>

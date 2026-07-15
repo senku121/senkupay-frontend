@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Withdraw funds securely from your Senku Pay wallet.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>
+
+Withdraw | Senku Pay
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="withdraw.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+<link
+rel="stylesheet"
+href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="withdraw-layout">
+
+<header class="withdraw-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>
+
+Dashboard
+
+</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>
+
+Senku Pay
+
+</h2>
+
+<small>
+
+Digital Payments
+
+</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="withdraw-container">
+
+<div
+id="withdrawMessage"
+class="withdraw-message"
+hidden>
+
+</div>
+
+<section class="withdraw-card">
+
+<div>
+
+<p>
+
+Available Balance
+
+</p>
+
+<h1 id="withdrawBalance">
+
+$0.00
+
+</h1>
+
+<span
+id="withdrawStatusText"
+class="withdraw-status-text">
+
+Wallet connected securely.
+
+</span>
+
+</div>
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+</section>
+
+<section class="form-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+WITHDRAW DETAILS
+
+</p>
+
+<h2>
+
+Withdrawal Amount
+
+</h2>
+
+</div>
+
+<span>
+
+USD
+
+</span>
+
+</div>
+
+<div class="amount-input">
+
+<span>
+
+$
+
+</span>
+
+<input
+type="number"
+id="withdrawAmount"
+placeholder="Enter withdrawal amount"
+min="1"
+step="0.01"
+autocomplete="off">
+
+</div>
+
+<small>
+
+Enter the amount you want to withdraw from your wallet.
+
+</small>
+
+</section>
+
+<div
+id="withdrawError"
+class="withdraw-error">
+
+<i class="fa-solid fa-circle-exclamation"></i>
+
+<span>
+
+Please enter a valid withdrawal amount.
+
+</span>
+
+</div>
+<section class="method-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+WITHDRAWAL METHOD
+
+</p>
+
+<h2>
+
+Choose Payout Method
+
+</h2>
+
+</div>
+
+<span>
+
+Secure Payout
+
+</span>
+
+</div>
+
+<div
+class="withdraw-options"
+role="radiogroup"
+aria-label="Withdrawal Method">
+
+<button
+type="button"
+class="withdraw-option active"
+data-method="card"
+role="radio"
+aria-checked="true">
+
+<div class="withdraw-icon">
+
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+<h3>
+
+Card
+
+</h3>
+
+<p>
+
+Visa • Mastercard
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="withdraw-option"
+data-method="cashapp"
+role="radio"
+aria-checked="false">
+
+<div class="withdraw-icon">
+
+<i class="fa-solid fa-dollar-sign"></i>
+
+</div>
+
+<h3>
+
+Cash App
+
+</h3>
+
+<p>
+
+Instant Cash App
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="withdraw-option"
+data-method="chime"
+role="radio"
+aria-checked="false">
+
+<div class="withdraw-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<h3>
+
+Chime
+
+</h3>
+
+<p>
+
+Chime Account
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="withdraw-option"
+data-method="applepay"
+role="radio"
+aria-checked="false">
+
+<div class="withdraw-icon">
+
+<i class="fa-brands fa-apple"></i>
+
+</div>
+
+<h3>
+
+Apple Pay
+
+</h3>
+
+<p>
+
+Apple Wallet
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="withdraw-option"
+data-method="googlepay"
+role="radio"
+aria-checked="false">
+
+<div class="withdraw-icon">
+
+<i class="fa-brands fa-google"></i>
+
+</div>
+
+<h3>
+
+Google Pay
+
+</h3>
+
+<p>
+
+Google Wallet
+
+</p>
+
+</button>
+
+</div>
+
+</section>
+
+<section class="account-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PAYOUT DETAILS
+
+</p>
+
+<h2>
+
+Recipient Information
+
+</h2>
+
+</div>
+
+</div>
+
+<div id="paymentFields">
+
+<div class="field-group">
+
+<label>
+
+Card Number
+
+</label>
+
+<input
+type="text"
+id="accountInput"
+placeholder="Enter your debit or credit card number">
+
+</div>
+
+<div class="field-group">
+
+<label>
+
+Cardholder Name
+
+</label>
+
+<input
+type="text"
+id="holderInput"
+placeholder="Enter cardholder name">
+
+</div>
+
+<div class="field-group">
+
+<label>
+
+Additional Note (Optional)
+
+</label>
+
+<input
+type="text"
+id="noteInput"
+placeholder="Optional note">
+
+</div>
+
+</div>
+
+</section>
+
+<button
+type="button"
+class="confirm-withdraw"
+id="confirmWithdraw">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+<span>
+
+Request Withdrawal
+
+</span>
+
+</button>
+
+<section class="withdraw-history">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+RECENT ACTIVITY
+
+</p>
+
+<h2>
+
+Recent Withdrawals
+
+</h2>
+
+</div>
+
+<a href="transactions.html">
+
+View All
+
+</a>
+
+</div>
+
+<div id="withdrawHistory">
+
+<div class="empty-history">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<h3>
+
+No Withdrawals Yet
+
+</h3>
+
+<p>
+
+Your completed, pending and failed withdrawals will appear here.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="withdraw-info">
+
+<div class="info-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>
+
+Secure Withdrawals
+
+</h3>
+
+<p>
+
+Every withdrawal request is securely transmitted to the Senku Pay backend using encrypted communication.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+<div>
+
+<h3>
+
+Manual Review
+
+</h3>
+
+<p>
+
+Withdrawal requests may require verification before funds are released depending on your payment provider.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-money-check-dollar"></i>
+
+<div>
+
+<h3>
+
+Gateway Ready
+
+</h3>
+
+<p>
+
+Card, Cash App, Chime, Apple Pay and Google Pay payout integrations can be connected later without changing this page.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="withdraw.js"></script>
+
+</body>
+
+</html>

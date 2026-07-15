@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage Senku Pay users and wallet accounts.">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>User Management | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-users.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="users-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a
+href="admin-users.html"
+class="active">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a href="admin-platform-withdraw.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a href="admin-agent-requests.html">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+<a href="#security">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>Security</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="users-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton"
+aria-label="Open navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">ACCOUNT CONTROL</p>
+
+<h1>User Management</h1>
+
+<p>
+
+Search, inspect and manage Senku Pay user accounts.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="add-user"
+id="createUserBtn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<span>Create User</span>
+
+</button>
+
+</header>
+
+<div
+id="adminUsersMessage"
+class="admin-users-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="user-summary-grid">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+<div>
+
+<p>Total Users</p>
+
+<h2 id="summaryTotalUsers">0</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-user-check"></i>
+
+</div>
+
+<div>
+
+<p>Active Users</p>
+
+<h2 id="summaryActiveUsers">0</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-user-lock"></i>
+
+</div>
+
+<div>
+
+<p>Restricted Users</p>
+
+<h2 id="summaryRestrictedUsers">0</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div>
+
+<p>Total Balance</p>
+
+<h2 id="summaryTotalBalance">$0.00</h2>
+
+</div>
+
+</div>
+
+</section>
+<section class="users-card">
+
+<div class="users-toolbar">
+
+<div class="search-area">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+type="search"
+id="userSearch"
+placeholder="Search username, email, ID or status...">
+
+</div>
+
+<div class="toolbar-actions">
+
+<select
+id="userStatusFilter"
+class="status-filter"
+aria-label="Filter users by status">
+
+<option value="all">
+
+All Statuses
+
+</option>
+
+<option value="active">
+
+Active
+
+</option>
+
+<option value="frozen">
+
+Frozen
+
+</option>
+
+<option value="blocked">
+
+Blocked
+
+</option>
+
+<option value="pending">
+
+Pending
+
+</option>
+
+</select>
+
+<button
+type="button"
+class="refresh-users-button"
+id="refreshUsersButton">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</div>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>User</th>
+
+<th>Email</th>
+
+<th>Balance</th>
+
+<th>Status</th>
+
+<th>Joined</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="userTable">
+
+<tr class="loading-row">
+
+<td colspan="7">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading users...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="table-footer">
+
+<p id="userResultsText">
+
+Showing 0 users
+
+</p>
+
+<div class="pagination-controls">
+
+<button
+type="button"
+id="previousPageButton"
+class="pagination-button"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="currentPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+id="nextPageButton"
+class="pagination-button"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="security-card"
+id="security">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">SECURITY</p>
+
+<h2>Account Administration</h2>
+
+</div>
+
+<span>Protected Actions</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-user-shield"></i>
+
+</div>
+
+<div>
+
+<h3>Role-Protected Access</h3>
+
+<p>
+
+Only authenticated administrators can access user-management actions.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>Live Synchronization</h3>
+
+<p id="usersLastSync">
+
+Users have not been synchronized yet.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-database"></i>
+
+</div>
+
+<div>
+
+<h3>Database Records</h3>
+
+<p>
+
+All balance, status and password changes are sent to the backend.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        USER MANAGEMENT MODAL
+==========================================-->
+
+<div
+class="user-modal"
+id="userManageModal"
+aria-hidden="true">
+
+<div
+class="user-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="manageUsername">
+
+<button
+type="button"
+class="close-user-modal"
+id="closeUserModal"
+aria-label="Close user management">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="modal-header">
+
+<div
+class="modal-user-avatar"
+id="manageUserAvatar">
+
+U
+
+</div>
+
+<div>
+
+<p class="section-label">USER ACCOUNT</p>
+
+<h2 id="manageUsername">User</h2>
+
+<p id="manageEmail">No email available</p>
+
+</div>
+
+</div>
+
+<div class="user-details">
+
+<div class="detail-box">
+
+<span>Account ID</span>
+
+<strong id="manageUserId">--</strong>
+
+</div>
+
+<div class="detail-box">
+
+<span>Balance</span>
+
+<strong id="manageBalance">$0.00</strong>
+
+</div>
+
+<div class="detail-box">
+
+<span>Status</span>
+
+<strong id="manageStatus">ACTIVE</strong>
+
+</div>
+
+<div class="detail-box">
+
+<span>Joined</span>
+
+<strong id="manageJoined">--</strong>
+
+</div>
+
+</div>
+
+<div
+id="userModalMessage"
+class="user-modal-message"
+hidden>
+
+</div>
+
+<div class="user-actions">
+
+<button
+type="button"
+id="addBalanceBtn"
+class="user-action add-balance-action">
+
+<i class="fa-solid fa-plus"></i>
+
+<span>Add Balance</span>
+
+</button>
+
+<button
+type="button"
+id="deductBalanceBtn"
+class="user-action deduct-balance-action">
+
+<i class="fa-solid fa-minus"></i>
+
+<span>Deduct Balance</span>
+
+</button>
+
+<button
+type="button"
+id="freezeUserBtn"
+class="user-action freeze-user-action">
+
+<i class="fa-solid fa-snowflake"></i>
+
+<span>Freeze Account</span>
+
+</button>
+
+<button
+type="button"
+id="blockUserBtn"
+class="user-action block-user-action">
+
+<i class="fa-solid fa-ban"></i>
+
+<span>Block Account</span>
+
+</button>
+
+<button
+type="button"
+id="resetPasswordBtn"
+class="user-action reset-password-action">
+
+<i class="fa-solid fa-key"></i>
+
+<span>Reset Password</span>
+
+</button>
+
+<button
+type="button"
+id="transactionHistoryBtn"
+class="user-action history-action">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<span>Transaction History</span>
+
+</button>
+
+</div>
+
+<div
+class="modal-form"
+id="userBalanceForm"
+hidden>
+
+<div class="modal-form-header">
+
+<h3 id="userBalanceFormTitle">
+
+Update Balance
+
+</h3>
+
+<button
+type="button"
+class="modal-form-close"
+id="closeUserBalanceForm"
+aria-label="Close balance form">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<label for="userBalanceAmount">
+
+Amount
+
+</label>
+
+<div class="modal-input">
+
+<span>$</span>
+
+<input
+type="number"
+id="userBalanceAmount"
+placeholder="Enter amount"
+min="0.01"
+step="0.01">
+
+</div>
+
+<div class="modal-form-actions">
+
+<button
+type="button"
+class="secondary-action"
+id="cancelUserBalanceAction">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-action"
+id="submitUserBalanceAction">
+
+Confirm
+
+</button>
+
+</div>
+
+</div>
+
+<div
+class="modal-form"
+id="userPasswordForm"
+hidden>
+
+<div class="modal-form-header">
+
+<h3>Reset User Password</h3>
+
+<button
+type="button"
+class="modal-form-close"
+id="closeUserPasswordForm"
+aria-label="Close password form">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<label for="newManagedUserPassword">
+
+New Password
+
+</label>
+
+<div class="modal-input">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="newManagedUserPassword"
+placeholder="Enter new password"
+autocomplete="new-password">
+
+</div>
+
+<div class="modal-form-actions">
+
+<button
+type="button"
+class="secondary-action"
+id="cancelUserPasswordAction">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-action"
+id="submitUserPasswordAction">
+
+Reset Password
+
+</button>
+
+</div>
+
+</div>
+
+<div
+class="transaction-history-panel"
+id="transactionHistoryPanel"
+hidden>
+
+<div class="modal-form-header">
+
+<div>
+
+<h3>User Transaction History</h3>
+
+<p id="transactionHistorySubtitle">
+
+Loading transaction activity...
+
+</p>
+
+</div>
+
+<button
+type="button"
+class="modal-form-close"
+id="closeTransactionHistoryPanel"
+aria-label="Close transaction history">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<div
+class="transaction-history-list"
+id="transactionHistoryList">
+
+<div class="history-loading">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading transactions...
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-users.js"></script>
+
+</body>
+
+</html>

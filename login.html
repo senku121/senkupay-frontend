@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log in to your Senku Pay account to access your wallet, transactions and payment dashboard.">
+    <meta name="theme-color" content="#070b16">
+
+    <title>Login | Senku Pay</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="glow glow1" aria-hidden="true"></div>
+    <div class="glow glow2" aria-hidden="true"></div>
+    <div class="glow glow3" aria-hidden="true"></div>
+
+    <header>
+        <a href="index.html" class="logo" aria-label="Return to Senku Pay home">
+            <div class="logo-box" aria-hidden="true">S</div>
+
+            <div>
+                <h2>Senku Pay</h2>
+                <small>Modern Digital Payments</small>
+            </div>
+        </a>
+    </header>
+
+    <main>
+        <section class="login-card" aria-labelledby="loginTitle">
+            <div class="card-top">
+                <div class="login-icon" aria-hidden="true">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                </div>
+
+                <h1 id="loginTitle">Welcome Back</h1>
+
+                <p>
+                    Log in to access your Senku Pay wallet and account dashboard.
+                </p>
+            </div>
+
+            <div
+                class="form-message"
+                id="formMessage"
+                role="alert"
+                aria-live="polite"
+                hidden
+            ></div>
+
+            <form id="loginForm" novalidate>
+                <div class="input-group">
+                    <label for="loginIdentifier">Username or Email</label>
+
+                    <input
+                        id="loginIdentifier"
+                        name="loginIdentifier"
+                        type="text"
+                        placeholder="Username or email"
+                        autocomplete="username"
+                        maxlength="160"
+                        spellcheck="false"
+                        required
+                    >
+
+                    <small class="field-error" id="identifierError"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-field">
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            autocomplete="current-password"
+                            maxlength="128"
+                            required
+                        >
+
+                        <button
+                            class="password-toggle"
+                            id="passwordToggle"
+                            type="button"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <small class="field-error" id="passwordError"></small>
+                </div>
+
+                <div class="remember-row">
+                    <label class="remember" for="rememberMe">
+                        <input
+                            id="rememberMe"
+                            name="rememberMe"
+                            type="checkbox"
+                        >
+                        Remember me
+                    </label>
+
+                    <a href="forgot-password.html">Forgot Password?</a>
+                </div>
+
+                <button
+                    class="login-btn"
+                    id="loginBtn"
+                    type="submit"
+                >
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span>Login</span>
+                </button>
+
+                <div class="role-login-grid">
+                    <a href="admin-login.html" class="agent-login-btn">
+                        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                        Login as Agent
+                    </a>
+
+                    <a href="sub-agent-login.html" class="sub-agent-login-btn">
+                        <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+                        Login as Sub Agent
+                    </a>
+                </div>
+            </form>
+
+            <div class="security-note">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+
+                <p>
+                    Senku Pay will never ask you to share your password or verification
+                    code through email, chat or phone.
+                </p>
+            </div>
+
+            <div class="bottom-text">
+                Don't have an account?
+                <a href="register.html">Create One</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

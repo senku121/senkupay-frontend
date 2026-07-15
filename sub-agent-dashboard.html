@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Sub Agent Dashboard | Senku Stakes</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<link rel="stylesheet" href="sub-agent-dashboard.css">
+<link rel="stylesheet" href="popup.css">
+
+
+
+</head>
+
+
+<body>
+
+
+
+
+<div class="agent-dashboard-layout">
+
+
+
+
+
+
+<!-- SIDEBAR -->
+
+
+<aside class="agent-sidebar">
+
+
+
+<div class="agent-brand">
+
+
+<div class="logo-box">
+
+S
+
+</div>
+
+
+<div>
+
+<h2>
+
+Senku Stakes
+
+</h2>
+
+
+<span>
+
+Sub Agent
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<nav>
+
+
+
+<a href="sub-agent-dashboard.html" class="active">
+
+
+<i class="fa-solid fa-chart-line"></i>
+
+Dashboard
+
+
+</a>
+
+
+
+
+
+<a href="#">
+
+
+<i class="fa-solid fa-users"></i>
+
+My Users
+
+
+</a>
+
+
+
+
+
+<a href="#">
+
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+Transactions
+
+
+</a>
+
+
+
+
+
+<a href="#">
+
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Send Request
+
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+
+<button class="agent-logout">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+
+</button>
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+<main class="agent-main">
+
+
+
+
+
+
+<header class="dashboard-header">
+<button id="menuToggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+
+<h1>
+
+Welcome, Agent
+
+</h1>
+
+
+<p>
+
+Manage your assigned users
+
+</p>
+
+<div class="agent-profile-mini">
+
+
+<div>
+
+<i class="fa-solid fa-user-shield"></i>
+
+</div>
+
+
+
+<div>
+
+<h3 id="loggedAgentName">
+
+Sub Agent
+
+</h3>
+
+
+<p>
+
+ID:
+
+<span id="loggedAgentId">
+
+SA001
+
+</span>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+<section class="agent-stats">
+
+
+
+
+
+<div class="stat-card">
+
+
+<i class="fa-solid fa-users"></i>
+
+
+<div>
+
+
+<p>
+
+Assigned Users
+
+</p>
+
+
+<h2 id="assignedUsers">
+0
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<i class="fa-solid fa-wallet"></i>
+
+
+<div>
+
+
+<p>
+
+Agent Balance
+
+</p>
+
+
+<h2 id="agentBalance">
+$0.00
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<i class="fa-solid fa-clock"></i>
+
+
+<div>
+
+
+<p>
+
+Pending Requests
+
+</p>
+
+
+<h2 id="pendingRequests">
+0
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="balance-card">
+
+
+
+<h2>
+
+Balance Management
+
+</h2>
+
+
+
+
+<div class="balance-info">
+
+
+<p>
+
+Available Balance
+
+</p>
+
+
+<h1 id="availableBalance">
+$0.00
+</h1>
+
+
+</div>
+
+
+
+
+
+<div class="balance-actions">
+	<div class="agent-wallet-section">
+
+
+<h3>
+Agent Wallet Deposit
+</h3>
+
+
+<p>
+Add funds to your agent wallet through payment gateway
+</p>
+
+
+<button class="deposit-agent-btn">
+
+<i class="fa-solid fa-credit-card"></i>
+
+Deposit Funds
+
+</button>
+
+
+</div>
+
+
+
+<button class="add-money">
+
+
+<i class="fa-solid fa-plus"></i>
+
+Add Balance
+
+</button>
+
+
+
+
+
+<button class="send-admin">
+
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Send To Admin
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="users-card">
+
+
+<h2>
+
+Recent Users
+
+</h2>
+
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+User
+
+</th>
+
+
+<th>
+
+Balance
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="recentUsersTable">
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+
+<section class="users-management-card">
+
+    <h2>User Management</h2>
+
+    <div class="user-search">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            id="userSearch"
+            placeholder="Search users...">
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Username</th>
+
+                <th>Balance</th>
+
+                <th>Status</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="userTable">
+
+        </tbody>
+
+    </table>
+
+</section>
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+</div>
+
+
+
+<!-- USER MANAGEMENT MODAL -->
+
+<div class="manage-user-modal" id="manageUserModal">
+
+    <div class="manage-user-box">
+
+        <button class="close-manage-modal">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div class="manage-user-header">
+
+            <i class="fa-solid fa-user"></i>
+
+            <h2 id="manageUsername">
+
+                Username
+
+            </h2>
+
+        </div>
+
+        <div class="manage-user-info">
+
+            <p>
+
+                Balance
+
+                <span id="manageBalance">
+
+                    $0.00
+
+                </span>
+
+            </p>
+
+            <p>
+
+                Status
+
+                <span id="manageStatus">
+
+                    ACTIVE
+
+                </span>
+
+            </p>
+
+        </div>
+
+        <div class="manage-user-actions">
+
+            <button id="btnViewProfile">
+
+                <i class="fa-solid fa-user"></i>
+
+                View Profile
+
+            </button>
+
+            <button id="btnAddBalance">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Balance
+
+            </button>
+
+            <button id="btnRemoveBalance">
+
+                <i class="fa-solid fa-minus"></i>
+
+                Remove Balance
+
+            </button>
+
+            <button id="btnFreeze">
+
+    <i class="fa-solid fa-snowflake"></i>
+
+    Freeze Account
+
+</button>
+
+
+<button id="btnBlock">
+
+    <i class="fa-solid fa-ban"></i>
+
+    Block Account
+
+</button>
+
+            <button id="btnTransactions">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                Transactions
+
+            </button>
+
+            <div class="user-transactions-box" id="userTransactionsBox">
+
+
+<h3>
+
+Transaction History
+
+</h3>
+
+
+<div id="userTransactionsList">
+
+
+</div>
+
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+
+<script src="sub-agent-dashboard.js"></script>
+
+
+</body>
+
+</html>

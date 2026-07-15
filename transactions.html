@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="View your complete Senku Pay transaction history.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>
+
+Transactions | Senku Pay
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="transactions.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+<link
+rel="stylesheet"
+href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="transactions-layout">
+
+<header class="transactions-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>
+
+Dashboard
+
+</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>
+
+Senku Pay
+
+</h2>
+
+<small>
+
+Digital Payments
+
+</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="transactions-container">
+
+<div
+id="transactionsMessage"
+class="transactions-message"
+hidden>
+
+</div>
+
+<section class="summary-grid">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-list"></i>
+
+</div>
+
+<div>
+
+<p>
+
+Total Transactions
+
+</p>
+
+<h2 id="totalTransactions">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-arrow-down"></i>
+
+</div>
+
+<div>
+
+<p>
+
+Total Deposits
+
+</p>
+
+<h2 id="totalDeposits">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</div>
+
+<div>
+
+<p>
+
+Total Withdrawals
+
+</p>
+
+<h2 id="totalWithdrawals">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+<section class="filter-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+FILTERS
+
+</p>
+
+<h2>
+
+Search Transactions
+
+</h2>
+
+</div>
+
+<span>
+
+Realtime Search
+
+</span>
+
+</div>
+
+<div class="search-box">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+type="text"
+id="transactionSearch"
+placeholder="Search by type, status or amount...">
+
+</div>
+
+<div class="filters">
+
+<button
+type="button"
+class="filter active"
+data-filter="all">
+
+All
+
+</button>
+
+<button
+type="button"
+class="filter"
+data-filter="deposit">
+
+Deposits
+
+</button>
+
+<button
+type="button"
+class="filter"
+data-filter="withdrawal">
+
+Withdrawals
+
+</button>
+
+<button
+type="button"
+class="filter"
+data-filter="pending">
+
+Pending
+
+</button>
+
+<button
+type="button"
+class="filter"
+data-filter="completed">
+
+Completed
+
+</button>
+
+<button
+type="button"
+class="filter"
+data-filter="failed">
+
+Failed
+
+</button>
+
+</div>
+
+</section>
+
+<section class="transactions-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+HISTORY
+
+</p>
+
+<h2>
+
+Transaction History
+
+</h2>
+
+</div>
+
+<a
+href="wallet.html">
+
+Wallet
+
+</a>
+
+</div>
+
+<div
+id="transactionList"
+class="transaction-list">
+
+<div class="empty-transactions">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<h3>
+
+Loading Transactions...
+
+</h3>
+
+<p>
+
+Please wait while your transaction history is being synchronized with Senku Pay.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="transactions-info">
+
+<div class="info-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>
+
+Secure Records
+
+</h3>
+
+<p>
+
+Every deposit and withdrawal is securely recorded on the Senku Pay backend and synchronized with your account.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<div>
+
+<h3>
+
+Real-Time Updates
+
+</h3>
+
+<p>
+
+Your transaction history refreshes automatically whenever a new deposit or withdrawal is completed.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-filter-circle-dollar"></i>
+
+<div>
+
+<h3>
+
+Smart Filtering
+
+</h3>
+
+<p>
+
+Quickly search and filter deposits, withdrawals and transaction statuses without reloading the page.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="transactions.js"></script>
+
+</body>
+
+</html>

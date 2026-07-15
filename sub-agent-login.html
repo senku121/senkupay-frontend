@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Sub Agent Login | Senku Stakes</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<link rel="stylesheet" href="sub-agent-login.css">
+<link rel="stylesheet" href="popup.css">
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+
+<body>
+
+
+
+
+
+<div class="agent-login-container">
+
+
+
+
+
+<div class="agent-login-card">
+
+
+
+
+
+<div class="agent-logo">
+
+
+<div class="logo-box">
+
+S
+
+</div>
+
+
+<h1>
+
+Sub Agent Portal
+
+</h1>
+
+
+<p>
+
+Authorized agents only
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<form id="agentLoginForm" autocomplete="off">
+
+
+
+
+
+<div class="input-group">
+
+
+<i class="fa-solid fa-id-badge"></i>
+
+
+<input
+type="text"
+id="agentUsername"
+placeholder="Username">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="input-group">
+
+
+<i class="fa-solid fa-lock"></i>
+
+
+<input
+
+type="password"
+
+id="agentPassword"
+
+placeholder="Password"
+
+>
+
+
+
+<i class="fa-solid fa-eye password-eye"></i>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<button class="agent-login-btn">
+
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+
+Login
+
+
+</button>
+
+
+
+
+
+
+<a href="login.html" class="back-login">
+
+
+Back to User Login
+
+</a>
+
+
+
+
+
+
+
+</form>
+<!--=================================
+        LOGIN POPUP
+==================================-->
+
+<div class="login-popup" id="loginPopup">
+
+    <div class="popup-box">
+
+        <div class="popup-icon success" id="popupIcon">
+            <i id="popupIconElement" class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <h2 id="popupTitle">
+            Success
+        </h2>
+
+        <p id="popupMessage">
+            Message
+        </p>
+
+        <button type="button" id="popupBtn">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+
+<script src="sub-agent-login.js"></script>
+
+
+</body>
+
+</html>

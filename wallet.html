@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="View your Senku Pay wallet balance, deposits, withdrawals and activity.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>
+
+Wallet | Senku Pay
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="wallet.css">
+
+<link rel="stylesheet" href="popup.css">
+
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="wallet-layout">
+
+<header class="wallet-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>
+
+Dashboard
+
+</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>
+
+Senku Pay
+
+</h2>
+
+<small>
+
+Digital Payments
+
+</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="wallet-container">
+
+<div
+id="walletMessage"
+class="wallet-message"
+hidden>
+
+</div>
+
+<section class="wallet-main-card">
+
+<div>
+
+<p>
+
+Available Balance
+
+</p>
+
+<h1 id="walletBalance">
+
+$0.00
+
+</h1>
+
+<span
+class="wallet-status"
+id="walletStatus">
+
+Wallet synchronized with the secure Senku Pay server.
+
+</span>
+
+</div>
+
+<i class="fa-solid fa-wallet"></i>
+
+</section>
+<section class="wallet-stats">
+
+<div class="wallet-stat">
+
+<i class="fa-solid fa-circle-dollar-to-slot"></i>
+
+<div>
+
+<p>
+
+Total Deposited
+
+</p>
+
+<h2 id="totalDeposited">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="wallet-stat">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<div>
+
+<p>
+
+Total Withdrawn
+
+</p>
+
+<h2 id="totalWithdrawn">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="wallet-stat">
+
+<i class="fa-solid fa-clock"></i>
+
+<div>
+
+<p>
+
+Pending Deposits
+
+</p>
+
+<h2 id="pendingDeposits">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="wallet-stat">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+<div>
+
+<p>
+
+Pending Withdrawals
+
+</p>
+
+<h2 id="pendingWithdrawals">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<!--=========================================
+            QUICK ACTIONS
+==========================================-->
+
+<section class="wallet-actions">
+
+<button
+type="button"
+class="deposit-btn"
+id="depositButton">
+
+<i class="fa-solid fa-plus"></i>
+
+<span>
+
+Deposit Funds
+
+</span>
+
+</button>
+
+<button
+type="button"
+class="withdraw-btn"
+id="withdrawButton">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+<span>
+
+Withdraw Funds
+
+</span>
+
+</button>
+
+</section>
+
+<!--=========================================
+            WALLET SUMMARY
+==========================================-->
+
+<section class="wallet-summary">
+
+<div class="summary-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<p>
+
+Wallet Status
+
+</p>
+
+<h3 id="walletVerification">
+
+Verified
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<i class="fa-solid fa-repeat"></i>
+
+<div>
+
+<p>
+
+Last Sync
+
+</p>
+
+<h3 id="walletSync">
+
+Just now
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<div>
+
+<p>
+
+Payment Method
+
+</p>
+
+<h3>
+
+Gateway Ready
+
+</h3>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<i class="fa-solid fa-lock"></i>
+
+<div>
+
+<p>
+
+Security
+
+</p>
+
+<h3>
+
+Protected
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+<!--=========================================
+            WALLET ACTIVITY
+==========================================-->
+
+<section class="history-card">
+
+<div class="section-title">
+
+<h2>
+
+Wallet Activity
+
+</h2>
+
+<a href="transactions.html">
+
+View All
+
+</a>
+
+</div>
+
+<div
+id="walletHistory">
+
+<div class="empty-wallet">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>
+
+No Wallet Activity
+
+</h3>
+
+<p>
+
+Your deposits, withdrawals and wallet transactions will appear here once you start using your Senku Pay wallet.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!--=========================================
+            FOOTER ACTION
+==========================================-->
+
+<section class="wallet-footer">
+
+<a
+href="transactions.html"
+class="view-transactions">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<span>
+
+View Full Transaction History
+
+</span>
+
+</a>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="wallet.js"></script>
+
+</body>
+
+</html>

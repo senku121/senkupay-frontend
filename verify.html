@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="Verify your Senku Pay account securely using the verification code sent to your email.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>
+
+Verify Email | Senku Pay
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="verify.css">
+
+<link rel="stylesheet" href="popup.css">
+
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="glow glow1"></div>
+
+<div class="glow glow2"></div>
+
+<div class="glow glow3"></div>
+
+<header>
+
+<a
+href="index.html"
+class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>
+
+Senku Pay
+
+</h2>
+
+<small>
+
+Modern Digital Payments
+
+</small>
+
+</div>
+
+</a>
+
+</header>
+
+<main>
+
+<section
+class="verify-card"
+aria-labelledby="verifyTitle">
+
+<div class="card-top">
+
+<div class="verify-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<h1
+id="verifyTitle">
+
+Verify Your Email
+
+</h1>
+
+<p>
+
+Enter the 6-digit verification code sent to your registered email address.
+
+</p>
+
+</div>
+
+<div
+id="formMessage"
+class="form-message"
+hidden>
+
+</div>
+
+<form
+id="verifyForm"
+novalidate>
+
+<div
+class="otp-container"
+id="otpContainer">
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+autocomplete="one-time-code"
+maxlength="1"
+aria-label="Verification digit 1">
+
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+maxlength="1"
+aria-label="Verification digit 2">
+
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+maxlength="1"
+aria-label="Verification digit 3">
+
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+maxlength="1"
+aria-label="Verification digit 4">
+
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+maxlength="1"
+aria-label="Verification digit 5">
+
+<input
+class="otp-input"
+type="text"
+inputmode="numeric"
+maxlength="1"
+aria-label="Verification digit 6">
+
+</div>
+
+<small
+id="otpError"
+class="otp-error"
+aria-live="polite">
+
+</small>
+
+<div class="timer">
+
+Code expires in
+
+<span id="timer">
+
+02:00
+
+</span>
+
+</div>
+
+<button
+id="verifyButton"
+class="verify-btn"
+type="submit">
+
+<i class="fa-solid fa-check"></i>
+
+<span>
+
+Verify Code
+
+</span>
+
+</button>
+
+<div class="resend">
+
+Didn't receive the code?
+
+<button
+type="button"
+id="resend-btn"
+disabled>
+
+Resend OTP
+
+</button>
+
+</div>
+
+</form>
+
+<div class="security-note">
+
+<i class="fa-solid fa-lock"></i>
+
+<p>
+
+Never share your verification code with anyone.
+Senku Pay support will never ask you to reveal it.
+
+</p>
+
+</div>
+
+<div class="bottom-text">
+
+<a href="forgot-password.html">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back to Forgot Password
+
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="popup.js"></script>
+
+<script src="verify.js"></script>
+
+</body>
+
+</html>

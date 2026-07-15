@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage your Senku Pay account preferences, security and notifications.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>Settings | Senku Pay</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="settings.css">
+
+<link rel="stylesheet" href="popup.css">
+
+<link rel="stylesheet" href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="settings-layout">
+
+<header class="settings-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<small>Digital Payments</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="settings-container">
+
+<div
+id="settingsMessage"
+class="settings-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="settings-hero">
+
+<div>
+
+<p class="hero-label">
+
+ACCOUNT PREFERENCES
+
+</p>
+
+<h1>Settings</h1>
+
+<p>
+
+Manage your profile preferences, security options, notifications and account access.
+
+</p>
+
+</div>
+
+<div class="hero-icon">
+
+<i class="fa-solid fa-sliders"></i>
+
+</div>
+
+</section>
+
+<section class="settings-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PROFILE
+
+</p>
+
+<h2>
+
+Profile Settings
+
+</h2>
+
+</div>
+
+<span>Account Details</span>
+
+</div>
+
+<div class="settings-grid">
+
+<div class="setting-input">
+
+<label for="settingsUsername">
+
+Username
+
+</label>
+
+<input
+type="text"
+id="settingsUsername"
+placeholder="Username">
+
+</div>
+
+<div class="setting-input">
+
+<label for="settingsEmail">
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="settingsEmail"
+placeholder="Email address"
+readonly>
+
+</div>
+
+<div class="setting-input">
+
+<label for="settingsPhone">
+
+Phone Number
+
+</label>
+
+<input
+type="tel"
+id="settingsPhone"
+placeholder="+1 234 567 890">
+
+</div>
+
+<div class="setting-input">
+
+<label for="settingsCountry">
+
+Country
+
+</label>
+
+<input
+type="text"
+id="settingsCountry"
+placeholder="Country">
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="save-settings-btn"
+id="saveSettingsBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+<span>Save Profile Settings</span>
+
+</button>
+
+</section>
+<section class="settings-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+SECURITY
+
+</p>
+
+<h2>
+
+Account Security
+
+</h2>
+
+</div>
+
+<span>Protected</span>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-lock"></i>
+
+</div>
+
+<div>
+
+<h3>Change Password</h3>
+
+<p>Update your Senku Pay account password securely.</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="action-button"
+id="changePasswordButton">
+
+Change
+
+</button>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-envelope-circle-check"></i>
+
+</div>
+
+<div>
+
+<h3>Email Verification</h3>
+
+<p id="settingsEmailVerificationText">
+
+Checking your verification status...
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="action-button"
+id="verifyEmailButton">
+
+Verify
+
+</button>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h3>Two-Factor Authentication</h3>
+
+<p>Add an extra layer of protection to your account.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="twoFactorToggle"
+disabled>
+
+<span></span>
+
+</label>
+
+</div>
+
+</section>
+
+<section class="settings-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+NOTIFICATIONS
+
+</p>
+
+<h2>
+
+Notification Preferences
+
+</h2>
+
+</div>
+
+<span>Customizable</span>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-envelope"></i>
+
+</div>
+
+<div>
+
+<h3>Email Notifications</h3>
+
+<p>Receive important account and security updates.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="emailNotifications"
+checked>
+
+<span></span>
+
+</label>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+</div>
+
+<div>
+
+<h3>Transaction Notifications</h3>
+
+<p>Receive updates about deposits and withdrawals.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="transactionNotifications"
+checked>
+
+<span></span>
+
+</label>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+</div>
+
+<div>
+
+<h3>Product Updates</h3>
+
+<p>Receive Senku Pay feature and service announcements.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="productNotifications">
+
+<span></span>
+
+</label>
+
+</div>
+
+</section>
+
+<section class="settings-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+APPEARANCE
+
+</p>
+
+<h2>
+
+Display Preferences
+
+</h2>
+
+</div>
+
+<span>Interface</span>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-moon"></i>
+
+</div>
+
+<div>
+
+<h3>Dark Mode</h3>
+
+<p>Use the Senku Pay dark interface.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="darkModeToggle"
+checked
+disabled>
+
+<span></span>
+
+</label>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+</div>
+
+<div>
+
+<h3>Animations</h3>
+
+<p>Enable interface transitions and motion effects.</p>
+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="animationsToggle"
+checked>
+
+<span></span>
+
+</label>
+
+</div>
+
+</section>
+<section class="settings-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+ACCOUNT
+
+</p>
+
+<h2>
+
+Account Management
+
+</h2>
+
+</div>
+
+<span>
+
+Security
+
+</span>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-user-check"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Account Status
+
+</h3>
+
+<p id="accountStatusText">
+
+Checking account status...
+
+</p>
+
+</div>
+
+</div>
+
+<div
+class="status-badge"
+id="accountStatusBadge">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Logout
+
+</h3>
+
+<p>
+
+Sign out from all saved sessions on this device.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="logout-btn"
+id="logoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>
+
+Logout
+
+</span>
+
+</button>
+
+</div>
+
+<div class="setting-row">
+
+<div class="setting-row-info">
+
+<div class="setting-icon danger">
+
+<i class="fa-solid fa-trash"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Delete Account
+
+</h3>
+
+<p>
+
+This feature will be available after backend integration.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="delete-btn"
+disabled>
+
+Coming Soon
+
+</button>
+
+</div>
+
+</section>
+
+<section class="settings-info">
+
+<div class="info-card">
+
+<i class="fa-solid fa-lock"></i>
+
+<div>
+
+<h3>
+
+Secure Preferences
+
+</h3>
+
+<p>
+
+All account preferences are securely synchronized with your Senku Pay account.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+<div>
+
+<h3>
+
+Automatic Sync
+
+</h3>
+
+<p>
+
+Changes are automatically synchronized after backend integration is completed.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>
+
+Protected Settings
+
+</h3>
+
+<p>
+
+Your profile, notifications and security settings are protected using encrypted communication.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="settings.js"></script>
+
+</body>
+
+</html>

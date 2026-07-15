@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Deposit funds securely into your Senku Pay wallet.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
+<title>
+
+Deposit | Senku Pay
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="deposit.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+<link
+rel="stylesheet"
+href="responsive.css">
+
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="deposit-layout">
+
+<header class="deposit-header">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>
+
+Dashboard
+
+</span>
+
+</a>
+
+<div class="logo">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>
+
+Senku Pay
+
+</h2>
+
+<small>
+
+Digital Payments
+
+</small>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="deposit-container">
+
+<div
+id="depositMessage"
+class="deposit-message"
+hidden>
+
+</div>
+
+<section class="deposit-card">
+
+<div>
+
+<p>
+
+Available Balance
+
+</p>
+
+<h1 id="depositBalance">
+
+$0.00
+
+</h1>
+
+<span
+id="depositStatusText"
+class="deposit-status-text">
+
+Wallet connected securely.
+
+</span>
+
+</div>
+
+<i class="fa-solid fa-wallet"></i>
+
+</section>
+
+<section class="form-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+DEPOSIT DETAILS
+
+</p>
+
+<h2>
+
+Deposit Amount
+
+</h2>
+
+</div>
+
+<span>
+
+USD
+
+</span>
+
+</div>
+
+<div class="amount-input">
+
+<span>$</span>
+
+<input
+type="number"
+id="depositAmount"
+placeholder="Enter deposit amount"
+min="1"
+step="0.01"
+autocomplete="off">
+
+</div>
+
+<small>
+
+Enter the amount you want to deposit into your wallet.
+
+</small>
+
+</section>
+
+<div
+id="depositError"
+class="deposit-error">
+
+<i class="fa-solid fa-circle-exclamation"></i>
+
+<span>
+
+Please enter a valid amount.
+
+</span>
+
+</div>
+<section class="payment-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PAYMENT METHOD
+
+</p>
+
+<h2>
+
+Choose Payment Method
+
+</h2>
+
+</div>
+
+<span>
+
+Secure Checkout
+
+</span>
+
+</div>
+
+<div
+class="payment-options"
+role="radiogroup"
+aria-label="Payment Method">
+
+<button
+type="button"
+class="payment-option active"
+data-method="card"
+role="radio"
+aria-checked="true">
+
+<div class="payment-icon">
+
+<i class="fa-solid fa-credit-card"></i>
+
+</div>
+
+<h3>
+
+Card
+
+</h3>
+
+<p>
+
+Visa • Mastercard • Amex
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="payment-option"
+data-method="cashapp"
+role="radio"
+aria-checked="false">
+
+<div class="payment-icon">
+
+<i class="fa-solid fa-dollar-sign"></i>
+
+</div>
+
+<h3>
+
+Cash App
+
+</h3>
+
+<p>
+
+Instant Wallet Payment
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="payment-option"
+data-method="chime"
+role="radio"
+aria-checked="false">
+
+<div class="payment-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<h3>
+
+Chime
+
+</h3>
+
+<p>
+
+US Banking Payment
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="payment-option"
+data-method="applepay"
+role="radio"
+aria-checked="false">
+
+<div class="payment-icon">
+
+<i class="fa-brands fa-apple"></i>
+
+</div>
+
+<h3>
+
+Apple Pay
+
+</h3>
+
+<p>
+
+One Tap Checkout
+
+</p>
+
+</button>
+
+<button
+type="button"
+class="payment-option"
+data-method="googlepay"
+role="radio"
+aria-checked="false">
+
+<div class="payment-icon">
+
+<i class="fa-brands fa-google"></i>
+
+</div>
+
+<h3>
+
+Google Pay
+
+</h3>
+
+<p>
+
+Fast Secure Payment
+
+</p>
+
+</button>
+
+</div>
+
+</section>
+
+<section class="payment-details">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PAYMENT GATEWAY
+
+</p>
+
+<h2>
+
+Gateway Preview
+
+</h2>
+
+</div>
+
+</div>
+
+<div
+class="gateway-loader"
+id="gatewayLoader"
+hidden>
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+<span>
+
+Preparing Secure Checkout...
+
+</span>
+
+</div>
+
+<div
+class="gateway-preview"
+id="gatewayPreview">
+
+<div class="gateway-header">
+
+<div class="gateway-circle">
+
+<i
+id="gatewayIcon"
+class="fa-solid fa-credit-card">
+
+</i>
+
+</div>
+
+<div>
+
+<h3 id="gatewayTitle">
+
+Card Payment
+
+</h3>
+
+<p id="gatewaySubtitle">
+
+Visa, Mastercard & American Express
+
+</p>
+
+</div>
+
+</div>
+
+<div class="gateway-body">
+
+<div class="gateway-row">
+
+<span>
+
+Gateway Status
+
+</span>
+
+<strong>
+
+Ready
+
+</strong>
+
+</div>
+
+<div class="gateway-row">
+
+<span>
+
+Processing
+
+</span>
+
+<strong>
+
+Instant
+
+</strong>
+
+</div>
+
+<div class="gateway-row">
+
+<span>
+
+Security
+
+</span>
+
+<strong>
+
+SSL Encrypted
+
+</strong>
+
+</div>
+
+<div class="gateway-row">
+
+<span>
+
+Integration
+
+</span>
+
+<strong>
+
+API Ready
+
+</strong>
+
+</div>
+
+</div>
+
+<div class="gateway-note">
+
+<i class="fa-solid fa-circle-info"></i>
+
+<span id="gatewayDescription">
+
+After clicking <strong>Continue to Payment</strong>, your selected payment gateway will open securely.
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<button
+type="button"
+class="confirm-deposit"
+id="confirmDeposit">
+
+<i class="fa-solid fa-lock"></i>
+
+<span>
+
+Continue to Payment
+
+</span>
+
+</button>
+
+<section class="deposit-history">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+RECENT ACTIVITY
+
+</p>
+
+<h2>
+
+Recent Deposits
+
+</h2>
+
+</div>
+
+<a href="transactions.html">
+
+View All
+
+</a>
+
+</div>
+
+<div id="depositHistory">
+
+<div class="empty-deposit">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+<h3>
+
+No Deposit History
+
+</h3>
+
+<p>
+
+Your successful, pending and failed deposits will appear here after your first payment.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="deposit-info">
+
+<div class="info-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<div>
+
+<h3>
+
+Secure Checkout
+
+</h3>
+
+<p>
+
+Payments are designed to be processed through secure external gateways using encrypted communication.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-bolt"></i>
+
+<div>
+
+<h3>
+
+Automatic Wallet Credit
+
+</h3>
+
+<p>
+
+After your payment provider confirms a successful payment, the backend can credit your Senku Pay wallet automatically.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-plug-circle-check"></i>
+
+<div>
+
+<h3>
+
+Gateway Ready
+
+</h3>
+
+<p>
+
+Card, Cash App, Chime, Apple Pay and Google Pay integrations can be connected later without changing this page design.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="deposit.js"></script>
+
+</body>
+
+</html>

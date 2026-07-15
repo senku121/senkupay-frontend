@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>Withdraw Requests | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-withdraw.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="withdraw-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a
+href="admin-withdraw.html"
+class="active">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a href="admin-platform-withdraw.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a href="admin-agents.html">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a href="admin-agent-requests.html">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="withdraw-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">
+
+WITHDRAWALS
+
+</p>
+
+<h1>
+
+Withdraw Requests
+
+</h1>
+
+<p>
+
+Review and manage withdrawal requests submitted by users.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="refresh-button"
+id="refreshWithdrawButton">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</header>
+
+<div
+id="withdrawMessage"
+class="withdraw-message"
+hidden>
+
+</div>
+
+<section class="summary-grid">
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<div>
+
+<p>Pending</p>
+
+<h2 id="pendingCount">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+</div>
+
+<div>
+
+<p>Pending Amount</p>
+
+<h2 id="pendingAmount">
+
+$0.00
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<div>
+
+<p>Approved</p>
+
+<h2 id="approvedCount">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="summary-card">
+
+<div class="summary-icon">
+
+<i class="fa-solid fa-circle-xmark"></i>
+
+</div>
+
+<div>
+
+<p>Rejected</p>
+
+<h2 id="rejectedCount">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+<section class="withdraw-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+WITHDRAW REQUESTS
+
+</p>
+
+<h2>
+
+Pending & Completed Requests
+
+</h2>
+
+</div>
+
+<span id="lastWithdrawSync">
+
+Not synchronized yet
+
+</span>
+
+</div>
+
+<div class="toolbar">
+
+<div class="search-box">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+type="search"
+id="withdrawSearch"
+placeholder="Search username, account, method or ID...">
+
+</div>
+
+<select
+id="withdrawStatusFilter">
+
+<option value="all">
+
+All Status
+
+</option>
+
+<option value="pending">
+
+Pending
+
+</option>
+
+<option value="approved">
+
+Approved
+
+</option>
+
+<option value="rejected">
+
+Rejected
+
+</option>
+
+</select>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>User</th>
+
+<th>Method</th>
+
+<th>Account</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="withdrawRequests">
+
+<tr class="loading-row">
+
+<td colspan="7">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading withdrawal requests...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+id="withdrawEmpty"
+class="empty-state"
+hidden>
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>
+
+No Withdrawal Requests
+
+</h3>
+
+<p>
+
+No withdrawal requests match your current filters.
+
+</p>
+
+</div>
+
+<div class="table-footer">
+
+<p id="withdrawResultsText">
+
+Showing 0 requests
+
+</p>
+
+<div class="pagination">
+
+<button
+type="button"
+id="withdrawPreviousPage"
+class="pagination-button"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="withdrawPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+id="withdrawNextPage"
+class="pagination-button"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="security-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+SECURITY
+
+</p>
+
+<h2>
+
+Withdrawal Protection
+
+</h2>
+
+</div>
+
+<span>
+
+Administrator Only
+
+</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Protected Access
+
+</h3>
+
+<p>
+
+Only authenticated administrators can approve or reject withdrawal requests.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-server"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Backend Status
+
+</h3>
+
+<p id="withdrawBackendStatus">
+
+Checking connection...
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Synchronization
+
+</h3>
+
+<p>
+
+Withdrawal requests update whenever the page is refreshed.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        WITHDRAW DETAILS MODAL
+==========================================-->
+
+<div
+class="withdraw-modal"
+id="withdrawModal"
+aria-hidden="true">
+
+<div
+class="withdraw-modal-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="withdrawModalTitle">
+
+<button
+type="button"
+class="close-withdraw-modal"
+id="closeWithdrawModal"
+aria-label="Close withdrawal details">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="withdraw-modal-header">
+
+<div class="withdraw-modal-icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+WITHDRAWAL DETAILS
+
+</p>
+
+<h2 id="withdrawModalTitle">
+
+Withdrawal Request
+
+</h2>
+
+<p id="withdrawModalSubtitle">
+
+Review the payout information before taking action.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="withdraw-detail-grid">
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Request ID
+
+</span>
+
+<strong id="detailWithdrawId">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+User
+
+</span>
+
+<strong id="detailWithdrawUser">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Email
+
+</span>
+
+<strong id="detailWithdrawEmail">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Amount
+
+</span>
+
+<strong id="detailWithdrawAmount">
+
+$0.00
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Payment Method
+
+</span>
+
+<strong id="detailWithdrawMethod">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Account Information
+
+</span>
+
+<strong id="detailWithdrawAccount">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Status
+
+</span>
+
+<strong id="detailWithdrawStatus">
+
+--
+
+</strong>
+
+</div>
+
+<div class="withdraw-detail-box">
+
+<span>
+
+Requested At
+
+</span>
+
+<strong id="detailWithdrawDate">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<div
+class="withdraw-note"
+id="withdrawNoteBox"
+hidden>
+
+<span>
+
+User Note
+
+</span>
+
+<p id="detailWithdrawNote">
+
+No note available.
+
+</p>
+
+</div>
+
+<div
+class="withdraw-modal-message"
+id="withdrawModalMessage"
+hidden
+aria-live="polite">
+
+</div>
+
+<div
+class="withdraw-modal-actions"
+id="withdrawModalActions">
+
+<button
+type="button"
+class="modal-reject-button"
+id="rejectWithdrawButton">
+
+<i class="fa-solid fa-xmark"></i>
+
+<span>
+
+Reject Request
+
+</span>
+
+</button>
+
+<button
+type="button"
+class="modal-approve-button"
+id="approveWithdrawButton">
+
+<i class="fa-solid fa-check"></i>
+
+<span>
+
+Approve Request
+
+</span>
+
+</button>
+
+</div>
+
+<button
+type="button"
+class="close-details-button"
+id="closeWithdrawDetailsButton">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>
+
+Back to Requests
+
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-withdraw.js"></script>
+
+</body>
+
+</html>

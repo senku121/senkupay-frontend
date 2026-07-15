@@ -1,0 +1,1461 @@
+/*==================================================
+                SENKU PAY
+                ADMIN LOGIN
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#050816;
+
+    --card:#111827;
+
+    --card2:#171f33;
+
+    --primary:#7b2cff;
+
+    --secondary:#00d4ff;
+
+    --text:#ffffff;
+
+    --muted:#9ca3af;
+
+    --border:rgba(255,255,255,.08);
+
+    --success:#22c55e;
+
+    --danger:#ef4444;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    font-family:"Inter",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+}
+
+button,
+input{
+
+    font:inherit;
+
+}
+
+button{
+
+    border:none;
+
+}
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+/*==================================
+        BACKGROUND
+==================================*/
+
+.admin-bg-grid{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-5;
+
+    pointer-events:none;
+
+    background-image:
+
+    linear-gradient(
+        rgba(255,255,255,.03) 1px,
+        transparent 1px
+    ),
+
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,.03) 1px,
+        transparent 1px
+    );
+
+    background-size:55px 55px;
+
+}
+
+.admin-glow{
+
+    position:fixed;
+
+    width:420px;
+
+    height:420px;
+
+    border-radius:50%;
+
+    filter:blur(80px);
+
+    opacity:.28;
+
+    pointer-events:none;
+
+    z-index:-4;
+
+}
+
+.admin-glow-one{
+
+    top:-180px;
+
+    left:-120px;
+
+    background:#7b2cff;
+
+}
+
+.admin-glow-two{
+
+    right:-160px;
+
+    bottom:-160px;
+
+    background:#00d4ff;
+
+}
+
+/*==================================
+        PAGE
+==================================*/
+
+.admin-login-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+/*==================================
+        CARD
+==================================*/
+
+.admin-card{
+
+    width:100%;
+
+    max-width:520px;
+
+    padding:42px;
+
+    border-radius:30px;
+
+    background:
+
+    rgba(17,24,39,.90);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+
+    0 35px 80px rgba(0,0,0,.45);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.admin-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    right:-130px;
+
+    top:-130px;
+
+    border-radius:50%;
+
+    background:
+
+    rgba(123,44,255,.12);
+
+}
+
+.admin-card>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/*==================================
+        LOGO
+==================================*/
+
+.admin-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:28px;
+
+}
+
+.logo-box{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--primary),
+
+    var(--secondary)
+
+    );
+
+    box-shadow:
+
+    0 18px 45px rgba(123,44,255,.35);
+
+}
+
+.admin-logo h1{
+
+    font-size:28px;
+
+    font-weight:900;
+
+}
+
+.admin-logo p{
+
+    color:var(--muted);
+
+    margin-top:4px;
+
+    font-size:14px;
+
+}
+
+/*==================================
+        BADGE
+==================================*/
+
+.security-badge{
+
+    width:max-content;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:40px;
+
+    margin-bottom:28px;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    background:
+
+    rgba(123,44,255,.15);
+
+    border:1px solid rgba(123,44,255,.35);
+
+}
+
+.security-badge i{
+
+    color:#b794ff;
+
+}
+
+/*==================================
+        HEADINGS
+==================================*/
+
+.admin-heading{
+
+    margin-bottom:28px;
+
+}
+
+.admin-heading h2{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+.admin-heading p{
+
+    color:var(--muted);
+
+    line-height:1.7;
+
+}
+
+/*==================================
+        MESSAGE
+==================================*/
+
+.admin-login-message{
+
+    display:none;
+
+    margin-bottom:22px;
+
+    padding:16px 18px;
+
+    border-radius:16px;
+
+    border:1px solid transparent;
+
+    font-size:14px;
+
+}
+
+.admin-login-message.show{
+
+    display:block;
+
+}
+
+.admin-login-message.success{
+
+    color:#b8f6cb;
+
+    background:rgba(34,197,94,.12);
+
+    border-color:rgba(34,197,94,.30);
+
+}
+
+.admin-login-message.error{
+
+    color:#ffc2cb;
+
+    background:rgba(239,68,68,.12);
+
+    border-color:rgba(239,68,68,.30);
+
+}
+
+.admin-login-message.info{
+
+    color:#d9f7ff;
+
+    background:rgba(0,212,255,.12);
+
+    border-color:rgba(0,212,255,.30);
+
+}
+/*==================================
+        INPUT GROUPS
+==================================*/
+
+.input-group{
+
+    margin-bottom:20px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:#d1d5db;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+.input-box{
+
+    min-height:62px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:0 16px;
+
+    border-radius:19px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.045);
+
+    transition:.35s ease;
+
+}
+
+.input-box:hover{
+
+    border-color:rgba(123,44,255,.35);
+
+}
+
+.input-box:focus-within{
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+    0 0 0 4px rgba(123,44,255,.15);
+
+}
+
+.input-box > i{
+
+    flex-shrink:0;
+
+    color:#b794ff;
+
+    font-size:17px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    height:60px;
+
+    min-width:0;
+
+    border:none;
+
+    outline:none;
+
+    color:#fff;
+
+    background:none;
+
+    font-size:15px;
+
+}
+
+.input-box input::placeholder{
+
+    color:#718096;
+
+}
+
+.input-box input.invalid{
+
+    color:#ffd1d1;
+
+}
+
+.input-box:has(input.invalid){
+
+    border-color:rgba(239,68,68,.75);
+
+    box-shadow:
+
+    0 0 0 4px rgba(239,68,68,.10);
+
+}
+
+.input-box:has(input.valid){
+
+    border-color:rgba(34,197,94,.65);
+
+    box-shadow:
+
+    0 0 0 4px rgba(34,197,94,.10);
+
+}
+
+/*==================================
+        PASSWORD TOGGLE
+==================================*/
+
+.toggle-password{
+
+    width:42px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:13px;
+
+    color:#9ca3af;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+}
+
+.toggle-password:hover{
+
+    color:#fff;
+
+    background:rgba(255,255,255,.06);
+
+}
+
+.toggle-password i{
+
+    pointer-events:none;
+
+}
+
+/*==================================
+        FIELD ERROR
+==================================*/
+
+.field-error{
+
+    display:block;
+
+    min-height:18px;
+
+    margin-top:7px;
+
+    color:#ff9ca8;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+}
+
+/*==================================
+        ADMIN OPTIONS
+==================================*/
+
+.admin-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin:4px 0 24px;
+
+}
+
+.remember-device{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+}
+
+.remember-device input{
+
+    width:17px;
+
+    height:17px;
+
+    accent-color:var(--primary);
+
+    cursor:pointer;
+
+}
+
+.admin-options a{
+
+    color:#b794ff;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.3s ease;
+
+}
+
+.admin-options a:hover{
+
+    color:var(--secondary);
+
+}
+
+/*==================================
+        LOGIN BUTTON
+==================================*/
+
+.admin-login-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    min-height:64px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    border-radius:20px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--primary),
+
+    var(--secondary)
+
+    );
+
+    box-shadow:
+
+    0 20px 45px rgba(123,44,255,.30);
+
+    transition:.35s ease;
+
+}
+
+.admin-login-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:55%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+    120deg,
+
+    transparent,
+
+    rgba(255,255,255,.34),
+
+    transparent
+
+    );
+
+    transition:.65s ease;
+
+}
+
+.admin-login-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 26px 55px rgba(123,44,255,.38);
+
+}
+
+.admin-login-btn:hover::before{
+
+    left:125%;
+
+}
+
+.admin-login-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.admin-login-btn:disabled{
+
+    opacity:.72;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+.admin-login-btn i,
+.admin-login-btn span{
+
+    position:relative;
+
+    z-index:2;
+
+}
+/*==================================
+        SECURITY PANEL
+==================================*/
+
+.security-panel{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:14px;
+
+    margin-top:26px;
+
+}
+
+.security-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:rgba(255,255,255,.035);
+
+    transition:.35s ease;
+
+}
+
+.security-item:hover{
+
+    transform:translateY(-3px);
+
+    border-color:rgba(123,44,255,.28);
+
+    background:rgba(123,44,255,.05);
+
+}
+
+.security-item > i{
+
+    width:44px;
+
+    height:44px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    color:#b794ff;
+
+    background:rgba(123,44,255,.15);
+
+}
+
+.security-item h4{
+
+    margin-bottom:5px;
+
+    font-size:15px;
+
+    font-weight:800;
+
+}
+
+.security-item p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.65;
+
+}
+
+/*==================================
+        USER LOGIN LINK
+==================================*/
+
+.user-login{
+
+    min-height:56px;
+
+    margin-top:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.35s ease;
+
+}
+
+.user-login:hover{
+
+    color:#fff;
+
+    border-color:rgba(123,44,255,.45);
+
+    background:rgba(123,44,255,.06);
+
+    transform:translateY(-3px);
+
+}
+
+/*==================================
+        CARD POLISH
+==================================*/
+
+.admin-card{
+
+    animation:
+
+    adminCardEnter .75s ease both;
+
+}
+
+.admin-logo,
+.security-badge,
+.admin-heading,
+#adminLoginForm,
+.security-panel,
+.user-login{
+
+    opacity:0;
+
+    animation:
+
+    adminContentEnter .65s ease forwards;
+
+}
+
+.admin-logo{
+
+    animation-delay:.08s;
+
+}
+
+.security-badge{
+
+    animation-delay:.16s;
+
+}
+
+.admin-heading{
+
+    animation-delay:.24s;
+
+}
+
+#adminLoginForm{
+
+    animation-delay:.32s;
+
+}
+
+.security-panel{
+
+    animation-delay:.40s;
+
+}
+
+.user-login{
+
+    animation-delay:.48s;
+
+}
+
+@keyframes adminCardEnter{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(34px)
+
+        scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+    }
+
+}
+
+@keyframes adminContentEnter{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*==================================
+        FLOATING GLOW
+==================================*/
+
+.logo-box{
+
+    animation:
+
+    logoFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+    0%,
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+}
+
+/*==================================
+        LOADING STATE
+==================================*/
+
+.admin-login-btn.loading{
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+.admin-login-btn.success{
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #16a34a,
+
+    #22c55e
+
+    );
+
+    box-shadow:
+
+    0 20px 45px rgba(34,197,94,.28);
+
+}
+
+/*==================================
+        INPUT AUTOFILL
+==================================*/
+
+input:-webkit-autofill{
+
+    -webkit-text-fill-color:#fff;
+
+    transition:background-color 9999s;
+
+}
+/*==================================
+        TABLET
+==================================*/
+
+@media(max-width:768px){
+
+    body{
+
+        overflow-y:auto;
+
+    }
+
+    .admin-login-page{
+
+        padding:40px 20px;
+
+        align-items:center;
+
+    }
+
+    .admin-card{
+
+        max-width:560px;
+
+        padding:36px 30px;
+
+    }
+
+}
+
+/*==================================
+        MOBILE
+==================================*/
+
+@media(max-width:520px){
+
+    .admin-login-page{
+
+        padding:24px 14px;
+
+    }
+
+    .admin-card{
+
+        padding:28px 20px;
+
+        border-radius:24px;
+
+    }
+
+    .admin-logo{
+
+        align-items:center;
+
+    }
+
+    .logo-box{
+
+        width:56px;
+
+        height:56px;
+
+        border-radius:18px;
+
+        font-size:25px;
+
+    }
+
+    .admin-logo h1{
+
+        font-size:23px;
+
+    }
+
+    .admin-logo p{
+
+        font-size:12px;
+
+    }
+
+    .security-badge{
+
+        padding:9px 15px;
+
+        font-size:11px;
+
+    }
+
+    .admin-heading h2{
+
+        font-size:25px;
+
+    }
+
+    .admin-heading p{
+
+        font-size:14px;
+
+    }
+
+    .input-box{
+
+        min-height:58px;
+
+        border-radius:17px;
+
+    }
+
+    .input-box input{
+
+        height:56px;
+
+        font-size:14px;
+
+    }
+
+    .admin-options{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .admin-login-btn{
+
+        min-height:58px;
+
+        border-radius:18px;
+
+        font-size:15px;
+
+    }
+
+    .security-item{
+
+        padding:14px;
+
+    }
+
+    .user-login{
+
+        min-height:52px;
+
+        border-radius:16px;
+
+    }
+
+}
+
+/*==================================
+        SMALL PHONES
+==================================*/
+
+@media(max-width:380px){
+
+    .admin-card{
+
+        padding:24px 16px;
+
+    }
+
+    .admin-logo{
+
+        gap:12px;
+
+    }
+
+    .logo-box{
+
+        width:52px;
+
+        height:52px;
+
+        font-size:23px;
+
+    }
+
+    .admin-logo h1{
+
+        font-size:21px;
+
+    }
+
+    .admin-heading h2{
+
+        font-size:23px;
+
+    }
+
+    .security-panel{
+
+        gap:11px;
+
+    }
+
+    .security-item > i{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+}
+
+/*==================================
+        ACCESSIBILITY
+==================================*/
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible{
+
+    outline:2px solid var(--secondary);
+
+    outline-offset:3px;
+
+}
+
+/*==================================
+        SCROLLBAR
+==================================*/
+
+::-webkit-scrollbar{
+
+    width:9px;
+
+    height:9px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#070b16;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    border-radius:20px;
+
+    background:
+
+    linear-gradient(
+
+    180deg,
+
+    var(--primary),
+
+    var(--secondary)
+
+    );
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+
+    linear-gradient(
+
+    180deg,
+
+    var(--secondary),
+
+    var(--primary)
+
+    );
+
+}
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:
+
+    var(--primary)
+
+    #070b16;
+
+}
+
+/*==================================
+        REDUCED MOTION
+==================================*/
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+
+    *::before,
+
+    *::after{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+/*==================================
+        PRINT
+==================================*/
+
+@media print{
+
+    body{
+
+        color:#000;
+
+        background:#fff;
+
+    }
+
+    .admin-bg-grid,
+    .admin-glow,
+    .security-panel,
+    .user-login{
+
+        display:none !important;
+
+    }
+
+    .admin-card{
+
+        color:#000;
+
+        background:#fff;
+
+        border:1px solid #ddd;
+
+        box-shadow:none;
+
+    }
+
+}
+
+/*==================================
+                END
+==================================*/

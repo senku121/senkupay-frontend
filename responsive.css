@@ -1,0 +1,848 @@
+/*==================================================
+        SENKU STAKES
+        GLOBAL RESPONSIVE SYSTEM
+==================================================*/
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+
+    width:100%;
+    overflow-x:hidden;
+
+}
+
+body{
+
+    width:100%;
+    overflow-x:hidden;
+
+}
+
+/*---------------------------------------
+Images
+---------------------------------------*/
+
+img,
+video,
+canvas{
+
+    max-width:100%;
+    height:auto;
+    display:block;
+
+}
+
+/*---------------------------------------
+Buttons
+---------------------------------------*/
+
+button{
+
+    cursor:pointer;
+
+}
+
+/*---------------------------------------
+Inputs
+---------------------------------------*/
+
+input,
+select,
+textarea{
+
+    max-width:100%;
+
+}
+
+/*---------------------------------------
+Tables
+---------------------------------------*/
+
+.table-container{
+
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+
+}
+
+table{
+
+    width:100%;
+
+}
+
+/*---------------------------------------
+Cards
+---------------------------------------*/
+
+.stat-card,
+.admin-card,
+.dashboard-card,
+.card{
+
+    width:100%;
+
+}
+
+/*---------------------------------------
+Prevent Layout Overflow
+---------------------------------------*/
+
+.admin-main,
+.dashboard-main,
+.main-content,
+.container{
+
+    max-width:100%;
+    overflow-x:hidden;
+
+}
+/*==================================================
+TABLET
+==================================================*/
+
+@media (max-width:992px){
+
+.admin-layout{
+
+    flex-direction:column;
+
+}
+
+.dashboard-layout{
+
+    flex-direction:column;
+
+}
+
+}
+/*==================================================
+MOBILE
+==================================================*/
+
+@media (max-width:768px){
+
+h1{
+
+    font-size:30px;
+
+}
+
+h2{
+
+    font-size:24px;
+
+}
+
+h3{
+
+    font-size:20px;
+
+}
+
+p{
+
+    font-size:15px;
+
+}
+
+}
+/*==================================================
+LOGIN / REGISTER / FORGOT PASSWORD
+==================================================*/
+
+@media (max-width:992px){
+
+.login-wrapper,
+.register-wrapper,
+.forgot-wrapper{
+
+    width:95%;
+    margin:auto;
+
+}
+
+.login-card,
+.register-card,
+.forgot-card{
+
+    width:100%;
+    max-width:550px;
+    margin:auto;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.login-card,
+.register-card,
+.forgot-card{
+
+    padding:35px 28px;
+
+}
+
+.login-logo,
+.register-logo,
+.forgot-logo{
+
+    width:80px;
+    height:80px;
+
+}
+
+.login-title,
+.register-title,
+.forgot-title{
+
+    font-size:28px;
+
+}
+
+.login-subtitle,
+.register-subtitle,
+.forgot-subtitle{
+
+    font-size:15px;
+
+}
+
+.agent-login-btn,
+.login-btn,
+.register-btn,
+.reset-btn{
+
+    width:100%;
+    height:52px;
+    font-size:16px;
+
+}
+
+input{
+
+    height:52px;
+    font-size:15px;
+
+}
+
+}
+
+@media (max-width:576px){
+
+.login-card,
+.register-card,
+.forgot-card{
+
+    padding:28px 20px;
+
+    border-radius:18px;
+
+}
+
+.login-title,
+.register-title,
+.forgot-title{
+
+    font-size:24px;
+
+}
+
+.login-subtitle,
+.register-subtitle,
+.forgot-subtitle{
+
+    font-size:14px;
+
+}
+
+.login-logo,
+.register-logo,
+.forgot-logo{
+
+    width:65px;
+    height:65px;
+
+}
+
+}
+/* ==================================================
+   SUB AGENT DASHBOARD
+================================================== */
+
+@media (max-width:1200px){
+
+.agent-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media (max-width:992px){
+
+.agent-sidebar{
+width:80px;
+padding:20px 10px;
+}
+
+.agent-brand h2,
+.agent-brand span,
+.agent-sidebar nav a span,
+.agent-logout span{
+display:none;
+}
+
+.agent-sidebar nav a{
+justify-content:center;
+padding:0;
+}
+
+.agent-main{
+margin-left:80px;
+width:calc(100% - 80px);
+padding:25px;
+}
+
+.balance-actions{
+flex-wrap:wrap;
+}
+
+}
+
+@media (max-width:768px){
+
+.agent-dashboard-layout{
+display:block;
+}
+
+.agent-sidebar{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+top:auto;
+
+width:100%;
+height:72px;
+min-height:72px;
+
+padding:8px;
+
+display:flex;
+flex-direction:row;
+
+border-right:none;
+border-top:1px solid rgba(255,255,255,.08);
+
+z-index:9999;
+}
+
+.agent-brand,
+.agent-logout{
+display:none;
+}
+
+.agent-sidebar nav{
+display:flex;
+flex-direction:row;
+justify-content:space-around;
+align-items:center;
+width:100%;
+}
+
+.agent-sidebar nav a{
+width:48px;
+height:48px;
+padding:0;
+justify-content:center;
+}
+
+.agent-sidebar nav a span{
+display:none;
+}
+
+.agent-main{
+margin-left:0;
+width:100%;
+padding:20px 16px 95px;
+}
+
+.dashboard-header h1{
+font-size:28px;
+}
+
+.agent-stats{
+grid-template-columns:1fr;
+gap:16px;
+}
+
+.balance-actions{
+flex-direction:column;
+}
+
+.balance-actions button{
+width:100%;
+justify-content:center;
+}
+
+.balance-info h1{
+font-size:32px;
+}
+
+.agent-profile-mini{
+width:100%;
+}
+
+.users-card,
+.users-management-card,
+.balance-card,
+.agent-wallet-section{
+padding:20px;
+}
+
+}
+
+@media (max-width:600px){
+
+.table-container{
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+}
+
+table{
+min-width:700px;
+}
+
+.manage-user-box{
+width:100%;
+max-width:95%;
+padding:20px;
+}
+
+.manage-user-info p{
+flex-direction:column;
+gap:4px;
+}
+
+.user-search{
+height:52px;
+}
+
+.deposit-agent-btn{
+width:100%;
+justify-content:center;
+}
+
+}
+
+@media (max-width:480px){
+
+.dashboard-header h1{
+font-size:24px;
+}
+
+.balance-info h1{
+font-size:28px;
+}
+
+.stat-card{
+padding:18px;
+}
+
+.stat-card h2{
+font-size:20px;
+}
+
+.agent-wallet-section h3{
+font-size:18px;
+}
+
+.agent-profile-mini{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.manage-user-actions button{
+height:48px;
+font-size:14px;
+}
+
+}
+/*==================================================
+        ADMIN AGENT REQUESTS RESPONSIVE
+==================================================*/
+
+@media (max-width:992px){
+
+    .admin-sidebar{
+        width:80px;
+        padding:25px 12px;
+    }
+
+    .admin-brand h2,
+    .admin-brand span,
+    .admin-sidebar nav a span,
+    .admin-logout span{
+        display:none;
+    }
+
+    .admin-sidebar nav a{
+        justify-content:center;
+        padding:0;
+    }
+
+    .admin-main{
+        margin-left:80px;
+        width:calc(100% - 80px);
+        padding:25px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .admin-sidebar{
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        top:auto;
+
+        width:100%;
+        height:75px;
+        min-height:auto;
+
+        padding:10px;
+
+        flex-direction:row;
+
+        justify-content:center;
+
+        z-index:999;
+
+        border-right:none;
+        border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .admin-brand,
+    .admin-logout{
+        display:none;
+    }
+
+    .admin-sidebar nav{
+        width:100%;
+        flex-direction:row;
+        justify-content:space-around;
+        gap:0;
+    }
+
+    .admin-sidebar nav a{
+        width:46px;
+        height:46px;
+        justify-content:center;
+        padding:0;
+    }
+
+    .admin-main{
+        margin-left:0;
+        width:100%;
+        padding:20px 16px 100px;
+    }
+
+    .page-header h1{
+        font-size:28px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .request-toolbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:15px;
+    }
+
+    .search-box{
+        min-width:100%;
+        width:100%;
+    }
+
+    .toolbar-right{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .toolbar-right select,
+    #refreshRequests{
+        width:100%;
+    }
+
+    .table-wrapper{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:950px;
+    }
+
+    .modal-card{
+        width:100%;
+        max-width:95%;
+        padding:22px;
+    }
+
+    .detail-row{
+        flex-direction:column;
+        gap:6px;
+        align-items:flex-start;
+    }
+
+    .modal-actions{
+        flex-direction:column;
+    }
+
+    .approve-btn,
+    .reject-btn,
+    .close-btn{
+        width:100%;
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .page-header h1{
+        font-size:24px;
+    }
+
+    .page-header p{
+        font-size:14px;
+    }
+
+    .stat-card{
+        padding:18px;
+    }
+
+    .stat-card h2{
+        font-size:22px;
+    }
+
+    .modal-header h2{
+        font-size:22px;
+    }
+
+}
+/*==================================================
+        ADMIN AGENTS RESPONSIVE
+==================================================*/
+
+@media (max-width:1200px){
+
+    .agent-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:992px){
+
+    .agent-main{
+        padding:25px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .admin-sidebar{
+
+        width:80px;
+        padding:20px 10px;
+
+    }
+
+    .admin-brand h2,
+    .admin-brand span,
+    .admin-sidebar nav a span,
+    .admin-logout span{
+
+        display:none;
+
+    }
+
+    .admin-sidebar nav a{
+
+        justify-content:center;
+        padding:0;
+
+    }
+
+    .agent-main{
+
+        margin-left:80px;
+        width:calc(100% - 80px);
+        padding:20px;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+
+    }
+
+    .create-agent{
+
+        width:100%;
+        justify-content:center;
+
+    }
+
+    .agent-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:640px){
+
+    .agent-main{
+
+        margin-left:0;
+        width:100%;
+        padding:18px 18px 95px;
+
+    }
+
+    .admin-sidebar{
+
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        top:auto;
+
+        width:100%;
+        min-height:75px;
+        height:75px;
+
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+
+        padding:10px;
+
+        border-right:none;
+        border-top:1px solid var(--border);
+
+        z-index:999;
+
+    }
+
+    .admin-brand{
+
+        display:none;
+
+    }
+
+    .admin-sidebar nav{
+
+        width:100%;
+
+        flex-direction:row;
+        justify-content:space-around;
+        gap:0;
+
+    }
+
+    .admin-sidebar nav a{
+
+        width:46px;
+        height:46px;
+        padding:0;
+        justify-content:center;
+
+    }
+
+    .admin-sidebar nav a i{
+
+        margin:0;
+
+    }
+
+    .admin-logout{
+
+        display:none;
+
+    }
+
+    .agent-card,
+    .sub-agent-card{
+
+        padding:20px;
+
+    }
+
+    .search-area{
+
+        height:54px;
+
+    }
+
+    .table-container{
+
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+
+    }
+
+    table{
+
+        min-width:760px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .page-header h1{
+
+        font-size:26px;
+
+    }
+
+    .agent-box{
+
+        padding:18px;
+
+    }
+
+    .agent-box h2{
+
+        font-size:22px;
+
+    }
+
+    .search-area{
+
+        padding:0 14px;
+
+    }
+
+}

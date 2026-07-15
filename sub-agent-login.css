@@ -1,0 +1,1958 @@
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+
+
+body{
+
+font-family:"Inter",sans-serif;
+
+background:#050816;
+
+color:#fff;
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+
+
+.agent-login-container{
+
+width:100%;
+
+padding:20px;
+
+}
+
+
+
+
+
+.agent-login-card{
+
+
+max-width:420px;
+
+
+margin:auto;
+
+
+padding:40px;
+
+
+border-radius:30px;
+
+
+background:
+
+
+rgba(17,24,39,.9);
+
+
+border:
+
+
+1px solid rgba(255,255,255,.08);
+
+
+box-shadow:
+
+0 30px 80px rgba(0,0,0,.5);
+
+
+animation:
+
+showCard .7s ease;
+
+
+}
+
+
+
+
+
+
+
+.agent-logo{
+
+
+text-align:center;
+
+
+margin-bottom:35px;
+
+
+}
+
+
+
+.logo-box{
+
+
+width:70px;
+
+
+height:70px;
+
+
+margin:auto;
+
+
+border-radius:22px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+font-size:35px;
+
+
+font-weight:900;
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#7b2cff,
+
+#00d4ff
+
+);
+
+
+}
+
+
+
+.agent-logo h1{
+
+
+margin-top:20px;
+
+
+font-size:28px;
+
+
+}
+
+
+
+.agent-logo p{
+
+
+margin-top:8px;
+
+
+color:#9ca3af;
+
+
+}
+
+
+
+
+
+
+
+
+.input-group{
+
+
+height:55px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+gap:12px;
+
+
+padding:0 18px;
+
+
+margin-bottom:18px;
+
+
+border-radius:16px;
+
+
+background:#171f33;
+
+
+border:1px solid rgba(255,255,255,.08);
+
+
+}
+
+
+
+.input-group input{
+
+
+flex:1;
+
+
+border:none;
+
+
+outline:none;
+
+
+background:none;
+
+
+color:#fff;
+
+
+font-size:15px;
+
+
+}
+
+
+
+.input-group i{
+
+
+color:#9ca3af;
+
+
+}
+
+
+
+.password-eye{
+
+
+cursor:pointer;
+
+
+}
+
+
+
+
+
+
+
+
+.agent-login-btn{
+
+
+width:100%;
+
+
+height:55px;
+
+
+border:none;
+
+
+border-radius:50px;
+
+
+cursor:pointer;
+
+
+color:#fff;
+
+
+font-size:16px;
+
+
+font-weight:700;
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#7b2cff,
+
+#00d4ff
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+.back-login{
+
+
+display:block;
+
+
+text-align:center;
+
+
+margin-top:20px;
+
+
+color:#9ca3af;
+
+
+text-decoration:none;
+
+
+}
+
+
+
+
+
+@keyframes showCard{
+
+
+from{
+
+
+opacity:0;
+
+
+transform:translateY(40px);
+
+
+}
+
+
+to{
+
+
+opacity:1;
+
+
+transform:translateY(0);
+
+
+}
+
+
+}
+/*==================================================
+        PREMIUM LOGIN POPUP
+==================================================*/
+
+.login-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(12px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+
+.login-popup.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+.popup-box{
+
+    width:420px;
+
+    max-width:92%;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    text-align:center;
+
+    background:rgba(17,24,39,.95);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transform:scale(.75);
+
+    transition:.35s;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+
+}
+
+
+.login-popup.show .popup-box{
+
+    transform:scale(1);
+
+}
+
+
+.popup-icon{
+
+    width:85px;
+
+    height:85px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    color:#fff;
+
+    margin-bottom:20px;
+
+}
+
+
+.popup-icon.success{
+
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+
+}
+
+
+.popup-icon.error{
+
+    background:linear-gradient(135deg,#dc2626,#ef4444);
+
+}
+
+
+.popup-icon.warning{
+
+    background:linear-gradient(135deg,#f59e0b,#facc15);
+
+}
+
+
+.popup-box h2{
+
+    margin-bottom:10px;
+
+    font-size:28px;
+
+    color:#fff;
+
+}
+
+
+.popup-box p{
+
+    color:#a1a1aa;
+
+    margin-bottom:30px;
+
+    line-height:1.6;
+
+}
+
+
+#popupBtn{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-weight:700;
+
+    font-size:16px;
+
+    background:linear-gradient(135deg,#7b2cff,#00d4ff);
+
+    transition:.3s;
+
+}
+
+
+#popupBtn:hover{
+
+    transform:translateY(-3px);
+
+}
+/*==================================================
+        LOGIN BUTTON LOADING
+==================================================*/
+
+
+.agent-login-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+
+}
+
+
+.agent-login-btn.loading{
+
+    pointer-events:none;
+
+    opacity:.9;
+
+}
+
+
+.agent-login-btn.loading i{
+
+    display:none;
+
+}
+
+
+.agent-login-btn.loading::before{
+
+    content:"";
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    border:3px solid rgba(255,255,255,.35);
+
+    border-top-color:#fff;
+
+    position:absolute;
+
+    left:24px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    animation:loginSpinner .8s linear infinite;
+
+}
+
+
+@keyframes loginSpinner{
+
+    to{
+
+        transform:translateY(-50%) rotate(360deg);
+
+    }
+
+}
+
+
+/*==================================================
+        PASSWORD EYE
+==================================================*/
+
+
+.password-eye{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    color:#8b8b98;
+
+}
+
+
+.password-eye:hover{
+
+    color:#ffffff;
+
+}
+
+
+/*==================================================
+        POPUP ANIMATION
+==================================================*/
+
+
+@keyframes popupSuccess{
+
+    0%{
+
+        transform:scale(.7);
+
+        opacity:0;
+
+    }
+
+    60%{
+
+        transform:scale(1.08);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+.login-popup.show .popup-box{
+
+    animation:popupSuccess .35s ease;
+
+}
+
+
+/*==================================================
+        MOBILE
+==================================================*/
+
+
+@media(max-width:600px){
+
+.popup-box{
+
+    padding:25px;
+
+}
+
+.popup-box h2{
+
+    font-size:23px;
+
+}
+
+.popup-icon{
+
+    width:70px;
+
+    height:70px;
+
+    font-size:28px;
+
+}
+
+}
+/*================================
+        RESPONSIVE
+================================*/
+
+@media(max-width:1100px){
+
+.platform-balance-card{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:25px;
+
+}
+
+.balance-right{
+
+width:100%;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+@media(max-width:850px){
+
+.withdraw-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.history-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.history-search{
+
+width:100%;
+
+}
+
+.platform-main{
+
+padding:20px;
+
+}
+
+.admin-sidebar{
+
+width:230px;
+
+}
+
+}
+
+@media(max-width:650px){
+
+.balance-right{
+
+grid-template-columns:1fr;
+
+}
+
+.page-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.admin-profile{
+
+width:100%;
+
+}
+
+}
+/*================================
+        PAGE ANIMATION
+================================*/
+
+.platform-main > section,
+.page-header{
+
+opacity:0;
+
+animation:pageEnter .7s ease forwards;
+
+}
+
+
+.page-header{
+
+animation-delay:.1s;
+
+}
+
+
+.platform-balance-card{
+
+animation-delay:.2s;
+
+}
+
+
+.platform-withdraw-card{
+
+animation-delay:.35s;
+
+}
+
+
+.withdraw-history-card{
+
+animation-delay:.5s;
+
+}
+
+
+@keyframes pageEnter{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+/*================================
+        BALANCE GLOW EFFECT
+================================*/
+
+
+.platform-balance-card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+.platform-balance-card::before{
+
+content:"";
+
+position:absolute;
+
+width:300px;
+
+height:300px;
+
+right:-120px;
+
+top:-120px;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(123,44,255,.35),
+
+transparent 70%
+
+);
+
+pointer-events:none;
+
+}
+
+
+
+.balance-icon{
+
+animation:
+
+balanceFloat 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes balanceFloat{
+
+
+0%,
+100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+
+}
+
+
+
+/*================================
+        FORM CARD EFFECT
+================================*/
+
+
+.platform-withdraw-card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+
+.platform-withdraw-card::after{
+
+content:"";
+
+position:absolute;
+
+width:250px;
+
+height:250px;
+
+bottom:-120px;
+
+right:-100px;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(0,212,255,.25),
+
+transparent 70%
+
+);
+
+}
+
+
+
+/*================================
+        INPUT HOVER
+================================*/
+
+
+.form-group input:hover,
+
+.form-group select:hover{
+
+
+border-color:rgba(123,44,255,.6);
+
+}
+
+
+
+.form-group input,
+
+.form-group select{
+
+transform:translateY(0);
+
+}
+
+
+.form-group input:focus,
+
+.form-group select:focus{
+
+
+transform:translateY(-2px);
+
+
+}
+
+
+
+/*================================
+        BUTTON SHINE EFFECT
+================================*/
+
+
+#platformWithdrawBtn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+
+#platformWithdrawBtn::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+
+left:-100%;
+
+
+width:60%;
+
+
+height:100%;
+
+
+background:
+
+linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+
+transition:.6s;
+
+
+}
+
+
+
+#platformWithdrawBtn:hover::before{
+
+
+left:120%;
+
+
+}
+
+
+
+/*================================
+        HISTORY TABLE ANIMATION
+================================*/
+
+
+.withdraw-history-card{
+
+
+animation:
+
+historyReveal .8s ease forwards;
+
+
+}
+
+
+@keyframes historyReveal{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+tbody tr{
+
+
+animation:
+
+rowEnter .4s ease forwards;
+
+
+}
+
+
+
+@keyframes rowEnter{
+
+
+from{
+
+opacity:0;
+
+transform:translateX(-20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+
+}
+
+
+
+/*================================
+        SEARCH PREMIUM EFFECT
+================================*/
+
+
+.history-search{
+
+transition:.3s;
+
+}
+
+
+.history-search:hover{
+
+
+transform:translateY(-2px);
+
+
+}
+
+
+
+.history-search input{
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#111b2e,
+
+#16233c
+
+);
+
+
+}
+
+
+
+/*================================
+        TABLE HEADER STYLE
+================================*/
+
+
+thead th:first-child{
+
+border-radius:14px 0 0 14px;
+
+}
+
+
+thead th:last-child{
+
+border-radius:0 14px 14px 0;
+
+}
+
+
+
+/*================================
+        CUSTOM SCROLLBAR
+================================*/
+
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+background:#08101d;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#7b2cff,
+
+#00d4ff
+
+);
+
+
+border-radius:20px;
+
+}
+/*================================
+        WITHDRAW HISTORY PANEL
+================================*/
+
+
+.withdraw-history-card{
+
+padding:30px;
+
+border-radius:24px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.25);
+
+overflow:hidden;
+
+}
+
+
+
+.history-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+
+
+.history-header h2{
+
+font-size:26px;
+
+font-weight:800;
+
+color:#fff;
+
+margin-bottom:6px;
+
+}
+
+
+
+.history-header p{
+
+font-size:14px;
+
+color:#8f98b5;
+
+}
+
+
+
+/*================================
+        SEARCH BOX
+================================*/
+
+
+.history-search{
+
+position:relative;
+
+width:300px;
+
+}
+
+
+
+.history-search i{
+
+position:absolute;
+
+left:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:#7b2cff;
+
+font-size:15px;
+
+}
+
+
+
+.history-search input{
+
+height:50px;
+
+width:100%;
+
+padding-left:48px;
+
+padding-right:18px;
+
+border-radius:15px;
+
+border:1px solid rgba(255,255,255,.08);
+
+background:#111b2e;
+
+color:white;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+
+
+.history-search input::placeholder{
+
+color:#68738f;
+
+}
+
+
+
+.history-search input:focus{
+
+border-color:#7b2cff;
+
+box-shadow:
+
+0 0 0 4px rgba(123,44,255,.15);
+
+transform:translateY(-2px);
+
+}
+
+
+
+/*================================
+        TABLE CONTAINER
+================================*/
+
+
+.withdraw-history-card .table-container{
+
+overflow-x:auto;
+
+border-radius:18px;
+
+}
+
+
+
+/*================================
+        TABLE
+================================*/
+
+
+.withdraw-history-card table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:850px;
+
+}
+
+
+
+.withdraw-history-card thead{
+
+background:#111b2e;
+
+}
+
+
+
+.withdraw-history-card th{
+
+padding:18px;
+
+text-align:left;
+
+font-size:13px;
+
+text-transform:uppercase;
+
+letter-spacing:.5px;
+
+color:#94a3b8;
+
+}
+
+
+
+.withdraw-history-card td{
+
+padding:18px;
+
+border-bottom:
+
+1px solid rgba(255,255,255,.06);
+
+font-size:14px;
+
+color:#e5e7eb;
+
+}
+
+
+
+.withdraw-history-card tbody tr{
+
+transition:.3s;
+
+}
+
+
+
+.withdraw-history-card tbody tr:hover{
+
+background:
+
+rgba(123,44,255,.08);
+
+transform:translateX(4px);
+
+}
+
+
+
+/*================================
+        STATUS BADGES
+================================*/
+
+
+.status{
+
+padding:7px 14px;
+
+border-radius:50px;
+
+font-size:12px;
+
+font-weight:700;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:6px;
+
+}
+
+
+
+.status.completed{
+
+background:
+
+rgba(34,197,94,.15);
+
+color:#22c55e;
+
+}
+
+
+
+.status.pending{
+
+background:
+
+rgba(245,158,11,.15);
+
+color:#f59e0b;
+
+}
+
+
+
+.status.failed{
+
+background:
+
+rgba(239,68,68,.15);
+
+color:#ef4444;
+
+}
+
+
+
+/*================================
+        EMPTY HISTORY
+================================*/
+
+
+.empty-history{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+padding:70px 20px;
+
+}
+
+
+
+.empty-history i{
+
+font-size:55px;
+
+color:#7b2cff;
+
+margin-bottom:20px;
+
+animation:
+
+emptyFloat 3s ease-in-out infinite;
+
+}
+
+
+
+@keyframes emptyFloat{
+
+
+0%,
+100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+
+}
+
+
+
+.empty-history h3{
+
+font-size:22px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+}
+
+
+
+.empty-history p{
+
+color:#8f98b5;
+
+font-size:14px;
+
+}
+
+
+
+/*================================
+        HISTORY RESPONSIVE
+================================*/
+
+
+@media(max-width:900px){
+
+
+.history-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+
+.history-search{
+
+width:100%;
+
+}
+
+
+}
+#addCardBtn{
+
+height:55px;
+
+padding:0 25px;
+
+border:none;
+
+border-radius:15px;
+
+background:
+linear-gradient(
+135deg,
+#7b2cff,
+#00d4ff
+);
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+margin-top:15px;
+display:flex;
+
+}
+
+
+#addCardBtn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 15px 35px rgba(123,44,255,.35);
+
+}
+ /*================================
+        MOBILE SIDEBAR TOP FIX
+================================*/
+
+
+@media(max-width:850px){
+
+
+.platform-layout{
+
+flex-direction:column;
+
+}
+
+
+/* Sidebar stays on top */
+
+.admin-sidebar{
+
+width:100%;
+
+min-height:auto;
+
+padding:18px;
+
+border-right:none;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+/* Brand center */
+
+.admin-brand{
+
+justify-content:center;
+
+margin-bottom:25px;
+
+}
+
+
+
+/* Navigation becomes horizontal */
+
+.admin-sidebar nav{
+
+flex-direction:row;
+
+overflow-x:auto;
+
+gap:8px;
+
+}
+
+
+
+.admin-sidebar nav a{
+
+white-space:nowrap;
+
+padding:12px 15px;
+
+}
+
+
+
+/* Logout stays below menu */
+
+.admin-logout{
+
+margin-top:20px;
+
+}
+
+
+
+.platform-main{
+
+padding:20px;
+
+width:100%;
+
+}
+
+}
+
+
+
+/*================================
+        SMALL MOBILE
+================================*/
+
+
+@media(max-width:600px){
+
+
+.page-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:18px;
+
+}
+
+
+
+.platform-balance-card{
+
+padding:22px;
+
+}
+
+
+
+.balance-left h2{
+
+font-size:30px;
+
+}
+
+
+
+.balance-icon{
+
+width:65px;
+
+height:65px;
+
+font-size:24px;
+
+}
+
+
+
+.balance-right{
+
+width:100%;
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.balance-mini{
+
+width:100%;
+
+}
+
+
+
+.platform-withdraw-card,
+
+.withdraw-history-card{
+
+padding:20px;
+
+border-radius:20px;
+
+}
+
+
+
+.withdraw-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+#platformWithdrawBtn{
+
+height:55px;
+
+font-size:15px;
+
+}
+
+
+
+.history-search{
+
+width:100%;
+
+}
+
+
+}
+
+
+
+/*================================
+        EXTRA SMALL PHONE
+================================*/
+
+
+@media(max-width:400px){
+
+
+.admin-sidebar nav a{
+
+font-size:13px;
+
+padding:10px 12px;
+
+}
+
+
+
+.logo-box{
+
+width:48px;
+
+height:48px;
+
+}
+
+
+
+.admin-brand h2{
+
+font-size:18px;
+
+}
+
+
+
+.platform-main{
+
+padding:15px;
+
+}
+
+
+}

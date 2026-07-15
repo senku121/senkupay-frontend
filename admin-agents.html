@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Manage Senku Pay agents, staff roles and permissions.">
+
+<meta
+name="theme-color"
+content="#050816">
+
+<title>Agent Management | Senku Pay Admin</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="admin-agents.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+</head>
+
+<body>
+
+<div class="admin-bg-grid"></div>
+
+<div class="agent-layout">
+
+<aside
+class="admin-sidebar"
+id="adminSidebar">
+
+<div class="admin-brand">
+
+<div class="logo-box">
+
+S
+
+</div>
+
+<div>
+
+<h2>Senku Pay</h2>
+
+<span>Administration</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin-dashboard.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a href="admin-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Users</span>
+
+</a>
+
+<a href="admin-transactions.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>Transactions</span>
+
+</a>
+
+<a href="admin-withdraw.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Withdraw Requests</span>
+
+</a>
+
+<a href="admin-platform-withdraw.html">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<span>Platform Withdraw</span>
+
+</a>
+
+<a
+href="admin-agents.html"
+class="active">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<span>Agents</span>
+
+</a>
+
+<a href="admin-agent-requests.html">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+<span>Agent Requests</span>
+
+</a>
+
+<a href="#security">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>Security</span>
+
+</a>
+
+</nav>
+
+<button
+type="button"
+class="admin-logout"
+id="adminLogoutButton">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</button>
+
+</aside>
+
+<div
+class="admin-sidebar-overlay"
+id="adminSidebarOverlay">
+
+</div>
+
+<main class="agent-main">
+
+<header class="page-header">
+
+<div class="header-left">
+
+<button
+type="button"
+class="mobile-menu-button"
+id="adminMobileMenuButton"
+aria-label="Open navigation"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div>
+
+<p class="page-label">
+
+STAFF CONTROL
+
+</p>
+
+<h1>
+
+Agent Management
+
+</h1>
+
+<p>
+
+Create and manage agent accounts, roles, permissions and status.
+
+</p>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="create-agent"
+id="createAgentButton">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<span>Create Agent</span>
+
+</button>
+
+</header>
+
+<div
+id="adminAgentsMessage"
+class="admin-agents-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<section class="agent-stats">
+
+<div class="agent-box">
+
+<div class="agent-stat-icon">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+<div>
+
+<p>Total Agents</p>
+
+<h2 id="totalAgents">0</h2>
+
+<span>All registered staff accounts</span>
+
+</div>
+
+</div>
+
+<div class="agent-box">
+
+<div class="agent-stat-icon active">
+
+<i class="fa-solid fa-user-check"></i>
+
+</div>
+
+<div>
+
+<p>Active Agents</p>
+
+<h2 id="activeAgents">0</h2>
+
+<span>Agents with current access</span>
+
+</div>
+
+</div>
+
+<div class="agent-box">
+
+<div class="agent-stat-icon disabled">
+
+<i class="fa-solid fa-user-lock"></i>
+
+</div>
+
+<div>
+
+<p>Disabled Agents</p>
+
+<h2 id="disabledAgents">0</h2>
+
+<span>Restricted staff accounts</span>
+
+</div>
+
+</div>
+
+<div class="agent-box">
+
+<div class="agent-stat-icon roles">
+
+<i class="fa-solid fa-id-badge"></i>
+
+</div>
+
+<div>
+
+<p>Agent Roles</p>
+
+<h2 id="agentRoleCount">0</h2>
+
+<span>Unique assigned permission groups</span>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="agent-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+AGENT ACCOUNTS
+
+</p>
+
+<h2>
+
+Registered Agents
+
+</h2>
+
+</div>
+
+<span id="agentsLastSync">
+
+Not synchronized yet
+
+</span>
+
+</div>
+
+<div class="agent-toolbar">
+
+<div class="search-area">
+
+<i class="fa-solid fa-search"></i>
+
+<input
+type="search"
+id="agentSearch"
+placeholder="Search ID, name, username, role or status...">
+
+</div>
+
+<div class="toolbar-actions">
+
+<select
+id="agentRoleFilter"
+aria-label="Filter agents by role">
+
+<option value="all">All Roles</option>
+
+<option value="agent">Agent</option>
+
+<option value="support_agent">Support Agent</option>
+
+<option value="finance_agent">Finance Agent</option>
+
+</select>
+
+<select
+id="agentStatusFilter"
+aria-label="Filter agents by status">
+
+<option value="all">All Statuses</option>
+
+<option value="active">Active</option>
+
+<option value="disabled">Disabled</option>
+
+<option value="suspended">Suspended</option>
+
+</select>
+
+<button
+type="button"
+class="refresh-agents-button"
+id="refreshAgentsButton">
+
+<i class="fa-solid fa-rotate"></i>
+
+<span>Refresh</span>
+
+</button>
+
+</div>
+
+</div>
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Agent</th>
+
+<th>Username</th>
+
+<th>Role</th>
+
+<th>Status</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="agentTable">
+
+<tr class="loading-row">
+
+<td colspan="7">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading agents...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+id="agentEmptyState"
+class="empty-state"
+hidden>
+
+<i class="fa-solid fa-user-shield"></i>
+
+<h3>No Agents Found</h3>
+
+<p>
+
+No agent accounts match the selected filters.
+
+</p>
+
+</div>
+
+<div class="table-footer">
+
+<p id="agentResultsText">
+
+Showing 0 agents
+
+</p>
+
+<div class="pagination-controls">
+
+<button
+type="button"
+class="pagination-button"
+id="previousAgentPage"
+disabled>
+
+<i class="fa-solid fa-chevron-left"></i>
+
+Previous
+
+</button>
+
+<span id="agentPageText">
+
+Page 1
+
+</span>
+
+<button
+type="button"
+class="pagination-button"
+id="nextAgentPage"
+disabled>
+
+Next
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="sub-agent-card">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+SUB-AGENT ACCOUNTS
+
+</p>
+
+<h2>
+
+Sub-Agent Management
+
+</h2>
+
+</div>
+
+<span id="subAgentsLastSync">
+
+Linked agent accounts
+
+</span>
+
+</div>
+
+<div class="sub-agent-toolbar">
+
+<div class="search-area">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="search"
+id="subAgentSearch"
+placeholder="Search sub-agent name, username or status...">
+
+</div>
+
+<select
+id="subAgentStatusFilter"
+aria-label="Filter sub-agents by status">
+
+<option value="all">
+
+All Statuses
+
+</option>
+
+<option value="active">
+
+Active
+
+</option>
+
+<option value="disabled">
+
+Disabled
+
+</option>
+
+<option value="suspended">
+
+Suspended
+
+</option>
+
+</select>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Sub-Agent</th>
+
+<th>Parent Agent</th>
+
+<th>Wallet Balance</th>
+
+<th>Status</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="subAgentTable">
+
+<tr class="loading-row">
+
+<td colspan="7">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading sub-agents...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div
+id="subAgentEmptyState"
+class="empty-state"
+hidden>
+
+<i class="fa-solid fa-users-gear"></i>
+
+<h3>No Sub-Agents Found</h3>
+
+<p>
+
+Sub-agent accounts linked to agents will appear here.
+
+</p>
+
+</div>
+
+</section>
+
+<section
+class="security-card"
+id="security">
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+AGENT SECURITY
+
+</p>
+
+<h2>
+
+Staff Access Protection
+
+</h2>
+
+</div>
+
+<span>
+
+Administrator Only
+
+</span>
+
+</div>
+
+<div class="security-grid">
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-user-shield"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Role-Based Access
+
+</h3>
+
+<p>
+
+Each staff account is assigned a controlled agent role and permission group.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-user-lock"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Account Restrictions
+
+</h3>
+
+<p>
+
+Administrators can immediately disable or restore agent access.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security-item">
+
+<div class="security-icon">
+
+<i class="fa-solid fa-server"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Backend Synchronization
+
+</h3>
+
+<p id="agentsBackendStatus">
+
+Checking agent-management server...
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!--=========================================
+        CREATE AGENT MODAL
+==========================================-->
+
+<div
+class="agent-modal-overlay"
+id="createAgentModal"
+aria-hidden="true">
+
+<div
+class="agent-modal"
+role="dialog"
+aria-modal="true"
+aria-labelledby="createAgentModalTitle">
+
+<button
+type="button"
+class="agent-modal-close"
+id="closeAgentModal"
+aria-label="Close create agent modal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="agent-modal-header">
+
+<div class="agent-modal-icon">
+
+<i class="fa-solid fa-user-plus"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+NEW STAFF ACCOUNT
+
+</p>
+
+<h2 id="createAgentModalTitle">
+
+Create Agent
+
+</h2>
+
+<p>
+
+Create a secure agent account and assign the correct permission role.
+
+</p>
+
+</div>
+
+</div>
+
+<div
+id="createAgentMessage"
+class="agent-modal-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<form
+id="createAgentForm"
+novalidate>
+
+<div class="agent-form-grid">
+
+<div class="form-group">
+
+<label for="agentName">
+
+Agent Name
+
+</label>
+
+<input
+type="text"
+id="agentName"
+placeholder="Full name"
+autocomplete="name"
+required>
+
+<small
+class="field-error"
+id="agentNameError">
+
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="agentUsername">
+
+Username
+
+</label>
+
+<input
+type="text"
+id="agentUsername"
+placeholder="Unique username"
+autocomplete="username"
+required>
+
+<small
+class="field-error"
+id="agentUsernameError">
+
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="agentPassword">
+
+Password
+
+</label>
+
+<div class="password-input">
+
+<input
+type="password"
+id="agentPassword"
+placeholder="Create secure password"
+autocomplete="new-password"
+required>
+
+<button
+type="button"
+class="password-toggle"
+id="toggleAgentPassword"
+aria-label="Show password">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+</div>
+
+<small
+class="field-error"
+id="agentPasswordError">
+
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="agentRole">
+
+Agent Role
+
+</label>
+
+<select id="agentRole">
+
+<option value="AGENT">
+
+Agent
+
+</option>
+
+<option value="SUPPORT_AGENT">
+
+Support Agent
+
+</option>
+
+<option value="FINANCE_AGENT">
+
+Finance Agent
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group full-width">
+
+<label for="agentEmail">
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="agentEmail"
+placeholder="agent@example.com"
+autocomplete="email">
+
+<small
+class="field-error"
+id="agentEmailError">
+
+</small>
+
+</div>
+
+<div class="form-group full-width">
+
+<label for="agentNote">
+
+Administrator Note
+
+</label>
+
+<textarea
+id="agentNote"
+placeholder="Optional internal note"
+maxlength="300">
+
+</textarea>
+
+</div>
+
+</div>
+
+<div class="agent-modal-actions">
+
+<button
+type="button"
+class="secondary-agent-button"
+id="cancelAgent">
+
+Cancel
+
+</button>
+
+<button
+type="submit"
+class="primary-agent-button"
+id="submitCreateAgent">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<span>Create Agent</span>
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!--=========================================
+        MANAGE AGENT MODAL
+==========================================-->
+
+<div
+class="agent-modal-overlay"
+id="manageAgentModal"
+aria-hidden="true">
+
+<div
+class="agent-modal manage-agent-modal"
+role="dialog"
+aria-modal="true"
+aria-labelledby="manageAgentTitle">
+
+<button
+type="button"
+class="agent-modal-close"
+id="closeManageModal"
+aria-label="Close manage agent modal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="agent-modal-header">
+
+<div
+class="agent-avatar"
+id="manageAgentAvatar">
+
+A
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+AGENT ACCOUNT
+
+</p>
+
+<h2 id="manageAgentTitle">
+
+Manage Agent
+
+</h2>
+
+<p id="manageAgentSubtitle">
+
+Review account details and access controls.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="agent-detail-grid">
+
+<div class="agent-detail-box">
+
+<span>Name</span>
+
+<strong id="manageAgentName">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Username</span>
+
+<strong id="manageAgentUsername">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Email</span>
+
+<strong id="manageAgentEmail">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Role</span>
+
+<strong id="manageAgentRole">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Status</span>
+
+<strong id="manageAgentStatus">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Created</span>
+
+<strong id="manageAgentCreated">--</strong>
+
+</div>
+
+</div>
+
+<div
+id="manageAgentMessage"
+class="agent-modal-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<div class="manage-agent-actions">
+
+<button
+type="button"
+class="agent-action status-action"
+id="toggleAgentStatus">
+
+<i class="fa-solid fa-user-lock"></i>
+
+<span>Disable Agent</span>
+
+</button>
+
+<button
+type="button"
+class="agent-action password-action"
+id="openResetAgentPassword">
+
+<i class="fa-solid fa-key"></i>
+
+<span>Reset Password</span>
+
+</button>
+
+<button
+type="button"
+class="agent-action role-action"
+id="openChangeAgentRole">
+
+<i class="fa-solid fa-id-badge"></i>
+
+<span>Change Role</span>
+
+</button>
+
+<button
+type="button"
+class="agent-action view-action"
+id="viewAgentSubAgents">
+
+<i class="fa-solid fa-users-gear"></i>
+
+<span>View Sub-Agents</span>
+
+</button>
+
+</div>
+<div
+class="agent-inline-panel"
+id="resetAgentPasswordPanel"
+hidden>
+
+<div class="inline-panel-header">
+
+<h3>Reset Agent Password</h3>
+
+<button
+type="button"
+class="inline-panel-close"
+id="closeResetAgentPasswordPanel"
+aria-label="Close reset password panel">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<div class="form-group">
+
+<label for="newAgentPassword">
+
+New Password
+
+</label>
+
+<div class="password-input">
+
+<input
+type="password"
+id="newAgentPassword"
+placeholder="Enter new password"
+autocomplete="new-password">
+
+<button
+type="button"
+class="password-toggle"
+id="toggleNewAgentPassword"
+aria-label="Show password">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+</div>
+
+<small
+class="field-error"
+id="newAgentPasswordError">
+
+</small>
+
+</div>
+
+<div class="agent-modal-actions">
+
+<button
+type="button"
+class="secondary-agent-button"
+id="cancelResetAgentPassword">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-agent-button"
+id="submitResetAgentPassword">
+
+<i class="fa-solid fa-key"></i>
+
+<span>Reset Password</span>
+
+</button>
+
+</div>
+
+</div>
+
+<div
+class="agent-inline-panel"
+id="changeAgentRolePanel"
+hidden>
+
+<div class="inline-panel-header">
+
+<h3>Change Agent Role</h3>
+
+<button
+type="button"
+class="inline-panel-close"
+id="closeChangeAgentRolePanel"
+aria-label="Close role change panel">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<div class="form-group">
+
+<label for="newAgentRole">
+
+New Role
+
+</label>
+
+<select id="newAgentRole">
+
+<option value="AGENT">
+
+Agent
+
+</option>
+
+<option value="SUPPORT_AGENT">
+
+Support Agent
+
+</option>
+
+<option value="FINANCE_AGENT">
+
+Finance Agent
+
+</option>
+
+</select>
+
+</div>
+
+<div class="agent-modal-actions">
+
+<button
+type="button"
+class="secondary-agent-button"
+id="cancelChangeAgentRole">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="primary-agent-button"
+id="submitChangeAgentRole">
+
+<i class="fa-solid fa-id-badge"></i>
+
+<span>Update Role</span>
+
+</button>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="close-manage-agent-button"
+id="closeManageButton">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>Back to Agents</span>
+
+</button>
+
+</div>
+
+</div>
+
+<!--=========================================
+        SUB-AGENT DETAILS MODAL
+==========================================-->
+
+<div
+class="agent-modal-overlay"
+id="subAgentModal"
+aria-hidden="true">
+
+<div
+class="agent-modal sub-agent-modal"
+role="dialog"
+aria-modal="true"
+aria-labelledby="subAgentModalTitle">
+
+<button
+type="button"
+class="agent-modal-close"
+id="closeSubAgentModal"
+aria-label="Close sub-agent modal">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+<div class="agent-modal-header">
+
+<div class="agent-modal-icon">
+
+<i class="fa-solid fa-users-gear"></i>
+
+</div>
+
+<div>
+
+<p class="section-label">
+
+SUB-AGENT DETAILS
+
+</p>
+
+<h2 id="subAgentModalTitle">
+
+Sub-Agent Account
+
+</h2>
+
+<p id="subAgentModalSubtitle">
+
+Review the linked sub-agent account.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="agent-detail-grid">
+
+<div class="agent-detail-box">
+
+<span>Name</span>
+
+<strong id="subAgentDetailName">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Username</span>
+
+<strong id="subAgentDetailUsername">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Parent Agent</span>
+
+<strong id="subAgentDetailParent">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Wallet Balance</span>
+
+<strong id="subAgentDetailBalance">$0.00</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Status</span>
+
+<strong id="subAgentDetailStatus">--</strong>
+
+</div>
+
+<div class="agent-detail-box">
+
+<span>Created</span>
+
+<strong id="subAgentDetailCreated">--</strong>
+
+</div>
+
+</div>
+
+<div
+id="subAgentModalMessage"
+class="agent-modal-message"
+hidden
+aria-live="polite">
+
+</div>
+
+<div class="manage-agent-actions">
+
+<button
+type="button"
+class="agent-action status-action"
+id="toggleSubAgentStatus">
+
+<i class="fa-solid fa-user-lock"></i>
+
+<span>Disable Sub-Agent</span>
+
+</button>
+
+<button
+type="button"
+class="agent-action password-action"
+id="resetSubAgentPassword">
+
+<i class="fa-solid fa-key"></i>
+
+<span>Reset Password</span>
+
+</button>
+
+</div>
+
+<button
+type="button"
+class="close-manage-agent-button"
+id="closeSubAgentDetails">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+<span>Back to Sub-Agents</span>
+
+</button>
+
+</div>
+
+</div>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
+<script src="admin-agents.js"></script>
+
+</body>
+
+</html>
