@@ -1341,3 +1341,208 @@ footer ul a:hover {
         transform: none;
     }
 }
+/* ==========================================
+   EXTRA RESPONSIVE FIXES
+   Add at the END of style.css
+========================================== */
+
+@media (max-width:992px){
+
+.hero-grid{
+    grid-template-columns:1fr;
+    gap:50px;
+}
+
+.hero-left{
+    text-align:center;
+}
+
+.hero-badge{
+    margin:auto auto 25px;
+}
+
+.hero-buttons{
+    justify-content:center;
+}
+
+.hero-users{
+    justify-content:center;
+}
+
+.dashboard{
+    width:100%;
+    max-width:100%;
+}
+
+.dashboard-body{
+    flex-direction:column;
+}
+
+aside{
+    width:100%;
+    overflow-x:auto;
+}
+
+aside ul{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+}
+
+.dashboard-content{
+    width:100%;
+}
+
+.cards{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.graph{
+    overflow:hidden;
+}
+
+}
+
+/* Tablet */
+
+@media (max-width:768px){
+
+.hero{
+    padding-top:120px;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.hero p{
+    font-size:16px;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.stats-section .container{
+    grid-template-columns:1fr;
+}
+
+.features-grid,
+.services-grid,
+.testimonial-grid,
+.footer-grid{
+    grid-template-columns:1fr;
+}
+
+.dashboard{
+    border-radius:20px;
+}
+
+.dashboard-top{
+    padding:15px;
+}
+
+.dashboard-content{
+    padding:20px;
+}
+
+.graph{
+    height:180px;
+}
+
+}
+
+/* Mobile */
+
+@media (max-width:480px){
+
+.container{
+    width:94%;
+}
+
+.hero{
+    padding-top:105px;
+}
+
+.hero h1{
+    font-size:32px;
+    line-height:1.2;
+}
+
+.hero p{
+    font-size:15px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+}
+
+.hero-buttons .btn{
+    width:100%;
+}
+
+.user-stack div{
+    width:34px;
+    height:34px;
+    font-size:13px;
+}
+
+.logo-text h2{
+    font-size:18px;
+}
+
+.logo-text small{
+    display:none;
+}
+
+.dashboard{
+    border-radius:16px;
+}
+
+.dashboard-title{
+    display:none;
+}
+
+aside{
+    padding:15px;
+}
+
+aside li{
+    font-size:13px;
+    padding:10px;
+}
+
+.card{
+    padding:18px;
+}
+
+.card h2{
+    font-size:26px;
+}
+
+.graph{
+    height:150px;
+    gap:8px;
+}
+
+.cta-box{
+    padding:35px 20px;
+}
+
+.cta-buttons{
+    flex-direction:column;
+}
+
+.cta-buttons .btn{
+    width:100%;
+}
+
+footer{
+    text-align:center;
+}
+
+.socials{
+    justify-content:center;
+}
+
+}
