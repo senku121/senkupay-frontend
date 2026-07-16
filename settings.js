@@ -14,6 +14,9 @@ const SETTINGS_ENDPOINT =
 const UPDATE_SETTINGS_ENDPOINT=
 `${API_BASE_URL}/api/settings/update`;
 
+const DELETE_ACCOUNT_ENDPOINT=
+`${API_BASE_URL}/api/user/account`;
+
 /*==================================
         STORAGE
 ==================================*/
@@ -137,6 +140,27 @@ document.getElementById("animationsToggle");
 
 const logoutButton=
 document.getElementById("logoutButton");
+
+const deleteAccountButton=
+document.getElementById("deleteAccountButton");
+
+const deleteAccountModal=
+document.getElementById("deleteAccountModal");
+
+const closeDeleteModalButton=
+document.getElementById("closeDeleteModalButton");
+
+const cancelDeleteButton=
+document.getElementById("cancelDeleteButton");
+
+const deleteConfirmationInput=
+document.getElementById("deleteConfirmationInput");
+
+const confirmDeleteButton=
+document.getElementById("confirmDeleteButton");
+
+const deleteModalMessage=
+document.getElementById("deleteModalMessage");
 
 /*==================================
         MESSAGE
@@ -970,6 +994,84 @@ logout();
 }
 
 });
+
+/*==================================
+        DELETE ACCOUNT
+==================================*/
+
+function openDeleteModal(){
+    deleteAccountModal.hidden=false;
+    document.body.classList.add("delete-modal-open");
+    deleteConfirmationInput.value="";
+    deleteModalMessage.textContent="";
+    confirmDeleteButton.disabled=true;
+    setTimeout(()=>deleteConfirmationInput.focus(),50);
+}
+
+function closeDeleteModal(){
+    if(confirmDeleteButton.dataset.loading==="true") return;
+    deleteAccountModal.hidden=true;
+    document.body.classList.remove("delete-modal-open");
+    deleteConfirmationInput.value="";
+    deleteModalMessage.textContent="";
+    confirmDeleteButton.disabled=true;
+}
+
+deleteAccountButton?.addEventListener("click",openDeleteModal);
+closeDeleteModalButton?.addEventListener("click",closeDeleteModal);
+cancelDeleteButton?.addEventListener("click",closeDeleteModal);
+
+deleteAccountModal?.querySelector("[data-close-delete-modal]")?.addEventListener("click",closeDeleteModal);
+
+deleteConfirmationInput?.addEventListener("input",()=>{
+    const valid=deleteConfirmationInput.value.trim().toUpperCase()==="DELETE";
+    confirmDeleteButton.disabled=!valid;
+    deleteModalMessage.textContent="";
+});
+
+document.addEventListener("keydown",event=>{
+    if(event.key==="Escape" && deleteAccountModal && !deleteAccountModal.hidden){
+        closeDeleteModal();
+    }
+});
+
+confirmDeleteButton?.addEventListener("click",async()=>{
+    if(deleteConfirmationInput.value.trim().toUpperCase()!=="DELETE") return;
+
+    confirmDeleteButton.disabled=true;
+    confirmDeleteButton.dataset.loading="true";
+    confirmDeleteButton.innerHTML=`<i class="fa-solid fa-spinner fa-spin"></i><span>Deleting...</span>`;
+    deleteModalMessage.textContent="";
+
+    try{
+        const response=await api(DELETE_ACCOUNT_ENDPOINT,{
+            method:"DELETE",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({confirmation:"DELETE"})
+        });
+
+        ["token","currentUser","verificationEmail"].forEach(key=>{
+            sessionStorage.removeItem(key);
+            localStorage.removeItem(key);
+        });
+
+        localStorage.removeItem("settings_email_notifications");
+        localStorage.removeItem("settings_transaction_notifications");
+        localStorage.removeItem("settings_product_notifications");
+        localStorage.removeItem("settings_animations");
+
+        window.location.replace(`login.html?accountDeleted=1&message=${encodeURIComponent(response.message||"Account deleted successfully.")}`);
+    }
+    catch(error){
+        deleteModalMessage.textContent=error.message||"Unable to delete account.";
+        confirmDeleteButton.disabled=false;
+    }
+    finally{
+        confirmDeleteButton.dataset.loading="false";
+        confirmDeleteButton.innerHTML=`<i class="fa-solid fa-trash"></i><span>Delete Permanently</span>`;
+    }
+});
+
 /*==================================
         INPUT EFFECTS
 ==================================*/

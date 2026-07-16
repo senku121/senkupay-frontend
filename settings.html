@@ -693,7 +693,7 @@ Delete Account
 
 <p>
 
-This feature will be available after backend integration.
+Permanently remove your account and all associated payment records. This action cannot be undone.
 
 </p>
 
@@ -704,9 +704,11 @@ This feature will be available after backend integration.
 <button
 type="button"
 class="delete-btn"
-disabled>
+id="deleteAccountButton">
 
-Coming Soon
+<i class="fa-solid fa-trash"></i>
+
+<span>Delete Account</span>
 
 </button>
 
@@ -786,6 +788,66 @@ Your profile, notifications and security settings are protected using encrypted 
 
 </main>
 
+</div>
+
+<!-- DELETE ACCOUNT MODAL -->
+<div class="delete-modal" id="deleteAccountModal" hidden>
+
+<div class="delete-modal-backdrop" data-close-delete-modal></div>
+
+<div
+class="delete-modal-dialog"
+role="dialog"
+aria-modal="true"
+aria-labelledby="deleteModalTitle"
+aria-describedby="deleteModalDescription">
+
+<button
+type="button"
+class="delete-modal-close"
+id="closeDeleteModalButton"
+aria-label="Close delete account confirmation">
+<i class="fa-solid fa-xmark"></i>
+</button>
+
+<div class="delete-modal-icon">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+
+<p class="delete-modal-label">PERMANENT ACTION</p>
+
+<h2 id="deleteModalTitle">Delete your account?</h2>
+
+<p id="deleteModalDescription" class="delete-modal-description">
+Your profile, transactions, deposits and withdrawal records will be permanently deleted. This cannot be reversed.
+</p>
+
+<div class="delete-warning-list">
+<p><i class="fa-solid fa-circle-xmark"></i> You will immediately lose access.</p>
+<p><i class="fa-solid fa-circle-xmark"></i> Your account history will be removed.</p>
+<p><i class="fa-solid fa-circle-xmark"></i> Accounts with balance or pending requests cannot be deleted.</p>
+</div>
+
+<label for="deleteConfirmationInput">Type <strong>DELETE</strong> to confirm</label>
+
+<input
+type="text"
+id="deleteConfirmationInput"
+placeholder="Type DELETE"
+autocomplete="off"
+spellcheck="false">
+
+<p class="delete-modal-message" id="deleteModalMessage" aria-live="polite"></p>
+
+<div class="delete-modal-actions">
+<button type="button" class="cancel-delete-btn" id="cancelDeleteButton">Cancel</button>
+<button type="button" class="confirm-delete-btn" id="confirmDeleteButton" disabled>
+<i class="fa-solid fa-trash"></i>
+<span>Delete Permanently</span>
+</button>
+</div>
+
+</div>
 </div>
 
 <script src="storage.js"></script>
