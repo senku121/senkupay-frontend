@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Review and manage Senku Pay identity verification submissions.">
+<meta name="theme-color" content="#050816">
+<title>KYC Verification | Senku Pay Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="admin-kyc.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="admin-bg-grid"></div>
+<div class="kyc-layout">
+<aside class="admin-sidebar" id="adminSidebar">
+<div class="admin-brand"><div class="logo-box">S</div><div><h2>Senku Pay</h2><span>Administration</span></div></div>
+<nav>
+<a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
+<a href="admin-users.html"><i class="fa-solid fa-users"></i><span>Users</span></a>
+<a href="admin-transactions.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transactions</span></a>
+<a href="admin-withdraw.html"><i class="fa-solid fa-wallet"></i><span>Withdraw Requests</span></a>
+<a href="admin-platform-withdraw.html"><i class="fa-solid fa-building-columns"></i><span>Platform Withdraw</span></a>
+<a href="admin-agents.html"><i class="fa-solid fa-user-shield"></i><span>Agents</span></a>
+<a href="admin-agent-requests.html"><i class="fa-solid fa-envelope-open-text"></i><span>Agent Requests</span></a>
+<a href="admin-kyc.html" class="active"><i class="fa-solid fa-id-card-clip"></i><span>KYC Verification</span></a>
+<a href="#security"><i class="fa-solid fa-shield-halved"></i><span>Security</span></a>
+</nav>
+<button type="button" class="admin-logout" id="adminLogoutButton"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+</aside>
+<div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+<main class="kyc-main">
+<header class="page-header">
+<div class="header-left"><button type="button" class="mobile-menu-button" id="adminMobileMenuButton" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+<div><p class="page-label">IDENTITY REVIEW</p><h1>KYC Verification</h1><p>Review uploaded identity documents and control verification status.</p></div></div>
+<button type="button" class="refresh-page-button" id="refreshKycButton"><i class="fa-solid fa-rotate"></i><span>Refresh</span></button>
+</header>
+<div id="kycPageMessage" class="page-message" hidden aria-live="polite"></div>
+<section class="stats-grid">
+<div class="stat-card"><div class="stat-icon pending"><i class="fa-solid fa-hourglass-half"></i></div><div><p>Pending Reviews</p><h2 id="pendingKycCount">0</h2><span>Waiting for action</span></div></div>
+<div class="stat-card"><div class="stat-icon verified"><i class="fa-solid fa-circle-check"></i></div><div><p>Verified Users</p><h2 id="verifiedKycCount">0</h2><span>Approved identities</span></div></div>
+<div class="stat-card"><div class="stat-icon rejected"><i class="fa-solid fa-circle-xmark"></i></div><div><p>Rejected</p><h2 id="rejectedKycCount">0</h2><span>Rejected submissions</span></div></div>
+<div class="stat-card"><div class="stat-icon reverify"><i class="fa-solid fa-arrows-rotate"></i></div><div><p>Reverification</p><h2 id="reverifyKycCount">0</h2><span>New documents required</span></div></div>
+</section>
+<section class="kyc-card">
+<div class="section-heading"><div><p class="section-label">SUBMISSIONS</p><h2>Identity Verification Queue</h2></div><span id="lastKycSync">Not synchronized yet</span></div>
+<div class="kyc-toolbar">
+<div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="kycSearch" placeholder="Search user, email, ID, country or document..."></div>
+<div class="toolbar-right">
+<select id="kycStatusFilter" aria-label="Filter by KYC status"><option value="all">All statuses</option><option value="pending">Pending review</option><option value="verified">Verified</option><option value="rejected">Rejected</option><option value="reverification_required">Reverification</option><option value="not_submitted">Not submitted</option><option value="revoked">Revoked</option></select>
+<select id="kycSort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="user">User A-Z</option></select>
+</div></div>
+<div class="table-wrapper"><table><thead><tr><th>User</th><th>Document</th><th>Country</th><th>Submitted</th><th>Status</th><th>Action</th></tr></thead><tbody id="kycTable"><tr class="loading-row"><td colspan="6"><i class="fa-solid fa-spinner fa-spin"></i> Loading KYC submissions...</td></tr></tbody></table></div>
+<div class="table-footer"><p id="kycResultsText">Showing 0 records</p><div class="pagination-controls"><button id="kycPreviousPage" class="pagination-button" disabled><i class="fa-solid fa-chevron-left"></i> Previous</button><span id="kycPageText">Page 1</span><button id="kycNextPage" class="pagination-button" disabled>Next <i class="fa-solid fa-chevron-right"></i></button></div></div>
+</section>
+<section class="security-card" id="security"><div class="section-heading"><div><p class="section-label">SECURITY</p><h2>Protected Identity Review</h2></div><span>Administrator Access</span></div><div class="security-grid"><div class="security-item"><i class="fa-solid fa-lock"></i><div><h3>Authenticated access</h3><p>Every request uses the administrator bearer token.</p></div></div><div class="security-item"><i class="fa-solid fa-cloud-arrow-up"></i><div><h3>Secure documents</h3><p>Files are loaded from the protected KYC records stored by the backend.</p></div></div><div class="security-item"><i class="fa-solid fa-clock-rotate-left"></i><div><h3>Review history</h3><p>Approval, rejection and reverification actions are recorded by the backend.</p></div></div></div></section>
+</main></div>
+<div class="review-modal" id="kycReviewModal" aria-hidden="true"><div class="review-modal-card" role="dialog" aria-modal="true" aria-labelledby="reviewUserName"><button class="modal-close" id="closeKycReview" aria-label="Close review"><i class="fa-solid fa-xmark"></i></button>
+<div class="review-header"><div class="review-avatar" id="reviewAvatar">U</div><div><p class="section-label">KYC REVIEW</p><h2 id="reviewUserName">User</h2><p id="reviewUserEmail">No email</p></div><span class="kyc-status pending" id="reviewStatus">Pending</span></div>
+<div id="reviewMessage" class="modal-message" hidden></div>
+<div class="review-info-grid"><div><span>User ID</span><strong id="reviewUserId">--</strong></div><div><span>Document Type</span><strong id="reviewDocumentType">--</strong></div><div><span>Issuing Country</span><strong id="reviewCountry">--</strong></div><div><span>Submitted</span><strong id="reviewSubmitted">--</strong></div><div><span>Verified</span><strong id="reviewVerified">--</strong></div><div><span>Source</span><strong id="reviewSource">--</strong></div></div>
+<div class="documents-heading"><div><p class="section-label">UPLOADED FILES</p><h3>Identity Documents</h3></div><span>Click a document to open it</span></div>
+<div class="document-grid" id="reviewDocuments"></div>
+<div class="notes-grid"><div><label for="adminReviewNote">Administrator note</label><textarea id="adminReviewNote" placeholder="Optional internal review note..."></textarea></div><div><label for="reviewReason">Reason</label><textarea id="reviewReason" placeholder="Required for rejection, reverification or revocation..."></textarea></div></div>
+<div class="review-actions"><button class="action-button approve" data-action="approve"><i class="fa-solid fa-check"></i> Approve</button><button class="action-button reject" data-action="reject"><i class="fa-solid fa-xmark"></i> Reject</button><button class="action-button reverify" data-action="reverify"><i class="fa-solid fa-rotate"></i> Request Reverification</button><button class="action-button offline" data-action="offline-verify"><i class="fa-solid fa-user-check"></i> Offline Verify</button><button class="action-button revoke" data-action="revoke"><i class="fa-solid fa-ban"></i> Revoke</button></div>
+</div></div>
+<div class="image-modal" id="kycImageModal" aria-hidden="true"><button class="image-close" id="closeKycImage"><i class="fa-solid fa-xmark"></i></button><img id="kycLargeImage" alt="KYC document preview"><a id="openKycOriginal" target="_blank" rel="noopener">Open original file</a></div>
+<script src="admin-kyc.js"></script>
+</body></html>
