@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Complete and manage your Senku Pay identity verification.">
+<meta name="theme-color" content="#070b16">
+<title>Identity Verification | Senku Pay</title>
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="kyc.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+<header class="kyc-header">
+<a href="dashboard.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i><span>Dashboard</span></a>
+<div class="logo"><div class="logo-box">S</div><div><h2>Senku Pay</h2><small>Identity Verification</small></div></div>
+</header>
+<main class="kyc-container">
+<div id="kycMessage" class="kyc-message" hidden aria-live="polite"></div>
+<section class="kyc-hero">
+<div class="hero-icon"><i class="fa-solid fa-shield-halved"></i></div>
+<div><p class="eyebrow">SECURE ACCOUNT RECOVERY</p><h1>Identity Verification</h1><p>Verify your identity to protect your account and make account recovery easier if access is lost or compromised.</p></div>
+</section>
+<section class="status-card">
+<div class="section-heading"><div><p class="eyebrow">CURRENT STATUS</p><h2>Your KYC Status</h2></div><span id="kycStatusBadge" class="status-badge loading">Checking...</span></div>
+<div class="status-grid">
+<div><span>Document Type</span><strong id="kycDocumentType">--</strong></div>
+<div><span>Issuing Country</span><strong id="kycCountry">--</strong></div>
+<div><span>Submitted</span><strong id="kycSubmittedAt">--</strong></div>
+<div><span>Verified</span><strong id="kycVerifiedAt">--</strong></div>
+</div>
+<div id="kycReasonBox" class="reason-box" hidden><strong id="kycReasonTitle">Reason</strong><p id="kycReasonText"></p></div>
+</section>
+<section id="kycUploadCard" class="upload-card">
+<div class="section-heading"><div><p class="eyebrow">DOCUMENT SUBMISSION</p><h2 id="kycFormTitle">Submit Verification Documents</h2></div><span>JPG, PNG or PDF · max 5 MB each</span></div>
+<form id="kycForm" novalidate>
+<div class="form-grid">
+<div class="field"><label for="documentType">Document Type</label><select id="documentType" name="documentType" required><option value="">Select document type</option><option value="CITIZENSHIP">Citizenship</option><option value="PASSPORT">Passport</option><option value="NATIONAL_ID">National ID</option><option value="DRIVING_LICENSE">Driving License</option></select></div>
+<div class="field"><label for="documentCountry">Issuing Country</label><input id="documentCountry" name="documentCountry" type="text" maxlength="80" placeholder="Example: NP or Nepal" required></div>
+</div>
+<div class="file-grid">
+<label class="file-box"><input id="idFront" name="idFront" type="file" accept="image/jpeg,image/png,application/pdf"><i class="fa-solid fa-id-card"></i><strong id="idFrontLabel">Document Front</strong><span id="idFrontName">Choose file</span></label>
+<label class="file-box" id="idBackBox"><input id="idBack" name="idBack" type="file" accept="image/jpeg,image/png,application/pdf"><i class="fa-regular fa-id-card"></i><strong>Document Back</strong><span id="idBackName">Choose file</span></label>
+<label class="file-box"><input id="selfie" name="selfie" type="file" accept="image/jpeg,image/png"><i class="fa-solid fa-camera"></i><strong>Selfie</strong><span id="selfieName">Choose file</span></label>
+<label class="file-box"><input id="proofOfAddress" name="proofOfAddress" type="file" accept="image/jpeg,image/png,application/pdf"><i class="fa-solid fa-house"></i><strong>Proof of Address</strong><span id="proofOfAddressName">Optional</span></label>
+</div>
+<label class="consent"><input id="kycConsent" type="checkbox"><span>I confirm these documents belong to me and the information is accurate.</span></label>
+<button id="submitKycBtn" class="submit-btn" type="submit"><i class="fa-solid fa-cloud-arrow-up"></i><span>Submit KYC Documents</span></button>
+</form>
+</section>
+<section class="documents-card">
+<div class="section-heading"><div><p class="eyebrow">SUBMISSION SUMMARY</p><h2>Uploaded Documents</h2></div></div>
+<div id="documentList" class="document-list"><p class="empty-text">No documents submitted yet.</p></div>
+</section>
+<section class="security-note"><i class="fa-solid fa-lock"></i><div><h3>Your documents are protected</h3><p>KYC files are stored securely and are available only to authorized reviewers. Never send identity documents through public chat or email.</p></div></section>
+</main>
+<script src="storage.js"></script>
+<script src="popup.js"></script>
+<script src="kyc.js"></script>
+</body>
+</html>

@@ -14,6 +14,9 @@ const WALLET_ENDPOINT =
 const TRANSACTIONS_ENDPOINT =
 `${API_BASE_URL}/api/transactions`;
 
+const KYC_STATUS_ENDPOINT =
+`${API_BASE_URL}/api/user/kyc/status`;
+
 /*==================================
         STORAGE HELPERS
 ==================================*/
@@ -161,6 +164,16 @@ document.getElementById("dashboardSidebar");
 
 const mobileMenuButton =
 document.getElementById("mobileMenuButton");
+
+const kycStatusElement = document.getElementById("dashboardKycStatus");
+const kycQuickText = document.getElementById("dashboardKycQuickText");
+const kycTitle = document.getElementById("dashboardKycTitle");
+const kycDescription = document.getElementById("dashboardKycDescription");
+const kycBadge = document.getElementById("dashboardKycBadge");
+const kycIcon = document.getElementById("dashboardKycIcon");
+const kycDocument = document.getElementById("dashboardKycDocument");
+const kycSubmitted = document.getElementById("dashboardKycSubmitted");
+const kycButton = document.getElementById("dashboardKycButton");
 
 /*==================================
         MESSAGE
@@ -620,6 +633,45 @@ return null;
 
 }
 
+}
+
+/*==================================
+        LOAD KYC STATUS
+==================================*/
+function prettyKycValue(value){
+return String(value || "--").replaceAll("_"," ").toLowerCase().replace(/\b\w/g,letter=>letter.toUpperCase());
+}
+
+function renderDashboardKyc(kyc = {}){
+const status = String(kyc.status || "NOT_SUBMITTED").toUpperCase();
+const settings = {
+NOT_SUBMITTED:{label:"Not Submitted",title:"Complete identity verification",description:"Verify your identity to protect your account and make recovery easier if access is lost.",className:"not-submitted",icon:"fa-id-card",button:"Verify Identity",quick:"Start verification"},
+PENDING:{label:"Pending Review",title:"Your verification is being reviewed",description:"Your documents were submitted successfully. An administrator will review them shortly.",className:"pending",icon:"fa-hourglass-half",button:"View Status",quick:"Pending review"},
+VERIFIED:{label:"Verified",title:"Your identity is verified",description:"Your account has completed identity verification and has stronger recovery protection.",className:"verified",icon:"fa-circle-check",button:"View Verification",quick:"Identity verified"},
+REJECTED:{label:"Rejected",title:"Verification needs attention",description:kyc.rejectionReason || "Your submission was rejected. Open verification to review the reason and submit new documents.",className:"rejected",icon:"fa-circle-xmark",button:"Resubmit Documents",quick:"Resubmit documents"},
+REVERIFY_REQUIRED:{label:"Reverification Required",title:"New verification documents required",description:kyc.reverificationReason || "An administrator requested updated identity documents.",className:"reverify",icon:"fa-rotate",button:"Verify Again",quick:"Verification required"},
+REVOKED:{label:"Revoked",title:"Verification was revoked",description:kyc.revocationReason || "Your previous verification is no longer active. Submit new identity documents.",className:"rejected",icon:"fa-triangle-exclamation",button:"Submit Again",quick:"Verification revoked"}
+};
+const item = settings[status] || {label:prettyKycValue(status),title:"Identity verification",description:"Open the verification page for details.",className:"not-submitted",icon:"fa-id-card",button:"View Details",quick:"Check status"};
+if(kycStatusElement){kycStatusElement.textContent=item.label;kycStatusElement.className=status==="VERIFIED"?"status-positive":status==="PENDING"?"status-warning":status==="NOT_SUBMITTED"?"":"status-danger";}
+if(kycQuickText)kycQuickText.textContent=item.quick;
+if(kycTitle)kycTitle.textContent=item.title;
+if(kycDescription)kycDescription.textContent=item.description;
+if(kycBadge){kycBadge.textContent=item.label;kycBadge.className=`kyc-dashboard-badge ${item.className}`;}
+if(kycIcon){kycIcon.className=`kyc-dashboard-icon ${item.className}`;kycIcon.innerHTML=`<i class="fa-solid ${item.icon}"></i>`;}
+if(kycDocument)kycDocument.textContent=prettyKycValue(kyc.documentType);
+if(kycSubmitted)kycSubmitted.textContent=formatDate(kyc.submittedAt);
+if(kycButton)kycButton.querySelector("span").textContent=item.button;
+}
+
+async function loadKycStatus(){
+try{
+const data=await apiRequest(KYC_STATUS_ENDPOINT);
+renderDashboardKyc(data.kyc || {});
+}catch(error){
+console.error("KYC status load failed:",error);
+renderDashboardKyc({status:"NOT_SUBMITTED"});
+}
 }
 
 /*==================================
@@ -1107,7 +1159,10 @@ await loadDashboard();
 
 if(dashboardData){
 
-await loadTransactions();
+await Promise.all([
+loadTransactions(),
+loadKycStatus()
+]);
 
 }
 

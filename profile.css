@@ -1546,3 +1546,15 @@ input:-webkit-autofill{
 /*==================================
                 END
 ==================================*/
+
+/*==================================
+        PROFILE KYC INTEGRATION
+==================================*/
+.profile-meta{grid-template-columns:repeat(4,1fr)}
+.kyc-security-item{border-color:rgba(123,44,255,.22)}
+.kyc-security-item.pending #profileKycIcon{color:var(--warning);background:rgba(245,158,11,.14)}
+.kyc-security-item.verified #profileKycIcon{color:var(--success);background:rgba(34,197,94,.14)}
+.kyc-security-item.rejected #profileKycIcon{color:var(--danger);background:rgba(239,68,68,.14)}
+#profileKycStatus.status-positive{color:var(--success)}#profileKycStatus.status-warning{color:var(--warning)}#profileKycStatus.status-danger{color:var(--danger)}
+@media(max-width:1000px){.profile-meta{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.profile-meta{grid-template-columns:1fr}.security-item{align-items:flex-start}.security-item>div{align-items:flex-start}.security-item button{min-width:100px}}

@@ -14,6 +14,9 @@ const PROFILE_ENDPOINT=
 const UPDATE_PROFILE_ENDPOINT=
 `${API_BASE_URL}/api/profile/update`;
 
+const KYC_STATUS_ENDPOINT=
+`${API_BASE_URL}/api/user/kyc/status`;
+
 /*==================================
         STORAGE
 ==================================*/
@@ -155,6 +158,11 @@ document.getElementById("verifyEmailBtn");
 
 const changePasswordBtn=
 document.getElementById("changePasswordBtn");
+
+const profileKycItem=document.getElementById("profileKycItem");
+const profileKycText=document.getElementById("profileKycText");
+const profileKycBtn=document.getElementById("profileKycBtn");
+const profileKycStatus=document.getElementById("profileKycStatus");
 
 /*==================================
         MESSAGE
@@ -813,6 +821,38 @@ return null;
 
 }
 /*==================================
+        KYC STATUS
+==================================*/
+function renderProfileKyc(kyc={}){
+const status=String(kyc.status||"NOT_SUBMITTED").toUpperCase();
+const states={
+NOT_SUBMITTED:{label:"Not Submitted",text:"Verify your identity to improve account protection and recovery.",button:"Verify",className:""},
+PENDING:{label:"Pending Review",text:"Your identity documents are awaiting administrator review.",button:"View",className:"pending"},
+VERIFIED:{label:"Verified",text:"Your identity has been verified successfully.",button:"View",className:"verified"},
+REJECTED:{label:"Rejected",text:kyc.rejectionReason||"Your verification was rejected. Submit clearer or updated documents.",button:"Resubmit",className:"rejected"},
+REVERIFY_REQUIRED:{label:"Reverification Required",text:kyc.reverificationReason||"Updated identity documents are required.",button:"Reverify",className:"rejected"},
+REVOKED:{label:"Revoked",text:kyc.revocationReason||"Your verification was revoked. Submit new documents.",button:"Submit Again",className:"rejected"}
+};
+const state=states[status]||{label:status.replaceAll("_"," "),text:"Open identity verification for details.",button:"View",className:""};
+if(profileKycItem)profileKycItem.className=`security-item kyc-security-item ${state.className}`;
+if(profileKycText)profileKycText.textContent=state.text;
+if(profileKycBtn)profileKycBtn.textContent=state.button;
+if(profileKycStatus){profileKycStatus.textContent=state.label;profileKycStatus.className=status==="VERIFIED"?"status-positive":status==="PENDING"?"status-warning":status==="NOT_SUBMITTED"?"":"status-danger";}
+}
+
+async function loadProfileKyc(){
+try{
+const data=await api(KYC_STATUS_ENDPOINT);
+renderProfileKyc(data.kyc||{});
+}catch(error){
+console.error("KYC status load failed:",error);
+renderProfileKyc({status:"NOT_SUBMITTED"});
+}
+}
+
+profileKycBtn?.addEventListener("click",()=>{window.location.href="kyc.html";});
+
+/*==================================
         VALIDATION
 ==================================*/
 
@@ -1297,7 +1337,10 @@ element.style.transform=
         INITIALIZE
 ==================================*/
 
-await loadProfile();
+await Promise.all([
+loadProfile(),
+loadProfileKyc()
+]);
 
 /*==================================
                 END

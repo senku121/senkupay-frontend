@@ -119,6 +119,14 @@ class="active">
 
 </a>
 
+<a href="kyc.html">
+
+<i class="fa-solid fa-id-card"></i>
+
+<span>Identity Verification</span>
+
+</a>
+
 <a href="profile.html">
 
 <i class="fa-solid fa-user"></i>
@@ -467,6 +475,34 @@ View payment history
 </div>
 
 <div
+class="quick-card kyc-quick-card"
+onclick="location.href='kyc.html'">
+
+<div class="quick-icon">
+
+<i class="fa-solid fa-id-card"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Verify Identity
+
+</h3>
+
+<p id="dashboardKycQuickText">
+
+Check verification status
+
+</p>
+
+</div>
+
+</div>
+
+<div
 class="quick-card"
 onclick="location.href='profile.html'">
 
@@ -582,6 +618,28 @@ Member Since
 
 </div>
 
+<div class="stat-card kyc-stat-card" onclick="location.href='kyc.html'" role="link" tabindex="0">
+
+<i class="fa-solid fa-id-card"></i>
+
+<div>
+
+<p>
+
+Identity Verification
+
+</p>
+
+<h3 id="dashboardKycStatus">
+
+Checking...
+
+</h3>
+
+</div>
+
+</div>
+
 <div class="stat-card">
 
 <i class="fa-solid fa-shield-halved"></i>
@@ -607,6 +665,66 @@ Protected
 </div>
 
 </section>
+<!--=========================================
+        IDENTITY VERIFICATION
+==========================================-->
+
+<section class="kyc-dashboard-section" id="dashboardKycSection">
+
+<div class="section-title">
+
+<h2>Identity Verification</h2>
+
+<a href="kyc.html">View Details</a>
+
+</div>
+
+<div class="kyc-dashboard-card">
+
+<div class="kyc-dashboard-icon" id="dashboardKycIcon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<div class="kyc-dashboard-content">
+
+<div class="kyc-dashboard-heading">
+
+<div>
+
+<h3 id="dashboardKycTitle">Checking verification status...</h3>
+
+<p id="dashboardKycDescription">Please wait while we load your identity verification status.</p>
+
+</div>
+
+<span class="kyc-dashboard-badge loading" id="dashboardKycBadge">Checking</span>
+
+</div>
+
+<div class="kyc-dashboard-meta">
+
+<div><span>Document</span><strong id="dashboardKycDocument">--</strong></div>
+
+<div><span>Submitted</span><strong id="dashboardKycSubmitted">--</strong></div>
+
+</div>
+
+<a class="kyc-dashboard-button" id="dashboardKycButton" href="kyc.html">
+
+<i class="fa-solid fa-arrow-right"></i>
+
+<span>Open Identity Verification</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
 <!--=========================================
         RECENT TRANSACTIONS
 ==========================================-->
