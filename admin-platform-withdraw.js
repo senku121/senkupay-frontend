@@ -1266,93 +1266,106 @@ type:"text"
 
 function updatePaymentMethodFields(){
 
-const method=
+    const method =
+        methodSelect?.value ||
+        "cashapp";
 
-methodSelect?.value||
+    const config =
+        paymentMethodConfig[method] ||
+        paymentMethodConfig.cashapp;
 
-"cashapp";
+    if(selectedMethodSummary){
 
-const config=
+        selectedMethodSummary.textContent =
+            methodLabel(method);
 
-paymentMethodConfig[method]||
+    }
 
-paymentMethodConfig.cashapp;
+    if(method === "card"){
 
-if(selectedMethodSummary){
+        // Remove previous payment destination value.
+        if(accountInput){
 
-selectedMethodSummary.textContent=
+            accountInput.value = "";
 
-methodLabel(method);
+        }
 
-}
+        if(accountInputError){
 
-if(method==="card"){
+            accountInputError.textContent = "";
 
-if(paymentDetailsBox){
+        }
 
-paymentDetailsBox.hidden=true;
+        // Completely hide the Cash App, PayPal,
+        // Chime, Apple Pay or Google Pay field.
+        if(paymentDetailsBox){
 
-}
+            paymentDetailsBox.hidden = true;
+            paymentDetailsBox.style.display = "none";
 
-if(savedCardSection){
+        }
 
-savedCardSection.hidden=false;
+        // Show the existing card selection section.
+        if(savedCardSection){
 
-}
+            savedCardSection.hidden = false;
+            savedCardSection.style.display = "block";
 
-}
+        }
 
-else{
+    }
+    else{
 
-if(paymentDetailsBox){
+        // Hide the card section.
+        if(savedCardSection){
 
-paymentDetailsBox.hidden=false;
+            savedCardSection.hidden = true;
+            savedCardSection.style.display = "none";
 
-}
+        }
 
-if(savedCardSection){
+        // Show the normal destination input.
+        if(paymentDetailsBox){
 
-savedCardSection.hidden=true;
+            paymentDetailsBox.hidden = false;
+            paymentDetailsBox.style.display = "block";
 
-}
+        }
 
-if(accountLabel){
+        if(accountLabel){
 
-accountLabel.textContent=
+            accountLabel.textContent =
+                config.label;
 
-config.label;
+        }
 
-}
+        if(accountInput){
 
-if(accountInput){
+            accountInput.type =
+                config.type;
 
-accountInput.type=
+            accountInput.placeholder =
+                config.placeholder;
 
-config.type;
+            accountInput.value = "";
 
-accountInput.placeholder=
+        }
 
-config.placeholder;
+        if(accountInputError){
 
-accountInput.value="";
+            accountInputError.textContent = "";
 
-}
+        }
 
-if(selectedCardId){
+        if(selectedCardId){
 
-selectedCardId.value="";
+            selectedCardId.value = "";
 
-}
+        }
 
-}
+    }
 
-if(accountInputError){
-
-accountInputError.textContent="";
-
-}
-
-updateWithdrawalSummary();
+    updateWithdrawalSummary();
 
 }
 

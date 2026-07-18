@@ -2865,6 +2865,10 @@ input:-webkit-autofill{
 
 }
 
+[hidden] {
+    display: none !important;
+}
+
 /*==================================
                 END
 ==================================*/
