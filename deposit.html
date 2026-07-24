@@ -110,6 +110,8 @@ Digital Payments
 <div
 id="depositMessage"
 class="deposit-message"
+role="status"
+aria-live="polite"
 hidden>
 
 </div>
@@ -180,7 +182,7 @@ USD
 type="number"
 id="depositAmount"
 placeholder="Enter deposit amount"
-min="1"
+min="0.50"
 step="0.01"
 autocomplete="off">
 
@@ -188,9 +190,38 @@ autocomplete="off">
 
 <small>
 
-Enter the amount you want to deposit into your wallet.
+You pay exactly the amount entered. CentryOS processing fees are deducted before the net amount is credited to your Senku Pay balance.
 
 </small>
+
+<div class="address-field">
+
+<label for="itemDeliveryAddress">
+
+Billing or Delivery Address
+
+</label>
+
+<div class="text-input">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<input
+type="text"
+id="itemDeliveryAddress"
+placeholder="Enter your real billing or delivery address"
+maxlength="240"
+autocomplete="street-address">
+
+</div>
+
+<small>
+
+CentryOS requires a real billing or delivery address to create the secure checkout.
+
+</small>
+
+</div>
 
 </section>
 
@@ -288,38 +319,13 @@ Cash App
 
 <p>
 
-Instant Wallet Payment
+Secure Cash App Checkout
 
 </p>
 
 </button>
 
-<button
-type="button"
-class="payment-option"
-data-method="chime"
-role="radio"
-aria-checked="false">
 
-<div class="payment-icon">
-
-<i class="fa-solid fa-building-columns"></i>
-
-</div>
-
-<h3>
-
-Chime
-
-</h3>
-
-<p>
-
-US Banking Payment
-
-</p>
-
-</button>
 
 <button
 type="button"
@@ -342,7 +348,7 @@ Apple Pay
 
 <p>
 
-One Tap Checkout
+Secure Apple Pay Checkout
 
 </p>
 
@@ -369,7 +375,7 @@ Google Pay
 
 <p>
 
-Fast Secure Payment
+Secure Google Pay Checkout
 
 </p>
 
@@ -472,13 +478,13 @@ Ready
 
 <span>
 
-Processing
+Amount Charged
 
 </span>
 
 <strong>
 
-Instant
+Exact Amount
 
 </strong>
 
@@ -504,13 +510,13 @@ SSL Encrypted
 
 <span>
 
-Integration
+Wallet Credit
 
 </span>
 
 <strong>
 
-API Ready
+Gross Minus Fee
 
 </strong>
 
@@ -548,6 +554,92 @@ Continue to Payment
 </span>
 
 </button>
+
+
+<section
+id="depositSettlement"
+class="deposit-settlement"
+hidden>
+
+<div class="section-heading">
+
+<div>
+
+<p class="section-label">
+
+PAYMENT RESULT
+
+</p>
+
+<h2>
+
+Deposit Settlement
+
+</h2>
+
+</div>
+
+<span id="settlementStatus">
+
+Pending
+
+</span>
+
+</div>
+
+<div class="settlement-grid">
+
+<div>
+
+<span>
+
+Customer Paid
+
+</span>
+
+<strong id="settlementGross">
+
+$0.00
+
+</strong>
+
+</div>
+
+<div>
+
+<span>
+
+Processing Fee
+
+</span>
+
+<strong id="settlementFee">
+
+$0.00
+
+</strong>
+
+</div>
+
+<div>
+
+<span>
+
+Added to Balance
+
+</span>
+
+<strong id="settlementNet">
+
+$0.00
+
+</strong>
+
+</div>
+
+</div>
+
+</section>
 
 <section class="deposit-history">
 
@@ -639,7 +731,7 @@ Automatic Wallet Credit
 
 <p>
 
-After your payment provider confirms a successful payment, the backend can credit your Senku Pay wallet automatically.
+After CentryOS confirms a successful payment through the signed webhook, Senku Pay credits the net amount automatically.
 
 </p>
 
@@ -655,13 +747,13 @@ After your payment provider confirms a successful payment, the backend can credi
 
 <h3>
 
-Gateway Ready
+CentryOS Checkout
 
 </h3>
 
 <p>
 
-Card, Cash App, Chime, Apple Pay and Google Pay integrations can be connected later without changing this page design.
+Card, Cash App, Apple Pay and Google Pay continue through the secure CentryOS checkout. Pay by Bank is hidden for now.
 
 </p>
 
