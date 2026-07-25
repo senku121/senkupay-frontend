@@ -1,217 +1,319 @@
 /*==================================================
                 SENKU PAY
-              WITHDRAW PAGE
+       PUSH-TO-CARD WITHDRAW PAGE
 ==================================================*/
 
-document.addEventListener("DOMContentLoaded",async()=>{
+document.addEventListener(
+"DOMContentLoaded",
+async () => {
 
-const API_BASE_URL=
+const API_BASE_URL =
 "https://senkupay-api.onrender.com";
 
-const WALLET_ENDPOINT=
+const WALLET_ENDPOINT =
 `${API_BASE_URL}/api/wallet`;
 
-const WITHDRAW_ENDPOINT=
+const LINK_WIDGET_ENDPOINT =
+`${API_BASE_URL}/api/centryos/linked-account-widget`;
+
+const LINKED_CARDS_ENDPOINT =
+`${API_BASE_URL}/api/centryos/linked-accounts/USD?accountType=card`;
+
+const WITHDRAW_ENDPOINT =
 `${API_BASE_URL}/api/withdraw`;
 
-const CREATE_WITHDRAW_ENDPOINT=
+const CREATE_WITHDRAW_ENDPOINT =
 `${API_BASE_URL}/api/withdraw/create`;
 
+const CARD_RETURN_POLL_ATTEMPTS = 15;
+const CARD_RETURN_POLL_DELAY_MS = 2000;
+
+
 /*==================================
-        STORAGE
+                SESSION
 ==================================*/
 
-function getToken(){
+function getToken() {
 
-return(
-
-sessionStorage.getItem("token")||
-
+return (
+sessionStorage.getItem("token") ||
 localStorage.getItem("token")
-
 );
 
 }
 
-function logout(){
+
+function logout() {
 
 [
 "token",
 "currentUser"
-
-].forEach(key=>{
+].forEach((key) => {
 
 sessionStorage.removeItem(key);
-
 localStorage.removeItem(key);
 
 });
 
-window.location.href="login.html";
+window.location.href =
+"login.html";
 
 }
 
-const token=getToken();
 
-if(!token){
+const token =
+getToken();
+
+if (!token) {
 
 logout();
-
 return;
 
 }
 
+
 /*==================================
-        ELEMENTS
+                ELEMENTS
 ==================================*/
 
-const balanceElement=
+const balanceElement =
 document.getElementById("withdrawBalance");
 
-const amountInput=
-document.getElementById("withdrawAmount");
-
-const confirmButton=
-document.getElementById("confirmWithdraw");
-
-const messageBox=
-document.getElementById("withdrawMessage");
-
-const errorBox=
-document.getElementById("withdrawError");
-
-const statusText=
+const statusText =
 document.getElementById("withdrawStatusText");
 
-const historyContainer=
+const amountInput =
+document.getElementById("withdrawAmount");
+
+const noteInput =
+document.getElementById("withdrawNote");
+
+const confirmButton =
+document.getElementById("confirmWithdraw");
+
+const addCardButton =
+document.getElementById("addCardButton");
+
+const refreshCardsButton =
+document.getElementById("refreshCardsButton");
+
+const refreshHistoryButton =
+document.getElementById("refreshHistoryButton");
+
+const linkedCardsContainer =
+document.getElementById("linkedCards");
+
+const historyContainer =
 document.getElementById("withdrawHistory");
 
-const paymentFields=
-document.getElementById("paymentFields");
+const messageBox =
+document.getElementById("withdrawMessage");
 
-const methodButtons=
-document.querySelectorAll(".withdraw-option");
+const errorBox =
+document.getElementById("withdrawError");
 
-let selectedMethod="card";
+const summaryAmount =
+document.getElementById("summaryAmount");
 
-/*==================================
-        MESSAGE
-==================================*/
+const summaryCard =
+document.getElementById("summaryCard");
 
-function showMessage(text,type="info"){
+let availableBalance = 0;
+let linkedCards = [];
+let selectedCardId = null;
 
-messageBox.hidden=false;
-
-messageBox.className=
-
-`withdraw-message show ${type}`;
-
-messageBox.textContent=text;
-
-}
-
-function hideMessage(){
-
-messageBox.hidden=true;
-
-messageBox.className=
-
-"withdraw-message";
-
-messageBox.textContent="";
-
-}
 
 /*==================================
-        FORMAT
+                HELPERS
 ==================================*/
 
-function money(value){
+function money(value) {
 
 return new Intl.NumberFormat(
-
 "en-US",
-
 {
-
-style:"currency",
-
-currency:"USD"
+style:
+"currency",
+currency:
+"USD"
+}
+).format(
+Number(value || 0)
+);
 
 }
 
-).format(Number(value||0));
+
+function escapeHTML(value) {
+
+return String(value ?? "")
+.replaceAll("&", "&amp;")
+.replaceAll("<", "&lt;")
+.replaceAll(">", "&gt;")
+.replaceAll('"', "&quot;")
+.replaceAll("'", "&#039;");
 
 }
+
+
+function normalizeStatus(value) {
+
+return String(value || "")
+.trim()
+.toUpperCase();
+
+}
+
+
+function createClientReference() {
+
+const random =
+globalThis.crypto?.randomUUID
+? globalThis.crypto.randomUUID()
+: Math.random()
+.toString(36)
+.slice(2);
+
+return (
+`withdraw-${Date.now()}-${random}`
+).slice(0, 100);
+
+}
+
+
+function delay(milliseconds) {
+
+return new Promise(
+(resolve) =>
+setTimeout(
+resolve,
+milliseconds
+)
+);
+
+}
+
 
 /*==================================
-        API
+                MESSAGES
+==================================*/
+
+function showMessage(
+text,
+type = "info"
+) {
+
+messageBox.hidden = false;
+messageBox.className =
+`withdraw-message ${type}`;
+messageBox.textContent =
+String(text || "");
+
+}
+
+
+function hideMessage() {
+
+messageBox.hidden = true;
+messageBox.className =
+"withdraw-message";
+messageBox.textContent = "";
+
+}
+
+
+function showValidationError(text) {
+
+errorBox.hidden = false;
+
+const textElement =
+errorBox.querySelector("span");
+
+if (textElement) {
+textElement.textContent = text;
+}
+
+}
+
+
+function hideValidationError() {
+
+errorBox.hidden = true;
+
+}
+
+
+/*==================================
+                API
 ==================================*/
 
 async function api(
-
 url,
+options = {}
+) {
 
-options={}
-
-){
-
-const response=
-
+const response =
 await fetch(
-
 url,
-
 {
-
 ...options,
-
-headers:{
-
-Accept:"application/json",
-
+headers: {
+Accept:
+"application/json",
 Authorization:
-
 `Bearer ${token}`,
-
-...(options.headers||{})
-
+...(options.headers || {})
 }
-
 }
-
 );
 
-if(
-
-response.status===401||
-
-response.status===403
-
-){
+if (
+response.status === 401 ||
+response.status === 403
+) {
 
 logout();
 
 throw new Error(
-
 "Session expired."
-
 );
 
 }
 
-const data=
+const contentType =
+response.headers.get(
+"content-type"
+) || "";
 
+let data = {};
+
+if (
+contentType.includes(
+"application/json"
+)
+) {
+
+data =
 await response.json();
 
-if(!response.ok){
+} else {
+
+const text =
+await response.text();
+
+data = {
+message:
+text ||
+"Unexpected server response."
+};
+
+}
+
+if (!response.ok) {
 
 throw new Error(
-
-data.message||
-
+data.message ||
 "Server request failed."
-
 );
 
 }
@@ -219,61 +321,56 @@ data.message||
 return data;
 
 }
+
+
 /*==================================
-        LOAD WALLET
+                WALLET
 ==================================*/
 
-async function loadWallet(){
+async function loadWallet() {
 
-hideMessage();
+try {
 
-try{
-
-const wallet=
-
+const wallet =
 await api(
-
 WALLET_ENDPOINT
-
 );
 
-const balance=
+availableBalance =
+Number(
+wallet.balance ??
+wallet.availableBalance ??
+wallet.user?.balance ??
+0
+);
 
-wallet.balance??
+balanceElement.textContent =
+money(
+availableBalance
+);
 
-wallet.availableBalance??
-
-0;
-
-balanceElement.textContent=
-
-money(balance);
-
-statusText.textContent=
-
+statusText.textContent =
 "Wallet connected securely to the Senku Pay server.";
+
+updateSummary();
 
 return wallet;
 
-}
+} catch (error) {
 
-catch(error){
-
-console.error(error);
-
-showMessage(
-
-error.message||
-
-"Unable to load wallet.",
-
-"error"
-
+console.error(
+"Wallet error:",
+error
 );
 
-statusText.textContent=
-
+statusText.textContent =
 "Wallet connection failed.";
+
+showMessage(
+error.message ||
+"Unable to load wallet.",
+"error"
+);
 
 return null;
 
@@ -281,755 +378,701 @@ return null;
 
 }
 
+
 /*==================================
-        PAYMENT METHODS
+          LINKED CARD RENDERING
 ==================================*/
 
-const methodTemplates={
-
-card:`
-
-<div class="field-group">
-
-<label>
-
-Card Number
-
-</label>
-
-<input
-id="accountInput"
-type="text"
-placeholder="Enter card number">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Cardholder Name
-
-</label>
-
-<input
-id="holderInput"
-type="text"
-placeholder="Enter cardholder name">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Optional Note
-
-</label>
-
-<input
-id="noteInput"
-type="text"
-placeholder="Optional note">
-
-</div>
-
-`,
-
-cashapp:`
-
-<div class="field-group">
-
-<label>
-
-Cash App Cashtag
-
-</label>
-
-<input
-id="accountInput"
-type="text"
-placeholder="$username">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Registered Email
-
-</label>
-
-<input
-id="holderInput"
-type="email"
-placeholder="Cash App email">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Optional Note
-
-</label>
-
-<input
-id="noteInput"
-type="text"
-placeholder="Optional note">
-
-</div>
-
-`,
-
-chime:`
-
-<div class="field-group">
-
-<label>
-
-Chime Username
-
-</label>
-
-<input
-id="accountInput"
-type="text"
-placeholder="Username">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Phone or Email
-
-</label>
-
-<input
-id="holderInput"
-type="text"
-placeholder="Phone or email">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Optional Note
-
-</label>
-
-<input
-id="noteInput"
-type="text"
-placeholder="Optional note">
-
-</div>
-
-`,
-
-applepay:`
-
-<div class="field-group">
-
-<label>
-
-Apple ID
-
-</label>
-
-<input
-id="accountInput"
-type="email"
-placeholder="Apple ID email">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Recipient Name
-
-</label>
-
-<input
-id="holderInput"
-type="text"
-placeholder="Full name">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Optional Note
-
-</label>
-
-<input
-id="noteInput"
-type="text"
-placeholder="Optional note">
-
-</div>
-
-`,
-
-googlepay:`
-
-<div class="field-group">
-
-<label>
-
-Google Pay Email
-
-</label>
-
-<input
-id="accountInput"
-type="email"
-placeholder="Google Pay email">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Recipient Name
-
-</label>
-
-<input
-id="holderInput"
-type="text"
-placeholder="Full name">
-
-</div>
-
-<div class="field-group">
-
-<label>
-
-Optional Note
-
-</label>
-
-<input
-id="noteInput"
-type="text"
-placeholder="Optional note">
-
-</div>
-
-`
-
-};
-
-function updatePaymentFields(){
-
-paymentFields.innerHTML=
-
-methodTemplates[selectedMethod];
+function cardLabel(card) {
+
+if (card.last4) {
+return `•••• ${card.last4}`;
+}
+
+return (
+card.nickName ||
+card.counterPartyName ||
+"Linked card"
+);
 
 }
 
-methodButtons.forEach(button=>{
+
+function renderLinkedCards() {
+
+linkedCardsContainer.replaceChildren();
+
+if (
+!Array.isArray(linkedCards) ||
+linkedCards.length === 0
+) {
+
+selectedCardId = null;
+
+linkedCardsContainer.innerHTML = `
+<div class="empty-card-state">
+<i class="fa-solid fa-credit-card"></i>
+<h3>No payout card linked</h3>
+<p>Click Add Payout Card and enter your card securely on CentryOS.</p>
+</div>
+`;
+
+updateSummary();
+
+return;
+
+}
+
+if (
+!linkedCards.some(
+(card) =>
+card.id === selectedCardId
+)
+) {
+
+selectedCardId =
+linkedCards[0].id;
+
+}
+
+linkedCards.forEach(
+(card) => {
+
+const button =
+document.createElement("button");
+
+button.type =
+"button";
+
+button.className =
+"linked-card-option";
+
+button.dataset.cardId =
+card.id;
+
+if (
+card.id === selectedCardId
+) {
+
+button.classList.add(
+"selected"
+);
+
+}
+
+button.innerHTML = `
+<div class="linked-card-top">
+<div class="linked-card-brand">
+<i class="fa-solid fa-credit-card"></i>
+<span>Push-to-card destination</span>
+</div>
+<i class="fa-solid fa-circle-check linked-card-check"></i>
+</div>
+<div class="linked-card-number">${escapeHTML(cardLabel(card))}</div>
+<div class="linked-card-meta">
+<span>${escapeHTML(card.counterPartyName || card.nickName || "Cardholder")}</span>
+<span>${escapeHTML(card.currency || "USD")}</span>
+</div>
+`;
 
 button.addEventListener(
-
 "click",
+() => {
 
-()=>{
+selectedCardId =
+card.id;
 
-methodButtons.forEach(item=>{
+renderLinkedCards();
+updateSummary();
 
-item.classList.remove("active");
-
-item.setAttribute(
-
-"aria-checked",
-
-"false"
-
+}
 );
 
-});
-
-button.classList.add("active");
-
-button.setAttribute(
-
-"aria-checked",
-
-"true"
-
+linkedCardsContainer.appendChild(
+button
 );
 
-selectedMethod=
+}
+);
 
-button.dataset.method;
-
-updatePaymentFields();
+updateSummary();
 
 }
 
-);
 
-});
-
-updatePaymentFields();
 /*==================================
-        LOAD WITHDRAW HISTORY
+            LOAD LINKED CARDS
 ==================================*/
 
-async function loadWithdrawHistory(){
+async function loadLinkedCards({
+silent = false
+} = {}) {
 
-if(!historyContainer){
+if (!silent) {
 
-return;
+linkedCardsContainer.innerHTML = `
+<div class="empty-card-state">
+<i class="fa-solid fa-spinner fa-spin"></i>
+<h3>Checking CentryOS</h3>
+<p>Loading your linked payout cards.</p>
+</div>
+`;
 
 }
 
-try{
+try {
 
-const response=
-
+const response =
 await api(
-
-WITHDRAW_ENDPOINT
-
+LINKED_CARDS_ENDPOINT
 );
 
-const withdrawals=
-
-Array.isArray(response)
-
-? response
-
-: response.withdrawals||
-
-response.data||
-
-[];
-
-if(withdrawals.length===0){
-
-return;
-
-}
-
-historyContainer.innerHTML="";
-
-withdrawals
-
-.slice(0,8)
-
-.forEach(item=>{
-
-const status=
-
+linkedCards =
+Array.isArray(
+response.accounts
+)
+? response.accounts.filter(
+(account) =>
 String(
+account.optionType || ""
+)
+.toLowerCase() ===
+"card"
+)
+: [];
 
-item.status||
+renderLinkedCards();
 
-"Pending"
+return linkedCards;
 
-).toLowerCase();
-
-let statusClass="pending";
-
-if(
-
-status==="approved"||
-
-status==="completed"||
-
-status==="success"
-
-){
-
-statusClass="success";
-
-}
-
-if(
-
-status==="failed"||
-
-status==="rejected"
-
-){
-
-statusClass="failed";
-
-}
-
-historyContainer.insertAdjacentHTML(
-
-"beforeend",
-
-`
-
-<div class="withdraw-item">
-
-<div class="withdraw-left">
-
-<div class="withdraw-item-icon">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</div>
-
-<div>
-
-<h3>
-
-${money(item.amount)}
-
-</h3>
-
-<p>
-
-${selectedMethod.toUpperCase()}
-
-</p>
-
-<small>
-
-${new Date(
-
-item.createdAt
-
-).toLocaleString()}
-
-</small>
-
-</div>
-
-</div>
-
-<div class="withdraw-status ${statusClass}">
-
-${item.status}
-
-</div>
-
-</div>
-
-`
-
-);
-
-});
-
-}
-
-catch(error){
+} catch (error) {
 
 console.error(
-
-"History error:",
-
+"Linked cards error:",
 error
-
 );
 
-}
+linkedCards = [];
+selectedCardId = null;
 
-}
+linkedCardsContainer.innerHTML = `
+<div class="empty-card-state">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<h3>Unable to load payout cards</h3>
+<p>${escapeHTML(error.message || "Please try again.")}</p>
+</div>
+`;
 
-/*==================================
-        VALIDATION
-==================================*/
+updateSummary();
 
-function validateWithdraw(){
-
-const amount=
-
-Number(
-
-amountInput.value
-
-);
-
-if(
-
-!Number.isFinite(amount)||
-
-amount<=0
-
-){
-
-errorBox.style.display=
-
-"flex";
-
-return false;
-
-}
-
-const account=
-
-document.getElementById(
-
-"accountInput"
-
-);
-
-if(
-
-account &&
-
-account.value.trim()===""
-
-){
+if (!silent) {
 
 showMessage(
-
-"Please complete the payout information.",
-
+error.message ||
+"Unable to load linked payout cards.",
 "error"
-
 );
-
-return false;
 
 }
 
-errorBox.style.display=
-
-"none";
-
-return true;
+return [];
 
 }
 
-amountInput.addEventListener(
+}
 
-"input",
 
-validateWithdraw
-
-);
 /*==================================
-        CREATE WITHDRAW REQUEST
+             ADD PAYOUT CARD
 ==================================*/
 
-confirmButton?.addEventListener(
-
+addCardButton.addEventListener(
 "click",
-
-async()=>{
+async () => {
 
 hideMessage();
 
-if(!validateWithdraw()){
+addCardButton.disabled =
+true;
+
+addCardButton.innerHTML = `
+<i class="fa-solid fa-spinner fa-spin"></i>
+<span>Preparing...</span>
+`;
+
+try {
+
+const response =
+await api(
+LINK_WIDGET_ENDPOINT,
+{
+method:
+"POST",
+headers: {
+"Content-Type":
+"application/json"
+},
+body:
+JSON.stringify({
+currency:
+"USD"
+})
+}
+);
+
+const widgetUrl =
+response.widget?.url;
+
+if (!widgetUrl) {
+
+throw new Error(
+"CentryOS did not return a card-linking URL."
+);
+
+}
+
+window.location.assign(
+widgetUrl
+);
+
+} catch (error) {
+
+console.error(
+"Create card widget error:",
+error
+);
+
+showMessage(
+error.message ||
+"Unable to open secure card linking.",
+"error"
+);
+
+addCardButton.disabled =
+false;
+
+addCardButton.innerHTML = `
+<i class="fa-solid fa-plus"></i>
+<span>Add Payout Card</span>
+`;
+
+}
+
+}
+);
+
+
+refreshCardsButton.addEventListener(
+"click",
+async () => {
+
+refreshCardsButton.disabled =
+true;
+
+await loadLinkedCards();
+
+refreshCardsButton.disabled =
+false;
+
+}
+);
+
+
+/*==================================
+          RETURN FROM CENTRYOS
+==================================*/
+
+async function handleCardLinkReturn() {
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+if (
+params.get(
+"linkedAccount"
+) !== "complete"
+) {
+return;
+}
+
+showMessage(
+"Card-linking return received. Waiting for CentryOS to make the card available...",
+"info"
+);
+
+for (
+let attempt = 0;
+attempt < CARD_RETURN_POLL_ATTEMPTS;
+attempt += 1
+) {
+
+const cards =
+await loadLinkedCards({
+silent:
+true
+});
+
+if (cards.length > 0) {
+
+showMessage(
+"Your payout card is linked and ready.",
+"success"
+);
+
+history.replaceState(
+{},
+document.title,
+window.location.pathname
+);
+
+return;
+}
+
+await delay(
+CARD_RETURN_POLL_DELAY_MS
+);
+
+}
+
+showMessage(
+"Card linking is still being synchronized. Press Refresh in a moment.",
+"info"
+);
+
+}
+
+
+/*==================================
+                SUMMARY
+==================================*/
+
+function selectedCard() {
+
+return linkedCards.find(
+(card) =>
+card.id === selectedCardId
+) || null;
+
+}
+
+
+function updateSummary() {
+
+const amount =
+Number(
+amountInput.value || 0
+);
+
+summaryAmount.textContent =
+money(
+Number.isFinite(amount)
+? amount
+: 0
+);
+
+const card =
+selectedCard();
+
+summaryCard.textContent =
+card
+? cardLabel(card)
+: "Not selected";
+
+confirmButton.disabled =
+!(
+Number.isFinite(amount) &&
+amount > 0 &&
+amount <= availableBalance &&
+card
+);
+
+}
+
+
+amountInput.addEventListener(
+"input",
+() => {
+
+hideValidationError();
+updateSummary();
+
+}
+);
+
+
+/*==================================
+              CREATE REQUEST
+==================================*/
+
+confirmButton.addEventListener(
+"click",
+async () => {
+
+hideMessage();
+hideValidationError();
+
+const amount =
+Number(
+amountInput.value
+);
+
+const card =
+selectedCard();
+
+if (
+!Number.isFinite(amount) ||
+amount <= 0
+) {
+
+showValidationError(
+"Enter a valid withdrawal amount."
+);
 
 return;
 
 }
 
-const amount=
+if (amount > availableBalance) {
 
-Number(
-
-amountInput.value
-
+showValidationError(
+"Withdrawal amount exceeds your available balance."
 );
 
-const account=
+return;
 
-document.getElementById(
+}
 
-"accountInput"
+if (!card) {
 
-)?.value.trim()||"";
+showValidationError(
+"Select a linked payout card."
+);
 
-const holder=
+return;
 
-document.getElementById(
+}
 
-"holderInput"
+confirmButton.disabled =
+true;
 
-)?.value.trim()||"";
-
-const note=
-
-document.getElementById(
-
-"noteInput"
-
-)?.value.trim()||"";
-
-confirmButton.disabled=true;
-
-confirmButton.innerHTML=`
-
+confirmButton.innerHTML = `
 <i class="fa-solid fa-spinner fa-spin"></i>
-
-<span>
-
-Submitting...
-
-</span>
-
+<span>Submitting Request...</span>
 `;
 
-try{
+try {
 
-const result=
-
+const response =
 await api(
-
 CREATE_WITHDRAW_ENDPOINT,
-
 {
-
-method:"POST",
-
-headers:{
-
+method:
+"POST",
+headers: {
 "Content-Type":
-
 "application/json"
-
 },
-
-body:JSON.stringify({
+body:
+JSON.stringify({
 
 amount,
 
-method:selectedMethod,
+linkedAccountId:
+card.id,
 
-account,
+clientReference:
+createClientReference(),
 
-holder,
-
-note
+note:
+String(
+noteInput.value || ""
+)
+.trim()
+.slice(0, 500)
 
 })
-
 }
-
 );
 
 showMessage(
-
-result.message||
-
-"Withdrawal request submitted successfully.",
-
+response.message ||
+"Withdrawal submitted for administrator review.",
 "success"
-
 );
 
-amountInput.value="";
+amountInput.value = "";
+noteInput.value = "";
 
-updatePaymentFields();
+await Promise.all([
+loadWallet(),
+loadWithdrawalHistory()
+]);
 
-await loadWallet();
+} catch (error) {
 
-await loadWithdrawHistory();
-
-}
-
-catch(error){
-
-console.error(error);
+console.error(
+"Create withdrawal error:",
+error
+);
 
 showMessage(
-
-error.message||
-
-"Unable to submit withdrawal request.",
-
+error.message ||
+"Unable to submit the withdrawal.",
 "error"
+);
 
+} finally {
+
+confirmButton.innerHTML = `
+<i class="fa-solid fa-shield-halved"></i>
+<span>Submit Withdrawal Request</span>
+`;
+
+updateSummary();
+
+}
+
+}
+);
+
+
+/*==================================
+          WITHDRAWAL HISTORY
+==================================*/
+
+function statusClass(value) {
+
+const status =
+normalizeStatus(value)
+.toLowerCase();
+
+return [
+"pending",
+"processing",
+"review_required",
+"completed",
+"failed",
+"rejected"
+].includes(status)
+? status
+: "pending";
+
+}
+
+
+function renderHistory(
+withdrawals
+) {
+
+historyContainer.replaceChildren();
+
+if (
+!Array.isArray(withdrawals) ||
+withdrawals.length === 0
+) {
+
+historyContainer.innerHTML = `
+<div class="empty-withdraw">
+<i class="fa-solid fa-clock-rotate-left"></i>
+<h3>No Withdrawal History</h3>
+<p>Your push-to-card requests will appear here.</p>
+</div>
+`;
+
+return;
+
+}
+
+withdrawals.forEach(
+(item) => {
+
+const row =
+document.createElement("div");
+
+row.className =
+"withdraw-item";
+
+const date =
+new Date(
+item.createdAt
+);
+
+row.innerHTML = `
+<div class="withdraw-item-left">
+<div class="withdraw-item-icon">
+<i class="fa-solid fa-credit-card"></i>
+</div>
+<div>
+<h3>${money(item.amount)}</h3>
+<p>${escapeHTML(item.account || "Linked payout card")}</p>
+<small>${Number.isNaN(date.getTime()) ? "Date unavailable" : escapeHTML(date.toLocaleString())}</small>
+</div>
+</div>
+<span class="status-pill ${statusClass(item.status)}">${escapeHTML(normalizeStatus(item.status) || "PENDING")}</span>
+`;
+
+historyContainer.appendChild(
+row
+);
+
+}
 );
 
 }
 
-finally{
 
-confirmButton.disabled=false;
+async function loadWithdrawalHistory() {
 
-confirmButton.innerHTML=`
+try {
 
-<i class="fa-solid fa-arrow-up"></i>
+const response =
+await api(
+WITHDRAW_ENDPOINT
+);
 
-<span>
+renderHistory(
+response.withdrawals || []
+);
 
-Request Withdrawal
+} catch (error) {
 
-</span>
+console.error(
+"Withdrawal history error:",
+error
+);
 
+historyContainer.innerHTML = `
+<div class="empty-withdraw">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<h3>History unavailable</h3>
+<p>${escapeHTML(error.message || "Please try again.")}</p>
+</div>
 `;
 
 }
 
-});
-
-/*==================================
-        PAGE ANIMATION
-==================================*/
-
-document
-
-.querySelectorAll(
-
-".withdraw-card,.form-card,.method-card,.account-card,.confirm-withdraw,.withdraw-history,.withdraw-info"
-
-)
-
-.forEach((element,index)=>{
-
-element.style.opacity="0";
-
-element.style.transform=
-
-"translateY(20px)";
-
-setTimeout(()=>{
-
-element.style.transition=
-
-".55s ease";
-
-element.style.opacity="1";
-
-element.style.transform=
-
-"translateY(0)";
-
-},100+(index*80));
-
-});
-
-/*==================================
-        INITIALIZE
-==================================*/
-
-const wallet=
-
-await loadWallet();
-
-if(wallet){
-
-await loadWithdrawHistory();
-
 }
 
+
+refreshHistoryButton.addEventListener(
+"click",
+loadWithdrawalHistory
+);
+
+
 /*==================================
-        END
+              INITIALIZE
 ==================================*/
 
-});
+await Promise.all([
+loadWallet(),
+loadLinkedCards(),
+loadWithdrawalHistory()
+]);
+
+await handleCardLinkReturn();
+
+}
+);
