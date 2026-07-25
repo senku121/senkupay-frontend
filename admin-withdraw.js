@@ -634,25 +634,82 @@ await api(
 `${ADMIN_WITHDRAWS_ENDPOINT}?${params.toString()}`
 );
 
+/*
+ * Compatibility:
+ *
+ * Older adminWithdrawController versions returned
+ * a bare array:
+ *   [ withdrawal, ... ]
+ *
+ * The current CentryOS controller returns:
+ *   {
+ *     success,
+ *     total,
+ *     page,
+ *     pages,
+ *     withdrawals
+ *   }
+ *
+ * Supporting both shapes prevents a valid array
+ * response from being displayed as zero requests.
+ */
+const withdrawals =
+Array.isArray(response)
+? response
+: (
+Array.isArray(response.withdrawals)
+? response.withdrawals
+: Array.isArray(response.requests)
+? response.requests
+: Array.isArray(response.data)
+? response.data
+: []
+);
+
+const responseTotal =
+Array.isArray(response)
+? withdrawals.length
+: Number(
+response.total ??
+withdrawals.length
+);
+
 totalPages =
-Math.max(
+Array.isArray(response)
+? 1
+: Math.max(
 Number(response.pages || 1),
 1
 );
 
 currentPage =
-Math.min(
+Array.isArray(response)
+? 1
+: Math.min(
 Number(response.page || currentPage),
 totalPages
 );
 
 renderRequests(
-response.withdrawals || []
+withdrawals
 );
 
 totalRequests.textContent =
 String(
-response.total || 0
+responseTotal
+);
+
+console.info(
+"Admin withdrawals API:",
+{
+apiVersion:
+response.apiVersion ||
+"LEGACY_ARRAY_OR_UNKNOWN",
+total:
+responseTotal,
+returned:
+withdrawals.length
+}
 );
 
 currentPageSummary.textContent =
