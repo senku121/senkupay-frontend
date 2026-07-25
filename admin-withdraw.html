@@ -139,6 +139,65 @@
 </section>
 </main>
 
+
+<div class="modal" id="approveModal" hidden>
+<div class="modal-backdrop" data-close-approve-modal></div>
+<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="approveModalTitle">
+<button type="button" class="modal-close" data-close-approve-modal aria-label="Close">
+<i class="fa-solid fa-xmark"></i>
+</button>
+
+<p class="page-label">APPROVE PUSH TO CARD</p>
+<h2 id="approveModalTitle">Set Senku Pay withdrawal fee</h2>
+<p class="modal-description">
+Enter the Senku Pay fee percentage. This amount is deducted from the user's requested withdrawal before the payout is submitted to CentryOS. CentryOS or the card issuer may charge a separate provider fee.
+</p>
+
+<div class="approval-calculation">
+<div>
+<span>Requested Amount</span>
+<strong id="approveRequestedAmount">$0.00</strong>
+</div>
+
+<div>
+<span>Senku Pay Fee</span>
+<strong id="approveSiteFeeAmount">$0.00</strong>
+</div>
+
+<div>
+<span>Submitted to CentryOS</span>
+<strong id="approvePayoutAmount">$0.00</strong>
+</div>
+</div>
+
+<label for="approveFeePercent">Senku Pay Fee Percentage</label>
+<div class="percentage-field">
+<input
+type="number"
+id="approveFeePercent"
+min="0"
+max="99.99"
+step="0.01"
+inputmode="decimal"
+placeholder="Example: 5"
+autocomplete="off">
+<span>%</span>
+</div>
+
+<small class="fee-example" id="approveFeeExample">
+For a $100.00 request, 5% deducts $5.00 and submits $95.00 to CentryOS.
+</small>
+
+<div class="modal-actions">
+<button type="button" class="secondary-button" data-close-approve-modal>Cancel</button>
+<button type="button" id="confirmApproveButton" class="primary-button" disabled>
+<i class="fa-solid fa-check"></i>
+<span>Confirm and Submit Payout</span>
+</button>
+</div>
+</div>
+</div>
+
 <div class="modal" id="rejectModal" hidden>
 <div class="modal-backdrop" data-close-modal></div>
 <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="rejectModalTitle">

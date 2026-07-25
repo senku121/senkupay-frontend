@@ -1020,6 +1020,9 @@ row.innerHTML = `
 <div>
 <h3>${money(item.amount)}</h3>
 <p>${escapeHTML(item.account || "Linked payout card")}</p>
+${item.payoutAmount !== null && item.payoutAmount !== undefined
+? `<small>Senku Pay fee: ${money(item.siteFeeAmount || 0)} (${escapeHTML(item.siteFeePercent || 0)}%) • Card payout: ${money(item.payoutAmount)}</small>`
+: ""}
 <small>${Number.isNaN(date.getTime()) ? "Date unavailable" : escapeHTML(date.toLocaleString())}</small>
 </div>
 </div>

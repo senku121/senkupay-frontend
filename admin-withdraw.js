@@ -19,6 +19,8 @@ let currentPage = 1;
 let totalPages = 1;
 let selectedStatus = "";
 let rejectWithdrawalId = null;
+let approveWithdrawalId = null;
+let approveRequestedValue = 0;
 
 
 /*==================================
@@ -151,6 +153,27 @@ document.getElementById("rejectReason");
 const confirmRejectButton =
 document.getElementById("confirmRejectButton");
 
+const approveModal =
+document.getElementById("approveModal");
+
+const approveFeePercent =
+document.getElementById("approveFeePercent");
+
+const approveRequestedAmount =
+document.getElementById("approveRequestedAmount");
+
+const approveSiteFeeAmount =
+document.getElementById("approveSiteFeeAmount");
+
+const approvePayoutAmount =
+document.getElementById("approvePayoutAmount");
+
+const approveFeeExample =
+document.getElementById("approveFeeExample");
+
+const confirmApproveButton =
+document.getElementById("confirmApproveButton");
+
 
 /*==================================
                 HELPERS
@@ -222,6 +245,67 @@ new Date(value);
 return Number.isNaN(date.getTime())
 ? "--"
 : date.toLocaleString();
+
+}
+
+
+function calculateSiteFee(
+requestedAmount,
+percentage
+) {
+
+const requestedCents =
+Math.round(
+Number(requestedAmount) * 100
+);
+
+const normalizedPercent =
+Number(percentage);
+
+if (
+!Number.isInteger(requestedCents) ||
+requestedCents <= 0 ||
+!Number.isFinite(normalizedPercent) ||
+normalizedPercent < 0 ||
+normalizedPercent > 99.99
+) {
+
+return null;
+
+}
+
+const feeCents =
+Math.round(
+requestedCents *
+normalizedPercent /
+100
+);
+
+const payoutCents =
+requestedCents -
+feeCents;
+
+if (payoutCents < 1) {
+return null;
+}
+
+return {
+
+requestedAmount:
+requestedCents / 100,
+
+siteFeePercent:
+Math.round(
+(normalizedPercent + Number.EPSILON) * 100
+) / 100,
+
+siteFeeAmount:
+feeCents / 100,
+
+payoutAmount:
+payoutCents / 100
+
+};
 
 }
 
@@ -458,6 +542,14 @@ request.innerHTML = `
 <strong>${escapeHTML(item.providerStatus || "Not submitted")}</strong>
 </div>
 <div class="detail-box">
+<span>Senku Pay Fee</span>
+<strong>${item.siteFeeAmount === null || item.siteFeeAmount === undefined ? "Not set" : `${money(item.siteFeeAmount)} (${escapeHTML(item.siteFeePercent)}%)`}</strong>
+</div>
+<div class="detail-box">
+<span>Submitted to CentryOS</span>
+<strong>${item.payoutAmount === null || item.payoutAmount === undefined ? "Not set" : money(item.payoutAmount)}</strong>
+</div>
+<div class="detail-box">
 <span>Provider Transaction</span>
 <strong title="${escapeHTML(providerReference)}">${escapeHTML(providerReference)}</strong>
 </div>
@@ -512,9 +604,8 @@ approveButton.innerHTML = `
 
 approveButton.addEventListener(
 "click",
-() => approveWithdrawal(
-item.id,
-approveButton
+() => openApproveModal(
+item
 )
 );
 
@@ -762,44 +853,173 @@ listElement.innerHTML = `
             APPROVE
 ==================================*/
 
-async function approveWithdrawal(
-id,
-button
-) {
+function updateApproveCalculation() {
 
-const confirmed =
-window.confirm(
-"Approve this withdrawal and submit the push-to-card payout to CentryOS?"
+const calculation =
+calculateSiteFee(
+approveRequestedValue,
+approveFeePercent.value
 );
 
-if (!confirmed) {
+approveRequestedAmount.textContent =
+money(
+approveRequestedValue
+);
+
+if (!calculation) {
+
+approveSiteFeeAmount.textContent =
+"$0.00";
+
+approvePayoutAmount.textContent =
+"$0.00";
+
+approveFeeExample.textContent =
+"Enter a percentage between 0 and 99.99.";
+
+confirmApproveButton.disabled =
+true;
+
 return;
+
 }
 
-button.disabled = true;
-button.innerHTML = `
+approveSiteFeeAmount.textContent =
+money(
+calculation.siteFeeAmount
+);
+
+approvePayoutAmount.textContent =
+money(
+calculation.payoutAmount
+);
+
+approveFeeExample.textContent =
+(
+`${calculation.siteFeePercent}% deducts ` +
+`${money(calculation.siteFeeAmount)} from ` +
+`${money(calculation.requestedAmount)}. ` +
+`${money(calculation.payoutAmount)} will be submitted to CentryOS.`
+);
+
+confirmApproveButton.disabled =
+false;
+
+}
+
+
+function openApproveModal(
+withdrawal
+) {
+
+approveWithdrawalId =
+withdrawal.id;
+
+approveRequestedValue =
+Number(
+withdrawal.amount || 0
+);
+
+approveFeePercent.value = "";
+
+approveModal.hidden = false;
+
+updateApproveCalculation();
+
+approveFeePercent.focus();
+
+}
+
+
+function closeApproveModal() {
+
+approveWithdrawalId = null;
+approveRequestedValue = 0;
+approveFeePercent.value = "";
+approveModal.hidden = true;
+
+}
+
+
+document
+.querySelectorAll(
+"[data-close-approve-modal]"
+)
+.forEach(
+(element) => {
+
+element.addEventListener(
+"click",
+closeApproveModal
+);
+
+}
+);
+
+
+approveFeePercent.addEventListener(
+"input",
+updateApproveCalculation
+);
+
+
+confirmApproveButton.addEventListener(
+"click",
+async () => {
+
+const calculation =
+calculateSiteFee(
+approveRequestedValue,
+approveFeePercent.value
+);
+
+if (
+!approveWithdrawalId ||
+!calculation
+) {
+
+showMessage(
+"Enter a valid Senku Pay fee percentage.",
+"error"
+);
+
+return;
+
+}
+
+confirmApproveButton.disabled =
+true;
+
+confirmApproveButton.innerHTML = `
 <i class="fa-solid fa-spinner fa-spin"></i>
-<span>Submitting...</span>
+<span>Submitting Payout...</span>
 `;
 
 try {
 
 const response =
 await api(
-`${ADMIN_WITHDRAWS_ENDPOINT}/${encodeURIComponent(id)}/approve`,
+`${ADMIN_WITHDRAWS_ENDPOINT}/${encodeURIComponent(approveWithdrawalId)}/approve`,
 {
 method:
 "POST",
 headers: {
 "Content-Type":
 "application/json"
-}
+},
+body:
+JSON.stringify({
+siteFeePercent:
+calculation.siteFeePercent
+})
 }
 );
 
+closeApproveModal();
+
 showMessage(
 response.message ||
-"Payout submitted to CentryOS.",
+"Withdrawal approved and submitted to CentryOS.",
 "success"
 );
 
@@ -818,15 +1038,20 @@ error.message ||
 "error"
 );
 
-button.disabled = false;
-button.innerHTML = `
+} finally {
+
+confirmApproveButton.disabled =
+false;
+
+confirmApproveButton.innerHTML = `
 <i class="fa-solid fa-check"></i>
-<span>Approve Push to Card</span>
+<span>Confirm and Submit Payout</span>
 `;
 
 }
 
 }
+);
 
 
 /*==================================
