@@ -336,8 +336,21 @@ await api(
 WALLET_ENDPOINT
 );
 
+/*
+ * /api/wallet currently returns:
+ * {
+ *   success: true,
+ *   wallet: {
+ *     balance: ...
+ *   }
+ * }
+ *
+ * Keep the other fallbacks for compatibility with
+ * older and future API response shapes.
+ */
 availableBalance =
 Number(
+wallet.wallet?.balance ??
 wallet.balance ??
 wallet.availableBalance ??
 wallet.user?.balance ??
