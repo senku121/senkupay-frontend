@@ -9,7 +9,9 @@ async () => {
 
 
 /*==================================
-      SHARED SHELL LAYOUT GUARD
+   SHARED SHELL GEOMETRY LAYOUT GUARD
+   Detects the fixed top bar/sidebar by
+   position and size instead of class name.
 ==================================*/
 
 function installSharedShellLayoutGuard(mainSelector) {
@@ -22,139 +24,326 @@ if (!body || !main) {
 return;
 }
 
-const sidebarSelectors = [
-".sidebar",
-".app-sidebar",
-".senku-sidebar",
-".senku-app-sidebar",
-"[data-app-sidebar]",
-"[data-shell-sidebar]"
-];
+const TOPBAR_CLASS = "senku-page-fixed-topbar";
+const SIDEBAR_CLASS = "senku-page-sidebar-offset";
+const PROVISIONAL_CLASS = "senku-page-shell-provisional";
+const provisionalDeadline = Date.now() + 1800;
 
-const topbarSelectors = [
-".topbar",
-".app-topbar",
-".senku-topbar",
-".senku-app-topbar",
-"[data-app-topbar]",
-"[data-shell-topbar]"
-];
-
-let sidebarDecision = null;
-let topbarDecision = null;
 let animationFrame = 0;
 
-function firstElement(selectors) {
-for (const selector of selectors) {
-const element = document.querySelector(selector);
-if (element) {
-return element;
+function isVisible(element, style, rect) {
+
+return (
+style.display !== "none" &&
+style.visibility !== "hidden" &&
+Number(style.opacity || 1) !== 0 &&
+rect.width > 0 &&
+rect.height > 0
+);
+
 }
+
+function outsidePageContent(element) {
+
+return (
+element !== main &&
+!main.contains(element)
+);
+
 }
+
+function shellCandidates() {
+
+return Array.from(
+document.body.querySelectorAll("*")
+).filter(outsidePageContent);
+
+}
+
+function findTopbar(candidates) {
+
+const minimumWidth =
+Math.max(240, window.innerWidth * 0.58);
+
+const matches = [];
+
+for (const element of candidates) {
+
+const style =
+window.getComputedStyle(element);
+
+if (
+style.position !== "fixed" &&
+style.position !== "sticky"
+) {
+continue;
+}
+
+const rect =
+element.getBoundingClientRect();
+
+if (!isVisible(element, style, rect)) {
+continue;
+}
+
+const touchesTop =
+rect.top <= 3 &&
+rect.bottom >= 40;
+
+const topbarShape =
+rect.height >= 44 &&
+rect.height <= 140 &&
+rect.width >= minimumWidth &&
+rect.right >= window.innerWidth * 0.86;
+
+if (touchesTop && topbarShape) {
+
+matches.push({
+element,
+rect,
+zIndex:
+Number.parseInt(style.zIndex, 10) || 0
+});
+
+}
+
+}
+
+matches.sort(
+(a, b) =>
+(b.zIndex - a.zIndex) ||
+(b.rect.width - a.rect.width) ||
+(a.rect.height - b.rect.height)
+);
+
+return matches[0] || null;
+
+}
+
+function findSidebar(candidates) {
+
+if (!window.matchMedia("(min-width: 901px)").matches) {
 return null;
 }
 
+const matches = [];
+
+for (const element of candidates) {
+
+const style =
+window.getComputedStyle(element);
+
+if (
+style.position !== "fixed" &&
+style.position !== "sticky"
+) {
+continue;
+}
+
+const rect =
+element.getBoundingClientRect();
+
+if (!isVisible(element, style, rect)) {
+continue;
+}
+
+const sidebarShape =
+rect.left <= 3 &&
+rect.width >= 170 &&
+rect.width <= 380 &&
+rect.height >= window.innerHeight * 0.62 &&
+rect.bottom >= window.innerHeight * 0.72;
+
+if (sidebarShape) {
+
+matches.push({
+element,
+rect,
+zIndex:
+Number.parseInt(style.zIndex, 10) || 0
+});
+
+}
+
+}
+
+matches.sort(
+(a, b) =>
+(b.zIndex - a.zIndex) ||
+(b.rect.height - a.rect.height) ||
+(b.rect.width - a.rect.width)
+);
+
+return matches[0] || null;
+
+}
+
+function firstContentTop() {
+
+const firstContent =
+main.querySelector(
+":scope > section, :scope > .kyc-message, :scope > .withdraw-message"
+);
+
+return (
+firstContent || main
+).getBoundingClientRect().top;
+
+}
+
 function scheduleSync() {
+
 if (animationFrame) {
 cancelAnimationFrame(animationFrame);
 }
-animationFrame = requestAnimationFrame(syncLayout);
+
+animationFrame =
+requestAnimationFrame(syncLayout);
+
 }
 
 function syncLayout() {
+
 animationFrame = 0;
 
-const desktop = window.matchMedia("(min-width: 901px)").matches;
-const sidebar = firstElement(sidebarSelectors);
-
-if (desktop && sidebar) {
-const sidebarRect = sidebar.getBoundingClientRect();
-const sidebarRight = Math.max(
-0,
-Math.min(window.innerWidth, sidebarRect.right)
+/*
+ * Remove only our temporary offsets before measuring.
+ * This lets us detect whether responsive.css already
+ * reserved space and prevents double offsets.
+ */
+body.classList.remove(
+TOPBAR_CLASS,
+SIDEBAR_CLASS,
+PROVISIONAL_CLASS
 );
 
-if (sidebarRect.width >= 160 && sidebarRight > 0) {
+void main.offsetWidth;
+
+const candidates =
+shellCandidates();
+
+const topbar =
+findTopbar(candidates);
+
+const sidebar =
+findSidebar(candidates);
+
+if (sidebar) {
+
+const sidebarRight =
+Math.max(
+0,
+Math.min(
+window.innerWidth,
+sidebar.rect.right
+)
+);
+
 root.style.setProperty(
 "--senku-page-sidebar-width",
 `${Math.ceil(sidebarRight)}px`
 );
 
-if (sidebarDecision === null) {
-const mainRect = main.getBoundingClientRect();
-sidebarDecision = mainRect.left < sidebarRight + 12;
+const mainLeft =
+main.getBoundingClientRect().left;
+
+if (mainLeft < sidebarRight + 12) {
+body.classList.add(SIDEBAR_CLASS);
 }
 
-body.classList.toggle(
-"senku-page-sidebar-offset",
-sidebarDecision === true
-);
-} else {
-body.classList.remove("senku-page-sidebar-offset");
-sidebarDecision = null;
 }
-} else {
-body.classList.remove("senku-page-sidebar-offset");
-sidebarDecision = null;
-}
-
-const topbar = firstElement(topbarSelectors);
 
 if (topbar) {
-const style = window.getComputedStyle(topbar);
-const topbarRect = topbar.getBoundingClientRect();
-const fixed = style.position === "fixed";
 
-if (fixed && topbarRect.height > 40 && topbarRect.bottom > 0) {
+const topbarBottom =
+Math.max(
+0,
+Math.min(
+window.innerHeight,
+topbar.rect.bottom
+)
+);
+
 root.style.setProperty(
 "--senku-page-topbar-height",
-`${Math.ceil(topbarRect.height)}px`
+`${Math.ceil(topbarBottom)}px`
 );
 
-if (topbarDecision === null) {
-const firstSection = main.querySelector("section");
-const firstTop = firstSection
-? firstSection.getBoundingClientRect().top
-: main.getBoundingClientRect().top;
+const overlaps =
+firstContentTop() < topbarBottom + 14;
 
-topbarDecision = firstTop < topbarRect.bottom + 14;
+if (overlaps) {
+body.classList.add(TOPBAR_CLASS);
 }
 
-body.classList.toggle(
-"senku-page-fixed-topbar",
-topbarDecision === true
-);
-} else {
-body.classList.remove("senku-page-fixed-topbar");
-topbarDecision = null;
-}
-} else {
-body.classList.remove("senku-page-fixed-topbar");
-topbarDecision = null;
-}
+} else if (Date.now() < provisionalDeadline) {
+
+/*
+ * Prevent the first card from flashing beneath a shell
+ * that is injected shortly after DOMContentLoaded.
+ */
+body.classList.add(PROVISIONAL_CLASS);
+
 }
 
-const observer = new MutationObserver(scheduleSync);
-observer.observe(document.body, {
+}
+
+const observer =
+new MutationObserver(scheduleSync);
+
+observer.observe(
+document.body,
+{
 childList: true,
 subtree: true
-});
+}
+);
 
 window.addEventListener(
 "resize",
-() => {
-body.classList.remove("senku-page-sidebar-offset");
-body.classList.remove("senku-page-fixed-topbar");
-sidebarDecision = null;
-topbarDecision = null;
-scheduleSync();
-},
+scheduleSync,
 { passive: true }
 );
 
+window.addEventListener(
+"orientationchange",
+scheduleSync,
+{ passive: true }
+);
+
+window.addEventListener(
+"load",
+scheduleSync,
+{ once: true }
+);
+
+if (window.visualViewport) {
+
+window.visualViewport.addEventListener(
+"resize",
+scheduleSync,
+{ passive: true }
+);
+
+}
+
 scheduleSync();
-window.setTimeout(scheduleSync, 120);
-window.setTimeout(scheduleSync, 700);
+
+[
+60,
+180,
+450,
+900,
+1800,
+2600
+].forEach(
+(delay) =>
+window.setTimeout(
+scheduleSync,
+delay
+)
+);
+
 }
 
 installSharedShellLayoutGuard(".withdraw-container");

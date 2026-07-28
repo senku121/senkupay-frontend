@@ -664,8 +664,9 @@ margin-right:auto !important;
 padding:30px 22px calc(65px + env(safe-area-inset-bottom)) !important;
 }
 
+body.page-withdraw.senku-page-shell-provisional .withdraw-container,
 body.page-withdraw.senku-page-fixed-topbar .withdraw-container{
-padding-top:calc(var(--senku-page-topbar-height,74px) + 22px) !important;
+padding-top:calc(var(--senku-page-topbar-height,74px) + 24px) !important;
 }
 
 body.page-withdraw .withdraw-container > *,
@@ -720,6 +721,7 @@ padding:22px 14px calc(48px + env(safe-area-inset-bottom)) !important;
 gap:22px !important;
 }
 
+body.page-withdraw.senku-page-shell-provisional .withdraw-container,
 body.page-withdraw.senku-page-fixed-topbar .withdraw-container{
 padding-top:calc(var(--senku-page-topbar-height,74px) + 18px) !important;
 }
@@ -829,4 +831,20 @@ grid-template-columns:minmax(0,1fr) auto;
 body.page-withdraw .section-heading > span{
 max-width:92px;
 }
+}
+
+
+/* V5 fixed-shell header safety */
+html{
+scroll-padding-top:calc(var(--senku-page-topbar-height,74px) + 20px);
+}
+
+body.page-withdraw .withdraw-container{
+position:relative;
+z-index:0;
+}
+
+body.page-withdraw.senku-page-fixed-topbar > .withdraw-container,
+body.page-withdraw.senku-page-shell-provisional > .withdraw-container{
+min-height:100vh;
 }

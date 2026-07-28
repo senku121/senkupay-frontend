@@ -26,8 +26,9 @@ margin-right:auto !important;
 padding:30px 20px calc(60px + env(safe-area-inset-bottom)) !important;
 }
 
+body.page-kyc.senku-page-shell-provisional .kyc-container,
 body.page-kyc.senku-page-fixed-topbar .kyc-container{
-padding-top:calc(var(--senku-page-topbar-height,74px) + 22px) !important;
+padding-top:calc(var(--senku-page-topbar-height,74px) + 24px) !important;
 }
 
 body.page-kyc .kyc-container > *,
@@ -81,6 +82,7 @@ padding:22px 14px calc(48px + env(safe-area-inset-bottom)) !important;
 gap:22px !important;
 }
 
+body.page-kyc.senku-page-shell-provisional .kyc-container,
 body.page-kyc.senku-page-fixed-topbar .kyc-container{
 padding-top:calc(var(--senku-page-topbar-height,74px) + 18px) !important;
 }
@@ -179,4 +181,20 @@ padding:16px;
 body.page-kyc .security-note{
 flex-direction:column;
 }
+}
+
+
+/* V5 fixed-shell header safety */
+html{
+scroll-padding-top:calc(var(--senku-page-topbar-height,74px) + 20px);
+}
+
+body.page-kyc .kyc-container{
+position:relative;
+z-index:0;
+}
+
+body.page-kyc.senku-page-fixed-topbar > .kyc-container,
+body.page-kyc.senku-page-shell-provisional > .kyc-container{
+min-height:100vh;
 }
