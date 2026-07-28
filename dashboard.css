@@ -2344,3 +2344,154 @@ input:-webkit-autofill{
 .kyc-dashboard-button{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:14px;font-size:14px;font-weight:800;background:rgba(255,180,62,.16);border:1px solid rgba(255,180,62,.28);color:#f2e1be;transition:.3s}.kyc-dashboard-button:hover{transform:translateY(-2px);background:rgba(255,180,62,.24)}
 .status-positive{color:var(--success)!important}.status-warning{color:var(--warning)!important}.status-danger{color:var(--danger)!important}
 @media(max-width:768px){.kyc-dashboard-card{flex-direction:column;padding:22px}.kyc-dashboard-heading{flex-direction:column}.kyc-dashboard-meta{flex-direction:column;gap:13px}.kyc-dashboard-button{width:100%;justify-content:center}}
+
+/*==================================================
+   V4 DASHBOARD HEADER WIDTH / CLIPPING FIX
+   Keeps the topbar full-width while preserving the
+   page gutter and prevents the account block from
+   being clipped at the right edge.
+==================================================*/
+
+html,
+body.page-dashboard{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow-x:hidden;
+}
+
+body.page-dashboard .dashboard-layout{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+}
+
+body.page-dashboard .main-area{
+    --dashboard-page-gutter:35px;
+    width:auto !important;
+    max-width:calc(100% - 270px) !important;
+    min-width:0 !important;
+    flex:1 1 auto;
+    margin-left:270px !important;
+    padding-left:var(--dashboard-page-gutter) !important;
+    padding-right:var(--dashboard-page-gutter) !important;
+    overflow-x:hidden;
+}
+
+body.page-dashboard .topbar{
+    width:auto !important;
+    max-width:none !important;
+    min-width:0;
+    margin-left:calc(var(--dashboard-page-gutter) * -1) !important;
+    margin-right:calc(var(--dashboard-page-gutter) * -1) !important;
+    padding-left:var(--dashboard-page-gutter) !important;
+    padding-right:calc(var(--dashboard-page-gutter) + env(safe-area-inset-right)) !important;
+}
+
+body.page-dashboard .topbar > *,
+body.page-dashboard .top-actions,
+body.page-dashboard .user,
+body.page-dashboard .user > div:last-child{
+    min-width:0;
+}
+
+body.page-dashboard .search{
+    flex:1 1 380px;
+    max-width:380px;
+    min-width:180px;
+}
+
+body.page-dashboard .top-actions{
+    flex:0 0 auto;
+    max-width:calc(100% - 210px);
+}
+
+body.page-dashboard .user{
+    max-width:220px;
+}
+
+body.page-dashboard .user > div:last-child{
+    max-width:150px;
+    overflow:hidden;
+}
+
+body.page-dashboard .user h4,
+body.page-dashboard .user span{
+    display:block;
+    max-width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+body.page-dashboard .content,
+body.page-dashboard .content > *,
+body.page-dashboard .welcome > div,
+body.page-dashboard .cards > *,
+body.page-dashboard .quick-grid > *,
+body.page-dashboard .stats-grid > *{
+    min-width:0;
+    max-width:100%;
+}
+
+@media(max-width:1200px){
+    body.page-dashboard .main-area{
+        --dashboard-page-gutter:25px;
+    }
+}
+
+@media(max-width:992px) and (min-width:769px){
+    body.page-dashboard .main-area{
+        --dashboard-page-gutter:20px;
+        max-width:calc(100% - 230px) !important;
+        margin-left:230px !important;
+    }
+
+    body.page-dashboard .top-actions{
+        max-width:100%;
+    }
+}
+
+@media(max-width:768px){
+    body.page-dashboard .main-area{
+        --dashboard-page-gutter:18px;
+        width:100% !important;
+        max-width:100% !important;
+        margin-left:0 !important;
+    }
+
+    body.page-dashboard .topbar{
+        padding-top:16px !important;
+        padding-bottom:16px !important;
+    }
+
+    body.page-dashboard .search{
+        min-width:0;
+        max-width:none;
+    }
+
+    body.page-dashboard .top-actions{
+        max-width:none;
+    }
+
+    body.page-dashboard .user{
+        max-width:none;
+    }
+}
+
+@media(max-width:520px){
+    body.page-dashboard .main-area{
+        --dashboard-page-gutter:12px;
+    }
+}
+
+@media(max-width:380px){
+    body.page-dashboard .top-actions{
+        width:100%;
+    }
+
+    body.page-dashboard .user > div:last-child{
+        max-width:140px;
+    }
+}
+
