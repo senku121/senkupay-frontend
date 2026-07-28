@@ -1,127 +1,116 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<link href="/favicon.png" rel="icon" type="image/x-icon"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Verify your Senku Pay account securely using the verification code sent to your email." name="description"/>
-<meta content="#07090d" name="theme-color"/>
-<title>
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Verify your Senku Pay account securely using the verification code sent to your email.">
+    <meta name="theme-color" content="#05080a">
+    <title>Verify Reset Code | Senku Pay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="verify.css">
+</head>
+<body class="auth-page verify-reset-page">
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="glow glow1" aria-hidden="true"></div>
+    <div class="glow glow2" aria-hidden="true"></div>
+    <div class="glow glow3" aria-hidden="true"></div>
+    <header class="auth-header">
+        <a href="index.html" class="logo" aria-label="Return to Senku Pay home">
+            <span class="logo-box" aria-hidden="true">S</span>
+            <span class="logo-copy">
+                <strong>Senku <em>Pay</em></strong>
+                <small>Modern Digital Payments</small>
+            </span>
+        </a>
+        <a class="header-home" href="index.html">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <span>Back to home</span>
+        </a>
+    </header>
+    <main>
+        <div class="auth-layout">
+            <aside class="auth-visual" aria-hidden="true">
+                <div class="visual-copy">
+                    <span class="visual-kicker"><i class="fa-solid fa-shield-halved"></i>RESET VERIFICATION</span>
+                    <h2>One final security check before your password changes.</h2>
+                    <p>Use the six-digit code sent to your registered email address to continue to the secure password reset page.</p>
+                    <div class="visual-features"><div class="visual-feature"><i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i><span>Email-delivered code</span></div><div class="visual-feature"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>Protected verification</span></div><div class="visual-feature"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>Direct reset continuation</span></div></div>
+                </div>
 
-Verify Email | Senku Pay
+                <div class="visual-stage">
+                    <div class="sun-orb">
+                        <span class="orbit orbit-one"></span>
+                        <span class="orbit orbit-two"></span>
+                        <span class="orbit orbit-three"></span>
+                        <span class="orbit-dot dot-one"></span>
+                        <span class="orbit-dot dot-two"></span>
+                    </div>
 
-</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
-<link href="verify.css?v=20260728-v3" rel="stylesheet"/>
-<meta content="dark" name="color-scheme"/><link href="popup.css?v=20260728-v3" rel="stylesheet"/><link href="responsive.css?v=20260728-v3" rel="stylesheet"/></head>
-<body class="senku-obsidian-amber page-verify" data-page="verify" data-ui-version="obsidian-amber-v3">
-<div class="bg-grid"></div>
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
-<header>
-<a class="logo" href="index.html">
-<div class="logo-box">
+                    <div class="wallet-preview">
+                        <div class="preview-head">
+                            <span class="mini-logo">S</span>
+                            <div><strong>Senku Pay</strong><small>Secure account</small></div>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                        <div class="preview-balance">
+                            <span>Available balance</span>
+                            <strong>$12,458.90</strong>
+                            <small><i class="fa-solid fa-arrow-trend-up"></i> Protected access</small>
+                        </div>
+                        <div class="preview-actions">
+                            <span><i class="fa-solid fa-arrow-down"></i>Deposit</span>
+                            <span><i class="fa-solid fa-arrow-up"></i>Withdraw</span>
+                            <span><i class="fa-solid fa-wallet"></i>Wallet</span>
+                        </div>
+                        <div class="preview-activity">
+                            <div><span class="activity-icon"><i class="fa-solid fa-check"></i></span><p><strong>Account secured</strong><small>Protection active</small></p><b>Live</b></div>
+                            <div><span class="activity-icon"><i class="fa-solid fa-bolt"></i></span><p><strong>Fast access</strong><small>All devices</small></p><b>24/7</b></div>
+                        </div>
+                    </div>
+                </div>
 
-S
+                <div class="visual-trust">
+                    <span><i class="fa-solid fa-lock"></i> Secure</span>
+                    <span><i class="fa-solid fa-bolt"></i> Fast</span>
+                    <span><i class="fa-solid fa-globe"></i> Global</span>
+                </div>
+            </aside>
 
-</div>
-<div>
-<h2>
+            <section class="verify-card auth-card" aria-labelledby="verifyTitle">
+                <div class="card-top">
+                    <div class="verify-icon auth-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+                    <span class="card-kicker">SECURITY CHECK</span>
+                    <h1 id="verifyTitle">Verify Your Email</h1>
+                    <p>Enter the 6-digit verification code sent to your registered email address.</p>
+                </div>
 
-Senku Pay
+                <div id="formMessage" class="form-message" hidden aria-live="polite"></div>
 
-</h2>
-<small>
+                <form id="verifyForm" novalidate>
+                    <div class="otp-label-row"><label>Verification code</label><span>6 digits</span></div>
+                    <div class="otp-container" id="otpContainer" role="group" aria-label="Six-digit verification code"><input class="otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Verification digit 1">
+<input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="Verification digit 2">
+<input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="Verification digit 3">
+<input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="Verification digit 4">
+<input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="Verification digit 5">
+<input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="Verification digit 6"></div>
+                    <small id="otpError" class="otp-error" aria-live="polite"></small>
+                    <div class="code-meta"><div class="timer"><i class="fa-regular fa-clock"></i> Code expires in <span id="timer">02:00</span></div><div class="resend">Didn't receive it? <button type="button" id="resend-btn" disabled>Resend OTP</button></div></div>
+                    <button id="verifyButton" class="verify-btn primary-action" type="submit"><i class="fa-solid fa-check" aria-hidden="true"></i><span>Verify Code</span></button>
+                </form>
 
-Modern Digital Payments
-
-</small>
-</div>
-</a>
-</header>
-<main>
-<section aria-labelledby="verifyTitle" class="verify-card">
-<div class="card-top">
-<div class="verify-icon">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
-<h1 id="verifyTitle">
-
-Verify Your Email
-
-</h1>
-<p>
-
-Enter the 6-digit verification code sent to your registered email address.
-
-</p>
-</div>
-<div class="form-message" hidden="" id="formMessage">
-</div>
-<form id="verifyForm" novalidate="">
-<div class="otp-container" id="otpContainer">
-<input aria-label="Verification digit 1" autocomplete="one-time-code" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-<input aria-label="Verification digit 2" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-<input aria-label="Verification digit 3" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-<input aria-label="Verification digit 4" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-<input aria-label="Verification digit 5" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-<input aria-label="Verification digit 6" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
-</div>
-<small aria-live="polite" class="otp-error" id="otpError">
-</small>
-<div class="timer">
-
-Code expires in
-
-<span id="timer">
-
-02:00
-
-</span>
-</div>
-<button class="verify-btn" id="verifyButton" type="submit">
-<i class="fa-solid fa-check"></i>
-<span>
-
-Verify Code
-
-</span>
-</button>
-<div class="resend">
-
-Didn't receive the code?
-
-<button disabled="" id="resend-btn" type="button">
-
-Resend OTP
-
-</button>
-</div>
-</form>
-<div class="security-note">
-<i class="fa-solid fa-lock"></i>
-<p>
-
-Never share your verification code with anyone.
-Senku Pay support will never ask you to reveal it.
-
-</p>
-</div>
-<div class="bottom-text">
-<a href="forgot-password.html">
-<i class="fa-solid fa-arrow-left"></i>
-
-Back to Forgot Password
-
-</a>
-</div>
-</section>
-</main>
-<script src="popup.js?v=20260728-v3"></script><script src="verify.js?v=20260728-v3"></script>
+                <div class="security-note"><i class="fa-solid fa-lock" aria-hidden="true"></i><p>Never share your verification code with anyone. Senku Pay support will never ask you to reveal it.</p></div>
+                <div class="bottom-text"><a href="forgot-password.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Forgot Password</a></div>
+            </section>
+        </div>
+    </main>
+    <script src="popup.js"></script>
+    <script src="verify.js"></script>
 </body>
 </html>

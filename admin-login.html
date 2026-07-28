@@ -1,147 +1,184 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<link href="/favicon.png" rel="icon" type="image/x-icon"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-<meta content="Secure Senku Pay administrator login." name="description"/>
-<meta content="#07090d" name="theme-color"/>
-<title>Admin Login | Senku Pay</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
-<link href="admin-login.css?v=20260728-v3" rel="stylesheet"/>
-<meta content="dark" name="color-scheme"/><link href="popup.css?v=20260728-v3" rel="stylesheet"/><link href="responsive.css?v=20260728-v3" rel="stylesheet"/></head>
-<body class="senku-obsidian-amber page-admin-login" data-page="admin-login" data-ui-version="obsidian-amber-v3">
-<div class="admin-bg-grid"></div>
-<div class="admin-glow admin-glow-one"></div>
-<div class="admin-glow admin-glow-two"></div>
-<main class="admin-login-page">
-<section class="admin-card">
-<div class="admin-logo">
-<div class="logo-box">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure Senku Pay administrator login.">
+    <meta name="theme-color" content="#07090d">
+    <meta name="color-scheme" content="dark">
 
-S
+    <title>Admin Login | Senku Pay</title>
 
-</div>
-<div>
-<h1>Senku Pay</h1>
-<p>Administration Portal</p>
-</div>
-</div>
-<div class="security-badge">
-<i class="fa-solid fa-shield-halved"></i>
-<span>SECURE ADMIN ACCESS</span>
-</div>
-<div class="admin-heading">
-<h2>Administrator Login</h2>
-<p>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-Authorized Senku Pay personnel only.
+    <link rel="stylesheet" href="popup.css?v=20260728-v3">
+    <link rel="stylesheet" href="responsive.css?v=20260728-v3">
+    <link rel="stylesheet" href="admin-login.css?v=20260728-v4">
+</head>
 
-</p>
-</div>
-<div aria-live="polite" class="admin-login-message" hidden="" id="adminLoginMessage">
-</div>
-<form id="adminLoginForm" novalidate="">
-<div class="input-group">
-<label for="adminUsername">
+<body class="senku-obsidian-amber page-admin-login" data-page="admin-login" data-ui-version="obsidian-amber-v4">
+    <div class="admin-bg-grid" aria-hidden="true"></div>
+    <div class="admin-noise" aria-hidden="true"></div>
+    <div class="admin-glow admin-glow-one" aria-hidden="true"></div>
+    <div class="admin-glow admin-glow-two" aria-hidden="true"></div>
 
-Admin Username
+    <main class="admin-login-page">
+        <section class="portal-showcase" aria-label="Senku Pay administration portal information">
+            <a href="index.html" class="portal-brand" aria-label="Return to Senku Pay home">
+                <div class="brand-mark" aria-hidden="true"><span>S</span></div>
+                <div>
+                    <strong>SENKU <em>PAY</em></strong>
+                    <small>Administration Portal</small>
+                </div>
+            </a>
 
-</label>
-<div class="input-box">
-<i class="fa-solid fa-user-shield"></i>
-<input autocomplete="username" id="adminUsername" name="username" placeholder="Enter admin username" required="" type="text"/>
-</div>
-<small class="field-error" id="adminUsernameError">
-</small>
-</div>
-<div class="input-group">
-<label for="adminPassword">
+            <div class="showcase-copy">
+                <div class="portal-label">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <span>CONTROL CENTER</span>
+                </div>
 
-Password
+                <h1>Secure oversight for every <span>critical operation.</span></h1>
+                <p>
+                    Review platform activity, manage authorized accounts and protect
+                    Senku Pay operations through one restricted administration portal.
+                </p>
+            </div>
 
-</label>
-<div class="input-box">
-<i class="fa-solid fa-lock"></i>
-<input autocomplete="current-password" id="adminPassword" name="password" placeholder="Enter administrator password" required="" type="password"/>
-<button aria-label="Show password" class="toggle-password" id="toggleAdminPassword" type="button">
-<i class="fa-solid fa-eye"></i>
-</button>
-</div>
-<small class="field-error" id="adminPasswordError">
-</small>
-</div>
-<div class="admin-options">
-<label class="remember-device">
-<input id="rememberDevice" type="checkbox"/>
-<span>
+            <div class="security-orbit" aria-hidden="true">
+                <div class="orbit-glow"></div>
+                <div class="orbit-ring orbit-ring-one"></div>
+                <div class="orbit-ring orbit-ring-two"></div>
+                <div class="orbit-core">
+                    <i class="fa-solid fa-shield"></i>
+                </div>
+                <span class="orbit-node node-one"><i class="fa-solid fa-server"></i></span>
+                <span class="orbit-node node-two"><i class="fa-solid fa-user-lock"></i></span>
+                <span class="orbit-node node-three"><i class="fa-solid fa-fingerprint"></i></span>
+            </div>
 
-Remember this device
+            <div class="showcase-security">
+                <article>
+                    <i class="fa-solid fa-lock"></i>
+                    <div>
+                        <strong>Restricted access</strong>
+                        <span>Authorized administrators only</span>
+                    </div>
+                </article>
+                <article>
+                    <i class="fa-solid fa-signal"></i>
+                    <div>
+                        <strong>Protected session</strong>
+                        <span>Secure authentication workflow</span>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-</span>
-</label>
-<a href="#" id="adminForgotPassword">
+        <section class="admin-card" aria-labelledby="adminLoginTitle">
+            <div class="mobile-brand">
+                <div class="brand-mark" aria-hidden="true"><span>S</span></div>
+                <div>
+                    <strong>SENKU <em>PAY</em></strong>
+                    <small>Administration Portal</small>
+                </div>
+            </div>
 
-Need Help?
+            <div class="security-badge">
+                <span class="badge-pulse" aria-hidden="true"></span>
+                <span>SECURE ADMIN ACCESS</span>
+            </div>
 
-</a>
-</div>
-<button class="admin-login-btn" id="adminLoginButton" type="submit">
-<i class="fa-solid fa-right-to-bracket"></i>
-<span>
+            <div class="admin-heading">
+                <h2 id="adminLoginTitle">Administrator Login</h2>
+                <p>Enter your authorized credentials to continue to the control center.</p>
+            </div>
 
-Access Admin Dashboard
+            <div
+                id="adminLoginMessage"
+                class="admin-login-message"
+                aria-live="polite"
+                hidden
+            ></div>
 
-</span>
-</button>
-</form>
-<div class="security-panel">
-<div class="security-item">
-<i class="fa-solid fa-server"></i>
-<div>
-<h4>
+            <form id="adminLoginForm" novalidate>
+                <div class="input-group">
+                    <label for="adminUsername">Admin Username</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                        <input
+                            id="adminUsername"
+                            name="username"
+                            type="text"
+                            placeholder="Enter admin username"
+                            autocomplete="username"
+                            spellcheck="false"
+                            required
+                        >
+                    </div>
+                    <small class="field-error" id="adminUsernameError"></small>
+                </div>
 
-Protected Infrastructure
+                <div class="input-group">
+                    <label for="adminPassword">Password</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <input
+                            id="adminPassword"
+                            name="password"
+                            type="password"
+                            placeholder="Enter administrator password"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button
+                            id="toggleAdminPassword"
+                            class="toggle-password"
+                            type="button"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <small class="field-error" id="adminPasswordError"></small>
+                </div>
 
-</h4>
-<p>
+                <div class="admin-options">
+                    <label class="remember-device">
+                        <input id="rememberDevice" type="checkbox">
+                        <span class="custom-check" aria-hidden="true">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <span>Remember this device</span>
+                    </label>
 
-Every administrator login is protected using encrypted communication.
+                    <a href="#" id="adminForgotPassword">Need Help?</a>
+                </div>
 
-</p>
-</div>
-</div>
-<div class="security-item">
-<i class="fa-solid fa-user-lock"></i>
-<div>
-<h4>
+                <button id="adminLoginButton" class="admin-login-btn" type="submit">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span>Access Admin Dashboard</span>
+                </button>
+            </form>
 
-Restricted Access
+            <div class="card-security-note">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                <p>Administrative access may be monitored for platform security.</p>
+            </div>
 
-</h4>
-<p>
+            <a class="user-login" href="login.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>Return to User Login</span>
+            </a>
+        </section>
+    </main>
 
-Only authorized Senku Pay administrators can access this portal.
-
-</p>
-</div>
-</div>
-</div>
-<a class="user-login" href="login.html">
-<i class="fa-solid fa-user"></i>
-<span>
-
-Return to User Login
-
-</span>
-</a>
-</section>
-</main>
-<script src="storage.js?v=20260728-v3"></script><script src="popup.js?v=20260728-v3"></script>
-<script src="admin-login.js?v=20260728-v3"></script>
+    <script src="storage.js?v=20260728-v3"></script>
+    <script src="popup.js?v=20260728-v3"></script>
+    <script src="admin-login.js?v=20260728-v4"></script>
 </body>
 </html>

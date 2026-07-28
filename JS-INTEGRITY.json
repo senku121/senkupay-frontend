@@ -1,0 +1,32 @@
+[
+  {
+    "file": "login.js",
+    "unchanged": true,
+    "sha256": "835b41e041d30353f40e95e0cc277a82aa047271013053e4a3dee30bb6f5826c"
+  },
+  {
+    "file": "register.js",
+    "unchanged": true,
+    "sha256": "8bf259c36963dd8cbe79642cd1599b0fd84647985d523e06ba47c0d5129d8049"
+  },
+  {
+    "file": "forgot-password.js",
+    "unchanged": true,
+    "sha256": "5381a65006d47c17b8c957516aa6a64d7b27538494036f1cc91bd0898e226986"
+  },
+  {
+    "file": "reset-password.js",
+    "unchanged": true,
+    "sha256": "fdc04abc8368af7736b5242accab43959adb46ca6428a9e18c34b82b41d85ee9"
+  },
+  {
+    "file": "verify-email.js",
+    "unchanged": true,
+    "sha256": "1f204b7b12717dbbc62d5086df0ffde9116fc1e758c1a1dd91061c639fb26d93"
+  },
+  {
+    "file": "verify.js",
+    "unchanged": true,
+    "sha256": "5769f078c2b3a65054933730904067b42be315855be9c99e2545c6245e40c7d7"
+  }
+]
