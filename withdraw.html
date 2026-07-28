@@ -1,31 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Request a secure push-to-card withdrawal from Senku Pay.">
-<meta name="theme-color" content="#070b16">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Request a secure push-to-card withdrawal from Senku Pay." name="description"/>
+<meta content="#070b16" name="theme-color"/>
 <title>Withdraw | Senku Pay</title>
+<link href="/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<link href="withdraw.css" rel="stylesheet"/>
 
-<link rel="icon" href="/favicon.png" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link rel="stylesheet" href="withdraw.css">
-<link rel="stylesheet" href="popup.css">
-<link rel="stylesheet" href="responsive.css">
-</head>
-
-<body>
+<meta content="dark" name="color-scheme"/><link href="popup.css" rel="stylesheet"/><link href="responsive.css" rel="stylesheet"/></head>
+<body class="senku-obsidian-amber page-withdraw" data-page="withdraw" data-ui-version="obsidian-amber-v1">
 <div class="bg-grid"></div>
-
 <header class="withdraw-header">
-<a href="dashboard.html" class="back-btn">
+<a class="back-btn" href="dashboard.html">
 <i class="fa-solid fa-arrow-left"></i>
 <span>Dashboard</span>
 </a>
-
 <div class="logo">
 <div class="logo-box">S</div>
 <div>
@@ -34,20 +30,16 @@
 </div>
 </div>
 </header>
-
 <main class="withdraw-container">
-
-<div id="withdrawMessage" class="withdraw-message" role="status" aria-live="polite" hidden></div>
-
+<div aria-live="polite" class="withdraw-message" hidden="" id="withdrawMessage" role="status"></div>
 <section class="withdraw-card">
 <div>
 <p>Available Balance</p>
 <h1 id="withdrawBalance">$0.00</h1>
-<span id="withdrawStatusText" class="withdraw-status-text">Loading wallet...</span>
+<span class="withdraw-status-text" id="withdrawStatusText">Loading wallet...</span>
 </div>
 <i class="fa-solid fa-money-bill-transfer"></i>
 </section>
-
 <section class="form-card">
 <div class="section-heading">
 <div>
@@ -56,39 +48,21 @@
 </div>
 <span>USD</span>
 </div>
-
 <p class="section-description">
 Withdrawals are submitted to the Senku Pay administrator for approval. After approval, CentryOS sends the payout to your linked card.
 </p>
-
 <label class="field-label" for="withdrawAmount">Withdrawal Amount</label>
 <div class="amount-input">
 <span>$</span>
-<input
-type="number"
-id="withdrawAmount"
-placeholder="Enter amount"
-min="0.01"
-step="0.01"
-inputmode="decimal"
-autocomplete="off">
+<input autocomplete="off" id="withdrawAmount" inputmode="decimal" min="0.01" placeholder="Enter amount" step="0.01" type="number"/>
 </div>
-
 <label class="field-label" for="withdrawNote">Optional Note</label>
-<input
-class="text-field"
-type="text"
-id="withdrawNote"
-placeholder="Optional note for the administrator"
-maxlength="500"
-autocomplete="off">
-
-<div id="withdrawError" class="withdraw-error" hidden>
+<input autocomplete="off" class="text-field" id="withdrawNote" maxlength="500" placeholder="Optional note for the administrator" type="text"/>
+<div class="withdraw-error" hidden="" id="withdrawError">
 <i class="fa-solid fa-circle-exclamation"></i>
 <span>Please enter a valid amount and select a payout card.</span>
 </div>
 </section>
-
 <section class="method-card">
 <div class="section-heading">
 <div>
@@ -97,7 +71,6 @@ autocomplete="off">
 </div>
 <span>Push to Card</span>
 </div>
-
 <div class="method-banner">
 <div class="method-icon">
 <i class="fa-solid fa-credit-card"></i>
@@ -107,27 +80,23 @@ autocomplete="off">
 <p>Your full card details are entered only on CentryOS and are never stored by Senku Pay.</p>
 </div>
 </div>
-
 <div class="card-toolbar">
 <div>
 <h3>Your Linked Cards</h3>
 <p>Select one card for this withdrawal.</p>
 </div>
-
 <div class="toolbar-actions">
-<button type="button" id="refreshCardsButton" class="secondary-button">
+<button class="secondary-button" id="refreshCardsButton" type="button">
 <i class="fa-solid fa-rotate"></i>
 <span>Refresh</span>
 </button>
-
-<button type="button" id="addCardButton" class="primary-button">
+<button class="primary-button" id="addCardButton" type="button">
 <i class="fa-solid fa-plus"></i>
 <span>Add Payout Card</span>
 </button>
 </div>
 </div>
-
-<div id="linkedCards" class="linked-card-list">
+<div class="linked-card-list" id="linkedCards">
 <div class="empty-card-state">
 <i class="fa-solid fa-spinner fa-spin"></i>
 <h3>Loading linked cards</h3>
@@ -135,7 +104,6 @@ autocomplete="off">
 </div>
 </div>
 </section>
-
 <section class="confirm-withdraw">
 <div class="withdraw-summary">
 <div>
@@ -151,28 +119,24 @@ autocomplete="off">
 <strong id="summaryCard">Not selected</strong>
 </div>
 </div>
-
-<button type="button" id="confirmWithdraw" disabled>
+<button disabled="" id="confirmWithdraw" type="button">
 <i class="fa-solid fa-shield-halved"></i>
 <span>Submit Withdrawal Request</span>
 </button>
-
 <p>
 The requested amount moves from your available balance to locked balance until the administrator approves or rejects it.
 </p>
 </section>
-
 <section class="withdraw-history">
 <div class="section-heading">
 <div>
 <p class="section-label">ACTIVITY</p>
 <h2>Withdrawal History</h2>
 </div>
-<button type="button" id="refreshHistoryButton" class="icon-button" aria-label="Refresh withdrawal history">
+<button aria-label="Refresh withdrawal history" class="icon-button" id="refreshHistoryButton" type="button">
 <i class="fa-solid fa-rotate"></i>
 </button>
 </div>
-
 <div id="withdrawHistory">
 <div class="empty-withdraw">
 <i class="fa-solid fa-clock-rotate-left"></i>
@@ -181,7 +145,6 @@ The requested amount moves from your available balance to locked balance until t
 </div>
 </div>
 </section>
-
 <section class="withdraw-info">
 <div>
 <i class="fa-solid fa-user-shield"></i>
@@ -199,10 +162,7 @@ The requested amount moves from your available balance to locked balance until t
 <p>Final timing depends on CentryOS and the receiving card issuer. Processing status updates through signed webhooks.</p>
 </div>
 </section>
-
 </main>
-
-<script src="popup.js"></script>
-<script src="withdraw.js"></script>
+<script src="popup.js"></script><script src="withdraw.js"></script>
 </body>
 </html>
