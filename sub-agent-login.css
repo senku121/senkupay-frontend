@@ -14,7 +14,7 @@ body{
 
 font-family:"Inter",sans-serif;
 
-background:#050816;
+background:#070a0e;
 
 color:#fff;
 
@@ -62,7 +62,7 @@ border-radius:30px;
 background:
 
 
-rgba(17,24,39,.9);
+rgba(7, 10, 14,.9);
 
 
 border:
@@ -138,9 +138,9 @@ linear-gradient(
 
 135deg,
 
-#7b2cff,
+#ffb43e,
 
-#00d4ff
+#e6a43a
 
 );
 
@@ -204,7 +204,7 @@ margin-bottom:18px;
 border-radius:16px;
 
 
-background:#171f33;
+background:#0e1218;
 
 
 border:1px solid rgba(255,255,255,.08);
@@ -297,9 +297,9 @@ linear-gradient(
 
 135deg,
 
-#7b2cff,
+#ffb43e,
 
-#00d4ff
+#e6a43a
 
 );
 
@@ -417,7 +417,7 @@ transform:translateY(0);
 
     text-align:center;
 
-    background:rgba(17,24,39,.95);
+    background:rgba(7, 10, 14,.95);
 
     border:1px solid rgba(255,255,255,.08);
 
@@ -523,7 +523,7 @@ transform:translateY(0);
 
     font-size:16px;
 
-    background:linear-gradient(135deg,#7b2cff,#00d4ff);
+    background:linear-gradient(135deg,#ffb43e,#e6a43a);
 
     transition:.3s;
 
@@ -889,7 +889,7 @@ radial-gradient(
 
 circle,
 
-rgba(123,44,255,.35),
+rgba(255,180,62,.35),
 
 transparent 70%
 
@@ -968,7 +968,7 @@ radial-gradient(
 
 circle,
 
-rgba(0,212,255,.25),
+rgba(230,164,58,.25),
 
 transparent 70%
 
@@ -988,7 +988,7 @@ transparent 70%
 .form-group select:hover{
 
 
-border-color:rgba(123,44,255,.6);
+border-color:rgba(255,180,62,.6);
 
 }
 
@@ -1192,9 +1192,9 @@ linear-gradient(
 
 135deg,
 
-#111b2e,
+#0e1218,
 
-#16233c
+#0e1218
 
 );
 
@@ -1239,7 +1239,7 @@ height:8px;
 
 ::-webkit-scrollbar-track{
 
-background:#08101d;
+background:#070a0e;
 
 }
 
@@ -1252,9 +1252,9 @@ linear-gradient(
 
 180deg,
 
-#7b2cff,
+#ffb43e,
 
-#00d4ff
+#e6a43a
 
 );
 
@@ -1352,7 +1352,7 @@ top:50%;
 
 transform:translateY(-50%);
 
-color:#7b2cff;
+color:#ffb43e;
 
 font-size:15px;
 
@@ -1374,7 +1374,7 @@ border-radius:15px;
 
 border:1px solid rgba(255,255,255,.08);
 
-background:#111b2e;
+background:#0e1218;
 
 color:white;
 
@@ -1396,11 +1396,11 @@ color:#68738f;
 
 .history-search input:focus{
 
-border-color:#7b2cff;
+border-color:#ffb43e;
 
 box-shadow:
 
-0 0 0 4px rgba(123,44,255,.15);
+0 0 0 4px rgba(255,180,62,.15);
 
 transform:translateY(-2px);
 
@@ -1442,7 +1442,7 @@ min-width:850px;
 
 .withdraw-history-card thead{
 
-background:#111b2e;
+background:#0e1218;
 
 }
 
@@ -1494,7 +1494,7 @@ transition:.3s;
 
 background:
 
-rgba(123,44,255,.08);
+rgba(255,180,62,.08);
 
 transform:translateX(4px);
 
@@ -1588,7 +1588,7 @@ padding:70px 20px;
 
 font-size:55px;
 
-color:#7b2cff;
+color:#ffb43e;
 
 margin-bottom:20px;
 
@@ -1684,8 +1684,8 @@ border-radius:15px;
 background:
 linear-gradient(
 135deg,
-#7b2cff,
-#00d4ff
+#ffb43e,
+#e6a43a
 );
 
 color:white;
@@ -1711,7 +1711,7 @@ display:flex;
 transform:translateY(-2px);
 
 box-shadow:
-0 15px 35px rgba(123,44,255,.35);
+0 15px 35px rgba(255,180,62,.35);
 
 }
  /*================================

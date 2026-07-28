@@ -11,7 +11,7 @@ if(!token){logout();return}
 const $=id=>document.getElementById(id);
 const els={table:$("kycTable"),search:$("kycSearch"),status:$("kycStatusFilter"),sort:$("kycSort"),refresh:$("refreshKycButton"),message:$("kycPageMessage"),pending:$("pendingKycCount"),verified:$("verifiedKycCount"),rejected:$("rejectedKycCount"),reverify:$("reverifyKycCount"),results:$("kycResultsText"),page:$("kycPageText"),prev:$("kycPreviousPage"),next:$("kycNextPage"),sync:$("lastKycSync"),modal:$("kycReviewModal"),close:$("closeKycReview"),reviewMessage:$("reviewMessage"),documents:$("reviewDocuments"),note:$("adminReviewNote"),reason:$("reviewReason"),imageModal:$("kycImageModal"),largeImage:$("kycLargeImage"),original:$("openKycOriginal"),imageClose:$("closeKycImage"),sidebar:$("adminSidebar"),overlay:$("adminSidebarOverlay"),menu:$("adminMobileMenuButton"),logout:$("adminLogoutButton")};
 let records=[],filtered=[],selected=null,currentPage=1;const pageSize=10;
-const esc=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const esc=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#9c5b0d;");
 const fmtDate=v=>{if(!v)return"--";const d=new Date(v);return Number.isNaN(d.getTime())?"--":d.toLocaleString()};
 const normalizeStatus=v=>String(v||"NOT_SUBMITTED").trim().toLowerCase().replaceAll(" ","_").replaceAll("-","_");
 const statusLabel=v=>normalizeStatus(v).replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase());

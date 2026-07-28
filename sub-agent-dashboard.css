@@ -19,17 +19,17 @@
 
 :root{
 
-    --bg:#050816;
+    --bg:#070a0e;
 
-    --sidebar:#0b1220;
+    --sidebar:#070a0e;
 
-    --card:#111827;
+    --card:#070a0e;
 
-    --card2:#171f33;
+    --card2:#0e1218;
 
-    --primary:#7b2cff;
+    --primary:#ffb43e;
 
-    --secondary:#00d4ff;
+    --secondary:#e6a43a;
 
     --text:#ffffff;
 
@@ -80,7 +80,7 @@ min-height:100vh;
 
 width:270px;
 
-background:rgba(11,18,32,.95);
+background:rgba(7, 10, 14,.95);
 
 border-right:1px solid var(--border);
 
@@ -232,9 +232,9 @@ background:linear-gradient(
 
 135deg,
 
-rgba(123,44,255,.35),
+rgba(255,180,62,.35),
 
-rgba(0,212,255,.15)
+rgba(230,164,58,.15)
 
 );
 
@@ -373,7 +373,7 @@ margin-bottom:30px;
 
     background:
 
-    rgba(17,24,39,.9);
+    rgba(7, 10, 14,.9);
 
     border:
 
@@ -413,13 +413,13 @@ margin-bottom:30px;
     font-size:22px;
 
 
-    color:#b794ff;
+    color:#ffd17a;
 
 
     background:
 
 
-    rgba(123,44,255,.15);
+    rgba(255,180,62,.15);
 
 
 }
@@ -469,7 +469,7 @@ flex-direction:column;
     background:
 
 
-    rgba(17,24,39,.9);
+    rgba(7, 10, 14,.9);
 
 
     border:
@@ -635,9 +635,9 @@ align-items:flex-start;
 
         135deg,
 
-        #7b2cff,
+        #ffb43e,
 
-        #00d4ff
+        #e6a43a
 
     );
 
@@ -679,7 +679,7 @@ align-items:flex-start;
     background:
 
 
-    rgba(17,24,39,.9);
+    rgba(7, 10, 14,.9);
 
 
     border:
@@ -983,7 +983,7 @@ padding:15px;
 
     background:
 
-    rgba(17,24,39,.9);
+    rgba(7, 10, 14,.9);
 
     border:
 
@@ -1055,7 +1055,7 @@ padding:15px;
 .user-search i{
 
 
-    color:#b794ff;
+    color:#ffd17a;
 
 
 }
@@ -1135,9 +1135,9 @@ padding:15px;
 
         135deg,
 
-        #7b2cff,
+        #ffb43e,
 
-        #00d4ff
+        #e6a43a
 
     );
 
@@ -1218,9 +1218,9 @@ max-width:500px;
 
         145deg,
 
-        rgba(123,44,255,.15),
+        rgba(255,180,62,.15),
 
-        rgba(0,212,255,.08)
+        rgba(230,164,58,.08)
 
     );
 
@@ -1393,7 +1393,7 @@ max-width:500px;
     background:
 
 
-    rgba(123,44,255,.12);
+    rgba(255,180,62,.12);
 
 
     border:
@@ -1434,9 +1434,9 @@ max-width:500px;
 
         135deg,
 
-        #7b2cff,
+        #ffb43e,
 
-        #00d4ff
+        #e6a43a
 
     );
 
@@ -1524,7 +1524,7 @@ padding:35px;
     background:
 
 
-    rgba(17,24,39,.95);
+    rgba(7, 10, 14,.95);
 
 
     border:
@@ -1649,9 +1649,9 @@ padding:35px;
 
         135deg,
 
-        #7b2cff,
+        #ffb43e,
 
-        #00d4ff
+        #e6a43a
 
     );
 
@@ -1792,9 +1792,9 @@ width:100%;
 
         135deg,
 
-        rgba(123,44,255,.8),
+        rgba(255,180,62,.8),
 
-        rgba(0,212,255,.5)
+        rgba(230,164,58,.5)
 
     );
 
@@ -1872,9 +1872,9 @@ width:100%;
 
         135deg,
 
-        #0284c7,
+        #d6942b,
 
-        #0ea5e9
+        #d99a30
 
     );
 
@@ -2086,7 +2086,7 @@ border:none;
 
 border-radius:15px;
 
-background:linear-gradient(135deg,#7b2cff,#00d4ff);
+background:linear-gradient(135deg,#ffb43e,#e6a43a);
 
 color:white;
 

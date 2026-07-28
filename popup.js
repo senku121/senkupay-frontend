@@ -183,36 +183,65 @@
         window.location.href = "login.html";
     }
 
+    function directBodyChild(node){
+        let current = node;
+        while(current && current.parentElement && current.parentElement !== document.body){
+            current = current.parentElement;
+        }
+        return current && current.parentElement === document.body ? current : null;
+    }
+
     function injectUserShell(){
         document.body.classList.add("senku-user-shell");
+
         if(currentFile === "dashboard.html"){
             const existing = document.getElementById("dashboardSidebar");
-            if(existing){ existing.classList.add("senku-app-sidebar"); }
+            if(existing){
+                existing.classList.add("senku-app-sidebar");
+                const subtitle = existing.querySelector(".side-logo small");
+                if(subtitle) subtitle.textContent = "Personal Account";
+            }
             return;
         }
+
         if(document.getElementById("senkuAppSidebar")) return;
+        const main = document.querySelector("main");
+        const shellRoot = directBodyChild(main) || main;
+
         const aside = document.createElement("aside");
         aside.id = "senkuAppSidebar";
         aside.className = "senku-app-sidebar";
         aside.setAttribute("aria-label", "Senku Pay account navigation");
         aside.innerHTML = `${brandMarkup("Personal Account")}<nav>${navMarkup(userNav)}</nav><button type="button" class="senku-shell-logout" id="senkuGlobalLogout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>`;
-        document.body.insertBefore(aside, document.body.firstChild);
 
-        const main = document.querySelector("main");
-        if(main) main.classList.add("senku-shell-main");
+        if(shellRoot && shellRoot.parentNode === document.body){
+            document.body.insertBefore(aside, shellRoot);
+        }else{
+            document.body.insertBefore(aside, document.body.firstChild);
+        }
+
+        if(main) main.classList.add("senku-shell-main-content");
+        if(shellRoot) shellRoot.classList.add("senku-shell-content");
+
         const [title, subtitle] = titleMap[currentFile] || ["Senku Pay", "Secure digital payments"];
         const topbar = document.createElement("header");
         topbar.className = "senku-shell-topbar";
         topbar.innerHTML = `
-            <div style="display:flex;align-items:center;gap:12px;min-width:0">
+            <div class="senku-topbar-heading">
                 <button type="button" class="senku-global-menu" id="senkuGlobalMenu" aria-label="Open account navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                <div style="min-width:0"><h1>${title}</h1><p>${subtitle}</p></div>
+                <div><h1>${title}</h1><p>${subtitle}</p></div>
             </div>
             <div class="senku-topbar-actions">
                 <a class="senku-topbar-pill" href="wallet.html"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a>
                 <a class="senku-topbar-pill" href="profile.html"><i class="fa-solid fa-user"></i><span>Account</span></a>
             </div>`;
-        document.body.insertBefore(topbar, main || aside.nextSibling);
+
+        if(shellRoot && shellRoot.parentNode === document.body){
+            document.body.insertBefore(topbar, shellRoot);
+        }else{
+            aside.insertAdjacentElement("afterend", topbar);
+        }
+
         const menu = document.getElementById("senkuGlobalMenu");
         setupInjectedSidebar(aside, menu);
         document.getElementById("senkuGlobalLogout")?.addEventListener("click", () => {
@@ -224,9 +253,15 @@
         document.body.classList.add("senku-admin-shell");
         const sidebar = document.querySelector(".admin-sidebar");
         if(!sidebar) return;
-        sidebar.id = "adminSidebar";
+        if(!sidebar.id) sidebar.id = "adminSidebar";
         sidebar.classList.add("senku-admin-sidebar");
-        sidebar.innerHTML = `${brandMarkup("Administration Portal")}<nav>${navMarkup(adminNav)}</nav><button type="button" class="admin-logout" id="adminLogoutButton"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>`;
+
+        const subtitle = sidebar.querySelector(".admin-brand span,.admin-brand small,.side-logo small");
+        if(subtitle) subtitle.textContent = "Administration Portal";
+        sidebar.querySelectorAll("nav a").forEach(link => {
+            const href = (link.getAttribute("href") || "").toLowerCase();
+            if(href && !href.startsWith("#")) link.classList.toggle("active", href === currentFile);
+        });
 
         let overlay = document.getElementById("adminSidebarOverlay");
         if(!overlay){
@@ -244,8 +279,9 @@
             menu.setAttribute("aria-label", "Open navigation");
             menu.setAttribute("aria-expanded", "false");
             menu.innerHTML = '<i class="fa-solid fa-bars"></i>';
-            const header = document.querySelector("main header,.page-header,.admin-topbar");
+            const header = document.querySelector("main header,.page-header,.admin-topbar,.dashboard-header");
             if(header) header.insertBefore(menu, header.firstChild);
+            setupInjectedSidebar(sidebar, menu);
         }
     }
 

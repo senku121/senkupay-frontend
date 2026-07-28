@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         message.className = `admin-agents-message show ${type}`;
         message.textContent = text;
     };
-    const escapeHTML = value => String(value ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[c]));
+    const escapeHTML = value => String(value ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#9c5b0d;",'"':"&quot;"}[c]));
     const statusOf = item => String(item.status || "active").toLowerCase();
     const normalize = payload => {
         const agents = Array.isArray(payload) ? payload : payload.agents || payload.data?.agents || payload.data || [];

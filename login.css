@@ -4,11 +4,11 @@
 ==================================================*/
 
 :root {
-    --bg: #070b16;
-    --card: #111827;
-    --card2: #171f33;
-    --primary: #7b2cff;
-    --secondary: #00d4ff;
+    --bg: #070a0e;
+    --card: #070a0e;
+    --card2: #0e1218;
+    --primary: #ffb43e;
+    --secondary: #e6a43a;
     --text: #ffffff;
     --muted: #9ca3af;
     --border: rgba(255,255,255,.08);
@@ -83,7 +83,7 @@ a {
 .glow3 {
     width: 260px;
     height: 260px;
-    background: #8b5cf6;
+    background: #dda03a;
     top: 45%;
     left: 48%;
 }
@@ -112,7 +112,7 @@ header {
     font-size: 26px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow: 0 20px 40px rgba(123,44,255,.35);
+    box-shadow: 0 20px 40px rgba(255,180,62,.35);
 }
 
 .logo h2 {
@@ -140,7 +140,7 @@ main {
     padding: 50px;
     border: 1px solid var(--border);
     border-radius: 32px;
-    background: rgba(17,24,39,.92);
+    background: rgba(7, 10, 14,.92);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     box-shadow:
@@ -157,8 +157,8 @@ main {
     border-radius: 32px;
     background: linear-gradient(
         135deg,
-        rgba(123,44,255,.6),
-        rgba(0,212,255,.35),
+        rgba(255,180,62,.6),
+        rgba(230,164,58,.35),
         transparent
     );
     -webkit-mask:
@@ -175,7 +175,7 @@ main {
     width: 260px;
     height: 260px;
     border-radius: 50%;
-    background: rgba(123,44,255,.08);
+    background: rgba(255,180,62,.08);
     right: -120px;
     top: -120px;
     pointer-events: none;
@@ -205,7 +205,7 @@ form,
     align-items: center;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     font-size: 34px;
-    box-shadow: 0 25px 45px rgba(123,44,255,.30);
+    box-shadow: 0 25px 45px rgba(255,180,62,.30);
     animation: iconFloat 4s ease-in-out infinite;
 }
 
@@ -244,9 +244,9 @@ form,
 }
 
 .form-message.info {
-    color: #bdefff;
-    background: rgba(0,212,255,.09);
-    border-color: rgba(0,212,255,.24);
+    color: #f4dfb6;
+    background: rgba(230,164,58,.09);
+    border-color: rgba(230,164,58,.24);
 }
 
 form {
@@ -270,7 +270,7 @@ form {
 .input-group label {
     font-size: 15px;
     font-weight: 600;
-    color: #d8def0;
+    color: #f2e1be;
 }
 
 .input-group input {
@@ -294,15 +294,15 @@ form {
 }
 
 .input-group input:hover {
-    border-color: rgba(123,44,255,.30);
+    border-color: rgba(255,180,62,.30);
 }
 
 .input-group input:focus {
     border-color: var(--primary);
-    background: #1b2540;
+    background: #0e1218;
     box-shadow:
-        0 0 0 4px rgba(123,44,255,.18),
-        0 15px 35px rgba(123,44,255,.08);
+        0 0 0 4px rgba(255,180,62,.18),
+        0 15px 35px rgba(255,180,62,.08);
 }
 
 .input-group input.invalid {
@@ -373,7 +373,7 @@ form {
 }
 
 .remember-row a {
-    color: #9d7dff;
+    color: #e8bd70;
     text-decoration: none;
     font-weight: 600;
     transition: .3s ease;
@@ -399,7 +399,7 @@ form {
     font-size: 17px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow: 0 18px 45px rgba(123,44,255,.35);
+    box-shadow: 0 18px 45px rgba(255,180,62,.35);
     transition: .35s ease;
 }
 
@@ -422,7 +422,7 @@ form {
 
 .login-btn:hover:not(:disabled) {
     transform: translateY(-4px);
-    box-shadow: 0 28px 60px rgba(123,44,255,.45);
+    box-shadow: 0 28px 60px rgba(255,180,62,.45);
 }
 
 .login-btn:hover:not(:disabled)::before {
@@ -448,7 +448,7 @@ form {
 .sub-agent-login-btn {
     min-height: 55px;
     padding: 12px 15px;
-    border: 1px solid rgba(123,44,255,.5);
+    border: 1px solid rgba(255,180,62,.5);
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -459,7 +459,7 @@ form {
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background: rgba(123,44,255,.15);
+    background: rgba(255,180,62,.15);
     transition: .35s ease;
 }
 
@@ -467,7 +467,7 @@ form {
 .sub-agent-login-btn:hover {
     transform: translateY(-3px);
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow: 0 16px 35px rgba(123,44,255,.22);
+    box-shadow: 0 16px 35px rgba(255,180,62,.22);
 }
 
 .security-note {
@@ -500,7 +500,7 @@ form {
 }
 
 .bottom-text a {
-    color: #9d7dff;
+    color: #e8bd70;
     text-decoration: none;
     font-weight: 700;
     transition: .3s ease;
@@ -533,7 +533,7 @@ form {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0b1020;
+    background: #070a0e;
 }
 
 ::-webkit-scrollbar-thumb {

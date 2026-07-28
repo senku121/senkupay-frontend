@@ -6,12 +6,12 @@
 
 :root {
   color-scheme: dark;
-  --sp-bg: #07090d;
-  --sp-bg-deep: #040609;
+  --sp-bg: #070a0e;
+  --sp-bg-deep: #070a0e;
   --sp-surface: #0d1117;
-  --sp-surface-2: #111720;
+  --sp-surface-2: #070a0e;
   --sp-surface-3: #171e28;
-  --sp-surface-soft: rgba(17, 23, 32, .82);
+  --sp-surface-soft: rgba(7, 10, 14, .82);
   --sp-border: rgba(230, 176, 84, .16);
   --sp-border-strong: rgba(255, 183, 67, .34);
   --sp-accent: #ffb43e;
@@ -23,7 +23,7 @@
   --sp-success: #33c978;
   --sp-danger: #ef5c5c;
   --sp-warning: #f59e0b;
-  --sp-info: #4aa7ff;
+  --sp-info: #eec67e;
   --sp-sidebar: 274px;
   --sp-topbar: 76px;
   --sp-radius-xs: 10px;
@@ -44,7 +44,7 @@ body.senku-obsidian-amber {
   background:
     radial-gradient(circle at 82% 4%, rgba(255,180,62,.09), transparent 28%),
     radial-gradient(circle at 8% 92%, rgba(202,126,19,.06), transparent 27%),
-    linear-gradient(145deg, var(--sp-bg-deep), var(--sp-bg) 42%, #091019 100%);
+    linear-gradient(145deg, var(--sp-bg-deep), var(--sp-bg) 42%, #070a0e 100%);
   color: var(--sp-text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
@@ -78,8 +78,8 @@ body.senku-obsidian-amber::after {
 }
 ::selection { background: rgba(255,180,62,.3); color: white; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #070a0f; }
-::-webkit-scrollbar-thumb { background: #29313c; border: 2px solid #070a0f; border-radius: 99px; }
+::-webkit-scrollbar-track { background: #070a0e; }
+::-webkit-scrollbar-thumb { background: #29313c; border: 2px solid #070a0e; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #3a4654; }
 a { color: inherit; }
 img, svg, video, canvas { max-width: 100%; }
@@ -125,7 +125,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .senku-obsidian-amber :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea) {
   min-height: 48px;
   color: var(--sp-text) !important;
-  background: rgba(8,12,17,.82) !important;
+  background: rgba(7, 10, 14,.82) !important;
   border: 1px solid rgba(255,255,255,.1) !important;
   border-radius: 12px !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
@@ -135,7 +135,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .senku-obsidian-amber :is(input,select,textarea):focus {
   border-color: rgba(255,180,62,.58) !important;
   box-shadow: 0 0 0 4px rgba(255,180,62,.08) !important;
-  background: #0a0f15 !important;
+  background: #070a0e !important;
 }
 .senku-obsidian-amber input[type="checkbox"],
 .senku-obsidian-amber input[type="radio"] { accent-color: var(--sp-accent); }
@@ -143,7 +143,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 .senku-obsidian-amber :is(.card,.stat-card,.stat-box,.summary-card,.info-card,.security-item,.security-card,.activity-card,.history-card,.filter-card,.form-card,.upload-card,.documents-card,.status-card,.settings-card,.profile-card,.wallet-main-card,.withdraw-card,.agent-box,.transaction-box,.request-detail-box,.agent-detail-box,.modal-form,.section-card,.quick-action,.system-status-item,.balance-card,.users-card,.users-management-card,.sub-agent-card) {
   border: 1px solid rgba(255,255,255,.075) !important;
-  background: linear-gradient(145deg, rgba(20,27,36,.92), rgba(10,14,20,.96)) !important;
+  background: linear-gradient(145deg, rgba(20,27,36,.92), rgba(7, 10, 14,.96)) !important;
   box-shadow: var(--sp-shadow-soft) !important;
   border-radius: var(--sp-radius) !important;
 }
@@ -219,7 +219,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   z-index: 99999;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at center, #111722, #05070a 68%);
+  background: radial-gradient(circle at center, #070a0e, #070a0e 68%);
   transition: opacity .5s var(--sp-ease), visibility .5s ease;
 }
 .senku-page-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -249,7 +249,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
    ====================================================================== */
 body.page-index #siteHeader {
   position: sticky !important; top: 0; z-index: 1000;
-  background: rgba(6,9,13,.72) !important;
+  background: rgba(7, 10, 14,.72) !important;
   border-bottom: 1px solid rgba(255,255,255,.06) !important;
   backdrop-filter: blur(22px) saturate(130%);
 }
@@ -272,7 +272,7 @@ body.page-index .hero-left > p { max-width: 650px; font-size:1.04rem !important;
 body.page-index .hero-buttons { gap:12px !important; }
 body.page-index .hero-buttons .btn { min-width:150px; justify-content:center; }
 body.page-index .hero-users { border-top:1px solid rgba(255,255,255,.07); padding-top:22px; margin-top:30px !important; }
-body.page-index .user-stack > div { background:#1d2631 !important; border-color:#090c11 !important; color:var(--sp-accent) !important; }
+body.page-index .user-stack > div { background:#1d2631 !important; border-color:#070a0e !important; color:var(--sp-accent) !important; }
 body.page-index .hero-right { position:relative; isolation:isolate; }
 body.page-index .hero-right::before {
   content:""; position:absolute; width:430px; aspect-ratio:1; border-radius:50%; z-index:-2;
@@ -284,20 +284,20 @@ body.page-index .hero-right::after { content:""; position:absolute; inset:8% -3%
 body.page-index .dashboard {
   transform: perspective(1400px) rotateY(-7deg) rotateX(2deg) !important;
   border:1px solid rgba(255,180,62,.20) !important;
-  background:linear-gradient(145deg,#121821,#090d13) !important;
+  background:linear-gradient(145deg,#121821,#070a0e) !important;
   box-shadow:0 38px 90px rgba(0,0,0,.48),0 0 0 1px rgba(255,255,255,.025) !important;
   border-radius:26px !important;
   overflow:hidden;
 }
-body.page-index .dashboard-top { background:#0d1219 !important; border-bottom:1px solid rgba(255,255,255,.055) !important; }
-body.page-index .dashboard-body aside { background:#0a0e14 !important; border-right:1px solid rgba(255,255,255,.055); }
+body.page-index .dashboard-top { background:#070a0e !important; border-bottom:1px solid rgba(255,255,255,.055) !important; }
+body.page-index .dashboard-body aside { background:#070a0e !important; border-right:1px solid rgba(255,255,255,.055); }
 body.page-index .dashboard-body aside li.active { color:#1a1105 !important; background:linear-gradient(135deg,var(--sp-accent-2),var(--sp-accent)) !important; }
 body.page-index .dashboard-content .card { box-shadow:none !important; }
 body.page-index .dashboard-content .card span { color:var(--sp-success) !important; }
 body.page-index .graph div { background:linear-gradient(to top,#9b5b0e,var(--sp-accent-2)) !important; box-shadow:0 0 18px rgba(255,180,62,.14); }
 body.page-index .stats-section { padding:32px 0 86px !important; }
 body.page-index .stats-section .container { display:grid !important; grid-template-columns:repeat(4,1fr); gap:1px !important; padding:0 !important; overflow:hidden; border:1px solid rgba(255,255,255,.075); border-radius:20px; background:rgba(255,255,255,.04); }
-body.page-index .stat-box { border:0 !important; border-radius:0 !important; background:#0e141c !important; box-shadow:none !important; padding:26px 20px !important; }
+body.page-index .stat-box { border:0 !important; border-radius:0 !important; background:#070a0e !important; box-shadow:none !important; padding:26px 20px !important; }
 body.page-index .stat-box + .stat-box { border-left:1px solid rgba(255,255,255,.07) !important; }
 body.page-index .stat-box h2 { color:var(--sp-accent) !important; }
 body.page-index :is(.features,.services,.about,.testimonials) { padding:88px 0 !important; }
@@ -305,11 +305,11 @@ body.page-index .section-heading { max-width:760px !important; margin-bottom:44p
 body.page-index .section-heading span { color:var(--sp-accent) !important; background:rgba(255,180,62,.07) !important; border-color:var(--sp-border) !important; }
 body.page-index .section-heading h2 { font-size:clamp(2rem,4vw,3.4rem) !important; letter-spacing:-.055em !important; }
 body.page-index :is(.feature-grid,.services-grid,.about-grid,.testimonial-grid) { gap:16px !important; }
-body.page-index :is(.feature-card,.service-card,.testimonial-card) { border-color:rgba(255,255,255,.075) !important; background:linear-gradient(145deg,#121923,#0a0e14) !important; box-shadow:none !important; border-radius:18px !important; }
+body.page-index :is(.feature-card,.service-card,.testimonial-card) { border-color:rgba(255,255,255,.075) !important; background:linear-gradient(145deg,#070a0e,#070a0e) !important; box-shadow:none !important; border-radius:18px !important; }
 body.page-index :is(.feature-card,.service-card) .icon { color:var(--sp-accent) !important; background:rgba(255,180,62,.09) !important; }
 body.page-index .cta { background:transparent !important; }
-body.page-index .cta-box { border:1px solid rgba(255,180,62,.22) !important; background:radial-gradient(circle at 85% 20%,rgba(255,180,62,.17),transparent 26%),linear-gradient(135deg,#17140f,#0f141b 60%,#111820) !important; border-radius:28px !important; box-shadow:var(--sp-shadow) !important; }
-body.page-index footer { background:#070a0f !important; border-top:1px solid rgba(255,255,255,.065) !important; }
+body.page-index .cta-box { border:1px solid rgba(255,180,62,.22) !important; background:radial-gradient(circle at 85% 20%,rgba(255,180,62,.17),transparent 26%),linear-gradient(135deg,#17140f,#0f141b 60%,#070a0e) !important; border-radius:28px !important; box-shadow:var(--sp-shadow) !important; }
+body.page-index footer { background:#070a0e !important; border-top:1px solid rgba(255,255,255,.065) !important; }
 
 /* ======================================================================
    AUTHENTICATION — SINGLE CALM EDITORIAL PANEL
@@ -333,7 +333,7 @@ body:is(.page-login,.page-register,.page-forgot-password,.page-reset-password,.p
   padding:clamp(28px,5vw,48px) !important;
   border:1px solid rgba(255,180,62,.18) !important;
   border-radius:28px !important;
-  background:linear-gradient(150deg,rgba(19,26,35,.96),rgba(8,12,17,.98)) !important;
+  background:linear-gradient(150deg,rgba(19,26,35,.96),rgba(7, 10, 14,.98)) !important;
   box-shadow:0 35px 100px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035) !important;
   overflow:hidden;
   position:relative;
@@ -352,11 +352,11 @@ body.page-login :is(.agent-login-btn,.sub-agent-login-btn) { background:rgba(255
 body.page-admin-login .admin-login-page { width:100%; display:grid; place-items:center; }
 body.page-admin-login .admin-card {
   width:min(100%,570px) !important; padding:44px !important; border-radius:28px !important;
-  border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#141b24,#090d13) !important; box-shadow:var(--sp-shadow) !important;
+  border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#141b24,#070a0e) !important; box-shadow:var(--sp-shadow) !important;
 }
 body.page-admin-login .security-badge { color:var(--sp-accent) !important; background:rgba(255,180,62,.07) !important; border-color:var(--sp-border) !important; }
 body.page-sub-agent-login .agent-login-container { width:100%; min-height:auto !important; }
-body.page-sub-agent-login .agent-login-card { width:min(100%,500px) !important; padding:42px !important; border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#141b24,#090d13) !important; border-radius:28px !important; box-shadow:var(--sp-shadow) !important; }
+body.page-sub-agent-login .agent-login-card { width:min(100%,500px) !important; padding:42px !important; border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#141b24,#070a0e) !important; border-radius:28px !important; box-shadow:var(--sp-shadow) !important; }
 
 /* ======================================================================
    COMMON APPLICATION SHELL (injected on user pages)
@@ -371,7 +371,7 @@ body.page-sub-agent-login .agent-login-card { width:min(100%,500px) !important; 
   display:flex !important;
   flex-direction:column !important;
   padding:22px 16px !important;
-  background:rgba(8,12,17,.97) !important;
+  background:rgba(7, 10, 14,.97) !important;
   border-right:1px solid rgba(255,255,255,.07) !important;
   box-shadow:18px 0 50px rgba(0,0,0,.18) !important;
   backdrop-filter:blur(22px);
@@ -427,7 +427,7 @@ body.page-sub-agent-login .agent-login-card { width:min(100%,500px) !important; 
 .senku-shell-topbar {
   position:fixed; top:0; left:var(--sp-sidebar); right:0; z-index:1000; min-height:var(--sp-topbar);
   display:flex; align-items:center; justify-content:space-between; gap:20px; padding:12px 28px;
-  background:rgba(7,10,15,.78); border-bottom:1px solid rgba(255,255,255,.065); backdrop-filter:blur(20px) saturate(130%);
+  background:rgba(7, 10, 14,.78); border-bottom:1px solid rgba(255,255,255,.065); backdrop-filter:blur(20px) saturate(130%);
 }
 .senku-shell-topbar h1 { margin:0; font-size:1.08rem; letter-spacing:-.025em; }
 .senku-shell-topbar p { margin:3px 0 0; color:var(--sp-muted); font-size:.75rem; }
@@ -443,7 +443,7 @@ body.page-sub-agent-login .agent-login-card { width:min(100%,500px) !important; 
 body.page-dashboard .dashboard-layout { min-height:100vh !important; background:transparent !important; }
 body.page-dashboard #dashboardSidebar { width:var(--sp-sidebar) !important; }
 body.page-dashboard .main-area { margin-left:var(--sp-sidebar) !important; width:calc(100% - var(--sp-sidebar)) !important; background:transparent !important; }
-body.page-dashboard .topbar { min-height:var(--sp-topbar) !important; background:rgba(7,10,15,.78) !important; border-bottom:1px solid rgba(255,255,255,.065) !important; backdrop-filter:blur(20px); }
+body.page-dashboard .topbar { min-height:var(--sp-topbar) !important; background:rgba(7, 10, 14,.78) !important; border-bottom:1px solid rgba(255,255,255,.065) !important; backdrop-filter:blur(20px); }
 body.page-dashboard .content { padding:30px !important; }
 body.page-dashboard :is(.overview-grid,.dashboard-grid,.stat-grid,.quick-actions-grid) { gap:14px !important; }
 
@@ -480,14 +480,14 @@ body.senku-admin-shell :is(.admin-main,.users-main,.transaction-main,.platform-m
 body.senku-admin-shell :is(.admin-main,.users-main,.transaction-main,.platform-main,.kyc-main,.sub-agent-main,.agent-main) > :first-child { margin-top:0 !important; }
 body.senku-admin-shell :is(.admin-topbar,.page-header,.dashboard-header) {
   min-height:94px !important; margin:-28px -28px 26px !important; padding:18px 28px !important;
-  background:rgba(7,10,15,.76) !important; border-bottom:1px solid rgba(255,255,255,.065) !important; backdrop-filter:blur(20px);
+  background:rgba(7, 10, 14,.76) !important; border-bottom:1px solid rgba(255,255,255,.065) !important; backdrop-filter:blur(20px);
 }
 body.senku-admin-shell :is(.admin-topbar,.page-header,.dashboard-header) h1 { font-size:clamp(1.55rem,3vw,2.25rem) !important; }
 body.senku-admin-shell :is(.stats-grid,.summary-grid,.agent-stats,.admin-stats,.kyc-stats,.transaction-stats) { gap:14px !important; }
 body.senku-admin-shell :is(.stat-card,.summary-card,.stat-box) { min-height:126px; padding:20px !important; }
 body.senku-admin-shell :is(.stat-card h2,.summary-card h2,.stat-box h2) { font-size:clamp(1.5rem,2.5vw,2.05rem) !important; }
 body.senku-admin-shell :is(.admin-card,.users-card,.transaction-card,.platform-card,.section-card,.quick-actions,.recent-users,.security-section,.system-status,.agent-card,.requests-card,.kyc-card) {
-  border:1px solid rgba(255,255,255,.07) !important; background:linear-gradient(145deg,rgba(17,24,33,.94),rgba(8,12,17,.97)) !important; border-radius:20px !important; box-shadow:var(--sp-shadow-soft) !important;
+  border:1px solid rgba(255,255,255,.07) !important; background:linear-gradient(145deg,rgba(7, 10, 14,.94),rgba(7, 10, 14,.97)) !important; border-radius:20px !important; box-shadow:var(--sp-shadow-soft) !important;
 }
 body.page-admin-dashboard :is(.dashboard-stats,.admin-stats) { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:14px !important; }
 body.page-admin-dashboard .quick-actions { padding:22px !important; }
@@ -511,9 +511,9 @@ body.page-sub-agent-dashboard .agent-sidebar { width:var(--sp-sidebar) !importan
 /* ======================================================================
    POPUPS / MODALS
    ====================================================================== */
-.senku-obsidian-amber :is(.popup-overlay,.modal-overlay,.agent-modal-overlay,.request-modal,.platform-modal,.image-modal) { backdrop-filter:blur(10px); background:rgba(2,4,7,.75) !important; }
+.senku-obsidian-amber :is(.popup-overlay,.modal-overlay,.agent-modal-overlay,.request-modal,.platform-modal,.image-modal) { backdrop-filter:blur(10px); background:rgba(7, 10, 14,.75) !important; }
 .senku-obsidian-amber :is(.popup-box,.modal-card,.agent-modal,.request-modal-card,.platform-modal-box,.delete-account-modal-content) {
-  border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#151c25,#090d13) !important; border-radius:22px !important; box-shadow:0 35px 100px rgba(0,0,0,.55) !important;
+  border:1px solid rgba(255,180,62,.2) !important; background:linear-gradient(145deg,#151c25,#070a0e) !important; border-radius:22px !important; box-shadow:0 35px 100px rgba(0,0,0,.55) !important;
 }
 .senku-obsidian-amber .popup-icon.warning { color:#171006 !important; background:linear-gradient(145deg,var(--sp-accent-2),var(--sp-accent)) !important; }
 .senku-obsidian-amber .popup-btn.confirm { color:#171006 !important; background:linear-gradient(135deg,var(--sp-accent-2),var(--sp-accent)) !important; }
@@ -555,7 +555,7 @@ body.page-sub-agent-dashboard .agent-sidebar { width:var(--sp-sidebar) !importan
   body.senku-admin-shell #adminMobileMenuButton,
   body.page-sub-agent-dashboard #menuToggle { display:grid !important; }
   body.senku-user-shell :is(.wallet-container,.deposit-container,.withdraw-container,.transactions-container,.profile-container,.settings-container,.kyc-container) { width:min(100% - 28px,1180px) !important; }
-  body.page-index .nav-links,body.page-index .nav-buttons { background:#0d1219 !important; border-color:rgba(255,255,255,.08) !important; box-shadow:var(--sp-shadow) !important; }
+  body.page-index .nav-links,body.page-index .nav-buttons { background:#070a0e !important; border-color:rgba(255,255,255,.08) !important; box-shadow:var(--sp-shadow) !important; }
   body.page-index .stats-section .container { grid-template-columns:repeat(2,1fr); }
   body.page-index .stat-box + .stat-box { border-left:0 !important; }
   body.page-index .stat-box:nth-child(even) { border-left:1px solid rgba(255,255,255,.07) !important; }
@@ -613,4 +613,100 @@ body.page-sub-agent-dashboard .agent-sidebar { width:var(--sp-sidebar) !importan
   body.page-index .stat-box:nth-child(n) { border-left:0 !important; border-top:1px solid rgba(255,255,255,.07) !important; }
   body.page-index .stat-box:first-child { border-top:0 !important; }
   body.page-wallet .wallet-actions { grid-template-columns:1fr !important; }
+}
+
+
+/* ======================================================================
+   OBSIDIAN AMBER V2 — FINAL CONSISTENCY, OVERFLOW & LEGACY-COLOR FIXES
+   ====================================================================== */
+html, body { width:100%; max-width:100%; overflow-x:hidden !important; }
+body.senku-obsidian-amber { --purple:#ffb43e; --primary:#ffb43e; --primary-color:#ffb43e; --secondary:#d28a22; --accent:#ffb43e; --accent-color:#ffb43e; --blue:#d5962d; --cyan:#e4ad50; }
+body.senku-obsidian-amber *, body.senku-obsidian-amber *::before, body.senku-obsidian-amber *::after { min-width:0; }
+body.senku-obsidian-amber :is(.dashboard-layout,.wallet-layout,.deposit-layout,.withdraw-layout,.transactions-layout,.profile-layout,.settings-layout,.kyc-layout,.admin-layout,.users-layout,.transaction-layout,.platform-layout,.sub-agent-layout,.agent-dashboard-layout) { max-width:100% !important; overflow-x:clip !important; }
+
+/* App shell now moves the direct page wrapper instead of a nested <main>. */
+.senku-shell-content {
+  width:calc(100% - var(--sp-sidebar)) !important;
+  max-width:calc(100% - var(--sp-sidebar)) !important;
+  min-height:100vh !important;
+  margin-left:var(--sp-sidebar) !important;
+  padding-top:calc(var(--sp-topbar) + 28px) !important;
+  overflow-x:clip !important;
+  background:transparent !important;
+}
+.senku-shell-main-content { width:100% !important; max-width:100% !important; margin-left:0 !important; min-width:0 !important; }
+.senku-topbar-heading { display:flex; align-items:center; gap:12px; min-width:0; }
+.senku-topbar-heading > div { min-width:0; }
+.senku-shell-brand > div:last-child { display:flex; flex-direction:column; min-width:0; }
+.senku-shell-brand strong,.senku-shell-brand small { display:block; }
+.senku-shell-brand strong { color:var(--sp-text) !important; line-height:1.1; }
+.senku-shell-brand small { margin-top:3px; line-height:1.2; }
+.senku-shell-topbar { overflow:hidden; }
+
+/* Remove every remaining legacy purple/blue treatment from UI surfaces. */
+body.senku-obsidian-amber :is(
+ .balance-card,.wallet-main-card,.deposit-card,.withdraw-card,.settings-hero,.kyc-hero,.profile-card,
+ .cta-box,.wallet-action,.action-card,.quick-action,.payment-method,.method-option,.method-card,.gateway-card,
+ .admin-stat-card,.agent-stat-card,.summary-card,.stat-card,.stat-box,.info-card,.feature-card,.service-card
+) { border-color:rgba(255,180,62,.14) !important; }
+body.senku-obsidian-amber :is(
+ .balance-card::before,.balance-card::after,.wallet-main-card::before,.wallet-main-card::after,
+ .deposit-card::before,.deposit-card::after,.withdraw-card::before,.withdraw-card::after,
+ .settings-hero::before,.settings-hero::after,.kyc-hero::before,.kyc-hero::after
+) { border-color:rgba(255,180,62,.17) !important; background:rgba(255,180,62,.055) !important; }
+body.senku-obsidian-amber :is(
+ .balance-card i,.wallet-main-card > i,.deposit-card > i,.withdraw-card > i,.settings-hero i,.kyc-hero i,
+ .quick-action i,.action-card i,.wallet-action i,.method-option i,.payment-method i,.empty-state i,
+ .no-transactions i,.no-activity i,.card-icon,.action-icon,.feature-icon,.service-icon
+) { color:var(--sp-accent) !important; }
+body.senku-obsidian-amber :is(
+ .quick-action-icon,.action-icon,.card-icon,.feature-icon,.service-icon,.payment-icon,.method-icon,.profile-avatar,
+ .summary-icon,.stat-icon,.security-icon,.setting-icon,.hero-icon,.transaction-icon,.agent-stat-icon,.system-status-icon
+) { background:rgba(255,180,62,.11) !important; border-color:rgba(255,180,62,.19) !important; color:var(--sp-accent) !important; box-shadow:none !important; }
+body.senku-obsidian-amber :is(
+ .primary-btn,.action-btn,.main-action,.continue-button,.continue-btn,.payment-button,.subscribe-btn,
+ .add-funds-button,#addFundsButton,.wallet-actions a,.wallet-actions button,.view-history-btn,.verify-button
+) { color:#171006 !important; background:linear-gradient(135deg,var(--sp-accent-2),var(--sp-accent) 58%,#dc8b1c) !important; border-color:rgba(255,215,143,.48) !important; box-shadow:0 12px 34px rgba(255,180,62,.16) !important; }
+body.senku-obsidian-amber :is(.gradient-text,.text-gradient,[class*="gradient-text"]) { color:var(--sp-accent) !important; background:none !important; -webkit-text-fill-color:currentColor !important; }
+body.senku-obsidian-amber :is(.active-tab,.tab.active,.filter-btn.active,.method-option.active,.payment-method.active,.selected) { border-color:rgba(255,180,62,.48) !important; background:rgba(255,180,62,.12) !important; color:var(--sp-accent-2) !important; }
+body.senku-obsidian-amber :is(.view-all,.link-button,.forgot-link,.resend-link,.back-link,a.accent) { color:var(--sp-accent) !important; }
+
+/* User dashboard uses the same exact navigation styling as all account pages. */
+body.page-dashboard #dashboardSidebar { padding:22px 16px !important; }
+body.page-dashboard #dashboardSidebar .senku-shell-brand { flex:none; }
+body.page-dashboard #dashboardSidebar nav { flex:1; }
+body.page-dashboard #dashboardSidebar .logout { margin-top:auto; }
+body.page-dashboard .main-area { max-width:calc(100% - var(--sp-sidebar)) !important; overflow-x:clip !important; }
+body.page-dashboard .content { width:100%; max-width:1500px; margin-inline:auto; }
+body.page-dashboard :is(.cards,.quick-actions,.account-summary,.overview-grid,.dashboard-grid) > * { min-width:0; }
+
+/* Keep desktop grids inside the viewport instead of cutting the right edge. */
+body.senku-obsidian-amber :is(.cards,.wallet-stats,.summary-grid,.quick-actions,.quick-actions-grid,.account-summary,.settings-grid,.form-grid,.status-grid,.admin-stats,.dashboard-stats,.stats-grid) { max-width:100% !important; }
+body.senku-obsidian-amber :is(.table-container,.transactions-card,.history-card,.recent-users,.users-card,.transaction-card) { max-width:100% !important; overflow-x:auto !important; }
+body.senku-obsidian-amber table { max-width:100%; }
+
+/* Obsidian-amber chart and decorative graphics. */
+body.senku-obsidian-amber :is(.chart-line,.activity-line,.line-chart,.chart-path) { stroke:var(--sp-accent) !important; }
+body.senku-obsidian-amber :is(.chart-dot,.activity-dot) { fill:var(--sp-accent-2) !important; box-shadow:0 0 18px rgba(255,180,62,.28) !important; }
+body.senku-obsidian-amber :is(.chart-bar,.bar,.graph-bar) { background:linear-gradient(to top,#9d5b0b,var(--sp-accent-2)) !important; }
+
+@media (max-width: 1200px) {
+  body.page-dashboard .cards { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  body.page-dashboard .quick-actions { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width: 860px) {
+  .senku-shell-content { width:100% !important; max-width:100% !important; margin-left:0 !important; padding-top:calc(var(--sp-topbar) + 18px) !important; }
+  body.page-dashboard .main-area { max-width:100% !important; }
+  body.page-index .menu-btn { display:grid !important; }
+  body.page-index .nav-links, body.page-index .nav-buttons { display:none !important; }
+  body.page-index .nav-links.mobile-active { display:flex !important; }
+  body.page-index .nav-buttons.mobile-active { display:grid !important; }
+}
+@media (max-width: 640px) {
+  .senku-shell-content { padding-top:82px !important; }
+  body.page-dashboard .cards, body.page-dashboard .quick-actions { grid-template-columns:1fr !important; }
+  body.page-dashboard .content { padding:14px !important; }
+  body.senku-user-shell :is(.wallet-container,.deposit-container,.withdraw-container,.transactions-container,.profile-container,.settings-container,.kyc-container) { width:calc(100% - 24px) !important; }
+  body.senku-obsidian-amber :is(.wallet-actions,.payment-methods,.method-grid,.quick-actions-grid,.account-summary,.profile-meta) { grid-template-columns:1fr !important; }
+  body.senku-obsidian-amber :is(.wallet-main-card,.deposit-card,.withdraw-card,.settings-hero,.kyc-hero) { padding:22px 18px !important; }
 }

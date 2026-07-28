@@ -363,7 +363,7 @@ value??""
 
 .replaceAll('"',"&quot;")
 
-.replaceAll("'","&#039;");
+.replaceAll("'","&#9c5b0d;");
 
 }
 

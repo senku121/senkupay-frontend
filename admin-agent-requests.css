@@ -11,13 +11,13 @@
 
 :root{
 
-    --bg:#050816;
-    --sidebar:#0b1220;
-    --card:#111827;
-    --card2:#171f33;
+    --bg:#070a0e;
+    --sidebar:#070a0e;
+    --card:#070a0e;
+    --card2:#0e1218;
 
-    --primary:#7b2cff;
-    --secondary:#00d4ff;
+    --primary:#ffb43e;
+    --secondary:#e6a43a;
 
     --text:#ffffff;
     --muted:#9ca3af;
@@ -120,13 +120,13 @@ body::before{
 
     radial-gradient(
         circle at top left,
-        rgba(123,44,255,.18),
+        rgba(255,180,62,.18),
         transparent 35%
     ),
 
     radial-gradient(
         circle at bottom right,
-        rgba(0,212,255,.12),
+        rgba(230,164,58,.12),
         transparent 35%
     );
 
@@ -170,7 +170,7 @@ body::before{
 
     border-right:1px solid var(--border);
 
-    background:rgba(11,18,32,.96);
+    background:rgba(7, 10, 14,.96);
 
     backdrop-filter:blur(18px);
 
@@ -219,7 +219,7 @@ body::before{
     );
 
     box-shadow:
-    0 20px 45px rgba(123,44,255,.30);
+    0 20px 45px rgba(255,180,62,.30);
 
 }
 
@@ -282,14 +282,14 @@ body::before{
 
     color:#fff;
 
-    border:1px solid rgba(123,44,255,.30);
+    border:1px solid rgba(255,180,62,.30);
 
     background:
 
     linear-gradient(
         135deg,
-        rgba(123,44,255,.32),
-        rgba(0,212,255,.15)
+        rgba(255,180,62,.32),
+        rgba(230,164,58,.15)
     );
 
 }
@@ -412,7 +412,7 @@ body::before{
 
     margin-bottom:8px;
 
-    color:#9d7dff;
+    color:#e8bd70;
 
     font-size:12px;
 
@@ -478,7 +478,7 @@ body::before{
 
     transform:translateY(-4px);
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -548,11 +548,11 @@ body::before{
 
 .agent-requests-message.info{
 
-    color:#d2f3ff;
+    color:#f2e2c2;
 
-    background:rgba(0,212,255,.10);
+    background:rgba(230,164,58,.10);
 
-    border-color:rgba(0,212,255,.24);
+    border-color:rgba(230,164,58,.24);
 
 }
 
@@ -586,7 +586,7 @@ body::before{
 
     border:1px solid var(--border);
 
-    background:rgba(17,24,39,.92);
+    background:rgba(7, 10, 14,.92);
 
     transition:.35s;
 
@@ -596,7 +596,7 @@ body::before{
 
     transform:translateY(-5px);
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -646,9 +646,9 @@ body::before{
 
 .money-icon{
 
-    color:#b794ff;
+    color:#ffd17a;
 
-    background:rgba(123,44,255,.15);
+    background:rgba(255,180,62,.15);
 
 }
 
@@ -692,7 +692,7 @@ body::before{
 
     border:1px solid var(--border);
 
-    background:rgba(17,24,39,.92);
+    background:rgba(7, 10, 14,.92);
 
     box-shadow:
     0 18px 40px rgba(0,0,0,.18);
@@ -727,7 +727,7 @@ body::before{
 
     margin-bottom:8px;
 
-    color:#9d7dff;
+    color:#e8bd70;
 
     font-size:12px;
 
@@ -799,7 +799,7 @@ body::before{
 
 .search-box:hover{
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -808,13 +808,13 @@ body::before{
     border-color:var(--primary);
 
     box-shadow:
-    0 0 0 4px rgba(123,44,255,.12);
+    0 0 0 4px rgba(255,180,62,.12);
 
 }
 
 .search-box i{
 
-    color:#b794ff;
+    color:#ffd17a;
 
 }
 
@@ -946,7 +946,7 @@ tbody tr{
 
 tbody tr:hover{
 
-    background:rgba(123,44,255,.05);
+    background:rgba(255,180,62,.05);
 
 }
 
@@ -964,7 +964,7 @@ tbody tr:hover{
 
     margin-right:8px;
 
-    color:#b794ff;
+    color:#ffd17a;
 
 }
 
@@ -1050,7 +1050,7 @@ tbody tr:hover{
 
     border-radius:50px;
 
-    color:#d8c7ff;
+    color:#efd6a0;
 
     font-size:12px;
 
@@ -1058,9 +1058,9 @@ tbody tr:hover{
 
     text-transform:capitalize;
 
-    background:rgba(123,44,255,.15);
+    background:rgba(255,180,62,.15);
 
-    border:1px solid rgba(123,44,255,.25);
+    border:1px solid rgba(255,180,62,.25);
 
 }
 
@@ -1163,9 +1163,9 @@ tbody tr:hover{
 
 .view-request{
 
-    background:rgba(37,99,235,.20);
+    background:rgba(200,129,24,.20);
 
-    border:1px solid rgba(59,130,246,.32);
+    border:1px solid rgba(212,147,40,.32);
 
 }
 
@@ -1195,7 +1195,7 @@ tbody tr:hover{
 
 .view-request:hover{
 
-    background:#2563eb;
+    background:#c88118;
 
 }
 
@@ -1227,7 +1227,7 @@ tbody tr:hover{
 
     margin-bottom:18px;
 
-    color:#7b2cff;
+    color:#ffb43e;
 
     font-size:54px;
 
@@ -1321,7 +1321,7 @@ tbody tr:hover{
 
     transform:translateY(-2px);
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -1371,7 +1371,7 @@ tbody tr:hover{
 
     transform:translateY(-4px);
 
-    border-color:rgba(123,44,255,.32);
+    border-color:rgba(255,180,62,.32);
 
 }
 
@@ -1391,11 +1391,11 @@ tbody tr:hover{
 
     border-radius:18px;
 
-    color:#b794ff;
+    color:#ffd17a;
 
     font-size:21px;
 
-    background:rgba(123,44,255,.15);
+    background:rgba(255,180,62,.15);
 
 }
 
@@ -1480,8 +1480,8 @@ tbody tr:hover{
 
     linear-gradient(
         145deg,
-        rgba(25,31,52,.98),
-        rgba(10,15,28,.98)
+        rgba(14, 18, 24,.98),
+        rgba(7, 10, 14,.98)
     );
 
     box-shadow:
@@ -1789,11 +1789,11 @@ tbody tr:hover{
 
 .request-modal-message.info{
 
-    color:#d7f6ff;
+    color:#f2e1be;
 
-    background:rgba(0,212,255,.10);
+    background:rgba(230,164,58,.10);
 
-    border-color:rgba(0,212,255,.22);
+    border-color:rgba(230,164,58,.22);
 
 }
 
@@ -1989,7 +1989,7 @@ tbody tr:hover{
 
     margin-bottom:10px;
 
-    color:#dbe5f5;
+    color:#f2e1be;
 
     font-size:14px;
 
@@ -2036,7 +2036,7 @@ tbody tr:hover{
     border-color:var(--primary);
 
     box-shadow:
-    0 0 0 4px rgba(123,44,255,.14);
+    0 0 0 4px rgba(255,180,62,.14);
 
 }
 
@@ -2729,7 +2729,7 @@ textarea:-webkit-autofill{
 
 ::-webkit-scrollbar-track{
 
-    background:#08101d;
+    background:#070a0e;
 
 }
 
@@ -2763,7 +2763,7 @@ textarea:-webkit-autofill{
 
     scrollbar-color:
     var(--primary)
-    #08101d;
+    #070a0e;
 
 }
 

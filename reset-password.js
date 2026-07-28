@@ -296,7 +296,7 @@ width="75%";
 
 text="Good";
 
-color="#3b82f6";
+color="#d49328";
 
 }
 

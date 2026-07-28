@@ -1,14 +1,14 @@
 /* Senku Pay global popup — Obsidian Amber */
 .popup-overlay{
   position:fixed; inset:0; z-index:100000; display:grid; place-items:center; padding:20px;
-  background:rgba(2,4,7,.78); backdrop-filter:blur(12px); opacity:0; visibility:hidden;
+  background:rgba(7, 10, 14,.78); backdrop-filter:blur(12px); opacity:0; visibility:hidden;
   transition:opacity .25s ease,visibility .25s ease;
 }
 .popup-overlay.active{opacity:1;visibility:visible}
 .popup-box{
   width:min(100%,430px); padding:34px 30px 28px; text-align:center; color:#f8f7f2;
   border:1px solid rgba(255,180,62,.2); border-radius:24px;
-  background:linear-gradient(145deg,#151c25,#090d13); box-shadow:0 34px 100px rgba(0,0,0,.58);
+  background:linear-gradient(145deg,#151c25,#070a0e); box-shadow:0 34px 100px rgba(0,0,0,.58);
   transform:translateY(16px) scale(.97); transition:transform .28s cubic-bezier(.2,.8,.2,1);
 }
 .popup-overlay.active .popup-box{transform:none}
