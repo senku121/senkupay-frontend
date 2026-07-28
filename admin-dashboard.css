@@ -11,13 +11,13 @@
 
 :root{
 
-    --bg:#070a0e;
-    --sidebar:#070a0e;
-    --card:#070a0e;
-    --card2:#0e1218;
+    --bg:#050816;
+    --sidebar:#0b1220;
+    --card:#111827;
+    --card2:#171f33;
 
-    --primary:#ffb43e;
-    --secondary:#e6a43a;
+    --primary:#7b2cff;
+    --secondary:#00d4ff;
 
     --text:#ffffff;
     --muted:#9ca3af;
@@ -118,7 +118,7 @@ body::before{
 
         circle at top left,
 
-        rgba(255,180,62,.18),
+        rgba(123,44,255,.18),
 
         transparent 35%
 
@@ -128,7 +128,7 @@ body::before{
 
         circle at bottom right,
 
-        rgba(230,164,58,.12),
+        rgba(0,212,255,.12),
 
         transparent 35%
 
@@ -170,7 +170,7 @@ body::before{
 
     padding:28px 22px;
 
-    background:rgba(7, 10, 14,.95);
+    background:rgba(11,18,32,.95);
 
     border-right:1px solid var(--border);
 
@@ -226,7 +226,7 @@ body::before{
 
     box-shadow:
 
-    0 20px 45px rgba(255,180,62,.30);
+    0 20px 45px rgba(123,44,255,.30);
 
 }
 
@@ -290,13 +290,13 @@ body::before{
 
     135deg,
 
-    rgba(255,180,62,.32),
+    rgba(123,44,255,.32),
 
-    rgba(230,164,58,.15)
+    rgba(0,212,255,.15)
 
     );
 
-    border:1px solid rgba(255,180,62,.30);
+    border:1px solid rgba(123,44,255,.30);
 
 }
 
@@ -420,7 +420,7 @@ body::before{
 
 .topbar-label{
 
-    color:#e8bd70;
+    color:#9d7dff;
 
     font-size:12px;
 
@@ -462,7 +462,7 @@ body::before{
 
     border-radius:22px;
 
-    background:rgba(7, 10, 14,.92);
+    background:rgba(17,24,39,.92);
 
     border:1px solid var(--border);
 
@@ -561,7 +561,7 @@ body::before{
 
     border-radius:24px;
 
-    background:rgba(7, 10, 14,.92);
+    background:rgba(17,24,39,.92);
 
     border:1px solid var(--border);
 
@@ -585,7 +585,7 @@ body::before{
 
     border-radius:50%;
 
-    background:rgba(255,180,62,.10);
+    background:rgba(123,44,255,.10);
 
 }
 
@@ -593,7 +593,7 @@ body::before{
 
     transform:translateY(-6px);
 
-    border-color:rgba(255,180,62,.35);
+    border-color:rgba(123,44,255,.35);
 
     box-shadow:
 
@@ -625,11 +625,11 @@ body::before{
 
     border-radius:20px;
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-size:24px;
 
-    background:rgba(255,180,62,.16);
+    background:rgba(123,44,255,.16);
 
 }
 
@@ -675,7 +675,7 @@ body::before{
 
     border-radius:28px;
 
-    background:rgba(7, 10, 14,.92);
+    background:rgba(17,24,39,.92);
 
     border:1px solid var(--border);
 
@@ -701,7 +701,7 @@ body::before{
 
 .section-label{
 
-    color:#e8bd70;
+    color:#9d7dff;
 
     font-size:12px;
 
@@ -767,9 +767,9 @@ body::before{
 
     transform:translateY(-5px);
 
-    border-color:rgba(255,180,62,.35);
+    border-color:rgba(123,44,255,.35);
 
-    background:rgba(255,180,62,.06);
+    background:rgba(123,44,255,.06);
 
 }
 
@@ -967,7 +967,7 @@ body::before{
 
 .table-search i{
 
-    color:#ffd17a;
+    color:#b794ff;
 
 }
 
@@ -1098,11 +1098,11 @@ td{
 
 .frozen-status{
 
-    color:#e8c27f;
+    color:#60a5fa;
 
-    background:rgba(212,147,40,.15);
+    background:rgba(59,130,246,.15);
 
-    border:1px solid rgba(212,147,40,.24);
+    border:1px solid rgba(59,130,246,.24);
 
 }
 
@@ -1138,9 +1138,9 @@ td{
 
     font-weight:700;
 
-    background:rgba(255,180,62,.20);
+    background:rgba(123,44,255,.20);
 
-    border:1px solid rgba(255,180,62,.35);
+    border:1px solid rgba(123,44,255,.35);
 
     transition:.3s;
 
@@ -1324,9 +1324,9 @@ td{
 
     145deg,
 
-    rgba(14, 18, 24,.98),
+    rgba(28,34,58,.98),
 
-    rgba(7, 10, 14,.98)
+    rgba(13,18,34,.98)
 
     );
 
@@ -1648,9 +1648,9 @@ td{
 
     135deg,
 
-    #d6942b,
+    #0284c7,
 
-    #c88118
+    #2563eb
 
     );
 
@@ -1682,9 +1682,9 @@ td{
 
     135deg,
 
-    #d88c20,
+    #7c3aed,
 
-    #d99328
+    #9333ea
 
     );
 
@@ -1795,7 +1795,7 @@ td{
 .modal-input span,
 .modal-input i{
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-weight:800;
 
@@ -2446,7 +2446,7 @@ td{
 
     box-shadow:
     0 0 0 4px
-    rgba(255,180,62,.14);
+    rgba(123,44,255,.14);
 
 }
 
@@ -2516,7 +2516,7 @@ input:-webkit-autofill{
 
 ::-webkit-scrollbar-track{
 
-    background:#070a0e;
+    background:#08101d;
 
 }
 
@@ -2550,7 +2550,7 @@ input:-webkit-autofill{
 
     scrollbar-color:
     var(--primary)
-    #070a0e;
+    #08101d;
 
 }
 

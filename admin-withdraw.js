@@ -203,7 +203,7 @@ return String(value ?? "")
 .replaceAll("<", "&lt;")
 .replaceAll(">", "&gt;")
 .replaceAll('"', "&quot;")
-.replaceAll("'", "&#9c5b0d;");
+.replaceAll("'", "&#039;");
 
 }
 

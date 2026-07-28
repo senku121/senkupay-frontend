@@ -4,15 +4,15 @@
 ========================================== */
 
 :root {
-    --background: #070a0e;
-    --surface: rgba(14, 18, 24, .92);
-    --surface-solid: #0e1218;
+    --background: #070916;
+    --surface: rgba(18, 23, 43, .92);
+    --surface-solid: #171d34;
     --text: #ffffff;
     --muted: #9ca3b9;
     --muted-dark: #7d88aa;
-    --primary: #ffb43e;
-    --primary-light: #dda03a;
-    --accent: #ffb43e;
+    --primary: #7b2cff;
+    --primary-light: #8b5cf6;
+    --accent: #00d5ff;
     --success: #2ed573;
     --warning: #f7b731;
     --danger: #ff647c;
@@ -39,7 +39,7 @@ body {
 }
 
 body::selection {
-    background: rgba(232, 166, 57, .45);
+    background: rgba(123, 44, 255, .45);
     color: #fff;
 }
 
@@ -129,7 +129,7 @@ header {
     font-size: 24px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary-light), var(--accent));
-    box-shadow: 0 15px 35px rgba(255,180,62,.35);
+    box-shadow: 0 15px 35px rgba(123,44,255,.35);
 }
 
 .logo h2 {
@@ -191,7 +191,7 @@ main {
     justify-content: center;
     background: linear-gradient(135deg, var(--primary-light), var(--accent));
     font-size: 34px;
-    box-shadow: 0 18px 40px rgba(255,180,62,.26);
+    box-shadow: 0 18px 40px rgba(123,44,255,.26);
     animation: iconFloat 4s ease-in-out infinite;
 }
 
@@ -238,9 +238,9 @@ main {
 }
 
 .form-message.info {
-    color: #f4dfb6;
-    background: rgba(232, 166, 57, .09);
-    border-color: rgba(232, 166, 57, .24);
+    color: #bdefff;
+    background: rgba(0, 213, 255, .09);
+    border-color: rgba(0, 213, 255, .24);
 }
 
 /* Form */
@@ -272,7 +272,7 @@ form {
 .input-group label {
     font-size: 15px;
     font-weight: 600;
-    color: #f2e1be;
+    color: #d7dcef;
 }
 
 .input-group input,
@@ -294,7 +294,7 @@ form {
 
 .input-group input:hover,
 .input-group select:hover {
-    border-color: rgba(255,180,62,.48);
+    border-color: rgba(123,44,255,.48);
 }
 
 .input-group input::placeholder {
@@ -304,8 +304,8 @@ form {
 .input-group input:focus,
 .input-group select:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(255,180,62,.15);
-    background: #0e1218;
+    box-shadow: 0 0 0 4px rgba(123,44,255,.15);
+    background: #1a2039;
 }
 
 .input-group input.invalid,
@@ -320,7 +320,7 @@ form {
 
 .input-group select option {
     color: #fff;
-    background: #0e1218;
+    background: #171d34;
 }
 
 .field-help {
@@ -437,7 +437,7 @@ form {
     justify-content: center;
     gap: 12px;
     transition: .35s ease;
-    box-shadow: 0 18px 40px rgba(255,180,62,.30);
+    box-shadow: 0 18px 40px rgba(123,44,255,.30);
 }
 
 .register-btn::before {
@@ -459,7 +459,7 @@ form {
 
 .register-btn:hover:not(:disabled) {
     transform: translateY(-4px);
-    box-shadow: 0 25px 50px rgba(255,180,62,.45);
+    box-shadow: 0 25px 50px rgba(123,44,255,.45);
 }
 
 .register-btn:hover:not(:disabled)::before {
@@ -522,7 +522,7 @@ form {
 }
 
 ::-webkit-scrollbar-track {
-    background: #070a0e;
+    background: #08101d;
 }
 
 ::-webkit-scrollbar-thumb {

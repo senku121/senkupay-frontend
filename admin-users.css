@@ -11,13 +11,13 @@
 
 :root{
 
-    --bg:#070a0e;
-    --sidebar:#070a0e;
-    --card:#070a0e;
-    --card2:#0e1218;
+    --bg:#050816;
+    --sidebar:#0b1220;
+    --card:#111827;
+    --card2:#171f33;
 
-    --primary:#ffb43e;
-    --secondary:#e6a43a;
+    --primary:#7b2cff;
+    --secondary:#00d4ff;
 
     --text:#ffffff;
     --muted:#9ca3af;
@@ -119,13 +119,13 @@ body::before{
 
     radial-gradient(
         circle at top left,
-        rgba(255,180,62,.18),
+        rgba(123,44,255,.18),
         transparent 35%
     ),
 
     radial-gradient(
         circle at bottom right,
-        rgba(230,164,58,.12),
+        rgba(0,212,255,.12),
         transparent 35%
     );
 
@@ -167,7 +167,7 @@ body::before{
 
     padding:28px 22px;
 
-    background:rgba(7, 10, 14,.96);
+    background:rgba(11,18,32,.96);
 
     border-right:1px solid var(--border);
 
@@ -217,7 +217,7 @@ body::before{
 
     box-shadow:
 
-    0 20px 45px rgba(255,180,62,.30);
+    0 20px 45px rgba(123,44,255,.30);
 
 }
 
@@ -284,11 +284,11 @@ body::before{
 
     linear-gradient(
         135deg,
-        rgba(255,180,62,.32),
-        rgba(230,164,58,.15)
+        rgba(123,44,255,.32),
+        rgba(0,212,255,.15)
     );
 
-    border:1px solid rgba(255,180,62,.30);
+    border:1px solid rgba(123,44,255,.30);
 
 }
 
@@ -410,7 +410,7 @@ body::before{
 
     margin-bottom:8px;
 
-    color:#e8bd70;
+    color:#9d7dff;
 
     font-size:12px;
 
@@ -528,11 +528,11 @@ body::before{
 
 .admin-users-message.info{
 
-    color:#f2e2c2;
+    color:#d2f3ff;
 
-    background:rgba(230,164,58,.10);
+    background:rgba(0,212,255,.10);
 
-    border-color:rgba(230,164,58,.24);
+    border-color:rgba(0,212,255,.24);
 
 }
 
@@ -566,7 +566,7 @@ body::before{
 
     border:1px solid var(--border);
 
-    background:rgba(7, 10, 14,.92);
+    background:rgba(17,24,39,.92);
 
     transition:.35s;
 
@@ -576,7 +576,7 @@ body::before{
 
     transform:translateY(-5px);
 
-    border-color:rgba(255,180,62,.35);
+    border-color:rgba(123,44,255,.35);
 
 }
 
@@ -596,11 +596,11 @@ body::before{
 
     border-radius:19px;
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-size:23px;
 
-    background:rgba(255,180,62,.15);
+    background:rgba(123,44,255,.15);
 
 }
 
@@ -634,7 +634,7 @@ body::before{
 
     border:1px solid var(--border);
 
-    background:rgba(7, 10, 14,.92);
+    background:rgba(17,24,39,.92);
 
     box-shadow:
     0 18px 40px rgba(0,0,0,.18);
@@ -693,7 +693,7 @@ body::before{
 
 .search-area:hover{
 
-    border-color:rgba(255,180,62,.35);
+    border-color:rgba(123,44,255,.35);
 
 }
 
@@ -702,13 +702,13 @@ body::before{
     border-color:var(--primary);
 
     box-shadow:
-    0 0 0 4px rgba(255,180,62,.14);
+    0 0 0 4px rgba(123,44,255,.14);
 
 }
 
 .search-area i{
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-size:17px;
 
@@ -812,7 +812,7 @@ body::before{
 
     transform:translateY(-3px);
 
-    border-color:rgba(255,180,62,.32);
+    border-color:rgba(123,44,255,.32);
 
 }
 
@@ -898,7 +898,7 @@ tbody tr{
 
 tbody tr:hover{
 
-    background:rgba(255,180,62,.05);
+    background:rgba(123,44,255,.05);
 
 }
 
@@ -916,7 +916,7 @@ tbody tr:hover{
 
     margin-right:8px;
 
-    color:#ffd17a;
+    color:#b794ff;
 
 }
 
@@ -958,11 +958,11 @@ tbody tr:hover{
 
 .user-status.frozen{
 
-    color:#e8c27f;
+    color:#60a5fa;
 
-    background:rgba(212,147,40,.15);
+    background:rgba(59,130,246,.15);
 
-    border:1px solid rgba(212,147,40,.24);
+    border:1px solid rgba(59,130,246,.24);
 
 }
 
@@ -1010,9 +1010,9 @@ tbody tr:hover{
 
     font-weight:700;
 
-    background:rgba(255,180,62,.20);
+    background:rgba(123,44,255,.20);
 
-    border:1px solid rgba(255,180,62,.35);
+    border:1px solid rgba(123,44,255,.35);
 
     transition:.3s;
 
@@ -1103,7 +1103,7 @@ tbody tr:hover{
 
     transform:translateY(-2px);
 
-    border-color:rgba(255,180,62,.35);
+    border-color:rgba(123,44,255,.35);
 
 }
 
@@ -1147,7 +1147,7 @@ tbody tr:hover{
 
     margin-bottom:8px;
 
-    color:#e8bd70;
+    color:#9d7dff;
 
     font-size:12px;
 
@@ -1211,7 +1211,7 @@ tbody tr:hover{
 
     transform:translateY(-4px);
 
-    border-color:rgba(255,180,62,.32);
+    border-color:rgba(123,44,255,.32);
 
 }
 
@@ -1231,11 +1231,11 @@ tbody tr:hover{
 
     border-radius:17px;
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-size:20px;
 
-    background:rgba(255,180,62,.15);
+    background:rgba(123,44,255,.15);
 
 }
 
@@ -1320,8 +1320,8 @@ tbody tr:hover{
 
     linear-gradient(
         145deg,
-        rgba(14, 18, 24,.98),
-        rgba(7, 10, 14,.98)
+        rgba(25,31,52,.98),
+        rgba(10,15,28,.98)
     );
 
     box-shadow:
@@ -1559,11 +1559,11 @@ tbody tr:hover{
 
 .user-modal-message.info{
 
-    color:#f2e1be;
+    color:#d7f6ff;
 
-    background:rgba(230,164,58,.10);
+    background:rgba(0,212,255,.10);
 
-    border-color:rgba(230,164,58,.22);
+    border-color:rgba(0,212,255,.22);
 
 }
 
@@ -1631,7 +1631,7 @@ tbody tr:hover{
 
 .freeze-user-action{
 
-    background:linear-gradient(135deg,#d6942b,#c88118);
+    background:linear-gradient(135deg,#0284c7,#2563eb);
 
 }
 
@@ -1643,7 +1643,7 @@ tbody tr:hover{
 
 .reset-password-action{
 
-    background:linear-gradient(135deg,#d88c20,#d99328);
+    background:linear-gradient(135deg,#7c3aed,#9333ea);
 
 }
 
@@ -1761,14 +1761,14 @@ tbody tr:hover{
 
     border-color:var(--primary);
 
-    box-shadow:0 0 0 4px rgba(255,180,62,.12);
+    box-shadow:0 0 0 4px rgba(123,44,255,.12);
 
 }
 
 .modal-input span,
 .modal-input i{
 
-    color:#ffd17a;
+    color:#b794ff;
 
     font-weight:800;
 
@@ -2554,7 +2554,7 @@ input:-webkit-autofill{
 
 ::-webkit-scrollbar-track{
 
-    background:#070a0e;
+    background:#08101d;
 
 }
 
@@ -2588,7 +2588,7 @@ input:-webkit-autofill{
 
     scrollbar-color:
     var(--primary)
-    #070a0e;
+    #08101d;
 
 }
 

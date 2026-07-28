@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 width: "75%",
-                color: "#ffb43e",
+                color: "#00d5ff",
                 text: "Password strength: good"
             },
             {

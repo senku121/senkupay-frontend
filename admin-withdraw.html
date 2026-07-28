@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Review and process Senku Pay user withdrawal requests." name="description"/>
-<meta content="#07090d" name="theme-color"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Review and process Senku Pay user withdrawal requests.">
+<meta name="theme-color" content="#050816">
 <title>Withdrawal Requests | Senku Pay Admin</title>
-<link href="/favicon.png" rel="icon" type="image/x-icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
-<link href="admin-withdraw.css" rel="stylesheet"/>
-<meta content="dark" name="color-scheme"/><link href="popup.css" rel="stylesheet"/><link href="responsive.css" rel="stylesheet"/></head>
-<body class="senku-obsidian-amber page-admin-withdraw" data-page="admin-withdraw" data-ui-version="obsidian-amber-v1">
+
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="admin-withdraw.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
 <div class="admin-bg-grid"></div>
+
 <aside class="admin-sidebar" id="adminSidebar">
 <div class="admin-brand">
 <div class="logo-box">S</div>
@@ -24,26 +27,30 @@
 <span>Administration</span>
 </div>
 </div>
+
 <nav>
 <a href="admin-dashboard.html"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
 <a href="admin-users.html"><i class="fa-solid fa-users"></i><span>Users</span></a>
 <a href="admin-transactions.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transactions</span></a>
-<a class="active" href="admin-withdraw.html"><i class="fa-solid fa-wallet"></i><span>Withdraw Requests</span></a>
+<a href="admin-withdraw.html" class="active"><i class="fa-solid fa-wallet"></i><span>Withdraw Requests</span></a>
 <a href="admin-platform-withdraw.html"><i class="fa-solid fa-building-columns"></i><span>Platform Withdraw</span></a>
 <a href="admin-agents.html"><i class="fa-solid fa-user-shield"></i><span>Agents</span></a>
 <a href="admin-agent-requests.html"><i class="fa-solid fa-envelope-open-text"></i><span>Agent Requests</span></a>
 <a href="admin-kyc.html"><i class="fa-solid fa-id-card-clip"></i><span>KYC Verification</span></a>
 </nav>
-<button class="admin-logout" id="adminLogoutButton" type="button">
+
+<button type="button" class="admin-logout" id="adminLogoutButton">
 <i class="fa-solid fa-right-from-bracket"></i>
 <span>Logout</span>
 </button>
 </aside>
+
 <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
 <main class="admin-main">
 <header class="page-header">
 <div class="header-left">
-<button aria-label="Open navigation" class="mobile-menu-button" id="adminMobileMenuButton" type="button">
+<button type="button" class="mobile-menu-button" id="adminMobileMenuButton" aria-label="Open navigation">
 <i class="fa-solid fa-bars"></i>
 </button>
 <div>
@@ -52,6 +59,7 @@
 <p>Approve or reject USD push-to-card requests. Card details remain with CentryOS.</p>
 </div>
 </div>
+
 <div class="admin-profile">
 <div class="profile-icon" id="adminIcon">A</div>
 <div>
@@ -60,7 +68,9 @@
 </div>
 </div>
 </header>
-<div aria-live="polite" class="admin-message" hidden="" id="adminMessage" role="status"></div>
+
+<div id="adminMessage" class="admin-message" role="status" aria-live="polite" hidden></div>
+
 <section class="summary-grid">
 <div class="summary-card">
 <span>Total Matching Requests</span>
@@ -79,14 +89,16 @@
 <strong id="lastUpdated">--</strong>
 </div>
 </section>
+
 <section class="requests-card">
 <div class="requests-toolbar">
 <div>
 <p class="page-label">MANUAL APPROVAL</p>
 <h2>Push-to-Card Queue</h2>
 </div>
+
 <div class="toolbar-controls">
-<select aria-label="Filter withdrawal status" id="statusFilter">
+<select id="statusFilter" aria-label="Filter withdrawal status">
 <option value="">All statuses</option>
 <option value="PENDING">Pending</option>
 <option value="PROCESSING">Processing</option>
@@ -95,94 +107,122 @@
 <option value="FAILED">Failed</option>
 <option value="REJECTED">Rejected</option>
 </select>
-<button class="secondary-button" id="refreshButton" type="button">
+
+<button type="button" id="refreshButton" class="secondary-button">
 <i class="fa-solid fa-rotate"></i>
 <span>Refresh</span>
 </button>
 </div>
 </div>
-<div class="withdrawal-list" id="withdrawalList">
+
+<div id="withdrawalList" class="withdrawal-list">
 <div class="empty-admin-state">
 <i class="fa-solid fa-spinner fa-spin"></i>
 <h3>Loading requests</h3>
 <p>Please wait while Senku Pay loads the payout queue.</p>
 </div>
 </div>
+
 <div class="pagination">
-<button class="secondary-button" disabled="" id="previousPage" type="button">
+<button type="button" id="previousPage" class="secondary-button" disabled>
 <i class="fa-solid fa-chevron-left"></i>
 <span>Previous</span>
 </button>
+
 <span id="pageText">Page 1 of 1</span>
-<button class="secondary-button" disabled="" id="nextPage" type="button">
+
+<button type="button" id="nextPage" class="secondary-button" disabled>
 <span>Next</span>
 <i class="fa-solid fa-chevron-right"></i>
 </button>
 </div>
 </section>
 </main>
-<div class="modal" hidden="" id="approveModal">
-<div class="modal-backdrop" data-close-approve-modal=""></div>
-<div aria-labelledby="approveModalTitle" aria-modal="true" class="modal-box" role="dialog">
-<button aria-label="Close" class="modal-close" data-close-approve-modal="" type="button">
+
+
+<div class="modal" id="approveModal" hidden>
+<div class="modal-backdrop" data-close-approve-modal></div>
+<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="approveModalTitle">
+<button type="button" class="modal-close" data-close-approve-modal aria-label="Close">
 <i class="fa-solid fa-xmark"></i>
 </button>
+
 <p class="page-label">APPROVE PUSH TO CARD</p>
 <h2 id="approveModalTitle">Set Senku Pay withdrawal fee</h2>
 <p class="modal-description">
 Enter the Senku Pay fee percentage. This amount is deducted from the user's requested withdrawal before the payout is submitted to CentryOS. CentryOS or the card issuer may charge a separate provider fee.
 </p>
+
 <div class="approval-calculation">
 <div>
 <span>Requested Amount</span>
 <strong id="approveRequestedAmount">$0.00</strong>
 </div>
+
 <div>
 <span>Senku Pay Fee</span>
 <strong id="approveSiteFeeAmount">$0.00</strong>
 </div>
+
 <div>
 <span>Submitted to CentryOS</span>
 <strong id="approvePayoutAmount">$0.00</strong>
 </div>
 </div>
+
 <label for="approveFeePercent">Senku Pay Fee Percentage</label>
 <div class="percentage-field">
-<input autocomplete="off" id="approveFeePercent" inputmode="decimal" max="99.99" min="0" placeholder="Example: 5" step="0.01" type="number"/>
+<input
+type="number"
+id="approveFeePercent"
+min="0"
+max="99.99"
+step="0.01"
+inputmode="decimal"
+placeholder="Example: 5"
+autocomplete="off">
 <span>%</span>
 </div>
+
 <small class="fee-example" id="approveFeeExample">
 For a $100.00 request, 5% deducts $5.00 and submits $95.00 to CentryOS.
 </small>
+
 <div class="modal-actions">
-<button class="secondary-button" data-close-approve-modal="" type="button">Cancel</button>
-<button class="primary-button" disabled="" id="confirmApproveButton" type="button">
+<button type="button" class="secondary-button" data-close-approve-modal>Cancel</button>
+<button type="button" id="confirmApproveButton" class="primary-button" disabled>
 <i class="fa-solid fa-check"></i>
 <span>Confirm and Submit Payout</span>
 </button>
 </div>
 </div>
 </div>
-<div class="modal" hidden="" id="rejectModal">
-<div class="modal-backdrop" data-close-modal=""></div>
-<div aria-labelledby="rejectModalTitle" aria-modal="true" class="modal-box" role="dialog">
-<button aria-label="Close" class="modal-close" data-close-modal="" type="button">
+
+<div class="modal" id="rejectModal" hidden>
+<div class="modal-backdrop" data-close-modal></div>
+<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="rejectModalTitle">
+<button type="button" class="modal-close" data-close-modal aria-label="Close">
 <i class="fa-solid fa-xmark"></i>
 </button>
+
 <p class="page-label">REJECT REQUEST</p>
 <h2 id="rejectModalTitle">Return funds to user</h2>
 <p class="modal-description">Rejecting a pending request immediately moves the locked amount back to the user's available balance.</p>
+
 <label for="rejectReason">Reason</label>
 <textarea id="rejectReason" maxlength="500" placeholder="Enter the rejection reason"></textarea>
+
 <div class="modal-actions">
-<button class="secondary-button" data-close-modal="" type="button">Cancel</button>
-<button class="danger-button" id="confirmRejectButton" type="button">
+<button type="button" class="secondary-button" data-close-modal>Cancel</button>
+<button type="button" id="confirmRejectButton" class="danger-button">
 <i class="fa-solid fa-ban"></i>
 <span>Reject and Return Funds</span>
 </button>
 </div>
 </div>
 </div>
-<script src="popup.js"></script><script src="admin-withdraw.js"></script>
+
+<script src="popup.js"></script>
+<script src="admin-withdraw.js"></script>
 </body>
 </html>

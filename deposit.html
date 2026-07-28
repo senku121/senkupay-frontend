@@ -1,470 +1,778 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<link href="/favicon.png" rel="icon" type="image/x-icon"/>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-<meta content="Deposit funds securely into your Senku Pay wallet." name="description"/>
-<meta content="#07090d" name="theme-color"/>
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta
+name="description"
+content="Deposit funds securely into your Senku Pay wallet.">
+
+<meta
+name="theme-color"
+content="#070b16">
+
 <title>
 
 Deposit | Senku Pay
 
 </title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
-<link href="deposit.css" rel="stylesheet"/>
-<meta content="dark" name="color-scheme"/><link href="popup.css" rel="stylesheet"/><link href="responsive.css" rel="stylesheet"/></head>
-<body class="senku-obsidian-amber page-deposit" data-page="deposit" data-ui-version="obsidian-amber-v1">
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="deposit.css">
+
+<link
+rel="stylesheet"
+href="popup.css">
+
+<link
+rel="stylesheet"
+href="responsive.css">
+
+</head>
+
+<body>
+
 <div class="bg-grid"></div>
+
 <div class="deposit-layout">
+
 <header class="deposit-header">
-<a class="back-btn" href="dashboard.html">
+
+<a
+href="dashboard.html"
+class="back-btn">
+
 <i class="fa-solid fa-arrow-left"></i>
+
 <span>
 
 Dashboard
 
 </span>
+
 </a>
+
 <div class="logo">
+
 <div class="logo-box">
 
 S
 
 </div>
+
 <div>
+
 <h2>
 
 Senku Pay
 
 </h2>
+
 <small>
 
 Digital Payments
 
 </small>
+
 </div>
+
 </div>
+
 </header>
+
 <main class="deposit-container">
-<div aria-live="polite" class="deposit-message" hidden="" id="depositMessage" role="status">
+
+<div
+id="depositMessage"
+class="deposit-message"
+role="status"
+aria-live="polite"
+hidden>
+
 </div>
+
 <section class="deposit-card">
+
 <div>
+
 <p>
 
 Available Balance
 
 </p>
+
 <h1 id="depositBalance">
 
 $0.00
 
 </h1>
-<span class="deposit-status-text" id="depositStatusText">
+
+<span
+id="depositStatusText"
+class="deposit-status-text">
 
 Wallet connected securely.
 
 </span>
+
 </div>
+
 <i class="fa-solid fa-wallet"></i>
+
 </section>
+
 <section class="form-card">
+
 <div class="section-heading">
+
 <div>
+
 <p class="section-label">
 
 DEPOSIT DETAILS
 
 </p>
+
 <h2>
 
 Deposit Amount
 
 </h2>
+
 </div>
+
 <span>
 
 USD
 
 </span>
+
 </div>
+
 <div class="amount-input">
+
 <span>$</span>
-<input autocomplete="off" id="depositAmount" min="0.50" placeholder="Enter deposit amount" step="0.01" type="number"/>
+
+<input
+type="number"
+id="depositAmount"
+placeholder="Enter deposit amount"
+min="0.50"
+step="0.01"
+autocomplete="off">
+
 </div>
+
 <small>
 
 You pay exactly the amount entered. CentryOS processing fees are deducted before the net amount is credited to your Senku Pay balance.
 
 </small>
+
 <div class="address-field">
+
 <label for="itemDeliveryAddress">
 
 Billing or Delivery Address
 
 </label>
+
 <div class="text-input">
+
 <i class="fa-solid fa-location-dot"></i>
-<input autocomplete="street-address" id="itemDeliveryAddress" maxlength="240" placeholder="Enter your real billing or delivery address" type="text"/>
+
+<input
+type="text"
+id="itemDeliveryAddress"
+placeholder="Enter your real billing or delivery address"
+maxlength="240"
+autocomplete="street-address">
+
 </div>
+
 <small>
 
 CentryOS requires a real billing or delivery address to create the secure checkout.
 
 </small>
+
 </div>
+
 </section>
-<div class="deposit-error" id="depositError">
+
+<div
+id="depositError"
+class="deposit-error">
+
 <i class="fa-solid fa-circle-exclamation"></i>
+
 <span>
 
 Please enter a valid amount.
 
 </span>
+
 </div>
 <section class="payment-card">
+
 <div class="section-heading">
+
 <div>
+
 <p class="section-label">
 
 PAYMENT METHOD
 
 </p>
+
 <h2>
 
 Choose Payment Method
 
 </h2>
+
 </div>
+
 <span>
 
 Secure Checkout
 
 </span>
+
 </div>
-<div aria-label="Payment Method" class="payment-options" role="radiogroup">
-<button aria-checked="true" class="payment-option active" data-method="card" role="radio" type="button">
+
+<div
+class="payment-options"
+role="radiogroup"
+aria-label="Payment Method">
+
+<button
+type="button"
+class="payment-option active"
+data-method="card"
+role="radio"
+aria-checked="true">
+
 <div class="payment-icon">
+
 <i class="fa-solid fa-credit-card"></i>
+
 </div>
+
 <h3>
 
 Card
 
 </h3>
+
 <p>
 
 Visa • Mastercard • Amex
 
 </p>
+
 </button>
-<button aria-checked="false" class="payment-option" data-method="cashapp" role="radio" type="button">
+
+<button
+type="button"
+class="payment-option"
+data-method="cashapp"
+role="radio"
+aria-checked="false">
+
 <div class="payment-icon">
+
 <i class="fa-solid fa-dollar-sign"></i>
+
 </div>
+
 <h3>
 
 Cash App
 
 </h3>
+
 <p>
 
 Secure Cash App Checkout
 
 </p>
+
 </button>
-<button aria-checked="false" class="payment-option" data-method="applepay" role="radio" type="button">
+
+
+
+<button
+type="button"
+class="payment-option"
+data-method="applepay"
+role="radio"
+aria-checked="false">
+
 <div class="payment-icon">
+
 <i class="fa-brands fa-apple"></i>
+
 </div>
+
 <h3>
 
 Apple Pay
 
 </h3>
+
 <p>
 
 Secure Apple Pay Checkout
 
 </p>
+
 </button>
-<button aria-checked="false" class="payment-option" data-method="googlepay" role="radio" type="button">
+
+<button
+type="button"
+class="payment-option"
+data-method="googlepay"
+role="radio"
+aria-checked="false">
+
 <div class="payment-icon">
+
 <i class="fa-brands fa-google"></i>
+
 </div>
+
 <h3>
 
 Google Pay
 
 </h3>
+
 <p>
 
 Secure Google Pay Checkout
 
 </p>
+
 </button>
+
 </div>
+
 </section>
+
 <section class="payment-details">
+
 <div class="section-heading">
+
 <div>
+
 <p class="section-label">
 
 PAYMENT GATEWAY
 
 </p>
+
 <h2>
 
 Gateway Preview
 
 </h2>
+
 </div>
+
 </div>
-<div class="gateway-loader" hidden="" id="gatewayLoader">
+
+<div
+class="gateway-loader"
+id="gatewayLoader"
+hidden>
+
 <i class="fa-solid fa-spinner fa-spin"></i>
+
 <span>
 
 Preparing Secure Checkout...
 
 </span>
+
 </div>
-<div class="gateway-preview" id="gatewayPreview">
+
+<div
+class="gateway-preview"
+id="gatewayPreview">
+
 <div class="gateway-header">
+
 <div class="gateway-circle">
-<i class="fa-solid fa-credit-card" id="gatewayIcon">
+
+<i
+id="gatewayIcon"
+class="fa-solid fa-credit-card">
+
 </i>
+
 </div>
+
 <div>
+
 <h3 id="gatewayTitle">
 
 Card Payment
 
 </h3>
+
 <p id="gatewaySubtitle">
 
-Visa, Mastercard &amp; American Express
+Visa, Mastercard & American Express
 
 </p>
+
 </div>
+
 </div>
+
 <div class="gateway-body">
+
 <div class="gateway-row">
+
 <span>
 
 Gateway Status
 
 </span>
+
 <strong>
 
 Ready
 
 </strong>
+
 </div>
+
 <div class="gateway-row">
+
 <span>
 
 Amount Charged
 
 </span>
+
 <strong>
 
 Exact Amount
 
 </strong>
+
 </div>
+
 <div class="gateway-row">
+
 <span>
 
 Security
 
 </span>
+
 <strong>
 
 SSL Encrypted
 
 </strong>
+
 </div>
+
 <div class="gateway-row">
+
 <span>
 
 Wallet Credit
 
 </span>
+
 <strong>
 
 Gross Minus Fee
 
 </strong>
+
 </div>
+
 </div>
+
 <div class="gateway-note">
+
 <i class="fa-solid fa-circle-info"></i>
+
 <span id="gatewayDescription">
 
 After clicking <strong>Continue to Payment</strong>, your selected payment gateway will open securely.
 
 </span>
+
 </div>
+
 </div>
+
 </section>
-<button class="confirm-deposit" id="confirmDeposit" type="button">
+
+<button
+type="button"
+class="confirm-deposit"
+id="confirmDeposit">
+
 <i class="fa-solid fa-lock"></i>
+
 <span>
 
 Continue to Payment
 
 </span>
+
 </button>
-<section class="deposit-settlement" hidden="" id="depositSettlement">
+
+
+<section
+id="depositSettlement"
+class="deposit-settlement"
+hidden>
+
 <div class="section-heading">
+
 <div>
+
 <p class="section-label">
 
 PAYMENT RESULT
 
 </p>
+
 <h2>
 
 Deposit Settlement
 
 </h2>
+
 </div>
+
 <span id="settlementStatus">
 
 Pending
 
 </span>
+
 </div>
+
 <div class="settlement-grid">
+
 <div>
+
 <span>
 
 Customer Paid
 
 </span>
+
 <strong id="settlementGross">
 
 $0.00
 
 </strong>
+
 </div>
+
 <div>
+
 <span>
 
 Processing Fee
 
 </span>
+
 <strong id="settlementFee">
 
 $0.00
 
 </strong>
+
 </div>
+
 <div>
+
 <span>
 
 Added to Balance
 
 </span>
+
 <strong id="settlementNet">
 
 $0.00
 
 </strong>
+
 </div>
+
 </div>
+
 </section>
+
 <section class="deposit-history">
+
 <div class="section-heading">
+
 <div>
+
 <p class="section-label">
 
 RECENT ACTIVITY
 
 </p>
+
 <h2>
 
 Recent Deposits
 
 </h2>
+
 </div>
+
 <a href="transactions.html">
 
 View All
 
 </a>
+
 </div>
+
 <div id="depositHistory">
+
 <div class="empty-deposit">
+
 <i class="fa-solid fa-clock-rotate-left"></i>
+
 <h3>
 
 No Deposit History
 
 </h3>
+
 <p>
 
 Your successful, pending and failed deposits will appear here after your first payment.
 
 </p>
+
 </div>
+
 </div>
+
 </section>
+
 <section class="deposit-info">
+
 <div class="info-card">
+
 <i class="fa-solid fa-shield-halved"></i>
+
 <div>
+
 <h3>
 
 Secure Checkout
 
 </h3>
+
 <p>
 
 Payments are designed to be processed through secure external gateways using encrypted communication.
 
 </p>
+
 </div>
+
 </div>
+
 <div class="info-card">
+
 <i class="fa-solid fa-bolt"></i>
+
 <div>
+
 <h3>
 
 Automatic Wallet Credit
 
 </h3>
+
 <p>
 
 After CentryOS confirms a successful payment through the signed webhook, Senku Pay credits the net amount automatically.
 
 </p>
+
 </div>
+
 </div>
+
 <div class="info-card">
+
 <i class="fa-solid fa-plug-circle-check"></i>
+
 <div>
+
 <h3>
 
 CentryOS Checkout
 
 </h3>
+
 <p>
 
 Card, Cash App, Apple Pay and Google Pay continue through the secure CentryOS checkout. Pay by Bank is hidden for now.
 
 </p>
+
 </div>
+
 </div>
+
 </section>
+
 </main>
+
 </div>
-<script src="storage.js"></script><script src="popup.js"></script>
+
+<script src="storage.js"></script>
+
+<script src="popup.js"></script>
+
 <script src="deposit.js"></script>
+
 </body>
+
 </html>
