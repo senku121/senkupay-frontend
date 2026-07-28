@@ -638,3 +638,195 @@ outline-offset:3px;
 .withdraw-item{flex-direction:column}
 .status-pill{align-self:flex-start}
 }
+
+
+/*==================================================
+   V4 RESPONSIVE SHELL / OVERLAP STABILITY FIXES
+==================================================*/
+
+body.page-withdraw{
+width:100%;
+max-width:100%;
+min-width:0;
+box-sizing:border-box;
+}
+
+body.page-withdraw.senku-page-sidebar-offset{
+padding-left:var(--senku-page-sidebar-width,272px) !important;
+}
+
+body.page-withdraw .withdraw-container{
+width:min(1120px,100%) !important;
+max-width:1120px !important;
+min-width:0 !important;
+margin-left:auto !important;
+margin-right:auto !important;
+padding:30px 22px calc(65px + env(safe-area-inset-bottom)) !important;
+}
+
+body.page-withdraw.senku-page-fixed-topbar .withdraw-container{
+padding-top:calc(var(--senku-page-topbar-height,74px) + 22px) !important;
+}
+
+body.page-withdraw .withdraw-container > *,
+body.page-withdraw .form-card > *,
+body.page-withdraw .method-card > *,
+body.page-withdraw .confirm-withdraw > *,
+body.page-withdraw .withdraw-history > *{
+min-width:0;
+max-width:100%;
+}
+
+body.page-withdraw .section-heading > div,
+body.page-withdraw .method-banner > div:last-child,
+body.page-withdraw .card-toolbar > div,
+body.page-withdraw .withdraw-item-left > div:last-child{
+min-width:0;
+}
+
+body.page-withdraw .section-heading h2,
+body.page-withdraw .section-description,
+body.page-withdraw .method-banner p,
+body.page-withdraw .card-toolbar p,
+body.page-withdraw .withdraw-info p,
+body.page-withdraw .withdraw-status-text{
+overflow-wrap:anywhere;
+word-break:normal;
+}
+
+body.page-withdraw .amount-input input,
+body.page-withdraw .text-field{
+min-width:0;
+max-width:100%;
+}
+
+body.page-withdraw .linked-card-meta span,
+body.page-withdraw .withdraw-item p,
+body.page-withdraw .withdraw-item small{
+overflow-wrap:anywhere;
+}
+
+@media(max-width:900px){
+body.page-withdraw,
+body.page-withdraw.senku-page-sidebar-offset{
+padding-left:0 !important;
+}
+
+body.page-withdraw .withdraw-container{
+width:100% !important;
+max-width:none !important;
+margin:0 !important;
+padding:22px 14px calc(48px + env(safe-area-inset-bottom)) !important;
+gap:22px !important;
+}
+
+body.page-withdraw.senku-page-fixed-topbar .withdraw-container{
+padding-top:calc(var(--senku-page-topbar-height,74px) + 18px) !important;
+}
+
+body.page-withdraw .withdraw-card,
+body.page-withdraw .form-card,
+body.page-withdraw .method-card,
+body.page-withdraw .confirm-withdraw,
+body.page-withdraw .withdraw-history,
+body.page-withdraw .withdraw-info{
+width:100%;
+max-width:100%;
+}
+
+body.page-withdraw .section-heading{
+gap:12px;
+margin-bottom:22px;
+}
+
+body.page-withdraw .section-heading h2{
+font-size:clamp(22px,7vw,26px);
+line-height:1.13;
+}
+
+body.page-withdraw .section-heading > span{
+flex:0 0 auto;
+max-width:38%;
+text-align:right;
+line-height:1.3;
+}
+
+body.page-withdraw .method-banner{
+align-items:flex-start;
+}
+}
+
+@media(max-width:520px){
+body.page-withdraw .withdraw-container{
+padding-left:8px !important;
+padding-right:8px !important;
+}
+
+body.page-withdraw .withdraw-card,
+body.page-withdraw .form-card,
+body.page-withdraw .method-card,
+body.page-withdraw .confirm-withdraw,
+body.page-withdraw .withdraw-history,
+body.page-withdraw .withdraw-info{
+padding:22px !important;
+border-radius:22px !important;
+}
+
+body.page-withdraw .withdraw-card{
+min-height:150px;
+}
+
+body.page-withdraw .withdraw-card h1{
+font-size:34px;
+line-height:1.05;
+}
+
+body.page-withdraw .withdraw-card > i{
+font-size:46px;
+}
+
+body.page-withdraw .amount-input{
+height:66px;
+padding:0 18px;
+}
+
+body.page-withdraw .amount-input input{
+font-size:20px;
+}
+
+body.page-withdraw .section-description{
+font-size:15px;
+line-height:1.72;
+}
+
+body.page-withdraw .method-banner{
+padding:18px;
+gap:14px;
+}
+
+body.page-withdraw .method-icon{
+width:50px;
+height:50px;
+border-radius:15px;
+}
+}
+
+@media(max-width:380px){
+body.page-withdraw .withdraw-card,
+body.page-withdraw .form-card,
+body.page-withdraw .method-card,
+body.page-withdraw .confirm-withdraw,
+body.page-withdraw .withdraw-history,
+body.page-withdraw .withdraw-info{
+padding:18px !important;
+}
+
+body.page-withdraw .section-heading{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+}
+
+body.page-withdraw .section-heading > span{
+max-width:92px;
+}
+}

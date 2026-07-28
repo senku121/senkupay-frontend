@@ -7,6 +7,158 @@ document.addEventListener(
 "DOMContentLoaded",
 async () => {
 
+
+/*==================================
+      SHARED SHELL LAYOUT GUARD
+==================================*/
+
+function installSharedShellLayoutGuard(mainSelector) {
+
+const body = document.body;
+const root = document.documentElement;
+const main = document.querySelector(mainSelector);
+
+if (!body || !main) {
+return;
+}
+
+const sidebarSelectors = [
+".sidebar",
+".app-sidebar",
+".senku-sidebar",
+".senku-app-sidebar",
+"[data-app-sidebar]",
+"[data-shell-sidebar]"
+];
+
+const topbarSelectors = [
+".topbar",
+".app-topbar",
+".senku-topbar",
+".senku-app-topbar",
+"[data-app-topbar]",
+"[data-shell-topbar]"
+];
+
+let sidebarDecision = null;
+let topbarDecision = null;
+let animationFrame = 0;
+
+function firstElement(selectors) {
+for (const selector of selectors) {
+const element = document.querySelector(selector);
+if (element) {
+return element;
+}
+}
+return null;
+}
+
+function scheduleSync() {
+if (animationFrame) {
+cancelAnimationFrame(animationFrame);
+}
+animationFrame = requestAnimationFrame(syncLayout);
+}
+
+function syncLayout() {
+animationFrame = 0;
+
+const desktop = window.matchMedia("(min-width: 901px)").matches;
+const sidebar = firstElement(sidebarSelectors);
+
+if (desktop && sidebar) {
+const sidebarRect = sidebar.getBoundingClientRect();
+const sidebarRight = Math.max(
+0,
+Math.min(window.innerWidth, sidebarRect.right)
+);
+
+if (sidebarRect.width >= 160 && sidebarRight > 0) {
+root.style.setProperty(
+"--senku-page-sidebar-width",
+`${Math.ceil(sidebarRight)}px`
+);
+
+if (sidebarDecision === null) {
+const mainRect = main.getBoundingClientRect();
+sidebarDecision = mainRect.left < sidebarRight + 12;
+}
+
+body.classList.toggle(
+"senku-page-sidebar-offset",
+sidebarDecision === true
+);
+} else {
+body.classList.remove("senku-page-sidebar-offset");
+sidebarDecision = null;
+}
+} else {
+body.classList.remove("senku-page-sidebar-offset");
+sidebarDecision = null;
+}
+
+const topbar = firstElement(topbarSelectors);
+
+if (topbar) {
+const style = window.getComputedStyle(topbar);
+const topbarRect = topbar.getBoundingClientRect();
+const fixed = style.position === "fixed";
+
+if (fixed && topbarRect.height > 40 && topbarRect.bottom > 0) {
+root.style.setProperty(
+"--senku-page-topbar-height",
+`${Math.ceil(topbarRect.height)}px`
+);
+
+if (topbarDecision === null) {
+const firstSection = main.querySelector("section");
+const firstTop = firstSection
+? firstSection.getBoundingClientRect().top
+: main.getBoundingClientRect().top;
+
+topbarDecision = firstTop < topbarRect.bottom + 14;
+}
+
+body.classList.toggle(
+"senku-page-fixed-topbar",
+topbarDecision === true
+);
+} else {
+body.classList.remove("senku-page-fixed-topbar");
+topbarDecision = null;
+}
+} else {
+body.classList.remove("senku-page-fixed-topbar");
+topbarDecision = null;
+}
+}
+
+const observer = new MutationObserver(scheduleSync);
+observer.observe(document.body, {
+childList: true,
+subtree: true
+});
+
+window.addEventListener(
+"resize",
+() => {
+body.classList.remove("senku-page-sidebar-offset");
+body.classList.remove("senku-page-fixed-topbar");
+sidebarDecision = null;
+topbarDecision = null;
+scheduleSync();
+},
+{ passive: true }
+);
+
+scheduleSync();
+window.setTimeout(scheduleSync, 120);
+window.setTimeout(scheduleSync, 700);
+}
+
+installSharedShellLayoutGuard(".withdraw-container");
+
 const API_BASE_URL =
 "https://senkupay-api.onrender.com";
 
@@ -151,7 +303,7 @@ return String(value ?? "")
 .replaceAll("<", "&lt;")
 .replaceAll(">", "&gt;")
 .replaceAll('"', "&quot;")
-.replaceAll("'", "&#9c5b0d;");
+.replaceAll("'", "&#39;");
 
 }
 
