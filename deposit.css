@@ -10,12 +10,12 @@
 }
 
 :root{
-    --bg:#070b16;
-    --card:#111827;
-    --card2:#171f33;
-    --primary:#7b2cff;
-    --primary-light:#8b5cf6;
-    --secondary:#00d4ff;
+    --bg:#070a0e;
+    --card:#070a0e;
+    --card2:#0e1218;
+    --primary:#ffb43e;
+    --primary-light:#dda03a;
+    --secondary:#e6a43a;
     --text:#ffffff;
     --muted:#9ca3af;
     --border:rgba(255,255,255,.08);
@@ -86,7 +86,7 @@ a{
     justify-content:space-between;
     align-items:center;
 
-    background:rgba(13,20,38,.92);
+    background:rgba(7, 10, 14,.92);
     border-bottom:1px solid var(--border);
 
     backdrop-filter:blur(20px);
@@ -137,7 +137,7 @@ a{
 
     box-shadow:
     0 18px 40px
-    rgba(123,44,255,.35);
+    rgba(255,180,62,.35);
 }
 
 .logo h2{
@@ -196,9 +196,9 @@ a{
 }
 
 .deposit-message.info{
-    color:#d2f3ff;
-    background:rgba(0,212,255,.10);
-    border-color:rgba(0,212,255,.25);
+    color:#f2e2c2;
+    background:rgba(230,164,58,.10);
+    border-color:rgba(230,164,58,.25);
 }
 
 /*==================================
@@ -221,8 +221,8 @@ a{
     background:
     linear-gradient(
         135deg,
-        rgba(123,44,255,.34),
-        rgba(0,212,255,.18)
+        rgba(255,180,62,.34),
+        rgba(230,164,58,.18)
     );
 
     transition:.35s ease;
@@ -233,7 +233,7 @@ a{
 
     box-shadow:
     0 25px 55px
-    rgba(123,44,255,.24);
+    rgba(255,180,62,.24);
 }
 
 .deposit-card::before{
@@ -294,7 +294,7 @@ a{
 
     border-radius:28px;
 
-    background:rgba(17,24,39,.92);
+    background:rgba(7, 10, 14,.92);
 
     border:1px solid var(--border);
 
@@ -330,7 +330,7 @@ a{
 
     letter-spacing:.14em;
 
-    color:#9d7dff;
+    color:#e8bd70;
 
     margin-bottom:8px;
 
@@ -382,7 +382,7 @@ a{
 
 .amount-input:hover{
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -392,7 +392,7 @@ a{
 
     box-shadow:
 
-    0 0 0 4px rgba(123,44,255,.15);
+    0 0 0 4px rgba(255,180,62,.15);
 
 }
 
@@ -402,7 +402,7 @@ a{
 
     font-weight:800;
 
-    color:#b794ff;
+    color:#ffd17a;
 
 }
 
@@ -474,16 +474,16 @@ a{
 }
 
 .text-input:hover{
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 }
 
 .text-input:focus-within{
     border-color:var(--primary);
-    box-shadow:0 0 0 4px rgba(123,44,255,.15);
+    box-shadow:0 0 0 4px rgba(255,180,62,.15);
 }
 
 .text-input i{
-    color:#b794ff;
+    color:#ffd17a;
 }
 
 .text-input input{
@@ -630,7 +630,7 @@ a{
 
     transform:translateY(-5px);
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
 }
 
@@ -638,7 +638,7 @@ a{
 
     color:#fff;
 
-    border-color:rgba(123,44,255,.45);
+    border-color:rgba(255,180,62,.45);
 
     background:
 
@@ -646,15 +646,15 @@ a{
 
     135deg,
 
-    rgba(123,44,255,.25),
+    rgba(255,180,62,.25),
 
-    rgba(0,212,255,.12)
+    rgba(230,164,58,.12)
 
     );
 
     box-shadow:
 
-    0 18px 35px rgba(123,44,255,.18);
+    0 18px 35px rgba(255,180,62,.18);
 
 }
 
@@ -672,7 +672,7 @@ a{
 
     border-radius:18px;
 
-    background:rgba(123,44,255,.16);
+    background:rgba(255,180,62,.16);
 
 }
 
@@ -680,7 +680,7 @@ a{
 
     font-size:24px;
 
-    color:#b794ff;
+    color:#ffd17a;
 
 }
 
@@ -723,7 +723,7 @@ a{
 
     background:var(--card2);
 
-    color:#b794ff;
+    color:#ffd17a;
 
     font-weight:700;
 
@@ -751,9 +751,9 @@ a{
 
     135deg,
 
-    rgba(123,44,255,.08),
+    rgba(255,180,62,.08),
 
-    rgba(0,212,255,.05)
+    rgba(230,164,58,.05)
 
     );
 
@@ -791,9 +791,9 @@ a{
 
     135deg,
 
-    rgba(123,44,255,.30),
+    rgba(255,180,62,.30),
 
-    rgba(0,212,255,.20)
+    rgba(230,164,58,.20)
 
     );
 
@@ -879,15 +879,15 @@ a{
 
     border-radius:18px;
 
-    background:rgba(0,212,255,.08);
+    background:rgba(230,164,58,.08);
 
-    border:1px solid rgba(0,212,255,.20);
+    border:1px solid rgba(230,164,58,.20);
 
 }
 
 .gateway-note i{
 
-    color:#00d4ff;
+    color:#e6a43a;
 
     margin-top:2px;
 
@@ -897,7 +897,7 @@ a{
 
     line-height:1.7;
 
-    color:#d9e6f5;
+    color:#f2e1be;
 
 }
 
@@ -943,7 +943,7 @@ a{
 
     box-shadow:
 
-    0 20px 45px rgba(123,44,255,.30);
+    0 20px 45px rgba(255,180,62,.30);
 
     transition:.35s;
 
@@ -983,7 +983,7 @@ a{
 
 .deposit-history .section-heading a{
 
-    color:#9d7dff;
+    color:#e8bd70;
 
     font-weight:700;
 
@@ -1067,7 +1067,7 @@ a{
 
     transform:translateY(-3px);
 
-    border-color:rgba(123,44,255,.25);
+    border-color:rgba(255,180,62,.25);
 
 }
 
@@ -1095,13 +1095,13 @@ a{
 
     border-radius:15px;
 
-    background:rgba(123,44,255,.15);
+    background:rgba(255,180,62,.15);
 
 }
 
 .deposit-icon i{
 
-    color:#b794ff;
+    color:#ffd17a;
 
 }
 
@@ -1200,7 +1200,7 @@ a{
 
     transform:translateY(-5px);
 
-    border-color:rgba(123,44,255,.35);
+    border-color:rgba(255,180,62,.35);
 
     box-shadow:
 
@@ -1558,7 +1558,7 @@ button:disabled{
 
 ::-webkit-scrollbar-track{
 
-    background:#08101d;
+    background:#070a0e;
 
 }
 
@@ -1588,7 +1588,7 @@ button:disabled{
 
     var(--primary)
 
-    #08101d;
+    #070a0e;
 
 }
 

@@ -1,846 +1,481 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-<link rel="icon" href="/favicon.png" type="image/x-icon">
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<meta
-name="description"
-content="Manage your Senku Pay wallet, deposits, withdrawals and account activity.">
-
-<meta
-name="theme-color"
-content="#070b16">
-
+<link href="/favicon.png" rel="icon" type="image/x-icon"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Manage your Senku Pay wallet, deposits, withdrawals and account activity." name="description"/>
+<meta content="#07090d" name="theme-color"/>
 <title>Dashboard | Senku Pay</title>
-
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-rel="stylesheet">
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<link rel="stylesheet" href="dashboard.css">
-
-<link rel="stylesheet" href="popup.css">
-
-<link rel="stylesheet" href="responsive.css">
-
-</head>
-
-<body>
-
-<div class="bg-grid" aria-hidden="true"></div>
-
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<link href="dashboard.css?v=20260728-v3" rel="stylesheet"/>
+<meta content="dark" name="color-scheme"/><link href="popup.css?v=20260728-v3" rel="stylesheet"/><link href="responsive.css?v=20260728-v3" rel="stylesheet"/></head>
+<body class="senku-obsidian-amber page-dashboard" data-page="dashboard" data-ui-version="obsidian-amber-v3">
+<div aria-hidden="true" class="bg-grid"></div>
 <div class="dashboard-layout">
-
 <!--=========================================
                 SIDEBAR
 ==========================================-->
-
 <aside class="sidebar" id="dashboardSidebar">
-
 <div class="side-logo">
-
 <div class="logo-box">
 
 S
 
 </div>
-
 <div>
-
 <h2>Senku Pay</h2>
-
 <small>Digital Payments</small>
-
 </div>
-
 </div>
-
 <nav aria-label="Dashboard navigation">
-
-<a
-href="dashboard.html"
-class="active">
-
+<a class="active" href="dashboard.html">
 <i class="fa-solid fa-house"></i>
-
 <span>Dashboard</span>
-
 </a>
-
 <a href="wallet.html">
-
 <i class="fa-solid fa-wallet"></i>
-
 <span>Wallet</span>
-
 </a>
-
 <a href="deposit.html">
-
 <i class="fa-solid fa-credit-card"></i>
-
 <span>Deposit</span>
-
 </a>
-
 <a href="withdraw.html">
-
 <i class="fa-solid fa-money-bill-transfer"></i>
-
 <span>Withdraw</span>
-
 </a>
-
 <a href="transactions.html">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
 <span>Transactions</span>
-
 </a>
-
 <a href="kyc.html">
-
 <i class="fa-solid fa-id-card"></i>
-
 <span>Identity Verification</span>
-
 </a>
-
 <a href="profile.html">
-
 <i class="fa-solid fa-user"></i>
-
 <span>Profile</span>
-
 </a>
-
 <a href="settings.html">
-
 <i class="fa-solid fa-gear"></i>
-
 <span>Settings</span>
-
 </a>
-
 </nav>
-
 <div class="logout">
-
-<button
-type="button"
-id="logoutButton">
-
+<button id="logoutButton" type="button">
 <i class="fa-solid fa-right-from-bracket"></i>
-
 <span>Logout</span>
-
 </button>
-
 </div>
-
 </aside>
-
 <!--=========================================
                 MAIN AREA
 ==========================================-->
-
 <section class="main-area">
-
 <header class="topbar">
-
-<button
-type="button"
-class="mobile-menu-button"
-id="mobileMenuButton"
-aria-label="Open dashboard navigation"
-aria-expanded="false">
-
+<button aria-expanded="false" aria-label="Open dashboard navigation" class="mobile-menu-button" id="mobileMenuButton" type="button">
 <i class="fa-solid fa-bars"></i>
-
 </button>
-
 <div class="search">
-
 <i class="fa-solid fa-search"></i>
-
-<input
-id="dashboardSearch"
-type="search"
-placeholder="Search dashboard..."
-autocomplete="off">
-
+<input autocomplete="off" id="dashboardSearch" placeholder="Search dashboard..." type="search"/>
 </div>
-
 <div class="top-actions">
-
-<button
-type="button"
-id="notificationButton"
-class="notification-button"
-aria-label="View notifications">
-
+<button aria-label="View notifications" class="notification-button" id="notificationButton" type="button">
 <i class="fa-solid fa-bell"></i>
-
-<span
-class="notification-dot"
-id="notificationDot"
-hidden>
-
+<span class="notification-dot" hidden="" id="notificationDot">
 </span>
-
 </button>
-
 <div class="user">
-
-<div
-class="avatar"
-id="dashboardAvatar">
+<div class="avatar" id="dashboardAvatar">
 
 U
 
 </div>
-
 <div>
-
 <h4 id="dashboardUsername">
 
 Loading...
 
 </h4>
-
 <span id="dashboardRole">
 
 User
 
 </span>
-
 </div>
-
 </div>
-
 </div>
-
 </header>
-
 <main class="content">
-
-<div
-id="dashboardMessage"
-class="dashboard-message"
-hidden
-aria-live="polite">
-
+<div aria-live="polite" class="dashboard-message" hidden="" id="dashboardMessage">
 </div>
-
 <!--=========================================
                 WELCOME
 ==========================================-->
-
 <section class="welcome">
-
 <div>
-
 <p class="welcome-label">
 
 ACCOUNT OVERVIEW
 
 </p>
-
 <h1 id="dashboardWelcome">
 
 Welcome back 👋
 
 </h1>
-
 <p>
 
 Manage your balance, deposits, withdrawals and recent account activity.
 
 </p>
-
 </div>
-
-<button
-type="button"
-id="addFundsButton">
-
+<button id="addFundsButton" type="button">
 <i class="fa-solid fa-plus"></i>
-
 <span>Add Funds</span>
-
 </button>
-
 </section>
 <!--=========================================
                 BALANCE CARDS
 ==========================================-->
-
 <section class="cards">
-
 <div class="balance-card">
-
 <div>
-
 <p>Available Balance</p>
-
 <h2 id="dashboardBalance">
 
 $0.00
 
 </h2>
-
 </div>
-
 <i class="fa-solid fa-wallet"></i>
-
 </div>
-
 <div class="balance-card">
-
 <div>
-
 <p>Total Deposited</p>
-
 <h2 id="dashboardDeposited">
 
 $0.00
 
 </h2>
-
 </div>
-
 <i class="fa-solid fa-arrow-down"></i>
-
 </div>
-
 <div class="balance-card">
-
 <div>
-
 <p>Total Withdrawn</p>
-
 <h2 id="dashboardWithdrawn">
 
 $0.00
 
 </h2>
-
 </div>
-
 <i class="fa-solid fa-arrow-up"></i>
-
 </div>
-
 <div class="balance-card">
-
 <div>
-
 <p>Pending Withdrawals</p>
-
 <h2 id="dashboardPending">
 
 $0.00
 
 </h2>
-
 </div>
-
 <i class="fa-solid fa-hourglass-half"></i>
-
 </div>
-
 </section>
-
 <!--=========================================
             QUICK ACTIONS
 ==========================================-->
-
 <section class="quick-section">
-
 <div class="section-title">
-
 <h2>
 
 Quick Actions
 
 </h2>
-
 </div>
-
 <div class="quick-grid">
-
-<div
-class="quick-card"
-onclick="location.href='deposit.html'">
-
+<div class="quick-card" onclick="location.href='deposit.html'">
 <div class="quick-icon">
-
 <i class="fa-solid fa-credit-card"></i>
-
 </div>
-
 <div>
-
 <h3>
 
 Deposit
 
 </h3>
-
 <p>
 
 Instant wallet funding
 
 </p>
-
 </div>
-
 </div>
-
-<div
-class="quick-card"
-onclick="location.href='withdraw.html'">
-
+<div class="quick-card" onclick="location.href='withdraw.html'">
 <div class="quick-icon">
-
 <i class="fa-solid fa-money-bill-transfer"></i>
-
 </div>
-
 <div>
-
 <h3>
 
 Withdraw
 
 </h3>
-
 <p>
 
 Submit withdrawal request
 
 </p>
-
 </div>
-
 </div>
-
-<div
-class="quick-card"
-onclick="location.href='transactions.html'">
-
+<div class="quick-card" onclick="location.href='transactions.html'">
 <div class="quick-icon">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
 </div>
-
 <div>
-
 <h3>
 
 Transactions
 
 </h3>
-
 <p>
 
 View payment history
 
 </p>
-
 </div>
-
 </div>
-
-<div
-class="quick-card kyc-quick-card"
-onclick="location.href='kyc.html'">
-
+<div class="quick-card kyc-quick-card" onclick="location.href='kyc.html'">
 <div class="quick-icon">
-
 <i class="fa-solid fa-id-card"></i>
-
 </div>
-
 <div>
-
 <h3>
 
 Verify Identity
 
 </h3>
-
 <p id="dashboardKycQuickText">
 
 Check verification status
 
 </p>
-
 </div>
-
 </div>
-
-<div
-class="quick-card"
-onclick="location.href='profile.html'">
-
+<div class="quick-card" onclick="location.href='profile.html'">
 <div class="quick-icon">
-
 <i class="fa-solid fa-user"></i>
-
 </div>
-
 <div>
-
 <h3>
 
 Profile
 
 </h3>
-
 <p>
 
 Manage your account
 
 </p>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
-
 <!--=========================================
             ACCOUNT SUMMARY
 ==========================================-->
-
 <section class="stats-section">
-
 <div class="section-title">
-
 <h2>
 
 Account Summary
 
 </h2>
-
 </div>
-
 <div class="stats-grid">
-
 <div class="stat-card">
-
 <i class="fa-solid fa-user-check"></i>
-
 <div>
-
 <p>
 
 Account Status
 
 </p>
-
 <h3 id="dashboardStatus">
 
 Verified
 
 </h3>
-
 </div>
-
 </div>
-
 <div class="stat-card">
-
 <i class="fa-solid fa-envelope-circle-check"></i>
-
 <div>
-
 <p>
 
 Email
 
 </p>
-
 <h3 id="dashboardEmailStatus">
 
 Verified
 
 </h3>
-
 </div>
-
 </div>
-
 <div class="stat-card">
-
 <i class="fa-solid fa-calendar-days"></i>
-
 <div>
-
 <p>
 
 Member Since
 
 </p>
-
 <h3 id="dashboardJoined">
 
 --
 
 </h3>
-
 </div>
-
 </div>
-
 <div class="stat-card kyc-stat-card" onclick="location.href='kyc.html'" role="link" tabindex="0">
-
 <i class="fa-solid fa-id-card"></i>
-
 <div>
-
 <p>
 
 Identity Verification
 
 </p>
-
 <h3 id="dashboardKycStatus">
 
 Checking...
 
 </h3>
-
 </div>
-
 </div>
-
 <div class="stat-card">
-
 <i class="fa-solid fa-shield-halved"></i>
-
 <div>
-
 <p>
 
 Security
 
 </p>
-
 <h3>
 
 Protected
 
 </h3>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
 <!--=========================================
         IDENTITY VERIFICATION
 ==========================================-->
-
 <section class="kyc-dashboard-section" id="dashboardKycSection">
-
 <div class="section-title">
-
 <h2>Identity Verification</h2>
-
 <a href="kyc.html">View Details</a>
-
 </div>
-
 <div class="kyc-dashboard-card">
-
 <div class="kyc-dashboard-icon" id="dashboardKycIcon">
-
 <i class="fa-solid fa-shield-halved"></i>
-
 </div>
-
 <div class="kyc-dashboard-content">
-
 <div class="kyc-dashboard-heading">
-
 <div>
-
 <h3 id="dashboardKycTitle">Checking verification status...</h3>
-
 <p id="dashboardKycDescription">Please wait while we load your identity verification status.</p>
-
 </div>
-
 <span class="kyc-dashboard-badge loading" id="dashboardKycBadge">Checking</span>
-
 </div>
-
 <div class="kyc-dashboard-meta">
-
 <div><span>Document</span><strong id="dashboardKycDocument">--</strong></div>
-
 <div><span>Submitted</span><strong id="dashboardKycSubmitted">--</strong></div>
-
 </div>
-
-<a class="kyc-dashboard-button" id="dashboardKycButton" href="kyc.html">
-
+<a class="kyc-dashboard-button" href="kyc.html" id="dashboardKycButton">
 <i class="fa-solid fa-arrow-right"></i>
-
 <span>Open Identity Verification</span>
-
 </a>
-
 </div>
-
 </div>
-
 </section>
-
 <!--=========================================
         RECENT TRANSACTIONS
 ==========================================-->
-
 <section class="transaction-section">
-
 <div class="section-title">
-
 <h2>
 
 Recent Transactions
 
 </h2>
-
 <a href="transactions.html">
 
 View All
 
 </a>
-
 </div>
-
-<div
-class="transaction-card"
-id="dashboardTransactions">
-
+<div class="transaction-card" id="dashboardTransactions">
 <div class="empty-transactions">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
 <h3>
 
 No Transactions Yet
 
 </h3>
-
 <p>
 
 Your deposits, withdrawals and transfers will appear here once your account becomes active.
 
 </p>
-
 </div>
-
 </div>
-
 </section>
-
 <!--=========================================
         ACCOUNT ACTIVITY
 ==========================================-->
-
 <section class="activity-section">
-
 <div class="section-title">
-
 <h2>
 
 Account Activity
 
 </h2>
-
 </div>
-
 <div class="activity-card">
-
 <div class="chart-placeholder">
-
 <div class="chart-line"></div>
-
 <div class="chart-points">
-
 <span></span>
-
 <span></span>
-
 <span></span>
-
 <span></span>
-
 <span></span>
-
 </div>
-
 </div>
-
 <div class="chart-labels">
-
 <span>Mon</span>
-
 <span>Tue</span>
-
 <span>Wed</span>
-
 <span>Thu</span>
-
 <span>Fri</span>
-
 </div>
-
 </div>
-
 </section>
-
 </main>
-
 </section>
-
 </div>
-
-<script src="storage.js"></script>
-
-<script src="popup.js"></script>
-
-<script src="dashboard.js"></script>
-
+<script src="storage.js?v=20260728-v3"></script><script src="popup.js?v=20260728-v3"></script>
+<script src="dashboard.js?v=20260728-v3"></script>
 </body>
-
 </html>

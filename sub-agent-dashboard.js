@@ -81,21 +81,12 @@ if(logoutBtn){
 
 
 logoutBtn.addEventListener("click",()=>{
-
-
-    if(confirm("Logout from Sub Agent Panel?")){
-
-
-        logout();
-
-
-        window.location.href=
-        "sub-agent-login.html";
-
-
+    const performLogout=()=>{logout();window.location.href="sub-agent-login.html";};
+    if(typeof window.showPopup==="function"){
+        window.showPopup({type:"warning",title:"Sub Agent Logout",message:"Are you sure you want to log out of the Senku Pay sub-agent portal?",confirm:true,cancelText:"Cancel",confirmText:"Logout",onConfirm:performLogout});
+        return;
     }
-
-
+    performLogout();
 });
 
 

@@ -203,7 +203,7 @@ return String(value ?? "")
 .replaceAll("<", "&lt;")
 .replaceAll(">", "&gt;")
 .replaceAll('"', "&quot;")
-.replaceAll("'", "&#039;");
+.replaceAll("'", "&#9c5b0d;");
 
 }
 
@@ -1334,7 +1334,7 @@ document.body.classList.remove(
 
 logoutButton.addEventListener(
 "click",
-logoutAdmin
+()=>{if(typeof window.showPopup==="function"){window.showPopup({type:"warning",title:"Administrator Logout",message:"Are you sure you want to log out of the Senku Pay administration portal?",confirm:true,cancelText:"Cancel",confirmText:"Logout",onConfirm:logoutAdmin});return}logoutAdmin();}
 );
 
 

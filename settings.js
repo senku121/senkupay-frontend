@@ -979,19 +979,12 @@ logoutButton?.addEventListener(
 
 ()=>{
 
-if(
-
-confirm(
-
-"Are you sure you want to logout?"
-
-)
-
-){
+if(typeof window.showPopup === "function"){
+window.showPopup({type:"warning",title:"Logout",message:"Are you sure you want to log out of your Senku Pay account?",confirm:true,cancelText:"Cancel",confirmText:"Logout",onConfirm:logout});
+return;
+}
 
 logout();
-
-}
 
 });
 

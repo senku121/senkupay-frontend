@@ -1,167 +1,86 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<link rel="icon" href="/favicon.png" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Verify your Senku Pay email address using the six-digit verification code sent to your inbox.">
-    <meta name="theme-color" content="#070b16">
-
-    <title>Verify Email | Senku Pay</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
-
-    <link rel="stylesheet" href="verify-email.css">
-</head>
-
-<body>
-    <div class="glow glow1" aria-hidden="true"></div>
-    <div class="glow glow2" aria-hidden="true"></div>
-    <div class="glow glow3" aria-hidden="true"></div>
-
-    <header>
-        <a href="index.html" class="logo" aria-label="Return to Senku Pay home">
-            <div class="logo-box" aria-hidden="true">S</div>
-
-            <div>
-                <h2>Senku Pay</h2>
-                <small>Modern Digital Payments</small>
-            </div>
-        </a>
-    </header>
-
-    <main>
-        <section class="verify-card" aria-labelledby="verifyTitle">
-            <div class="card-top">
-                <div class="verify-icon" aria-hidden="true">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-
-                <h1 id="verifyTitle">Verify Your Email</h1>
-
-                <p>
+<link href="/favicon.png" rel="icon" type="image/x-icon"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Verify your Senku Pay email address using the six-digit verification code sent to your inbox." name="description"/>
+<meta content="#07090d" name="theme-color"/>
+<title>Verify Email | Senku Pay</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<link href="verify-email.css?v=20260728-v3" rel="stylesheet"/>
+<meta content="dark" name="color-scheme"/><link href="popup.css?v=20260728-v3" rel="stylesheet"/><link href="responsive.css?v=20260728-v3" rel="stylesheet"/></head>
+<body class="senku-obsidian-amber page-verify-email" data-page="verify-email" data-ui-version="obsidian-amber-v3">
+<div aria-hidden="true" class="glow glow1"></div>
+<div aria-hidden="true" class="glow glow2"></div>
+<div aria-hidden="true" class="glow glow3"></div>
+<header>
+<a aria-label="Return to Senku Pay home" class="logo" href="index.html">
+<div aria-hidden="true" class="logo-box">S</div>
+<div>
+<h2>Senku Pay</h2>
+<small>Modern Digital Payments</small>
+</div>
+</a>
+</header>
+<main>
+<section aria-labelledby="verifyTitle" class="verify-card">
+<div class="card-top">
+<div aria-hidden="true" class="verify-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<h1 id="verifyTitle">Verify Your Email</h1>
+<p>
                     Enter the six-digit verification code sent to
                     <strong id="maskedEmail">your email address</strong>.
                 </p>
-            </div>
-
-            <div
-                class="form-message"
-                id="formMessage"
-                role="alert"
-                aria-live="polite"
-                hidden
-            ></div>
-
-            <form id="verifyForm" novalidate>
-                <div
-                    class="otp-container"
-                    id="otpContainer"
-                    role="group"
-                    aria-label="Six-digit verification code"
-                >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        autocomplete="one-time-code"
-                        maxlength="1"
-                        aria-label="Verification digit 1"
-                    >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="1"
-                        aria-label="Verification digit 2"
-                    >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="1"
-                        aria-label="Verification digit 3"
-                    >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="1"
-                        aria-label="Verification digit 4"
-                    >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="1"
-                        aria-label="Verification digit 5"
-                    >
-                    <input
-                        class="otp-input"
-                        type="text"
-                        inputmode="numeric"
-                        maxlength="1"
-                        aria-label="Verification digit 6"
-                    >
-                </div>
-
-                <small class="otp-error" id="otpError" aria-live="polite"></small>
-
-                <div class="timer">
+</div>
+<div aria-live="polite" class="form-message" hidden="" id="formMessage" role="alert"></div>
+<form id="verifyForm" novalidate="">
+<div aria-label="Six-digit verification code" class="otp-container" id="otpContainer" role="group">
+<input aria-label="Verification digit 1" autocomplete="one-time-code" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+<input aria-label="Verification digit 2" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+<input aria-label="Verification digit 3" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+<input aria-label="Verification digit 4" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+<input aria-label="Verification digit 5" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+<input aria-label="Verification digit 6" class="otp-input" inputmode="numeric" maxlength="1" type="text"/>
+</div>
+<small aria-live="polite" class="otp-error" id="otpError"></small>
+<div class="timer">
                     Code expires in
                     <span id="timer">02:00</span>
-                </div>
-
-                <div class="resend">
+</div>
+<div class="resend">
                     Didn't receive the code?
 
-                    <button
-                        type="button"
-                        id="resend-btn"
-                        disabled
-                    >
+                    <button disabled="" id="resend-btn" type="button">
                         Resend OTP
                     </button>
-                </div>
-
-                <button
-                    class="verify-btn"
-                    id="verifyBtn"
-                    type="submit"
-                >
-                    <i class="fa-solid fa-check" aria-hidden="true"></i>
-                    <span>Verify Code</span>
-                </button>
-            </form>
-
-            <div class="security-note">
-                <i class="fa-solid fa-lock" aria-hidden="true"></i>
-
-                <p>
+</div>
+<button class="verify-btn" id="verifyBtn" type="submit">
+<i aria-hidden="true" class="fa-solid fa-check"></i>
+<span>Verify Code</span>
+</button>
+</form>
+<div class="security-note">
+<i aria-hidden="true" class="fa-solid fa-lock"></i>
+<p>
                     Never share your verification code with anyone. Senku Pay
                     support will never ask you to reveal it.
                 </p>
-            </div>
-
-            <div class="bottom-text">
-                <a href="register.html">
-                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+</div>
+<div class="bottom-text">
+<a href="register.html">
+<i aria-hidden="true" class="fa-solid fa-arrow-left"></i>
                     Back to Registration
                 </a>
-            </div>
-        </section>
-    </main>
-
-    <script src="verify-email.js"></script>
+</div>
+</section>
+</main>
+<script src="popup.js?v=20260728-v3"></script><script src="verify-email.js?v=20260728-v3"></script>
 </body>
 </html>

@@ -151,7 +151,7 @@ return String(value ?? "")
 .replaceAll("<", "&lt;")
 .replaceAll(">", "&gt;")
 .replaceAll('"', "&quot;")
-.replaceAll("'", "&#039;");
+.replaceAll("'", "&#9c5b0d;");
 
 }
 

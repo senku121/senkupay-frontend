@@ -1081,7 +1081,7 @@ return;
 }
 
 row.style.background =
-"rgba(123,44,255,.10)";
+"rgba(232, 166, 57,.10)";
 
 window.setTimeout(
 ()=>{
@@ -1137,15 +1137,7 @@ return;
 
 }
 
-if(
-window.confirm(
-"Are you sure you want to log out?"
-)
-){
-
 performLogout();
-
-}
 
 }
 );
