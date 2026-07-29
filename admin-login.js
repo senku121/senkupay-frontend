@@ -52,7 +52,7 @@ messageBox.hidden=false;
 
 messageBox.className=
 
-`admin-login-message show ${type}`;
+`sp-admin-login-message show ${type}`;
 
 messageBox.textContent=text;
 
@@ -64,7 +64,7 @@ messageBox.hidden=true;
 
 messageBox.className=
 
-"admin-login-message";
+"sp-admin-login-message";
 
 messageBox.textContent="";
 

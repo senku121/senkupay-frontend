@@ -59,7 +59,7 @@ a {
     text-decoration: none;
 }
 
-.admin-bg-grid {
+.sp-admin-bg-grid {
     position: fixed;
     inset: 0;
     z-index: -5;
@@ -73,7 +73,7 @@ a {
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .9), transparent 92%);
 }
 
-.admin-noise {
+.sp-admin-noise {
     position: fixed;
     inset: 0;
     z-index: -3;
@@ -82,7 +82,7 @@ a {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 
-.admin-glow {
+.sp-admin-glow {
     position: fixed;
     z-index: -4;
     width: 430px;
@@ -95,18 +95,18 @@ a {
     animation: glowDrift 11s ease-in-out infinite alternate;
 }
 
-.admin-glow-one {
+.sp-admin-glow-one {
     top: -215px;
     left: -155px;
 }
 
-.admin-glow-two {
+.sp-admin-glow-two {
     right: -190px;
     bottom: -205px;
     animation-delay: -5s;
 }
 
-.admin-login-page {
+.sp-admin-login-page {
     width: min(1500px, 100%);
     min-height: 100vh;
     margin-inline: auto;
@@ -117,8 +117,8 @@ a {
     align-items: stretch;
 }
 
-.portal-showcase,
-.admin-card {
+.sp-admin-portal-showcase,
+.sp-admin-card {
     min-width: 0;
     position: relative;
     overflow: hidden;
@@ -126,7 +126,7 @@ a {
     box-shadow: var(--shadow);
 }
 
-.portal-showcase {
+.sp-admin-portal-showcase {
     min-height: calc(100vh - clamp(40px, 6vw, 92px));
     padding: clamp(30px, 4.2vw, 68px);
     border-radius: 34px;
@@ -140,7 +140,7 @@ a {
     -webkit-backdrop-filter: blur(22px);
 }
 
-.portal-showcase::before {
+.sp-admin-portal-showcase::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -151,7 +151,7 @@ a {
         linear-gradient(120deg, transparent 0 58%, rgba(255, 180, 62, .035) 58% 59%, transparent 59% 100%);
 }
 
-.portal-showcase::after {
+.sp-admin-portal-showcase::after {
     content: "";
     position: absolute;
     width: 560px;
@@ -166,19 +166,19 @@ a {
         0 0 0 96px rgba(255, 180, 62, .018);
 }
 
-.portal-brand,
-.mobile-brand {
+.sp-admin-portal-brand,
+.sp-admin-mobile-brand {
     display: flex;
     align-items: center;
     gap: 14px;
 }
 
-.portal-brand {
+.sp-admin-portal-brand {
     width: fit-content;
     margin-bottom: clamp(46px, 8vh, 96px);
 }
 
-.brand-mark {
+.sp-admin-brand-mark {
     position: relative;
     width: 54px;
     height: 60px;
@@ -194,7 +194,7 @@ a {
     filter: drop-shadow(0 12px 22px rgba(255, 180, 62, .17));
 }
 
-.brand-mark::before {
+.sp-admin-brand-mark::before {
     content: "";
     position: absolute;
     inset: 5px;
@@ -202,27 +202,27 @@ a {
     border: 1px solid rgba(255, 180, 62, .42);
 }
 
-.brand-mark span {
+.sp-admin-brand-mark span {
     position: relative;
     z-index: 1;
 }
 
-.portal-brand strong,
-.mobile-brand strong {
+.sp-admin-portal-brand strong,
+.sp-admin-mobile-brand strong {
     display: block;
     font-size: 20px;
     line-height: 1.1;
     letter-spacing: .035em;
 }
 
-.portal-brand em,
-.mobile-brand em {
+.sp-admin-portal-brand em,
+.sp-admin-mobile-brand em {
     color: var(--amber);
     font-style: normal;
 }
 
-.portal-brand small,
-.mobile-brand small {
+.sp-admin-portal-brand small,
+.sp-admin-mobile-brand small {
     display: block;
     margin-top: 5px;
     color: var(--muted);
@@ -231,14 +231,14 @@ a {
     text-transform: uppercase;
 }
 
-.showcase-copy {
+.sp-admin-showcase-copy {
     max-width: 690px;
     position: relative;
     z-index: 3;
 }
 
-.portal-label,
-.security-badge {
+.sp-admin-portal-label,
+.sp-admin-security-badge {
     width: fit-content;
     display: inline-flex;
     align-items: center;
@@ -251,13 +251,13 @@ a {
     letter-spacing: .1em;
 }
 
-.portal-label {
+.sp-admin-portal-label {
     padding: 10px 15px;
     margin-bottom: 23px;
     border-radius: 999px;
 }
 
-.showcase-copy h1 {
+.sp-admin-showcase-copy h1 {
     max-width: 690px;
     margin-bottom: 22px;
     font-size: clamp(2.7rem, 4.6vw, 5.35rem);
@@ -266,19 +266,19 @@ a {
     font-weight: 800;
 }
 
-.showcase-copy h1 span {
+.sp-admin-showcase-copy h1 span {
     color: var(--amber);
     text-shadow: 0 0 34px rgba(255, 180, 62, .16);
 }
 
-.showcase-copy p {
+.sp-admin-showcase-copy p {
     max-width: 590px;
     color: var(--muted-light);
     font-size: clamp(15px, 1.2vw, 18px);
     line-height: 1.76;
 }
 
-.security-orbit {
+.sp-admin-security-orbit {
     position: absolute;
     right: clamp(20px, 5vw, 82px);
     bottom: clamp(126px, 18vh, 205px);
@@ -287,7 +287,7 @@ a {
     pointer-events: none;
 }
 
-.orbit-glow {
+.sp-admin-orbit-glow {
     position: absolute;
     inset: 23%;
     border-radius: 50%;
@@ -296,7 +296,7 @@ a {
     animation: orbitPulse 3.8s ease-in-out infinite;
 }
 
-.orbit-ring {
+.sp-admin-orbit-ring {
     position: absolute;
     inset: 8%;
     border-radius: 50%;
@@ -304,8 +304,8 @@ a {
     box-shadow: inset 0 0 36px rgba(255, 180, 62, .035);
 }
 
-.orbit-ring::before,
-.orbit-ring::after {
+.sp-admin-orbit-ring::before,
+.sp-admin-orbit-ring::after {
     content: "";
     position: absolute;
     width: 7px;
@@ -315,27 +315,27 @@ a {
     box-shadow: 0 0 15px var(--amber);
 }
 
-.orbit-ring::before {
+.sp-admin-orbit-ring::before {
     top: 11%;
     left: 19%;
 }
 
-.orbit-ring::after {
+.sp-admin-orbit-ring::after {
     right: 4%;
     bottom: 31%;
 }
 
-.orbit-ring-one {
+.sp-admin-orbit-ring-one {
     animation: ringSpin 17s linear infinite;
 }
 
-.orbit-ring-two {
+.sp-admin-orbit-ring-two {
     inset: 24%;
     border-style: dashed;
     animation: ringSpinReverse 13s linear infinite;
 }
 
-.orbit-core {
+.sp-admin-orbit-core {
     position: absolute;
     inset: 36%;
     display: grid;
@@ -350,7 +350,7 @@ a {
     animation: coreFloat 4.3s ease-in-out infinite;
 }
 
-.orbit-node {
+.sp-admin-orbit-node {
     position: absolute;
     width: 42px;
     height: 42px;
@@ -363,11 +363,11 @@ a {
     box-shadow: 0 15px 35px rgba(0, 0, 0, .28);
 }
 
-.node-one { top: 4%; right: 23%; animation: nodeFloat 4.5s ease-in-out infinite; }
-.node-two { left: 2%; bottom: 28%; animation: nodeFloat 4.8s -1.7s ease-in-out infinite; }
-.node-three { right: 6%; bottom: 10%; animation: nodeFloat 4.2s -.9s ease-in-out infinite; }
+.sp-admin-node-one { top: 4%; right: 23%; animation: nodeFloat 4.5s ease-in-out infinite; }
+.sp-admin-node-two { left: 2%; bottom: 28%; animation: nodeFloat 4.8s -1.7s ease-in-out infinite; }
+.sp-admin-node-three { right: 6%; bottom: 10%; animation: nodeFloat 4.2s -.9s ease-in-out infinite; }
 
-.showcase-security {
+.sp-admin-showcase-security {
     margin-top: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -376,7 +376,7 @@ a {
     z-index: 4;
 }
 
-.showcase-security article {
+.sp-admin-showcase-security article {
     min-width: 0;
     padding: 17px 18px;
     display: flex;
@@ -388,7 +388,7 @@ a {
     backdrop-filter: blur(15px);
 }
 
-.showcase-security article > i {
+.sp-admin-showcase-security article > i {
     width: 40px;
     height: 40px;
     flex: 0 0 auto;
@@ -399,23 +399,23 @@ a {
     background: rgba(255, 180, 62, .1);
 }
 
-.showcase-security strong,
-.showcase-security span {
+.sp-admin-showcase-security strong,
+.sp-admin-showcase-security span {
     display: block;
 }
 
-.showcase-security strong {
+.sp-admin-showcase-security strong {
     margin-bottom: 4px;
     font-size: 13px;
 }
 
-.showcase-security span {
+.sp-admin-showcase-security span {
     color: var(--muted);
     font-size: 11px;
     line-height: 1.45;
 }
 
-.admin-card {
+.sp-admin-card {
     align-self: center;
     width: 100%;
     max-width: 560px;
@@ -430,7 +430,7 @@ a {
     animation: cardEnter .75s cubic-bezier(.2, .8, .2, 1) both;
 }
 
-.admin-card::before {
+.sp-admin-card::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -439,7 +439,7 @@ a {
     background: linear-gradient(135deg, rgba(255, 180, 62, .12), transparent 32%, transparent 70%, rgba(255, 180, 62, .055));
 }
 
-.admin-card::after {
+.sp-admin-card::after {
     content: "";
     position: absolute;
     width: 260px;
@@ -452,23 +452,23 @@ a {
     pointer-events: none;
 }
 
-.admin-card > * {
+.sp-admin-card > * {
     position: relative;
     z-index: 2;
 }
 
-.mobile-brand {
+.sp-admin-mobile-brand {
     display: none;
     margin-bottom: 30px;
 }
 
-.security-badge {
+.sp-admin-security-badge {
     padding: 9px 14px;
     margin-bottom: 24px;
     border-radius: 999px;
 }
 
-.badge-pulse {
+.sp-admin-badge-pulse {
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -477,25 +477,25 @@ a {
     animation: badgePulse 1.8s ease-in-out infinite;
 }
 
-.admin-heading {
+.sp-admin-heading {
     margin-bottom: 28px;
 }
 
-.admin-heading h2 {
+.sp-admin-heading h2 {
     margin-bottom: 11px;
     font-size: clamp(29px, 3vw, 39px);
     line-height: 1.12;
     letter-spacing: -.04em;
 }
 
-.admin-heading p {
+.sp-admin-heading p {
     max-width: 410px;
     color: var(--muted);
     font-size: 14px;
     line-height: 1.68;
 }
 
-.admin-login-message {
+.sp-admin-login-message {
     display: none;
     margin-bottom: 19px;
     padding: 13px 15px;
@@ -505,24 +505,24 @@ a {
     line-height: 1.55;
 }
 
-.admin-login-message.show {
+.sp-admin-login-message.show {
     display: block;
     animation: messageEnter .28s ease both;
 }
 
-.admin-login-message.success {
+.sp-admin-login-message.success {
     color: #b9f6d0;
     background: rgba(40, 199, 111, .1);
     border-color: rgba(40, 199, 111, .28);
 }
 
-.admin-login-message.error {
+.sp-admin-login-message.error {
     color: #ffc0c6;
     background: rgba(239, 91, 104, .1);
     border-color: rgba(239, 91, 104, .28);
 }
 
-.admin-login-message.info {
+.sp-admin-login-message.info {
     color: #ffe2a9;
     background: rgba(255, 180, 62, .085);
     border-color: rgba(255, 180, 62, .23);
@@ -533,11 +533,11 @@ a {
     flex-direction: column;
 }
 
-.input-group {
+.sp-admin-input-group {
     margin-bottom: 17px;
 }
 
-.input-group label {
+.sp-admin-input-group label {
     display: block;
     margin: 0 0 9px 2px;
     color: var(--muted-light);
@@ -545,7 +545,7 @@ a {
     font-weight: 650;
 }
 
-.input-box {
+.sp-admin-input-box {
     min-height: 59px;
     padding: 0 13px 0 16px;
     display: flex;
@@ -557,24 +557,24 @@ a {
     transition: border-color .28s ease, box-shadow .28s ease, transform .28s ease, background .28s ease;
 }
 
-.input-box:hover {
+.sp-admin-input-box:hover {
     border-color: rgba(255, 180, 62, .22);
     background: rgba(7, 11, 16, .72);
 }
 
-.input-box:focus-within {
+.sp-admin-input-box:focus-within {
     transform: translateY(-1px);
     border-color: rgba(255, 180, 62, .7);
     box-shadow: 0 0 0 4px rgba(255, 180, 62, .1), 0 12px 28px rgba(0, 0, 0, .18);
 }
 
-.input-box > i {
+.sp-admin-input-box > i {
     flex: 0 0 auto;
     color: var(--amber);
     font-size: 15px;
 }
 
-.input-box input {
+.sp-admin-input-box input {
     width: 100%;
     min-width: 0;
     height: 57px;
@@ -585,20 +585,20 @@ a {
     font-size: 14px;
 }
 
-.input-box input::placeholder {
+.sp-admin-input-box input::placeholder {
     color: #626d7d;
 }
 
-.input-box:has(input.invalid) {
+.sp-admin-input-box:has(input.invalid) {
     border-color: rgba(239, 91, 104, .72);
     box-shadow: 0 0 0 4px rgba(239, 91, 104, .08);
 }
 
-.input-box:has(input.valid) {
+.sp-admin-input-box:has(input.valid) {
     border-color: rgba(40, 199, 111, .5);
 }
 
-.toggle-password {
+.sp-admin-toggle-password {
     width: 40px;
     height: 40px;
     flex: 0 0 auto;
@@ -612,12 +612,12 @@ a {
     transition: color .25s ease, background .25s ease;
 }
 
-.toggle-password:hover {
+.sp-admin-toggle-password:hover {
     color: #fff;
     background: rgba(255, 255, 255, .055);
 }
 
-.field-error {
+.sp-admin-field-error {
     display: block;
     min-height: 16px;
     margin: 6px 0 0 2px;
@@ -626,7 +626,7 @@ a {
     line-height: 1.4;
 }
 
-.admin-options {
+.sp-admin-options {
     margin: 0 0 23px;
     display: flex;
     align-items: center;
@@ -634,7 +634,7 @@ a {
     gap: 16px;
 }
 
-.remember-device {
+.sp-admin-remember-device {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -645,13 +645,13 @@ a {
     user-select: none;
 }
 
-.remember-device input {
+.sp-admin-remember-device input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
 
-.custom-check {
+.sp-admin-custom-check {
     width: 18px;
     height: 18px;
     display: grid;
@@ -664,40 +664,40 @@ a {
     transition: .25s ease;
 }
 
-.custom-check i {
+.sp-admin-custom-check i {
     opacity: 0;
     font-size: 10px;
     transform: scale(.5);
     transition: .2s ease;
 }
 
-.remember-device input:checked + .custom-check {
+.sp-admin-remember-device input:checked + .sp-admin-custom-check {
     border-color: var(--amber);
     background: var(--amber);
 }
 
-.remember-device input:checked + .custom-check i {
+.sp-admin-remember-device input:checked + .sp-admin-custom-check i {
     opacity: 1;
     transform: scale(1);
 }
 
-.remember-device input:focus-visible + .custom-check {
+.sp-admin-remember-device input:focus-visible + .sp-admin-custom-check {
     outline: 2px solid var(--amber);
     outline-offset: 3px;
 }
 
-.admin-options a {
+.sp-admin-options a {
     color: var(--amber-pale);
     font-size: 12px;
     font-weight: 700;
     transition: color .25s ease;
 }
 
-.admin-options a:hover {
+.sp-admin-options a:hover {
     color: #fff;
 }
 
-.admin-login-btn {
+.sp-admin-login-btn {
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -718,7 +718,7 @@ a {
     transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
 }
 
-.admin-login-btn::before {
+.sp-admin-login-btn::before {
     content: "";
     position: absolute;
     top: 0;
@@ -729,37 +729,37 @@ a {
     transition: left .65s ease;
 }
 
-.admin-login-btn:hover:not(:disabled) {
+.sp-admin-login-btn:hover:not(:disabled) {
     transform: translateY(-3px);
     filter: saturate(1.08);
     box-shadow: 0 23px 44px rgba(255, 180, 62, .26);
 }
 
-.admin-login-btn:hover::before {
+.sp-admin-login-btn:hover::before {
     left: 130%;
 }
 
-.admin-login-btn:active:not(:disabled) {
+.sp-admin-login-btn:active:not(:disabled) {
     transform: translateY(0) scale(.985);
 }
 
-.admin-login-btn:disabled {
+.sp-admin-login-btn:disabled {
     opacity: .72;
     cursor: not-allowed;
 }
 
-.admin-login-btn > * {
+.sp-admin-login-btn > * {
     position: relative;
     z-index: 1;
 }
 
-.admin-login-btn.success {
+.sp-admin-login-btn.success {
     color: #fff;
     background: linear-gradient(135deg, #1eaa5d, #2ed477);
     box-shadow: 0 18px 40px rgba(40, 199, 111, .2);
 }
 
-.card-security-note {
+.sp-admin-card-security-note {
     margin-top: 21px;
     padding: 13px 14px;
     display: flex;
@@ -770,19 +770,19 @@ a {
     background: rgba(255, 255, 255, .022);
 }
 
-.card-security-note i {
+.sp-admin-card-security-note i {
     margin-top: 2px;
     color: var(--amber);
     font-size: 13px;
 }
 
-.card-security-note p {
+.sp-admin-card-security-note p {
     color: var(--muted);
     font-size: 11px;
     line-height: 1.55;
 }
 
-.user-login {
+.sp-admin-user-login {
     min-height: 50px;
     margin-top: 17px;
     display: flex;
@@ -797,7 +797,7 @@ a {
     transition: transform .28s ease, color .28s ease, border-color .28s ease, background .28s ease;
 }
 
-.user-login:hover {
+.sp-admin-user-login:hover {
     color: #fff;
     transform: translateY(-2px);
     border-color: rgba(255, 180, 62, .28);
@@ -858,87 +858,87 @@ a:focus-visible {
 }
 
 @media (max-width: 1120px) {
-    .admin-login-page {
+    .sp-admin-login-page {
         grid-template-columns: minmax(0, .9fr) minmax(400px, .8fr);
         gap: 25px;
     }
 
-    .portal-showcase {
+    .sp-admin-portal-showcase {
         padding: 40px;
     }
 
-    .security-orbit {
+    .sp-admin-security-orbit {
         width: 310px;
         right: 12px;
         bottom: 185px;
     }
 
-    .showcase-copy h1 {
+    .sp-admin-showcase-copy h1 {
         font-size: clamp(2.6rem, 5vw, 4.3rem);
     }
 }
 
 @media (max-width: 900px) {
-    .admin-login-page {
+    .sp-admin-login-page {
         min-height: 100svh;
         padding: 24px;
         display: block;
     }
 
-    .portal-showcase {
+    .sp-admin-portal-showcase {
         display: none;
     }
 
-    .admin-card {
+    .sp-admin-card {
         max-width: 620px;
         margin: 0 auto;
     }
 
-    .mobile-brand {
+    .sp-admin-mobile-brand {
         display: flex;
     }
 }
 
 @media (max-width: 560px) {
-    .admin-login-page {
+    .sp-admin-login-page {
         padding: 14px;
         display: flex;
         align-items: center;
     }
 
-    .admin-card {
+    .sp-admin-card {
         padding: 27px 20px;
         border-radius: 24px;
     }
 
-    .mobile-brand {
+    .sp-admin-mobile-brand {
         margin-bottom: 25px;
     }
 
-    .mobile-brand .brand-mark {
+    .sp-admin-mobile-brand .sp-admin-brand-mark {
         width: 47px;
         height: 52px;
         font-size: 19px;
     }
 
-    .mobile-brand strong {
+    .sp-admin-mobile-brand strong {
         font-size: 17px;
     }
 
-    .security-badge {
+    .sp-admin-security-badge {
         margin-bottom: 20px;
         font-size: 10px;
     }
 
-    .admin-heading {
+    .sp-admin-heading {
         margin-bottom: 24px;
     }
 
-    .admin-heading h2 {
+    .sp-admin-heading h2 {
         font-size: 29px;
     }
 
-    .admin-options {
+    .sp-admin-options {
         align-items: flex-start;
         flex-direction: column;
         gap: 12px;
@@ -946,20 +946,146 @@ a:focus-visible {
 }
 
 @media (max-width: 370px) {
-    .admin-login-page {
+    .sp-admin-login-page {
         padding: 8px;
     }
 
-    .admin-card {
+    .sp-admin-card {
         padding: 23px 16px;
     }
 
-    .admin-heading h2 {
+    .sp-admin-heading h2 {
         font-size: 26px;
     }
 
-    .input-box {
+    .sp-admin-input-box {
         padding-left: 13px;
+    }
+}
+
+
+/* ==================================================
+   AUTH PAGE ISOLATION
+   Prevent shared dashboard/responsive styles from
+   collapsing or splitting the login card on phones.
+================================================== */
+body.page-admin-login,
+body.page-admin-login .sp-admin-login-page,
+body.page-admin-login .sp-admin-card {
+    float: none;
+    clear: both;
+    writing-mode: horizontal-tb;
+    direction: ltr;
+}
+
+body.page-admin-login .sp-admin-login-page {
+    position: relative;
+    inset: auto;
+    transform: none;
+    clip-path: none;
+}
+
+body.page-admin-login .sp-admin-card {
+    position: relative;
+    inset: auto;
+    float: none;
+    clear: both;
+    min-width: 0;
+    height: auto;
+    clip-path: none;
+    isolation: isolate;
+}
+
+@media (max-width: 900px) {
+    html {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.page-admin-login {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        overflow-x: clip !important;
+    }
+
+    body.page-admin-login .sp-admin-login-page {
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        min-height: 100svh;
+        margin: 0 !important;
+        padding:
+            max(18px, env(safe-area-inset-top))
+            max(18px, env(safe-area-inset-right))
+            max(18px, env(safe-area-inset-bottom))
+            max(18px, env(safe-area-inset-left)) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
+        gap: 0 !important;
+        overflow: visible !important;
+    }
+
+    body.page-admin-login .sp-admin-portal-showcase {
+        display: none !important;
+    }
+
+    body.page-admin-login .sp-admin-card {
+        width: min(100%, 620px) !important;
+        max-width: 620px !important;
+        min-width: 0 !important;
+        margin: 0 auto !important;
+        padding: 30px !important;
+        display: block !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
+        place-items: initial !important;
+        align-self: auto !important;
+        justify-self: auto !important;
+        translate: none !important;
+        rotate: none !important;
+        scale: none !important;
+        overflow: hidden !important;
+    }
+
+    body.page-admin-login .sp-admin-card > * {
+        width: auto;
+        max-width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    body.page-admin-login .sp-admin-login-page {
+        padding:
+            max(12px, env(safe-area-inset-top))
+            max(12px, env(safe-area-inset-right))
+            max(12px, env(safe-area-inset-bottom))
+            max(12px, env(safe-area-inset-left)) !important;
+    }
+
+    body.page-admin-login .sp-admin-card {
+        padding: 25px 18px !important;
+        border-radius: 22px !important;
+    }
+
+    body.page-admin-login .sp-admin-options {
+        width: 100%;
+    }
+}
+
+@media (max-height: 720px) and (max-width: 900px) {
+    body.page-admin-login .sp-admin-login-page {
+        justify-content: flex-start !important;
     }
 }
 

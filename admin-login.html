@@ -3,7 +3,7 @@
 <head>
     <link rel="icon" href="/favicon.png" type="image/x-icon">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Secure Senku Pay administrator login.">
     <meta name="theme-color" content="#07090d">
     <meta name="color-scheme" content="dark">
@@ -16,28 +16,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="popup.css?v=20260728-v3">
-    <link rel="stylesheet" href="responsive.css?v=20260728-v3">
-    <link rel="stylesheet" href="admin-login.css?v=20260728-v4">
+<link rel="stylesheet" href="admin-login.css?v=20260729-v5">
 </head>
 
-<body class="senku-obsidian-amber page-admin-login" data-page="admin-login" data-ui-version="obsidian-amber-v4">
-    <div class="admin-bg-grid" aria-hidden="true"></div>
-    <div class="admin-noise" aria-hidden="true"></div>
-    <div class="admin-glow admin-glow-one" aria-hidden="true"></div>
-    <div class="admin-glow admin-glow-two" aria-hidden="true"></div>
+<body class="senku-obsidian-amber page-admin-login" data-page="admin-login" data-ui-version="obsidian-amber-v5">
+    <div class="sp-admin-bg-grid" aria-hidden="true"></div>
+    <div class="sp-admin-noise" aria-hidden="true"></div>
+    <div class="sp-admin-glow sp-admin-glow-one" aria-hidden="true"></div>
+    <div class="sp-admin-glow sp-admin-glow-two" aria-hidden="true"></div>
 
-    <main class="admin-login-page">
-        <section class="portal-showcase" aria-label="Senku Pay administration portal information">
-            <a href="index.html" class="portal-brand" aria-label="Return to Senku Pay home">
-                <div class="brand-mark" aria-hidden="true"><span>S</span></div>
+    <main class="sp-admin-login-page">
+        <section class="sp-admin-portal-showcase" aria-label="Senku Pay administration portal information">
+            <a href="index.html" class="sp-admin-portal-brand" aria-label="Return to Senku Pay home">
+                <div class="sp-admin-brand-mark" aria-hidden="true"><span>S</span></div>
                 <div>
                     <strong>SENKU <em>PAY</em></strong>
                     <small>Administration Portal</small>
                 </div>
             </a>
 
-            <div class="showcase-copy">
-                <div class="portal-label">
+            <div class="sp-admin-showcase-copy">
+                <div class="sp-admin-portal-label">
                     <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                     <span>CONTROL CENTER</span>
                 </div>
@@ -49,19 +48,19 @@
                 </p>
             </div>
 
-            <div class="security-orbit" aria-hidden="true">
-                <div class="orbit-glow"></div>
-                <div class="orbit-ring orbit-ring-one"></div>
-                <div class="orbit-ring orbit-ring-two"></div>
-                <div class="orbit-core">
+            <div class="sp-admin-security-orbit" aria-hidden="true">
+                <div class="sp-admin-orbit-glow"></div>
+                <div class="sp-admin-orbit-ring sp-admin-orbit-ring-one"></div>
+                <div class="sp-admin-orbit-ring sp-admin-orbit-ring-two"></div>
+                <div class="sp-admin-orbit-core">
                     <i class="fa-solid fa-shield"></i>
                 </div>
-                <span class="orbit-node node-one"><i class="fa-solid fa-server"></i></span>
-                <span class="orbit-node node-two"><i class="fa-solid fa-user-lock"></i></span>
-                <span class="orbit-node node-three"><i class="fa-solid fa-fingerprint"></i></span>
+                <span class="sp-admin-orbit-node sp-admin-node-one"><i class="fa-solid fa-server"></i></span>
+                <span class="sp-admin-orbit-node sp-admin-node-two"><i class="fa-solid fa-user-lock"></i></span>
+                <span class="sp-admin-orbit-node sp-admin-node-three"><i class="fa-solid fa-fingerprint"></i></span>
             </div>
 
-            <div class="showcase-security">
+            <div class="sp-admin-showcase-security">
                 <article>
                     <i class="fa-solid fa-lock"></i>
                     <div>
@@ -79,36 +78,36 @@
             </div>
         </section>
 
-        <section class="admin-card" aria-labelledby="adminLoginTitle">
-            <div class="mobile-brand">
-                <div class="brand-mark" aria-hidden="true"><span>S</span></div>
+        <section class="sp-admin-card" aria-labelledby="adminLoginTitle">
+            <div class="sp-admin-mobile-brand">
+                <div class="sp-admin-brand-mark" aria-hidden="true"><span>S</span></div>
                 <div>
                     <strong>SENKU <em>PAY</em></strong>
                     <small>Administration Portal</small>
                 </div>
             </div>
 
-            <div class="security-badge">
-                <span class="badge-pulse" aria-hidden="true"></span>
+            <div class="sp-admin-security-badge">
+                <span class="sp-admin-badge-pulse" aria-hidden="true"></span>
                 <span>SECURE ADMIN ACCESS</span>
             </div>
 
-            <div class="admin-heading">
+            <div class="sp-admin-heading">
                 <h2 id="adminLoginTitle">Administrator Login</h2>
                 <p>Enter your authorized credentials to continue to the control center.</p>
             </div>
 
             <div
                 id="adminLoginMessage"
-                class="admin-login-message"
+                class="sp-admin-login-message"
                 aria-live="polite"
                 hidden
             ></div>
 
             <form id="adminLoginForm" novalidate>
-                <div class="input-group">
+                <div class="sp-admin-input-group">
                     <label for="adminUsername">Admin Username</label>
-                    <div class="input-box">
+                    <div class="sp-admin-input-box">
                         <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
                         <input
                             id="adminUsername"
@@ -120,12 +119,12 @@
                             required
                         >
                     </div>
-                    <small class="field-error" id="adminUsernameError"></small>
+                    <small class="sp-admin-field-error" id="adminUsernameError"></small>
                 </div>
 
-                <div class="input-group">
+                <div class="sp-admin-input-group">
                     <label for="adminPassword">Password</label>
-                    <div class="input-box">
+                    <div class="sp-admin-input-box">
                         <i class="fa-solid fa-lock" aria-hidden="true"></i>
                         <input
                             id="adminPassword"
@@ -137,20 +136,20 @@
                         >
                         <button
                             id="toggleAdminPassword"
-                            class="toggle-password"
+                            class="sp-admin-toggle-password"
                             type="button"
                             aria-label="Show password"
                         >
                             <i class="fa-solid fa-eye" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <small class="field-error" id="adminPasswordError"></small>
+                    <small class="sp-admin-field-error" id="adminPasswordError"></small>
                 </div>
 
-                <div class="admin-options">
-                    <label class="remember-device">
+                <div class="sp-admin-options">
+                    <label class="sp-admin-remember-device">
                         <input id="rememberDevice" type="checkbox">
-                        <span class="custom-check" aria-hidden="true">
+                        <span class="sp-admin-custom-check" aria-hidden="true">
                             <i class="fa-solid fa-check"></i>
                         </span>
                         <span>Remember this device</span>
@@ -159,18 +158,18 @@
                     <a href="#" id="adminForgotPassword">Need Help?</a>
                 </div>
 
-                <button id="adminLoginButton" class="admin-login-btn" type="submit">
+                <button id="adminLoginButton" class="sp-admin-login-btn" type="submit">
                     <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
                     <span>Access Admin Dashboard</span>
                 </button>
             </form>
 
-            <div class="card-security-note">
+            <div class="sp-admin-card-security-note">
                 <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                 <p>Administrative access may be monitored for platform security.</p>
             </div>
 
-            <a class="user-login" href="login.html">
+            <a class="sp-admin-user-login" href="login.html">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                 <span>Return to User Login</span>
             </a>
@@ -179,6 +178,6 @@
 
     <script src="storage.js?v=20260728-v3"></script>
     <script src="popup.js?v=20260728-v3"></script>
-    <script src="admin-login.js?v=20260728-v4"></script>
+    <script src="admin-login.js?v=20260729-v5"></script>
 </body>
 </html>
