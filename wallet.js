@@ -3,54 +3,48 @@
                 WALLET PAGE
 ==================================================*/
 
-document.addEventListener("DOMContentLoaded",async()=>{
+document.addEventListener("DOMContentLoaded", async () => {
 
-const API_BASE_URL=
+const API_BASE_URL =
 "https://senkupay-api.onrender.com";
 
-const WALLET_ENDPOINT=
+const WALLET_ENDPOINT =
 `${API_BASE_URL}/api/wallet`;
 
-const TRANSACTIONS_ENDPOINT=
+const TRANSACTIONS_ENDPOINT =
 `${API_BASE_URL}/api/transactions`;
 
 /*==================================
         STORAGE
 ==================================*/
 
-function getToken(){
+function getToken() {
 
-return(
-
-sessionStorage.getItem("token")||
-
+return (
+sessionStorage.getItem("token") ||
 localStorage.getItem("token")
-
 );
 
 }
 
-function getCurrentUser(){
+function getCurrentUser() {
 
-const raw=
-
-sessionStorage.getItem("currentUser")||
-
+const raw =
+sessionStorage.getItem("currentUser") ||
 localStorage.getItem("currentUser");
 
-if(!raw){
+if (!raw) {
 
 return null;
 
 }
 
-try{
+try {
 
 return JSON.parse(raw);
 
 }
-
-catch{
+catch {
 
 return null;
 
@@ -58,30 +52,27 @@ return null;
 
 }
 
-function logout(){
+function logout() {
 
 [
 "token",
 "currentUser"
-
-].forEach(key=>{
+].forEach(key => {
 
 sessionStorage.removeItem(key);
-
 localStorage.removeItem(key);
 
 });
 
-window.location.href="login.html";
+window.location.href = "login.html";
 
 }
 
-const token=getToken();
+const token = getToken();
 
-if(!token){
+if (!token) {
 
 logout();
-
 return;
 
 }
@@ -90,67 +81,73 @@ return;
         ELEMENTS
 ==================================*/
 
-const walletBalance=
+const walletBalance =
 document.getElementById("walletBalance");
 
-const totalDeposited=
+const totalDeposited =
 document.getElementById("totalDeposited");
 
-const totalWithdrawn=
+const totalWithdrawn =
 document.getElementById("totalWithdrawn");
 
-const pendingDeposits=
+const pendingDeposits =
 document.getElementById("pendingDeposits");
 
-const pendingWithdrawals=
+const pendingWithdrawals =
 document.getElementById("pendingWithdrawals");
 
-const walletStatus=
+const walletStatus =
 document.getElementById("walletStatus");
 
-const walletVerification=
+const walletVerification =
 document.getElementById("walletVerification");
 
-const walletSync=
+const walletSync =
 document.getElementById("walletSync");
 
-const walletHistory=
+const walletHistory =
 document.getElementById("walletHistory");
 
-const walletMessage=
+const walletMessage =
 document.getElementById("walletMessage");
 
-const depositButton=
+const depositButton =
 document.getElementById("depositButton");
 
-const withdrawButton=
+const withdrawButton =
 document.getElementById("withdrawButton");
 
 /*==================================
         MESSAGE
 ==================================*/
 
-function showMessage(text,type="info"){
+function showMessage(text, type = "info") {
 
-walletMessage.hidden=false;
+if (!walletMessage) {
 
-walletMessage.className=
-
-`wallet-message show ${type}`;
-
-walletMessage.textContent=text;
+return;
 
 }
 
-function hideMessage(){
+walletMessage.hidden = false;
+walletMessage.className =
+`wallet-message show ${type}`;
+walletMessage.textContent = text;
 
-walletMessage.hidden=true;
+}
 
-walletMessage.className=
+function hideMessage() {
 
+if (!walletMessage) {
+
+return;
+
+}
+
+walletMessage.hidden = true;
+walletMessage.className =
 "wallet-message";
-
-walletMessage.textContent="";
+walletMessage.textContent = "";
 
 }
 
@@ -158,35 +155,33 @@ walletMessage.textContent="";
         FORMAT
 ==================================*/
 
-function money(value){
+function money(value) {
+
+const amount = Number(value);
 
 return new Intl.NumberFormat(
-
 "en-US",
-
 {
-
-style:"currency",
-
-currency:"USD"
+style: "currency",
+currency: "USD"
+}
+).format(
+Number.isFinite(amount)
+? amount
+: 0
+);
 
 }
 
-).format(Number(value||0));
+function formatDate(date) {
 
-}
-
-function formatDate(date){
-
-if(!date){
+if (!date) {
 
 return "--";
 
 }
 
-return new Date(date)
-
-.toLocaleString();
+return new Date(date).toLocaleString();
 
 }
 
@@ -194,62 +189,66 @@ return new Date(date)
         API
 ==================================*/
 
-async function api(url){
+async function api(url) {
 
-const response=
-
+const response =
 await fetch(
-
 url,
-
 {
-
-headers:{
-
+method: "GET",
+cache: "no-store",
+headers: {
 Authorization:
-
 `Bearer ${token}`,
-
 Accept:
-
 "application/json"
-
 }
-
 }
-
 );
 
-if(
-
-response.status===401||
-
-response.status===403
-
-){
+if (
+response.status === 401 ||
+response.status === 403
+) {
 
 logout();
 
 throw new Error(
-
 "Session expired."
-
 );
 
 }
 
-const data=
+const contentType =
+response.headers.get("content-type") || "";
 
-await response.json();
+let data = {};
 
-if(!response.ok){
+if (
+contentType.includes("application/json")
+) {
+
+data = await response.json();
+
+}
+else {
+
+const text = await response.text();
+
+data = {
+message:
+text ||
+"Unexpected server response."
+};
+
+}
+
+if (!response.ok) {
 
 throw new Error(
-
-data.message||
-
+data.message ||
+data.error ||
 "Unable to load wallet."
-
 );
 
 }
@@ -257,202 +256,241 @@ data.message||
 return data;
 
 }
+
+/*==================================
+      RESPONSE NORMALIZATION
+==================================*/
+
+/*
+ * The backend currently returns wallet data as:
+ *
+ * {
+ *   success: true,
+ *   wallet: {
+ *     balance,
+ *     deposited,
+ *     withdrawn,
+ *     lockedBalance,
+ *     status
+ *   },
+ *   user: { ... }
+ * }
+ *
+ * Older frontend code read data.balance directly, which
+ * converted the missing root value to $0.00. This helper
+ * supports both nested and older root-level responses.
+ */
+function normalizeWalletResponse(data) {
+
+const wallet =
+data?.wallet &&
+typeof data.wallet === "object"
+? data.wallet
+: data;
+
+const currentUser =
+getCurrentUser();
+
+const user =
+data?.user ||
+wallet?.user ||
+currentUser ||
+{};
+
+return {
+raw: data || {},
+wallet: wallet || {},
+user
+};
+
+}
+
 /*==================================
         LOAD WALLET
 ==================================*/
 
-async function loadWallet(){
+async function loadWallet() {
 
 hideMessage();
 
-try{
+try {
 
-const data=
+const data =
 await api(WALLET_ENDPOINT);
 
-const currentUser=
-getCurrentUser();
+const normalized =
+normalizeWalletResponse(data);
 
-const user=
+const wallet =
+normalized.wallet;
 
-data.user||
+const user =
+normalized.user;
 
-currentUser||
-
-data;
-
-const availableBalance=
-
-data.balance??
-
-data.availableBalance??
-
+const availableBalance =
+wallet.balance ??
+wallet.availableBalance ??
+data.balance ??
+data.availableBalance ??
 0;
 
-const depositedAmount=
-
-data.deposited??
-
-data.totalDeposited??
-
+const depositedAmount =
+wallet.deposited ??
+wallet.totalDeposited ??
+data.deposited ??
+data.totalDeposited ??
 0;
 
-const withdrawnAmount=
-
-data.withdrawn??
-
-data.totalWithdrawn??
-
+const withdrawnAmount =
+wallet.withdrawn ??
+wallet.totalWithdrawn ??
+data.withdrawn ??
+data.totalWithdrawn ??
 0;
 
-const pendingDepositAmount=
-
-data.pendingDeposits??
-
-data.pendingDeposit??
-
+const pendingDepositAmount =
+wallet.pendingDeposits ??
+wallet.pendingDeposit ??
+data.pendingDeposits ??
+data.pendingDeposit ??
 0;
 
-const pendingWithdrawalAmount=
-
-data.pendingWithdrawals??
-
-data.pendingWithdraw??
-
-data.lockedBalance??
-
+const pendingWithdrawalAmount =
+wallet.pendingWithdrawals ??
+wallet.pendingWithdraw ??
+wallet.lockedBalance ??
+data.pendingWithdrawals ??
+data.pendingWithdraw ??
+data.lockedBalance ??
 0;
 
-if(walletBalance){
+if (walletBalance) {
 
-walletBalance.textContent=
-
+walletBalance.textContent =
 money(availableBalance);
 
 }
 
-if(totalDeposited){
+if (totalDeposited) {
 
-totalDeposited.textContent=
-
+totalDeposited.textContent =
 money(depositedAmount);
 
 }
 
-if(totalWithdrawn){
+if (totalWithdrawn) {
 
-totalWithdrawn.textContent=
-
+totalWithdrawn.textContent =
 money(withdrawnAmount);
 
 }
 
-if(pendingDeposits){
+if (pendingDeposits) {
 
-pendingDeposits.textContent=
-
+pendingDeposits.textContent =
 money(pendingDepositAmount);
 
 }
 
-if(pendingWithdrawals){
+if (pendingWithdrawals) {
 
-pendingWithdrawals.textContent=
-
+pendingWithdrawals.textContent =
 money(pendingWithdrawalAmount);
 
 }
 
-if(walletStatus){
+if (walletStatus) {
 
-walletStatus.textContent=
+const status =
+String(
+wallet.status ||
+"ACTIVE"
+).trim().toUpperCase();
 
-"Wallet synchronized with the secure Senku Pay server.";
+walletStatus.textContent =
+status === "ACTIVE"
+? "Wallet synchronized with the secure Senku Pay server."
+: `Wallet status: ${status.replaceAll("_", " ")}.`;
+
+walletStatus.classList.remove(
+"status-negative"
+);
 
 }
 
-if(walletVerification){
+if (walletVerification) {
 
-const verified=
-
-user.emailVerified??
-
-data.emailVerified??
-
+const rawVerified =
+user.emailVerified ??
+wallet.emailVerified ??
+data.emailVerified ??
 false;
 
-walletVerification.textContent=
+const verified =
+rawVerified === true ||
+rawVerified === "true" ||
+rawVerified === 1 ||
+rawVerified === "1";
 
+walletVerification.textContent =
 verified
-
 ? "Verified"
-
 : "Pending";
 
-walletVerification.className=
-
+walletVerification.className =
 verified
-
 ? "status-positive"
-
 : "status-negative";
 
 }
 
-if(walletSync){
+if (walletSync) {
 
-walletSync.textContent=
-
+walletSync.textContent =
 new Date().toLocaleTimeString(
-
 [],
-
 {
-
-hour:"2-digit",
-
-minute:"2-digit"
-
+hour: "2-digit",
+minute: "2-digit"
 }
-
 );
 
 }
 
-return data;
+console.info(
+"Wallet synchronized:",
+{
+balance: availableBalance,
+deposited: depositedAmount,
+withdrawn: withdrawnAmount,
+pendingDeposits: pendingDepositAmount,
+pendingWithdrawals: pendingWithdrawalAmount
+}
+);
+
+return normalized;
 
 }
-
-catch(error){
+catch (error) {
 
 console.error(
-
 "Wallet load failed:",
-
 error
-
 );
 
 showMessage(
-
-error.message||
-
+error.message ||
 "Unable to load wallet information.",
-
 "error"
-
 );
 
-if(walletStatus){
+if (walletStatus) {
 
-walletStatus.textContent=
-
+walletStatus.textContent =
 "Wallet synchronization failed.";
 
 walletStatus.classList.add(
-
 "status-negative"
-
 );
 
 }
@@ -467,60 +505,44 @@ return null;
         TRANSACTION TYPE
 ==================================*/
 
-function getTransactionDetails(tx){
+function getTransactionDetails(tx) {
 
-const type=
+const type =
+String(tx.type || "Transaction");
 
-String(tx.type||"Transaction");
-
-const normalized=
-
+const normalized =
 type.toLowerCase();
 
-const withdrawal=
-
+const withdrawal =
 normalized.includes("withdraw");
 
-const deposit=
-
+const deposit =
 normalized.includes("deposit");
 
-if(withdrawal){
+if (withdrawal) {
 
-return{
-
-icon:"fa-arrow-up",
-
-amountClass:"wallet-negative",
-
-sign:"-"
-
+return {
+icon: "fa-arrow-up",
+amountClass: "wallet-negative",
+sign: "-"
 };
 
 }
 
-if(deposit){
+if (deposit) {
 
-return{
-
-icon:"fa-arrow-down",
-
-amountClass:"wallet-positive",
-
-sign:"+"
-
+return {
+icon: "fa-arrow-down",
+amountClass: "wallet-positive",
+sign: "+"
 };
 
 }
 
-return{
-
-icon:"fa-money-bill-transfer",
-
-amountClass:"",
-
-sign:""
-
+return {
+icon: "fa-money-bill-transfer",
+amountClass: "",
+sign: ""
 };
 
 }
@@ -529,157 +551,93 @@ sign:""
         ESCAPE HTML
 ==================================*/
 
-function escapeHtml(value){
+function escapeHtml(value) {
 
-return String(value??"")
-
-.replaceAll("&","&amp;")
-
-.replaceAll("<","&lt;")
-
-.replaceAll(">","&gt;")
-
-.replaceAll('"',"&quot;")
-
-.replaceAll("'","&#9c5b0d;");
+return String(value ?? "")
+.replaceAll("&", "&amp;")
+.replaceAll("<", "&lt;")
+.replaceAll(">", "&gt;")
+.replaceAll('"', "&quot;")
+.replaceAll("'", "&#39;");
 
 }
+
 /*==================================
         LOAD WALLET HISTORY
 ==================================*/
 
-async function loadWalletHistory(){
+async function loadWalletHistory() {
 
-if(!walletHistory){
+if (!walletHistory) {
 
 return;
 
 }
 
-try{
+try {
 
-const response=
+const response =
+await api(TRANSACTIONS_ENDPOINT);
 
-await api(
-
-TRANSACTIONS_ENDPOINT
-
+const transactions =
+Array.isArray(response)
+? response
+: (
+response.transactions ||
+response.data ||
+[]
 );
 
-const transactions=
-
-Array.isArray(response)
-
-? response
-
-: response.transactions||
-
-response.data||
-
-[];
-
-if(transactions.length===0){
+if (transactions.length === 0) {
 
 return;
 
 }
 
-walletHistory.innerHTML="";
+walletHistory.innerHTML = "";
 
 transactions
+.slice(0, 8)
+.forEach(tx => {
 
-.slice(0,8)
-
-.forEach(tx=>{
-
-const ui=
-
+const ui =
 getTransactionDetails(tx);
 
-const amount=
-
-Number(tx.amount||0);
+const amount =
+Number(tx.amount || 0);
 
 walletHistory.insertAdjacentHTML(
-
 "beforeend",
-
 `
-
 <div class="wallet-row">
-
-<div class="wallet-info">
-
-<div class="wallet-icon">
-
-<i class="fa-solid ${ui.icon}"></i>
-
+    <div class="wallet-info">
+        <div class="wallet-icon">
+            <i class="fa-solid ${ui.icon}"></i>
+        </div>
+        <div>
+            <h4>${escapeHtml(tx.type || "Transaction")}</h4>
+            <p>
+                ${formatDate(tx.createdAt)}
+                <br>
+                Status: ${escapeHtml(tx.status || "Completed")}
+            </p>
+        </div>
+    </div>
+    <div class="wallet-amount ${ui.amountClass}">
+        ${ui.sign}${money(amount)}
+    </div>
 </div>
-
-<div>
-
-<h4>
-
-${escapeHtml(
-
-tx.type||
-
-"Transaction"
-
-)}
-
-</h4>
-
-<p>
-
-${formatDate(
-
-tx.createdAt
-
-)}
-
-<br>
-
-Status:
-
-${escapeHtml(
-
-tx.status||
-
-"Completed"
-
-)}
-
-</p>
-
-</div>
-
-</div>
-
-<div class="wallet-amount ${ui.amountClass}">
-
-${ui.sign}${money(amount)}
-
-</div>
-
-</div>
-
 `
-
 );
 
 });
 
 }
-
-catch(error){
+catch (error) {
 
 console.error(
-
 "History load failed:",
-
 error
-
 );
 
 }
@@ -691,125 +649,85 @@ error
 ==================================*/
 
 depositButton?.addEventListener(
-
 "click",
+() => {
 
-()=>{
+depositButton.disabled = true;
 
-depositButton.disabled=true;
-
-depositButton.innerHTML=`
-
+depositButton.innerHTML = `
 <i class="fa-solid fa-spinner fa-spin"></i>
-
-<span>
-
-Opening...
-
-</span>
-
+<span>Opening...</span>
 `;
 
-setTimeout(()=>{
+setTimeout(() => {
 
-window.location.href=
-
+window.location.href =
 "deposit.html";
 
-},600);
+}, 600);
 
 }
-
 );
 
 withdrawButton?.addEventListener(
-
 "click",
+() => {
 
-()=>{
+withdrawButton.disabled = true;
 
-withdrawButton.disabled=true;
-
-withdrawButton.innerHTML=`
-
+withdrawButton.innerHTML = `
 <i class="fa-solid fa-spinner fa-spin"></i>
-
-<span>
-
-Opening...
-
-</span>
-
+<span>Opening...</span>
 `;
 
-setTimeout(()=>{
+setTimeout(() => {
 
-window.location.href=
-
+window.location.href =
 "withdraw.html";
 
-},600);
+}, 600);
 
 }
-
 );
 
 document
-
-.querySelector(
-
-".view-transactions"
-
-)
-
+.querySelector(".view-transactions")
 ?.addEventListener(
-
 "click",
-
-event=>{
+event => {
 
 event.preventDefault();
 
-window.location.href=
-
+window.location.href =
 "transactions.html";
 
 }
-
 );
+
 /*==================================
         CARD ENTRANCE
 ==================================*/
 
 document
-
 .querySelectorAll(
-
 ".wallet-main-card,.wallet-stat,.wallet-actions,.summary-card,.history-card,.wallet-footer"
-
 )
+.forEach((element, index) => {
 
-.forEach((element,index)=>{
-
-element.style.opacity="0";
-
-element.style.transform=
-
+element.style.opacity = "0";
+element.style.transform =
 "translateY(20px)";
 
-setTimeout(()=>{
+setTimeout(() => {
 
-element.style.transition=
-
+element.style.transition =
 ".55s ease";
 
-element.style.opacity="1";
-
-element.style.transform=
-
+element.style.opacity = "1";
+element.style.transform =
 "translateY(0)";
 
-},100+(index*90));
+}, 100 + (index * 90));
 
 });
 
@@ -817,58 +735,35 @@ element.style.transform=
         AUTO REFRESH
 ==================================*/
 
-setInterval(()=>{
+setInterval(async () => {
 
-if(walletSync){
+if (document.visibilityState === "visible") {
 
-walletSync.textContent=
-
-new Date()
-
-.toLocaleTimeString(
-
-[],
-
-{
-
-hour:"2-digit",
-
-minute:"2-digit"
+await loadWallet();
 
 }
 
-);
-
-}
-
-},60000);
+}, 60000);
 
 /*==================================
         INITIALIZE
 ==================================*/
 
-const walletData=
-
+const walletData =
 await loadWallet();
 
-if(walletData){
+if (walletData) {
 
 await loadWalletHistory();
 
 showMessage(
-
 "Wallet synchronized successfully.",
-
 "success"
-
 );
 
 setTimeout(
-
 hideMessage,
-
 2500
-
 );
 
 }
@@ -878,45 +773,34 @@ hideMessage,
 ==================================*/
 
 document.addEventListener(
-
 "keydown",
+event => {
 
-event=>{
-
-if(
-
+if (
 event.altKey &&
+event.key.toLowerCase() === "d"
+) {
 
-event.key==="d"
-
-){
-
-window.location.href=
-
+window.location.href =
 "deposit.html";
 
 }
 
-if(
-
+if (
 event.altKey &&
+event.key.toLowerCase() === "w"
+) {
 
-event.key==="w"
-
-){
-
-window.location.href=
-
+window.location.href =
 "withdraw.html";
 
 }
 
 }
-
 );
 
 /*==================================
-        END
+                END
 ==================================*/
 
 });

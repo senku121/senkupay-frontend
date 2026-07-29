@@ -7,268 +7,153 @@
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
 <meta content="View your Senku Pay wallet balance, deposits, withdrawals and activity." name="description"/>
 <meta content="#07090d" name="theme-color"/>
-<title>
-
-Wallet | Senku Pay
-
-</title>
+<title>Wallet | Senku Pay</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <link href="wallet.css?v=20260728-v3" rel="stylesheet"/>
-<meta content="dark" name="color-scheme"/><link href="popup.css?v=20260728-v3" rel="stylesheet"/><link href="responsive.css?v=20260728-v3" rel="stylesheet"/></head>
+<meta content="dark" name="color-scheme"/>
+<link href="popup.css?v=20260728-v3" rel="stylesheet"/>
+<link href="responsive.css?v=20260728-v3" rel="stylesheet"/>
+</head>
 <body class="senku-obsidian-amber page-wallet" data-page="wallet" data-ui-version="obsidian-amber-v3">
 <div class="bg-grid"></div>
 <div class="wallet-layout">
 <header class="wallet-header">
 <a class="back-btn" href="dashboard.html">
 <i class="fa-solid fa-arrow-left"></i>
-<span>
-
-Dashboard
-
-</span>
+<span>Dashboard</span>
 </a>
 <div class="logo">
-<div class="logo-box">
-
-S
-
-</div>
+<div class="logo-box">S</div>
 <div>
-<h2>
-
-Senku Pay
-
-</h2>
-<small>
-
-Digital Payments
-
-</small>
+<h2>Senku Pay</h2>
+<small>Digital Payments</small>
 </div>
 </div>
 </header>
+
 <main class="wallet-container">
-<div class="wallet-message" hidden="" id="walletMessage">
-</div>
+<div class="wallet-message" hidden id="walletMessage"></div>
+
 <section class="wallet-main-card">
 <div>
-<p>
-
-Available Balance
-
-</p>
-<h1 id="walletBalance">
-
-$0.00
-
-</h1>
+<p>Available Balance</p>
+<h1 id="walletBalance">$0.00</h1>
 <span class="wallet-status" id="walletStatus">
-
 Wallet synchronized with the secure Senku Pay server.
-
 </span>
 </div>
 <i class="fa-solid fa-wallet"></i>
 </section>
+
 <section class="wallet-stats">
 <div class="wallet-stat">
 <i class="fa-solid fa-circle-dollar-to-slot"></i>
 <div>
-<p>
-
-Total Deposited
-
-</p>
-<h2 id="totalDeposited">
-
-$0.00
-
-</h2>
+<p>Total Deposited</p>
+<h2 id="totalDeposited">$0.00</h2>
 </div>
 </div>
+
 <div class="wallet-stat">
 <i class="fa-solid fa-money-bill-transfer"></i>
 <div>
-<p>
-
-Total Withdrawn
-
-</p>
-<h2 id="totalWithdrawn">
-
-$0.00
-
-</h2>
+<p>Total Withdrawn</p>
+<h2 id="totalWithdrawn">$0.00</h2>
 </div>
 </div>
+
 <div class="wallet-stat">
 <i class="fa-solid fa-clock"></i>
 <div>
-<p>
-
-Pending Deposits
-
-</p>
-<h2 id="pendingDeposits">
-
-$0.00
-
-</h2>
+<p>Pending Deposits</p>
+<h2 id="pendingDeposits">$0.00</h2>
 </div>
 </div>
+
 <div class="wallet-stat">
 <i class="fa-solid fa-hourglass-half"></i>
 <div>
-<p>
-
-Pending Withdrawals
-
-</p>
-<h2 id="pendingWithdrawals">
-
-$0.00
-
-</h2>
+<p>Pending Withdrawals</p>
+<h2 id="pendingWithdrawals">$0.00</h2>
 </div>
 </div>
 </section>
-<!--=========================================
-            QUICK ACTIONS
-==========================================-->
+
 <section class="wallet-actions">
 <button class="deposit-btn" id="depositButton" type="button">
 <i class="fa-solid fa-plus"></i>
-<span>
-
-Deposit Funds
-
-</span>
+<span>Deposit Funds</span>
 </button>
 <button class="withdraw-btn" id="withdrawButton" type="button">
 <i class="fa-solid fa-arrow-up"></i>
-<span>
-
-Withdraw Funds
-
-</span>
+<span>Withdraw Funds</span>
 </button>
 </section>
-<!--=========================================
-            WALLET SUMMARY
-==========================================-->
+
 <section class="wallet-summary">
 <div class="summary-card">
 <i class="fa-solid fa-shield-halved"></i>
 <div>
-<p>
-
-Wallet Status
-
-</p>
-<h3 id="walletVerification">
-
-Verified
-
-</h3>
+<p>Wallet Status</p>
+<h3 id="walletVerification">Verified</h3>
 </div>
 </div>
+
 <div class="summary-card">
 <i class="fa-solid fa-repeat"></i>
 <div>
-<p>
-
-Last Sync
-
-</p>
-<h3 id="walletSync">
-
-Just now
-
-</h3>
+<p>Last Sync</p>
+<h3 id="walletSync">Just now</h3>
 </div>
 </div>
+
 <div class="summary-card">
 <i class="fa-solid fa-credit-card"></i>
 <div>
-<p>
-
-Payment Method
-
-</p>
-<h3>
-
-Gateway Ready
-
-</h3>
+<p>Payment Method</p>
+<h3>Gateway Ready</h3>
 </div>
 </div>
+
 <div class="summary-card">
 <i class="fa-solid fa-lock"></i>
 <div>
-<p>
-
-Security
-
-</p>
-<h3>
-
-Protected
-
-</h3>
+<p>Security</p>
+<h3>Protected</h3>
 </div>
 </div>
 </section>
-<!--=========================================
-            WALLET ACTIVITY
-==========================================-->
+
 <section class="history-card">
 <div class="section-title">
-<h2>
-
-Wallet Activity
-
-</h2>
-<a href="transactions.html">
-
-View All
-
-</a>
+<h2>Wallet Activity</h2>
+<a href="transactions.html">View All</a>
 </div>
 <div id="walletHistory">
 <div class="empty-wallet">
 <i class="fa-solid fa-wallet"></i>
-<h3>
-
-No Wallet Activity
-
-</h3>
+<h3>No Wallet Activity</h3>
 <p>
-
 Your deposits, withdrawals and wallet transactions will appear here once you start using your Senku Pay wallet.
-
 </p>
 </div>
 </div>
 </section>
-<!--=========================================
-            FOOTER ACTION
-==========================================-->
+
 <section class="wallet-footer">
 <a class="view-transactions" href="transactions.html">
 <i class="fa-solid fa-clock-rotate-left"></i>
-<span>
-
-View Full Transaction History
-
-</span>
+<span>View Full Transaction History</span>
 </a>
 </section>
 </main>
 </div>
-<script src="storage.js?v=20260728-v3"></script><script src="popup.js?v=20260728-v3"></script>
-<script src="wallet.js?v=20260728-v3"></script>
+
+<script src="storage.js?v=20260728-v3"></script>
+<script src="popup.js?v=20260728-v3"></script>
+<script src="wallet.js?v=20260729-v4-balancefix"></script>
 </body>
 </html>
