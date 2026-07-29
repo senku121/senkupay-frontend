@@ -15,11 +15,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="stylesheet" href="popup.css?v=20260728-v3">
-<link rel="stylesheet" href="admin-login.css?v=20260729-v5">
+<link rel="stylesheet" href="admin-login.css?v=20260729-v6">
 </head>
 
-<body class="senku-obsidian-amber page-admin-login" data-page="admin-login" data-ui-version="obsidian-amber-v5">
+<body class="senku-obsidian-amber page-admin-login sp-admin-page-loading" data-page="admin-login" data-ui-version="obsidian-amber-v6">
+
+    <div id="spAdminPageLoader" class="sp-admin-page-loader" role="status" aria-live="polite" aria-label="Loading Senku Pay administration portal">
+        <div class="sp-admin-loader-panel">
+            <div class="sp-admin-loader-mark" aria-hidden="true"><span>S</span></div>
+            <div class="sp-admin-loader-brand">
+                <strong>SENKU <em>PAY</em></strong>
+                <span>Loading secure administration portal</span>
+            </div>
+            <div class="sp-admin-loader-track" aria-hidden="true"><span></span></div>
+        </div>
+    </div>
     <div class="sp-admin-bg-grid" aria-hidden="true"></div>
     <div class="sp-admin-noise" aria-hidden="true"></div>
     <div class="sp-admin-glow sp-admin-glow-one" aria-hidden="true"></div>
@@ -176,8 +186,6 @@
         </section>
     </main>
 
-    <script src="storage.js?v=20260728-v3"></script>
-    <script src="popup.js?v=20260728-v3"></script>
-    <script src="admin-login.js?v=20260729-v5"></script>
+    <script src="admin-login.js?v=20260729-v6"></script>
 </body>
 </html>

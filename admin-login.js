@@ -1,4 +1,73 @@
 /*==================================================
+        STANDALONE PAGE LOADER + LEGACY CLEANUP
+==================================================*/
+(function(){
+    "use strict";
+
+    const ownLoaderId = "spAdminPageLoader";
+    let loaderFinished = false;
+
+    function removeLegacyLoaderText(){
+        if(!document.body){
+            return;
+        }
+
+        const phrase = "loading your secure experience";
+        const elements = Array.from(document.body.querySelectorAll("div, section, aside, header"));
+
+        elements.forEach(element=>{
+            if(element.id===ownLoaderId || element.closest(`#${ownLoaderId}`)){
+                return;
+            }
+
+            const text = String(element.textContent || "")
+                .replace(/\s+/g," ")
+                .trim()
+                .toLowerCase();
+
+            if(text.includes(phrase) && text.length < 220){
+                element.remove();
+            }
+        });
+    }
+
+    function finishPageLoader(){
+        if(loaderFinished){
+            return;
+        }
+
+        loaderFinished = true;
+        removeLegacyLoaderText();
+
+        const loader = document.getElementById(ownLoaderId);
+        document.body?.classList.remove("sp-admin-page-loading");
+
+        if(!loader){
+            return;
+        }
+
+        loader.classList.add("is-hidden");
+        window.setTimeout(()=>loader.remove(), 450);
+    }
+
+    document.addEventListener("DOMContentLoaded", removeLegacyLoaderText, {once:true});
+
+    window.addEventListener("load", ()=>{
+        window.setTimeout(finishPageLoader, 380);
+    }, {once:true});
+
+    // Never allow the loader to remain visible if an external asset stalls.
+    window.setTimeout(finishPageLoader, 2200);
+
+    // Catch an old cached storage.js loader if a service worker injects it late.
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const observer = new MutationObserver(removeLegacyLoaderText);
+        observer.observe(document.body, {childList:true, subtree:true});
+        window.setTimeout(()=>observer.disconnect(), 3500);
+    }, {once:true});
+})();
+
+/*==================================================
                 SENKU PAY
                 ADMIN LOGIN
 ==================================================*/
